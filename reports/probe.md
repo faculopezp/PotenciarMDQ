@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-24 03:30 UTC
+# Probe de fuentes — 2026-10-24 03:43 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -118,7 +118,7 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 ```
 
 ## `clima_mdq` (openmeteo)
-- ❌ RetryError: HTTPSConnectionPool(host='archive-api.open-meteo.com', port=443): Max retries exceeded with url: /v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-18&daily=weather_code%2Cprecipitation_sum%2Cwind_speed_10m_max%2Cwind_gusts_10m_max%2Ctemperature_2m_max&timezone=America%2FArgentina%2FBuenos_Aires (Caused by ResponseError('too many 503 error responses'))
+- HTTP 200 `https://archive-api.open-meteo.com/v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-18&daily=weather_code%2Cprecipitation_`
 
 ## `anac_informes_mensuales` (url_pattern)
 - 0/60 URLs existen

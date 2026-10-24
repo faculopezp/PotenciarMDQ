@@ -89,8 +89,8 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| AGW-AW 109SP | 165 |
 | I.A-1124 | 165 |
+| AGW-AW 109SP | 165 |
 | SLG-4 TSI | 154 |
 
 ## Códigos sin coordenadas (top 25 → revisar dim_aeropuerto)
