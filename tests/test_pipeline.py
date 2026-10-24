@@ -99,3 +99,8 @@ def test_marts_conservan_pasajeros(work: Path):
         f"SELECT count(*), sum(pasajeros) FROM '{work}/marts/mart_mdq_diario.parquet'"
     ).fetchall()[0]
     assert diario[1] == 150 + 140 + 60 + 34 + 80 + 170   # solo comerciales
+
+
+def test_no_crea_anio_previo_por_huso_horario(work: Path):
+    [(anio_min,)] = q(work, "SELECT min(anio) FROM fct_movimiento")
+    assert anio_min == 2025

@@ -56,6 +56,8 @@ class CkanClient:
 
     def resources(self, dataset: str, formats: list[str] | None = None) -> list[Resource]:
         pkg = self.package_show(dataset)
+        if isinstance(pkg, list):  # DKAN devuelve [paquete]
+            pkg = pkg[0] if pkg else {}
         wanted = {f.lower() for f in formats} if formats else None
         out = []
         for r in pkg.get("resources", []):

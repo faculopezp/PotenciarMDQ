@@ -94,4 +94,7 @@ SELECT
   j.calidad_dato = 'provisorio'                    AS es_provisorio,
   j.source_file
 FROM j
-LEFT JOIN dim_fecha f ON f.fecha = j.fecha_local;
+LEFT JOIN dim_fecha f ON f.fecha = j.fecha_local
+-- Los vuelos de las primeras horas UTC del primer día caen el día anterior en hora local: se
+-- descartan para no crear un año con un par de filas (ej. 31/12/2018).
+WHERE j.fecha_local >= (SELECT min(fecha) FROM stg_movimiento);
