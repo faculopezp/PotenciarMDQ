@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-24 04:32 UTC
+# Probe de fuentes — 2026-10-24 04:48 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -171,6 +171,12 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
   - `mailto:`
   - `resourceUrl`
   - `url`
+
+## `madhel_api` (static_file)
+- HTTP 200, content-type `application/json`
+```
+{"count":713,"results":[{"uri":"/madhel/api/v2/airports/ACB/?format=json","the_geom":{"geometry":{"type":"Point","coordinates":[-60.57066,-33.27226]},"properties":{"name":"CORONEL BOGADO / AGROSERVICIOS - (ACB) - DRCE - PRIVADO NO CONTROLADO [** USO AGROA\u00c9REO **]","gg_point_coordinates":[-33.27
+```
 
 ## `opensky_indice` (static_file)
 - HTTP 200, content-type `text/html`

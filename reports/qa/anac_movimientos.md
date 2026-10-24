@@ -88,8 +88,8 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| AGW-AW 109SP | 165 |
 | I.A-1124 | 165 |
+| AGW-AW 109SP | 165 |
 | SLG-4 TSI | 154 |
 | CE-T-303 | 153 |
 
