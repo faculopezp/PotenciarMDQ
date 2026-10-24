@@ -114,7 +114,7 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                     f"{con.execute('SELECT count(*) FROM ref_madhel').fetchall()[0][0]}", "",
                     "Columnas:", "", _table(con, "SELECT column_name, column_type FROM "
                                                  "(DESCRIBE ref_madhel)"),
-                    "Primeras filas:", "", _table(con, "SELECT * FROM ref_madhel LIMIT 5"),
+                    "Primeras filas:", "", _table(con, "SELECT COLUMNS(*)::VARCHAR FROM ref_madhel LIMIT 3"),
                     "Códigos numéricos del CSV de movimientos encontrados en MADHEL:", "",
                     _table(con, """
                 WITH n AS (
