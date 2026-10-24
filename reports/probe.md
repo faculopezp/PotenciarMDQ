@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-24 03:52 UTC
+# Probe de fuentes — 2026-10-24 04:24 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -115,6 +115,20 @@ ACH;;;Aeródromo;"GENERAL ACHA";"37°24' 6""S  64°36'49""W";-64.61351000;-37.40
 ACM;;;Aeródromo;"ARRECIFES/LA CURA MALAL";"34° 4'33""S  60° 8'30""W";-60.14170000;-34.07574000;37.00;Metros;Arrecifes;4.0;OSO;PRIVADO;NOCONTROL;RACE;SAEF;CIVIL;Nacional;NO;NO;"BUENOS AIRES";NO
 ADO;SAWD;PUD;Aeródromo;"PUERTO DESEADO";"47°44' 6""S  65°54'15""W";-65.90410000;-47.73511000;82.00;Metros;"Puerto Deseado";2.0;N;PUBLICO;AERADIO;RASU;SAVF;CIVIL;Nacional;NO;NO;"SANTA CRUZ";NO
 ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""W";-62.26462000;-28.85541000;75.00;Metros;Bandera;4.0;N;PRIVADO;NOCONTROL;RANO;SACF;AEROAPP;Nacional;NO;NO;"SANTIAGO DEL ESTERO";NO
+```
+
+## `opensky_aeronaves` (static_file)
+- HTTP 200, content-type `text/csv; charset=utf-8`
+
+## `opensky_indice` (static_file)
+- HTTP 200, content-type `text/html`
+```
+<!-- S3 Bucket Explorer Version: 3.1.2 -->
+
+<!DOCTYPE html>
+<html lang="en" style="overflow-y: auto;">
+
+<head>
 ```
 
 ## `clima_mdq` (openmeteo)
