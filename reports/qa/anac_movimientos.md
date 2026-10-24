@@ -1,0 +1,202 @@
+# QA — BD PotenciarMDQ
+
+## Filas y nulos por archivo
+
+| source_file | filas | pct_fecha_null | pct_hora_null | pct_pax_null | pct_aeronave_null | pct_con_matricula | pct_provisorio | desde | hasta |
+|---|---|---|---|---|---|---|---|---|---|
+| 20261024_202012-informe-ministerio-actualizado-dic-final.csv | 212726 | 0.0 | 0.0 | 0.0 | 85.3 | 0.0 | 0.0 | 2019-12-31 | 2020-12-31 |
+| 20261024_202112-informe-ministerio-actualizado-dic-final.csv | 329781 | 0.0 | 0.0 | 0.0 | 14.06 | 0.0 | 0.0 | 2020-12-31 | 2021-12-31 |
+| 20261024_202212-informe-ministerio-actualizado-dic-final.csv | 477903 | 0.0 | 0.0 | 0.0 | 15.28 | 0.0 | 0.0 | 2021-12-31 | 2022-12-31 |
+| 20261024_202312-informe-ministerio-actualizado-dic.csv | 557152 | 0.0 | 0.0 | 0.0 | 15.63 | 0.0 | 0.0 | 2022-12-31 | 2023-12-31 |
+| 20261024_202412-informe-ministerio-actualizado-dic-final.csv | 578602 | 0.0 | 0.0 | 0.0 | 17.01 | 0.0 | 0.0 | 2023-12-31 | 2024-12-31 |
+| 20261024_202512-informe-ministerio-actualizado-dic-final.csv | 597784 | 0.0 | 0.0 | 0.0 | 22.73 | 0.0 | 0.0 | 2024-12-31 | 2025-12-31 |
+| 20261024_202609-informe-ministerio-vf-matricula.csv | 419262 | 0.0 | 0.0 | 0.0 | 26.9 | 100.0 | 21.99 | 2025-12-31 | 2026-09-30 |
+
+## Valores fuera de vocabulario: `clasificacion_vuelo`
+
+| valor | filas |
+|---|---|
+
+
+## Valores fuera de vocabulario: `tipo_movimiento`
+
+| valor | filas |
+|---|---|
+
+
+## Valores fuera de vocabulario: `calidad_dato`
+
+| valor | filas |
+|---|---|
+
+
+## Clases de vuelo (ajustar `clases_comerciales` en config/mdq.yaml)
+
+| clase_vuelo | es_comercial | filas |
+|---|---|---|
+| regular | True | 1758878 |
+| vuelo_privado_con_matricula_nacional | False | 469783 |
+| vuelo_escuela | False | 424780 |
+| no_regular | True | 272071 |
+| vuelo_oficial_nacional | False | 185580 |
+| vuelo_privado_con_matricula_extranjera | False | 25968 |
+| vuelo_de_adiestramiento | False | 23286 |
+| trabajo_aereo | False | 10051 |
+| vuelo_oficial_extranjero | False | 2813 |
+
+## Duplicados exactos
+
+| filas_duplicadas |
+|---|
+| 5419 |
+
+## Correcciones de aeropuerto aplicadas
+
+| aeropuerto_original | aeropuerto | filas |
+|---|---|---|
+| MDB | MDP | 8 |
+
+## Cobertura de enriquecimiento (vuelos comerciales)
+
+| pct_aeronave_otro | pct_aerolinea_sin_regla | pct_sin_distancia | pct_sin_asientos |
+|---|---|---|---|
+| 0.17 | 6.92 | 2.66 | 24.92 |
+
+## Aeronaves sin clasificar (top 25 → ampliar config/aeronaves.yaml)
+
+| aeronave | movimientos |
+|---|---|
+| AIB-A-330-223 | 1515 |
+| EAE-EA500 | 521 |
+| LBG-SH2 | 511 |
+| CE-C-501 | 457 |
+| BE-B-36-TC | 416 |
+| BE-V-35-B | 403 |
+| ER-415-CD | 351 |
+| BE-E55 | 310 |
+| AVA-A-1 | 309 |
+| HAF-HA-420 | 287 |
+| BE-G36 | 286 |
+| MC-BO-105-CBS | 282 |
+| CE-C-337-G | 268 |
+| BE-B-90 | 245 |
+| BE-DUKE B-60 | 241 |
+| CC-LY | 224 |
+| BE-65-B-80 | 215 |
+| BE-C-23 | 211 |
+| AE-7-EC | 210 |
+| RW-100-150 | 206 |
+| RQ-RANQUEL | 191 |
+| II-ARAVA 102 | 188 |
+| AGW-AW 109SP | 165 |
+| I.A-1124 | 165 |
+| SLG-4 TSI | 154 |
+
+## Códigos sin coordenadas (top 20 → revisar dim_aeropuerto)
+
+| origen_destino | movimientos |
+|---|---|
+| SPJC | 32878 |
+| 2278 | 9509 |
+| 3073 | 4193 |
+| 2976 | 3792 |
+| 3017 | 3696 |
+| RAT | 2615 |
+| 2324 | 1698 |
+| 2870 | 800 |
+| NDL | 763 |
+| 2463 | 704 |
+| BGI | 611 |
+| SLA | 587 |
+| HAL | 514 |
+| HNR | 500 |
+| MLE | 486 |
+| 2999 | 410 |
+| 2417 | 378 |
+| MBI | 350 |
+| 2666 | 343 |
+| HOP | 339 |
+
+## Tramos reconstruidos (cabotaje comercial)
+
+| tramos | despegues_cabotaje | pct_emparejado |
+|---|---|---|
+| 649413 | 766775 | 84.7 |
+
+## Rotaciones: método por matrícula vs por modelo
+
+| aeropuerto | metodo_emparejamiento | tipo_rotacion | n | mediana_min |
+|---|---|---|---|---|
+| BAR | matricula | escala_larga | 132 | 163.0 |
+| BAR | matricula | pernocte | 62 | 977.5 |
+| BAR | matricula | rotacion | 3943 | 68.0 |
+| BAR | modelo | escala_larga | 837 | 148.0 |
+| BAR | modelo | pernocte | 367 | 925.0 |
+| BAR | modelo | rotacion | 31347 | 64.0 |
+| BCA | matricula | escala_larga | 25 | 176.0 |
+| BCA | matricula | pernocte | 9 | 1304.0 |
+| BCA | matricula | rotacion | 929 | 49.0 |
+| BCA | modelo | escala_larga | 131 | 178.0 |
+| BCA | modelo | pernocte | 281 | 605.0 |
+| BCA | modelo | rotacion | 5126 | 52.0 |
+| DOZ | matricula | escala_larga | 79 | 178.0 |
+| DOZ | matricula | pernocte | 241 | 616.0 |
+| DOZ | matricula | rotacion | 3767 | 61.0 |
+| DOZ | modelo | escala_larga | 561 | 190.0 |
+| DOZ | modelo | pernocte | 924 | 613.0 |
+| DOZ | modelo | rotacion | 26748 | 57.0 |
+| MDP | matricula | escala_larga | 55 | 229.0 |
+| MDP | matricula | pernocte | 18 | 1382.0 |
+| MDP | matricula | rotacion | 1022 | 52.0 |
+| MDP | modelo | escala_larga | 364 | 206.0 |
+| MDP | modelo | pernocte | 97 | 1413.0 |
+| MDP | modelo | rotacion | 7344 | 52.0 |
+| NEU | matricula | escala_larga | 84 | 224.0 |
+| NEU | matricula | pernocte | 361 | 554.0 |
+| NEU | matricula | rotacion | 3016 | 52.0 |
+| NEU | modelo | escala_larga | 515 | 247.0 |
+| NEU | modelo | pernocte | 1252 | 1028.0 |
+| NEU | modelo | rotacion | 18595 | 53.0 |
+| SAL | matricula | escala_larga | 95 | 155.0 |
+| SAL | matricula | pernocte | 521 | 1119.0 |
+| SAL | matricula | rotacion | 3525 | 58.0 |
+| SAL | modelo | escala_larga | 554 | 149.0 |
+| SAL | modelo | pernocte | 2664 | 1103.0 |
+| SAL | modelo | rotacion | 22399 | 57.0 |
+
+## Meses sin movimientos en el foco
+
+| mes_faltante |
+|---|
+| 2019-12 |
+
+## Outliers: load factor estimado > 1,1 en el foco
+
+| fecha | aeronave | aerolinea_nombre | pasajeros | asientos_estimados | lf_estimado |
+|---|---|---|---|---|---|
+| 2022-04-18 | LJ-60 | Aerolíneas Argentinas | 160 | 7.0 | 22.857 |
+| 2021-08-26 | CE-150-G | Aerolíneas Argentinas | 87 | 43.0 | 2.023 |
+| 2022-01-29 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 183 | 97.0 | 1.887 |
+| 2021-12-30 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 181 | 97.0 | 1.866 |
+| 2022-11-06 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 156 | 97.0 | 1.608 |
+| 2023-01-28 | PA-PA-28-181 | Sin dato | 3 | 2.0 | 1.5 |
+| 2023-01-28 | PA-PA-28-181 | Sin dato | 3 | 2.0 | 1.5 |
+| 2023-10-01 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 143 | 97.0 | 1.474 |
+| 2023-02-21 | BE-B-200 | Sin dato | 10 | 7.0 | 1.429 |
+| 2023-10-06 | CE-650 | Patagonian Air S.A. | 7 | 5.0 | 1.4 |
+| 2024-09-01 | BE-E-90 | Sin dato | 7 | 5.0 | 1.4 |
+| 2021-12-23 | CE-525 | Sin dato | 7 | 5.0 | 1.4 |
+| 2023-01-01 | LJ-35 | Baires Fly | 7 | 5.0 | 1.4 |
+| 2025-01-17 | LJ-31-A | Sin dato | 8 | 6.0 | 1.333 |
+| 2022-12-28 | BO-737-76N | Aerolíneas Argentinas | 172 | 129.0 | 1.333 |
+| 2023-10-01 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 125 | 97.0 | 1.289 |
+| 2022-10-04 | BO-737-76N | Aerolíneas Argentinas | 162 | 129.0 | 1.256 |
+| 2023-05-21 | PA-PA-46R-350 | Sin dato | 5 | 4.0 | 1.25 |
+| 2020-12-22 | PAA-PA-A-34-200T | Sin dato | 5 | 4.0 | 1.25 |
+| 2025-03-03 | BE-C-90-GTI | Sin dato | 6 | 5.0 | 1.2 |
+
+## Reconciliación vs fuente oficial (config/reconciliacion.csv)
+
+| anio | mes | aeropuerto_anac | pasajeros_oficial | pasajeros_datos | dif_pax_pct | movimientos_oficial | movimientos_datos | dif_movs_pct |
+|---|---|---|---|---|---|---|---|---|
+
