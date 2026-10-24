@@ -2,15 +2,14 @@
 title: Mar del Plata despega
 ---
 
-<link rel="stylesheet" href="./components/inputs.css">
-
 ```js
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 import * as Inputs from "@observablehq/inputs";
 import {html} from "htl";
-import {CAT, OTRO, SEQ, DIV, FOCO, entero, pct, variacion, decimal1, MESES, DIAS, CLASES,
-  datos, ultimoAnioCompleto, veranosCompletos, topN} from "./components/util.js";
+import {TINTA, TINTA_2, ACENTO, CAT, OTRO, SEQ, DIV, SEGMENTOS, SEG_NOMBRE, SEG_COLOR, segColor,
+  entero, pct, pct1, variacion, decimal1, compacto, MESES, DIAS, datos, ultimoAnioCompleto,
+  veranosCompletos, topN, fechaLarga} from "./components/util.js";
 ```
 
 ```js
@@ -19,45 +18,118 @@ const mensual = datos(FileAttachment("data/mdq_mensual.json"));
 const diario = datos(FileAttachment("data/mdq_diario.json"));
 const horaSemana = datos(FileAttachment("data/mdq_hora_semana.json"));
 const aerolineas = datos(FileAttachment("data/mdq_aerolineas.json"));
-const aeronaves = datos(FileAttachment("data/mdq_aeronaves.json"));
 const rutas = datos(FileAttachment("data/mdq_rutas.json"));
 const verano = datos(FileAttachment("data/mdq_verano.json"));
 const rotaciones = datos(FileAttachment("data/mdq_rotaciones.json"));
 const tramos = datos(FileAttachment("data/mdq_tramos.json"));
-const general = datos(FileAttachment("data/mdq_aviacion_general.json"));
 const pares = datos(FileAttachment("data/benchmark_pares.json"));
+const serieLarga = datos(FileAttachment("data/mdq_serie_larga.json"));
+const tendencia = datos(FileAttachment("data/mdq_tendencia.json"));
+const turismo = datos(FileAttachment("data/mdq_turismo.json"));
+const segMensual = datos(FileAttachment("data/mdq_segmentos_mensual.json"));
+const segAnual = datos(FileAttachment("data/mdq_segmentos_anual.json"));
+const avionTipico = datos(FileAttachment("data/mdq_avion_tipico.json"));
+const historiaSeg = datos(FileAttachment("data/mdq_historia_segmentos.json"));
+const ranking = datos(FileAttachment("data/ranking_nacional.json"));
+const red = datos(FileAttachment("data/red_aeropuertos.json"));
+const atipicos = datos(FileAttachment("data/mdq_dias_atipicos.json"));
+const pronostico = datos(FileAttachment("data/mdq_pronostico.json"));
 const paises = FileAttachment("data/sudamerica.json").json();
 const hitos = FileAttachment("data/hitos.json").json();
+const eventos = FileAttachment("data/eventos.json").json();
 ```
 
 ```js
 const ref = ultimoAnioCompleto(anual);
 const anios = anual.map((d) => d.anio);
-const desde = d3.min(diario, (d) => d.fecha);
-const hasta = d3.max(diario, (d) => d.fecha);
-const fechaLarga = (d) => d.toLocaleDateString("es-AR", {day: "numeric", month: "long", year: "numeric", timeZone: "UTC"});
+const largaAnual = d3.rollups(serieLarga, (v) => ({pasajeros: d3.sum(v, (d) => d.pasajeros), meses: v.length, fuente: v[0].fuente}), (d) => d.anio)
+  .map(([anio, v]) => ({anio, ...v})).filter((d) => d.meses === 12);
+const record = d3.greatest(largaAnual, (d) => d.pasajeros);
+const turAnual = d3.rollups(turismo.filter((d) => d.llegados_aereos != null), (v) => ({turistas: d3.sum(v, (d) => d.turistas), llegados: d3.sum(v, (d) => d.llegados_aereos), meses: v.length}), (d) => d.anio)
+  .map(([anio, v]) => ({anio, ...v, share: v.llegados / v.turistas})).filter((d) => d.meses === 12);
+const turRef = turAnual.find((d) => d.anio === ref.anio) ?? turAnual.at(-1);
+const segRef = segAnual.filter((d) => d.anio === ref.anio);
+const noLinea = d3.sum(segRef.filter((d) => !["linea_regular", "charter_linea"].includes(d.segmento)), (d) => d.movimientos);
+const totalMovs = d3.sum(segRef, (d) => d.movimientos);
+const primerAnio = d3.min(serieLarga, (d) => d.anio);
 ```
 
-<div class="hero">
-  <h1>Mar del Plata despega</h1>
-  <h2>Cómo vuela la ciudad: pasajeros, rutas, aviones y temporadas en el Aeropuerto Astor Piazzolla, con datos abiertos de la ANAC.</h2>
-  <p class="muted">Datos del ${fechaLarga(desde)} al ${fechaLarga(hasta)}. Las cifras principales usan ${ref.anio}, el último año completo.</p>
+<div class="portada">
+  <div>
+    <span class="idx">PotenciarMDQ · Aeropuerto Astor Piazzolla</span>
+    <h1>Mar del Plata <em>despega</em></h1>
+    <p class="bajada">${new Date().getUTCFullYear() - primerAnio} años de vuelos, pasajeros, aviones y temporadas, con datos abiertos de la ANAC y del Municipio.</p>
+  </div>
+  <ol class="indice">
+    <li><span>01</span><a href="#01">Un siglo XXI con altibajos</a></li>
+    <li><span>02</span><a href="#02">El pulso diario</a></li>
+    <li><span>03</span><a href="#03">Una ciudad de temporada</a></li>
+    <li><span>04</span><a href="#04">Todo lo que vuela</a></li>
+    <li><span>05</span><a href="#05">Asientos y ocupación</a></li>
+    <li><span>06</span><a href="#06">A dónde se puede volar</a></li>
+    <li><span>07</span><a href="#07">Quién vuela</a></li>
+    <li><span>08</span><a href="#08">En qué aviones</a></li>
+    <li><span>09</span><a href="#09">Un día en el aeropuerto</a></li>
+    <li><span>10</span><a href="#10">Verano contra verano</a></li>
+    <li><span>11</span><a href="#11">En el mapa del país</a></li>
+    <li><span>12</span><a href="#12">Lo que viene</a></li>
+  </ol>
 </div>
 
-<div class="grid grid-cols-4">
-  <div class="card"><h2>Pasajeros en ${ref.anio}</h2><span class="big">${entero(ref.pasajeros)}</span>
-    <p class="muted">${ref.var_interanual == null ? "" : `${variacion(ref.var_interanual)} vs. ${ref.anio - 1}`}</p></div>
-  <div class="card"><h2>Vuelos comerciales por día</h2><span class="big">${decimal1(ref.movimientos_comerciales / 2 / 365)}</span>
-    <p class="muted">${entero(ref.movimientos_comerciales)} aterrizajes y despegues en el año</p></div>
-  <div class="card"><h2>Destinos directos</h2><span class="big">${ref.destinos_regulares}</span>
-    <p class="muted">con vuelos regulares</p></div>
-  <div class="card"><h2>Ocupación estimada</h2><span class="big">${pct(ref.lf_estimado)}</span>
-    <p class="muted">de los asientos se vendieron (estimación)</p></div>
+<div class="cifras">
+  <div><span class="rotulo">Pasajeros de línea ${ref.anio}</span><span class="valor">${compacto(ref.pasajeros_comerciales)}</span>
+    <p class="nota">${pct(ref.pasajeros_comerciales / record.pasajeros)} del récord de ${record.anio}</p></div>
+  <div><span class="rotulo">Movimientos totales ${ref.anio}</span><span class="valor">${entero(totalMovs)}</span>
+    <p class="nota">${pct(noLinea / totalMovs)} no son vuelos de línea</p></div>
+  <div><span class="rotulo">Turistas que llegan en avión</span><span class="valor">${pct1(turRef.share)}</span>
+    <p class="nota">de ${compacto(turRef.turistas)} turistas en ${turRef.anio}</p></div>
+  <div><span class="rotulo">Concentración de aerolíneas</span><span class="valor">${entero(ref.hhi_aerolineas)}</span>
+    <p class="nota">índice HHI sobre 10.000 (10.000 = una sola)</p></div>
 </div>
 
-## 1. El pulso del aeropuerto
+<h2 id="01" data-idx="01 — Desde 2001">Un siglo XXI con altibajos</h2>
 
-Cada punto es un día. La línea azul es el promedio de los últimos 7 días; la gris punteada, el mismo período del año anterior. Se ve el ritmo de la ciudad: el pico de enero, la calma del invierno y los saltos de los fines de semana largos.
+Pasajeros de vuelos de línea por mes. La línea gruesa es la **tendencia**: lo que queda después de sacar el efecto del verano (descomposición estacional STL). Hasta ${d3.max(serieLarga.filter((d) => d.fuente !== "ANAC"), (d) => d.anio)} los datos son del Municipio; desde ${d3.min(serieLarga.filter((d) => d.fuente === "ANAC"), (d) => d.anio)}, de la ANAC.
+
+```js
+Plot.plot({
+  width,
+  height: 380,
+  marginLeft: 55,
+  y: {grid: true, label: "Pasajeros por mes", tickFormat: compacto},
+  x: {label: null},
+  marks: [
+    Plot.areaY(serieLarga, {x: "periodo", y: "pasajeros", fill: TINTA, fillOpacity: 0.08, curve: "step"}),
+    Plot.lineY(serieLarga, {x: "periodo", y: "pasajeros", stroke: TINTA_2, strokeWidth: 1, curve: "step"}),
+    Plot.lineY(tendencia, {x: "periodo", y: "tendencia", stroke: ACENTO, strokeWidth: 2.5}),
+    Plot.dot([d3.greatest(serieLarga, (d) => d.pasajeros)], {x: "periodo", y: "pasajeros", fill: ACENTO, r: 4}),
+    Plot.text([d3.greatest(serieLarga, (d) => d.pasajeros)], {x: "periodo", y: "pasajeros", text: (d) => `Récord: ${entero(d.pasajeros)} (${MESES[d.mes - 1]} ${d.anio})`, dy: -10, textAnchor: "middle", fill: TINTA}),
+    Plot.ruleY([0]),
+    Plot.tip(serieLarga, Plot.pointerX({x: "periodo", y: "pasajeros",
+      title: (d) => `${MESES[d.mes - 1]} ${d.anio}\n${entero(d.pasajeros)} pasajeros\nFuente: ${d.fuente}`}))
+  ]
+})
+```
+
+```js
+Plot.plot({
+  width,
+  height: 200,
+  marginLeft: 55,
+  y: {grid: true, label: "Pasajeros por año", tickFormat: compacto},
+  x: {label: null, tickFormat: "d", ticks: 12},
+  marks: [
+    Plot.barY(largaAnual, {x: "anio", y: "pasajeros", fill: (d) => (d.anio === record.anio ? ACENTO : TINTA), fillOpacity: (d) => (d.fuente === "ANAC" ? 1 : 0.55), inset: 2, tip: true,
+      title: (d) => `${d.anio}: ${entero(d.pasajeros)} pasajeros (${d.fuente})`}),
+    Plot.ruleY([0])
+  ]
+})
+```
+<p class="fuente">Barras claras: Municipio de General Pueyrredon · oscuras: ANAC. En 2019, año que cubren ambas fuentes, difieren menos de 4 % por mes.</p>
+
+<h2 id="02" data-idx="02 — Día por día">El pulso diario</h2>
+
+Cada punto es un día. La línea negra es el promedio de 7 días; la gris punteada, el mismo período del año anterior.
 
 ```js
 Plot.plot({
@@ -67,9 +139,9 @@ Plot.plot({
   y: {grid: true, label: "Pasajeros por día", tickFormat: entero},
   x: {label: null},
   marks: [
-    Plot.dot(diario, {x: "fecha", y: "pasajeros", r: 1.5, fill: SEQ[1], fillOpacity: 0.5}),
+    Plot.dot(diario, {x: "fecha", y: "pasajeros", r: 1.3, fill: TINTA_2, fillOpacity: 0.35}),
     Plot.lineY(diario, {x: "fecha", y: "pasajeros_ma7_anio_anterior", stroke: OTRO, strokeDasharray: "3,3", strokeWidth: 1.5}),
-    Plot.lineY(diario, {x: "fecha", y: "pasajeros_ma7", stroke: FOCO, strokeWidth: 2}),
+    Plot.lineY(diario, {x: "fecha", y: "pasajeros_ma7", stroke: TINTA, strokeWidth: 1.8}),
     Plot.ruleY([0]),
     Plot.tip(diario, Plot.pointerX({x: "fecha", y: "pasajeros_ma7",
       title: (d) => `${fechaLarga(d.fecha)}${d.feriado_nombre ? ` · ${d.feriado_nombre}` : ""}\nPasajeros: ${entero(d.pasajeros)}\nPromedio 7 días: ${entero(d.pasajeros_ma7)}${d.var_ma7_interanual == null ? "" : `\nvs. año anterior: ${variacion(d.var_ma7_interanual)}`}`}))
@@ -77,9 +149,60 @@ Plot.plot({
 })
 ```
 
-## 2. Un calendario que respira con el verano
+### Días atípicos
 
-Cuanto más oscuro el cuadrado, más pasajeros ese día. El verano se ve a simple vista.
+Cada día comparado con lo esperable para ese día de la semana en esa época. Los marcados en bermellón se alejaron más de 3 desvíos: paros, temporales, feriados o vuelos extra.
+
+```js
+const ev = new Map(eventos.map((e) => [e.fecha, e]));
+const at = atipicos.filter((d) => d.z != null).map((d) => ({...d, evento: ev.get(d.fecha.toISOString().slice(0, 10))}));
+const marcados = at.filter((d) => d.es_atipico);
+```
+
+<div class="grid-2-1">
+<div>
+
+```js
+Plot.plot({
+  width: width * 0.62,
+  height: 300,
+  marginLeft: 45,
+  y: {grid: true, label: "Desvío (z)", domain: [d3.min(at, (d) => d.z), d3.max(at, (d) => d.z)]},
+  x: {label: null},
+  marks: [
+    Plot.ruleY([-3, 3], {stroke: ACENTO, strokeDasharray: "2,3"}),
+    Plot.ruleY([0], {stroke: TINTA_2}),
+    Plot.dot(at.filter((d) => !d.es_atipico), {x: "fecha", y: "z", r: 1.4, fill: TINTA_2, fillOpacity: 0.4}),
+    Plot.dot(marcados, {x: "fecha", y: "z", r: 3.5, fill: ACENTO, tip: true,
+      title: (d) => `${fechaLarga(d.fecha)}${d.feriado_nombre ? ` · ${d.feriado_nombre}` : ""}\n${entero(d.pasajeros)} pasajeros (esperado ${entero(d.esperado)})${d.evento ? `\n${d.evento.evento}` : ""}${d.condicion ? `\nClima: ${d.condicion}` : ""}`}),
+    Plot.text(marcados.filter((d) => d.evento), {x: "fecha", y: "z", text: () => "paro", dy: 12, fontSize: 10, fill: ACENTO})
+  ]
+})
+```
+
+</div>
+<div>
+
+```js
+html`<table class="editorial"><thead><tr><th>Día</th><th>Pasajeros</th><th>Esperado</th><th>Por qué</th></tr></thead><tbody>
+${d3.sort(marcados, (d) => d.z).slice(0, 10).map((d) => html`<tr><td>${d.fecha.toLocaleDateString("es-AR", {timeZone: "UTC"})}</td><td>${entero(d.pasajeros)}</td><td>${entero(d.esperado)}</td><td style="text-align:left">${d.evento ? html`<a href=${d.evento.fuente} target="_blank" rel="noopener">${d.evento.evento}</a>` : d.feriado_nombre ?? (d.condicion && d.condicion !== "normal" ? `Clima: ${d.condicion}` : "—")}</td></tr>`)}
+</tbody></table>`
+```
+
+</div>
+</div>
+
+```js
+// Qué parte de los días con cada condición tuvo una caída fuerte (>20 % menos de lo esperado).
+const porClima = d3.rollups(at.filter((d) => d.condicion && d.esperado > 0), (v) => ({dias: v.length, caidas: v.filter((d) => d.desvio_pct < -0.2).length}), (d) => d.condicion)
+  .map(([condicion, v]) => ({condicion, ...v, share: v.caidas / v.dias})).sort((a, b) => b.share - a.share);
+```
+
+${porClima.length > 1 ? html`<p>Días con una caída de más de 20 % respecto de lo esperado, según el clima: ${porClima.map((d) => `${d.condicion} ${pct(d.share)} (${d.dias} días)`).join(" · ")}. Clima: Open-Meteo (reanálisis ERA5) en el aeropuerto.</p>` : ""}
+
+<h2 id="03" data-idx="03 — Estacionalidad">Una ciudad de temporada</h2>
+
+Cuanto más oscuro el cuadrado, más pasajeros ese día.
 
 ```js
 const semana = (d) => d3.utcMonday.count(d3.utcYear(d.fecha), d.fecha);
@@ -90,42 +213,159 @@ const inicioMes = d3.range(12).map((m) => ({m, x: d3.utcMonday.count(new Date(Da
 ```js
 Plot.plot({
   width,
-  height: 40 + 110 * new Set(diario.map((d) => d.anio)).size,
+  height: 40 + 96 * new Set(diario.map((d) => d.anio)).size,
   padding: 0.08,
   x: {axis: "top", ticks: inicioMes.map((d) => d.x), tickFormat: (x) => MESES[inicioMes.find((d) => d.x === x)?.m] ?? "", tickSize: 0, label: null},
   y: {tickFormat: (i) => DIAS[i], tickSize: 0, label: null},
   fy: {tickFormat: "d", label: null},
   color: {type: "linear", range: [SEQ[0], SEQ[4]], legend: true, label: "Pasajeros por día", tickFormat: entero},
   marks: [
-    Plot.cell(diario, {x: semana, y: diaSemana, fy: "anio", fill: "pasajeros", rx: 2, tip: true,
+    Plot.cell(diario, {x: semana, y: diaSemana, fy: "anio", fill: "pasajeros", rx: 1, tip: true,
       title: (d) => `${fechaLarga(d.fecha)}${d.feriado_nombre ? ` · ${d.feriado_nombre}` : ""}\n${entero(d.pasajeros)} pasajeros`})
   ]
 })
 ```
 
-### ¿La ciudad se llena o se vacía?
+### El avión y los turistas
 
-Diferencia entre pasajeros que llegaron y que se fueron cada mes. Azul: llegó más gente de la que se fue. Rojo: se fue más de la que llegó.
+Turistas que llegan a Mar del Plata por cualquier medio (EMTURyC) y qué parte llega en avión.
+
+<div class="grid-2">
+<div>
+
+```js
+Plot.plot({
+  width: width / 2 - 20,
+  height: 260,
+  marginLeft: 45,
+  y: {grid: true, label: "% de turistas que llegan en avión", tickFormat: (d) => pct1(d)},
+  x: {label: null, tickFormat: "d"},
+  marks: [
+    Plot.lineY(turAnual, {x: "anio", y: "share", stroke: TINTA, strokeWidth: 2, marker: "circle-stroke"}),
+    Plot.ruleY([0]),
+    Plot.tip(turAnual, Plot.pointerX({x: "anio", y: "share", title: (d) => `${d.anio}\n${pct1(d.share)} en avión\n${entero(d.llegados)} de ${entero(d.turistas)}`}))
+  ]
+})
+```
+
+</div>
+<div>
+
+```js
+Plot.plot({
+  width: width / 2 - 20,
+  height: 260,
+  marginLeft: 45,
+  y: {grid: true, label: "Llegados − salidos por mes", tickFormat: entero},
+  x: {label: null},
+  marks: [
+    Plot.rectY(mensual, {x1: "periodo", x2: (d) => d3.utcMonth.offset(d.periodo, 1), y: "balance_pasajeros", inset: 0.5,
+      fill: (d) => (d.balance_pasajeros >= 0 ? DIV.pos : DIV.neg), tip: true,
+      title: (d) => `${MESES[d.mes - 1]} ${d.anio}\nLlegaron ${entero(d.pasajeros_llegados)}\nSe fueron ${entero(d.pasajeros_salidos)}`}),
+    Plot.ruleY([0])
+  ]
+})
+```
+<p class="fuente">Azul: llegó más gente de la que se fue · bermellón: al revés.</p>
+
+</div>
+</div>
+
+<h2 id="04" data-idx="04 — Toda la actividad">Todo lo que vuela</h2>
+
+El aeropuerto no es solo vuelos de línea: taxis aéreos, aviones privados, vuelos oficiales y militares y escuelas de vuelo usan la misma pista. Detalle por segmento en <a href="./aviacion-general">Toda la aviación</a>.
+
+```js
+// Grilla completa mes × segmento (los meses sin movimientos van en 0, si no el área se corta).
+const periodosSeg = [...new Set(segMensual.map((d) => +d.periodo))].sort((a, b) => a - b);
+const idxSeg = new Map(segMensual.map((d) => [`${+d.periodo}|${d.segmento}`, d]));
+const segM = periodosSeg.flatMap((t) => SEGMENTOS.map((s) => {
+  const d = idxSeg.get(`${t}|${s.id}`);
+  const periodo = new Date(t);
+  return {periodo, anio: periodo.getUTCFullYear(), mes: periodo.getUTCMonth() + 1, segmento: s.id, nombre: s.nombre, movimientos: d?.movimientos ?? 0};
+}));
+```
+
+```js
+Plot.plot({
+  width,
+  height: 320,
+  marginLeft: 50,
+  y: {grid: true, label: "Aterrizajes y despegues por mes", tickFormat: entero},
+  x: {label: null},
+  color: {...segColor, legend: true},
+  marks: [
+    Plot.areaY(segM, {x: "periodo", y: "movimientos", fill: "nombre", order: segColor.domain, curve: "step-after", tip: true,
+      title: (d) => `${d.nombre} · ${MESES[d.mes - 1]} ${d.anio}\n${entero(d.movimientos)} movimientos`}),
+    Plot.ruleY([0])
+  ]
+})
+```
+
+```js
+html`<table class="editorial"><thead><tr><th>Segmento ${ref.anio}</th><th>Movimientos</th><th>% del total</th><th>Pasajeros</th><th>Pax por movimiento</th><th>Operadores</th><th>% vuelos locales</th><th>% finde/feriado</th></tr></thead><tbody>
+${d3.sort(segRef, (d) => -d.movimientos).map((d) => html`<tr><td><span class="chip" style="background:${SEG_COLOR[d.segmento]}"></span>${SEG_NOMBRE[d.segmento] ?? d.segmento}</td><td>${entero(d.movimientos)}</td><td>${pct(d.share_movimientos)}</td><td>${entero(d.pasajeros)}</td><td>${decimal1(d.pax_por_movimiento)}</td><td>${d.operadores}</td><td>${pct(d.share_vuelos_locales)}</td><td>${pct(d.share_finde_feriado)}</td></tr>`)}
+</tbody></table>`
+```
+
+### El avión típico de cada segmento
+
+El modelo con más aterrizajes y despegues en ${ref.anio}. En taxi aéreo se muestra también el que más pasajeros lleva: la avioneta más frecuente casi no transporta gente.
+
+```js
+const tip = avionTipico.filter((d) => d.anio === ref.anio);
+const fichas = SEGMENTOS.flatMap((s) => {
+  const top = tip.find((d) => d.segmento === s.id && d.ranking === 1);
+  const porPax = tip.find((d) => d.segmento === s.id && d.ranking_por_pasajeros === 1);
+  const out = top ? [{...top, etiqueta: s.nombre}] : [];
+  if (porPax && top && porPax.aeronave_familia !== top.aeronave_familia && porPax.pasajeros > 0) out.push({...porPax, etiqueta: `${s.nombre} · el que más pasajeros lleva`});
+  return out;
+});
+```
+
+```js
+html`<div class="fichas">${fichas.map((f) => html`<div class="ficha">
+  <span class="seg" style="color:${SEG_COLOR[f.segmento]}">${f.etiqueta}</span>
+  <div class="modelo">${f.aeronave_familia}</div>
+  <dl>
+    <dt>Movimientos</dt><dd>${entero(f.movimientos)} (${pct(f.share_en_segmento)})</dd>
+    <dt>Pasajeros promedio</dt><dd>${decimal1(f.pax_promedio)}</dd>
+    <dt>Capacidad observada (p95)</dt><dd>${f.capacidad_observada_p95 ?? "—"}</dd>
+    <dt>Tiempo en tierra (mediana)</dt><dd>${f.tiempo_en_tierra_mediano_min != null ? `${Math.round(f.tiempo_en_tierra_mediano_min)} min` : "—"}</dd>
+    <dt>Duración de vuelo (mediana)</dt><dd>${f.duracion_vuelo_mediana_min != null ? `${Math.round(f.duracion_vuelo_mediana_min)} min` : "—"}</dd>
+    <dt>Hora más frecuente</dt><dd>${f.hora_mas_frecuente}h</dd>
+    <dt>Principales orígenes/destinos</dt><dd>${f.principales_origenes_destinos ?? "—"}</dd>
+  </dl></div>`)}</div>`
+```
+
+### Desde 2015
+
+Composición de la actividad por año. 2015–2018 sale de una muestra municipal de vuelos (≈ la mitad de los movimientos, sin vuelos oficiales ni escuelas), por eso se muestra en porcentaje.
+
+```js
+const hs = d3.rollups(historiaSeg, (v) => ({movimientos: d3.sum(v, (d) => d.movimientos), fuente: v[0].fuente}), (d) => d.anio, (d) => d.segmento)
+  .flatMap(([anio, segs]) => segs.map(([segmento, v]) => ({anio, segmento, nombre: SEG_NOMBRE[segmento] ?? segmento, ...v})));
+```
 
 ```js
 Plot.plot({
   width,
   height: 260,
   marginLeft: 50,
-  y: {grid: true, label: "Llegados − salidos", tickFormat: entero},
-  x: {label: null},
+  y: {percent: true, label: "% de los movimientos", grid: true},
+  x: {label: null, tickFormat: "d"},
+  color: {...segColor, legend: true},
   marks: [
-    Plot.rectY(mensual, {x1: "periodo", x2: (d) => d3.utcMonth.offset(d.periodo, 1), y: "balance_pasajeros", inset: 1,
-      fill: (d) => (d.balance_pasajeros >= 0 ? DIV.pos : DIV.neg), tip: true,
-      title: (d) => `${MESES[d.mes - 1]} ${d.anio}\nLlegaron ${entero(d.pasajeros_llegados)}\nSe fueron ${entero(d.pasajeros_salidos)}\nBalance ${entero(d.balance_pasajeros)}`}),
+    Plot.barY(hs, Plot.stackY({x: "anio", y: "movimientos", fill: "nombre", order: segColor.domain, offset: "normalize", inset: 0.5, tip: true,
+      title: (d) => `${d.nombre} ${d.anio}\n${entero(d.movimientos)} movimientos\nFuente: ${d.fuente}`})),
     Plot.ruleY([0])
   ]
 })
 ```
 
-## 3. ¿Cuántos asientos se ofrecen y cuántos se llenan?
+<h2 id="05" data-idx="05 — Oferta">Asientos y ocupación</h2>
 
-Pasajeros transportados y asientos ofrecidos (estimados) por mes. La distancia entre las dos líneas son asientos que volaron vacíos.
+Vuelos de línea: pasajeros transportados y asientos ofrecidos (estimados) por mes. La distancia entre ambas líneas son asientos que volaron vacíos.
 
 ```js
 Plot.plot({
@@ -134,7 +374,7 @@ Plot.plot({
   marginLeft: 50,
   y: {grid: true, label: "Por mes", tickFormat: entero},
   x: {label: null},
-  color: {legend: true, domain: ["Asientos ofrecidos (est.)", "Pasajeros"], range: [OTRO, FOCO]},
+  color: {legend: true, domain: ["Asientos ofrecidos (est.)", "Pasajeros"], range: [OTRO, TINTA]},
   marks: [
     Plot.areaY(mensual, {x: "periodo", y: "asientos_estimados", fill: OTRO, fillOpacity: 0.15}),
     Plot.lineY(mensual, {x: "periodo", y: "asientos_estimados", stroke: () => "Asientos ofrecidos (est.)", strokeWidth: 2}),
@@ -146,9 +386,9 @@ Plot.plot({
 })
 ```
 
-<div class="note">La ANAC no publica asientos. Los estimamos con la capacidad típica observada de cada avión (ver <a href="./metodologia">metodología</a>).</div>
+<div class="note">La ANAC no publica asientos: se estiman con la capacidad típica observada de cada avión (ver <a href="./metodologia">metodología</a>).</div>
 
-## 4. ¿A dónde se puede volar?
+<h2 id="06" data-idx="06 — Conectividad">A dónde se puede volar</h2>
 
 ```js
 const anioMapa = view(Inputs.select(anios.slice().reverse(), {label: "Año", value: ref.anio, format: String}));
@@ -158,41 +398,45 @@ const anioMapa = view(Inputs.select(anios.slice().reverse(), {label: "Año", val
 const rutasAnio = rutas.filter((d) => d.anio === anioMapa && d.lat != null && d.pasajeros >= 50);
 const maxPax = d3.max(rutasAnio, (d) => d.pasajeros);
 const foco = rutas.find((d) => d.foco_lat != null);
-const anchoMapa = Math.min(width, 720);
-// Etiquetas: se omite la de un punto a menos de 1° de otro más grande (ej. Ezeiza vs Aeroparque).
 const etiquetas = rutasAnio.filter((d) => !rutasAnio.some((o) => o.pasajeros > d.pasajeros && Math.hypot(o.lon - d.lon, o.lat - d.lat) < 1));
 ```
 
+<div class="grid-2-1">
+<div>
+
 ```js
 Plot.plot({
-  width: anchoMapa,
-  height: anchoMapa * 1.1,
+  width: Math.min(width * 0.6, 760),
+  height: Math.min(width * 0.6, 760) * 1.05,
   projection: {type: "mercator", inset: 40,
     domain: {type: "MultiPoint", coordinates: [[foco.foco_lon, foco.foco_lat], ...rutasAnio.map((d) => [d.lon, d.lat])]}},
   r: {range: [3, 20]},
   marks: [
-    Plot.geo(paises, {fill: "currentColor", fillOpacity: 0.06, stroke: "currentColor", strokeOpacity: 0.25}),
-    Plot.link(rutasAnio, {x1: "foco_lon", y1: "foco_lat", x2: "lon", y2: "lat", stroke: FOCO,
-      strokeOpacity: 0.6, strokeWidth: (d) => 1 + 8 * Math.sqrt(d.pasajeros / maxPax)}),
-    Plot.dot(rutasAnio, {x: "lon", y: "lat", r: "pasajeros", fill: FOCO, stroke: "var(--theme-background)", strokeWidth: 2, tip: true,
-      title: (d) => `${d.ciudad}\n${entero(d.pasajeros)} pasajeros con MDQ\n${d.salidas_semanales_promedio} salidas por semana${d.duracion_mediana_min ? `\n${d.duracion_mediana_min} min de vuelo` : ""}`}),
-    Plot.text(etiquetas, {x: "lon", y: "lat", text: "ciudad", dy: -16, fontSize: 11, fill: "currentColor"}),
-    Plot.dot([foco], {x: "foco_lon", y: "foco_lat", r: 6, fill: "currentColor"}),
+    Plot.geo(paises, {fill: TINTA, fillOpacity: 0.05, stroke: TINTA, strokeOpacity: 0.25}),
+    Plot.link(rutasAnio, {x1: "foco_lon", y1: "foco_lat", x2: "lon", y2: "lat", stroke: ACENTO, strokeOpacity: 0.55,
+      strokeWidth: (d) => 1 + 8 * Math.sqrt(d.pasajeros / maxPax)}),
+    Plot.dot(rutasAnio, {x: "lon", y: "lat", r: "pasajeros", fill: ACENTO, stroke: "var(--theme-background)", strokeWidth: 2, tip: true,
+      title: (d) => `${d.ciudad}\n${entero(d.pasajeros)} pasajeros\n${decimal1(d.salidas_semanales_promedio)} salidas por semana${d.duracion_mediana_min ? `\n${d.duracion_mediana_min} min de vuelo` : ""}`}),
+    Plot.text(etiquetas, {x: "lon", y: "lat", text: "ciudad", dy: -16, fontSize: 12, fill: TINTA}),
+    Plot.dot([foco], {x: "foco_lon", y: "foco_lat", r: 6, fill: TINTA}),
     Plot.text([foco], {x: "foco_lon", y: "foco_lat", text: () => "Mar del Plata", dx: 10, textAnchor: "start", fontWeight: "bold"})
   ]
 })
 ```
 
+</div>
+<div>
+
 ```js
-Inputs.table(rutas.filter((d) => d.anio === anioMapa), {
-  columns: ["ciudad", "pasajeros", "salidas_semanales_promedio", "duracion_mediana_min", "lf_estimado", "aerolineas"],
-  header: {ciudad: "Destino", pasajeros: "Pasajeros", salidas_semanales_promedio: "Salidas/semana", duracion_mediana_min: "Minutos de vuelo", lf_estimado: "Ocupación est.", aerolineas: "Aerolíneas"},
-  format: {pasajeros: entero, salidas_semanales_promedio: decimal1, lf_estimado: (x) => (x == null ? "" : pct(x))},
-  sort: "pasajeros", reverse: true, rows: 12
-})
+html`<table class="editorial"><thead><tr><th>Destino</th><th>Pasajeros</th><th>Salidas/sem.</th><th>Min</th></tr></thead><tbody>
+${d3.sort(rutas.filter((d) => d.anio === anioMapa), (d) => -d.pasajeros).slice(0, 14).map((d) => html`<tr><td>${d.ciudad ?? d.codigo}</td><td>${entero(d.pasajeros)}</td><td>${decimal1(d.salidas_semanales_promedio)}</td><td>${d.duracion_mediana_min ?? "—"}</td></tr>`)}
+</tbody></table>`
 ```
 
-## 5. ¿Quién vuela?
+</div>
+</div>
+
+<h2 id="07" data-idx="07 — Mercado">Quién vuela</h2>
 
 ```js
 const comerciales = aerolineas.filter((d) => d.aerolinea_nombre !== "Sin dato");
@@ -202,9 +446,9 @@ const aer = topN(comerciales, "aerolinea_nombre", "pasajeros", 5);
 ```js
 Plot.plot({
   width,
-  height: 300,
+  height: 280,
   marginLeft: 50,
-  y: {percent: true, label: "% de pasajeros", grid: true},
+  y: {percent: true, label: "% de pasajeros de línea", grid: true},
   x: {label: null, tickFormat: "d"},
   color: {legend: true, domain: [...aer.top, "Otras"], range: [...CAT.slice(0, aer.top.length), OTRO]},
   marks: [
@@ -214,18 +458,13 @@ Plot.plot({
 })
 ```
 
-<div class="grid grid-cols-2">
-  <div class="card"><h2>Concentración del mercado (HHI) en ${ref.anio}</h2><span class="big">${entero(ref.hhi_aerolineas)}</span>
-    <p class="muted">Va de 0 a 10.000. Más de 2.500 es un mercado muy concentrado; 10.000 es un solo operador.</p></div>
-  <div class="card"><h2>Aerolíneas comerciales activas</h2><span class="big">${ref.aerolineas_activas}</span>
-    <p class="muted">con al menos un vuelo comercial en ${ref.anio} (incluye charter y taxi aéreo)</p></div>
-</div>
+<h2 id="08" data-idx="08 — Flota">En qué aviones</h2>
 
-## 6. ¿En qué aviones?
+Familias de aviones en los vuelos de línea, por año (2015–2018: muestra municipal).
 
 ```js
-const flota = aeronaves.filter((d) => d.es_comercial && d.aeronave_familia !== "Sin dato");
-const fam = topN(flota, "aeronave_familia", "movimientos", 5);
+const flota = historiaSeg.filter((d) => ["linea_regular", "charter_linea"].includes(d.segmento) && d.aeronave_familia !== "Sin dato");
+const fam = topN(flota, "aeronave_familia", "movimientos", 6);
 ```
 
 ```js
@@ -233,19 +472,19 @@ Plot.plot({
   width,
   height: 300,
   marginLeft: 50,
-  y: {percent: true, label: "% de aterrizajes y despegues comerciales", grid: true},
+  y: {percent: true, label: "% de movimientos de línea", grid: true},
   x: {label: null, tickFormat: "d"},
   color: {legend: true, domain: [...fam.top, "Otras"], range: [...CAT.slice(0, fam.top.length), OTRO]},
   marks: [
-    Plot.barY(flota, Plot.groupX({y: "sum"}, {x: "anio", y: "movimientos", fill: fam.label, offset: "normalize", inset: 1, tip: true})),
+    Plot.barY(flota, Plot.stackY(Plot.groupX({y: "sum"}, {x: "anio", y: "movimientos", fill: fam.label, offset: "normalize", inset: 1, tip: true}))),
     Plot.ruleY([0])
   ]
 })
 ```
 
-## 7. Un día en el aeropuerto
+<h2 id="09" data-idx="09 — Operación">Un día en el aeropuerto</h2>
 
-Promedio de aterrizajes y despegues comerciales por semana, según día y hora.
+Aterrizajes y despegues de línea promedio por semana, según día y hora.
 
 ```js
 const anioHora = view(Inputs.select(anios.slice().reverse(), {label: "Año", value: ref.anio, format: String}));
@@ -254,13 +493,13 @@ const anioHora = view(Inputs.select(anios.slice().reverse(), {label: "Año", val
 ```js
 Plot.plot({
   width,
-  height: 260,
+  height: 250,
   padding: 0.06,
   x: {label: "Hora local", tickFormat: (h) => `${h}h`},
   y: {domain: d3.range(1, 8), tickFormat: (i) => DIAS[i - 1], label: null},
   color: {type: "linear", range: [SEQ[0], SEQ[4]], legend: true, label: "Movimientos por semana"},
   marks: [
-    Plot.cell(horaSemana.filter((d) => d.anio === anioHora), {x: "hora_local", y: "dia_semana", fill: "movimientos_por_semana", rx: 2, tip: true,
+    Plot.cell(horaSemana.filter((d) => d.anio === anioHora), {x: "hora_local", y: "dia_semana", fill: "movimientos_por_semana", rx: 1, tip: true,
       title: (d) => `${d.dia_semana_nombre} ${d.hora_local}h\n${decimal1(d.movimientos_por_semana)} movimientos por semana`})
   ]
 })
@@ -269,25 +508,22 @@ Plot.plot({
 ```js
 const rotAnio = rotaciones.filter((d) => d.anio === ref.anio && d.tipo_rotacion === "rotacion");
 const rotFam = d3.rollups(rotAnio, (v) => ({n: d3.sum(v, (d) => d.rotaciones), med: d3.median(v, (d) => d.mediana_min)}), (d) => d.aeronave_familia)
-  .filter(([, v]) => v.n >= 100).sort((a, b) => b[1].n - a[1].n).slice(0, 3);
+  .filter(([, v]) => v.n >= 100).sort((a, b) => b[1].n - a[1].n).slice(0, 2);
 const aep = tramos.filter((d) => d.anio === ref.anio && d.origen === "AER" && d.destino === "MDP");
 ```
 
-<div class="grid grid-cols-4">
-  <div class="card"><h2>Hora pico de diseño</h2><span class="big">${entero(ref.pax_hora_sbr30)}</span>
-    <p class="muted">pasajeros en la 30.ª hora más cargada de ${ref.anio} (estándar de planificación)</p></div>
-  ${rotFam.map(([f, v]) => html`<div class="card"><h2>Tiempo en tierra · ${f}</h2><span class="big">${Math.round(v.med)} min</span>
-    <p class="muted">mediana entre aterrizar y volver a despegar (${entero(v.n)} rotaciones)</p></div>`)}
+<div class="cifras">
+  <div><span class="rotulo">Hora pico de diseño</span><span class="valor">${entero(ref.pax_hora_sbr30)}</span><p class="nota">pasajeros en la 30.ª hora más cargada de ${ref.anio}</p></div>
+  ${rotFam.map(([f, v]) => html`<div><span class="rotulo">En tierra · ${f}</span><span class="valor">${Math.round(v.med)} min</span><p class="nota">mediana entre aterrizar y volver a despegar</p></div>`)}
+  <div><span class="rotulo">Aeroparque → MDQ</span><span class="valor">${aep.length ? Math.round(d3.median(aep, (d) => d.duracion_mediana_min)) : "—"} min</span><p class="nota">de pista a pista (mediana)</p></div>
 </div>
 
-${aep.length ? html`<p>Un vuelo desde Aeroparque tarda <b>${Math.round(d3.median(aep, (d) => d.duracion_mediana_min))} minutos</b> de pista a pista (mediana ${ref.anio}).</p>` : ""}
+<h2 id="10" data-idx="10 — Temporadas">Verano contra verano</h2>
 
-## 8. El verano, temporada contra temporada
-
-Pasajeros por destino en cada verano (diciembre, enero y febrero), destinos con más de 1.000 pasajeros en alguna temporada. Solo temporadas con datos completos.
+Pasajeros por destino en los últimos tres veranos completos (diciembre a febrero), destinos con más de 1.000 pasajeros en alguna temporada.
 
 ```js
-const completos = veranosCompletos(mensual);
+const completos = veranosCompletos(mensual).slice(-3);
 const ver = verano.filter((d) => completos.includes(d.verano_anio) && d.ciudad);
 const topDest = d3.rollups(ver, (v) => d3.max(v, (d) => d.pasajeros), (d) => d.ciudad)
   .filter(([, max]) => max >= 1000).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([c]) => c);
@@ -296,83 +532,101 @@ const verTop = ver.filter((d) => topDest.includes(d.ciudad));
 
 ```js
 completos.length < 2
-  ? html`<p class="muted">Hacen falta al menos dos temporadas completas para comparar.</p>`
+  ? html`<p class="muted">Hacen falta al menos dos temporadas completas.</p>`
   : Plot.plot({
       width,
       height: 60 + 34 * topDest.length,
-      marginLeft: 160,
+      marginLeft: 170,
       x: {grid: true, label: "Pasajeros en la temporada", tickFormat: entero},
       y: {domain: topDest, label: null},
       color: {legend: true, type: "ordinal", domain: completos, range: SEQ.slice(-completos.length), tickFormat: (y) => `Verano ${y}`},
       marks: [
-        Plot.link(d3.groups(verTop, (d) => d.ciudad), {
-          x1: ([, v]) => d3.min(v, (d) => d.pasajeros), x2: ([, v]) => d3.max(v, (d) => d.pasajeros), y1: ([c]) => c, y2: ([c]) => c, stroke: OTRO, strokeWidth: 2}),
+        Plot.link(d3.groups(verTop, (d) => d.ciudad), {x1: ([, v]) => d3.min(v, (d) => d.pasajeros), x2: ([, v]) => d3.max(v, (d) => d.pasajeros), y1: ([c]) => c, y2: ([c]) => c, stroke: OTRO, strokeWidth: 2}),
         Plot.dot(verTop, {x: "pasajeros", y: "ciudad", fill: "verano_anio", r: 6, stroke: "var(--theme-background)", strokeWidth: 2, tip: true,
-          title: (d) => `${d.ciudad} · verano ${d.verano_anio}\n${entero(d.pasajeros)} pasajeros\n${d.salidas} salidas`})
+          title: (d) => `${d.ciudad} · verano ${d.verano_anio}\n${entero(d.pasajeros)} pasajeros`})
       ]
     })
 ```
 
-## 9. Más allá de las aerolíneas
-
-No todo lo que despega es un avión de línea: escuelas de vuelo, aviones privados y vuelos oficiales usan el mismo aeropuerto.
+<h2 id="11" data-idx="11 — Contexto nacional">En el mapa del país</h2>
 
 ```js
-const ga = general.map((d) => ({...d, grupo: CLASES[d.clase_vuelo] ?? "Otros"}));
-const gruposGA = ["Privado", "Oficial", "Escuela de vuelo", "Otros"];
+const rankRef = ranking.filter((d) => d.anio === ref.anio).sort((a, b) => a.ranking_pasajeros - b.ranking_pasajeros);
+const mdqRank = rankRef.find((d) => d.es_foco);
+const redRef = red.filter((d) => d.anio === ref.anio);
+const mdqRed = redRef.find((d) => d.es_foco);
+const top25 = rankRef.filter((d) => d.ranking_pasajeros <= 25 || d.es_foco);
 ```
 
-<div class="card"><h2>Movimientos no comerciales en ${ref.anio}</h2><span class="big">${pct(ref.share_movimientos_no_comerciales)}</span>
-  <p class="muted">de todos los aterrizajes y despegues del aeropuerto</p></div>
+Mar del Plata fue el aeropuerto **n.º ${mdqRank?.ranking_pasajeros}** del país por pasajeros de línea en ${ref.anio} y el **n.º ${mdqRed?.ranking}** en importancia dentro de la red de vuelos de cabotaje (PageRank: cuenta cuántos vuelos llegan y desde qué aeropuertos).
+
+<div class="grid-2-1">
+<div>
 
 ```js
 Plot.plot({
-  width,
-  height: 240,
-  marginLeft: 50,
-  y: {grid: true, label: "Movimientos no comerciales", tickFormat: entero},
-  x: {label: null, tickFormat: "d"},
-  color: {legend: true, domain: gruposGA, range: CAT.slice(0, 4)},
-  marks: [Plot.barY(ga, Plot.groupX({y: "sum"}, {x: "anio", y: "movimientos", fill: "grupo", inset: 1, tip: true})), Plot.ruleY([0])]
-})
-```
-
-## 10. Mar del Plata y sus pares
-
-Comparación con otros aeropuertos turísticos y regionales del país en ${ref.anio}.
-
-```js
-const paresAnio = pares.filter((d) => d.anio === ref.anio);
-const metricaPar = view(Inputs.radio(new Map([
-  ["Pasajeros comerciales", "pasajeros_comerciales"],
-  ["Estacionalidad (mes pico ÷ mes valle)", "ratio_pico_valle"],
-  ["Destinos directos", "destinos_regulares"],
-  ["Ocupación estimada", "lf_estimado"]
-]), {value: "pasajeros_comerciales", label: "Métrica"}));
-```
-
-```js
-Plot.plot({
-  width,
-  height: 260,
-  marginLeft: 150,
-  x: {grid: true, label: null, tickFormat: metricaPar === "lf_estimado" ? pct : metricaPar === "ratio_pico_valle" ? decimal1 : entero},
-  y: {label: null},
+  width: width * 0.6,
+  height: 22 * top25.length + 40,
+  marginLeft: 160,
+  x: {type: "log", grid: true, label: "Pasajeros de línea (escala logarítmica)", tickFormat: compacto},
+  y: {domain: top25.map((d) => d.ciudad ?? d.codigo), label: null},
   marks: [
-    Plot.barX(paresAnio, {x: metricaPar, y: "ciudad", sort: {y: "-x"}, fill: (d) => (d.es_foco ? FOCO : OTRO), rx: 2, tip: true}),
-    Plot.ruleX([0])
+    Plot.barX(top25, {x1: 10000, x2: "pasajeros_linea", y: (d) => d.ciudad ?? d.codigo, fill: (d) => (d.es_foco ? ACENTO : d.es_par ? TINTA : OTRO), inset: 2, tip: true,
+      title: (d) => `n.º ${d.ranking_pasajeros} · ${d.ciudad}\n${entero(d.pasajeros_linea)} pasajeros`})
   ]
 })
 ```
 
-## 11. Línea de tiempo
+</div>
+<div>
 
 ```js
-html`<ul class="timeline">${hitos.map((h) => html`<li><b>${h.fecha}</b> — ${h.titulo}
-  <a href=${h.fuente} target="_blank" rel="noopener">(${h.tipo_fuente === "prensa" ? "nota de prensa" : "fuente"})</a></li>`)}</ul>`
+const paresRef = pares.filter((d) => d.anio === ref.anio);
 ```
 
-## Lo que muestran los datos
+```js
+html`<table class="editorial"><thead><tr><th>Aeropuerto</th><th>Pico ÷ valle</th><th>% verano</th><th>Destinos</th></tr></thead><tbody>
+${d3.sort(paresRef, (d) => -d.ratio_pico_valle).map((d) => html`<tr class=${d.es_foco ? "foco" : ""}><td>${d.ciudad}</td><td>${decimal1(d.ratio_pico_valle)}</td><td>${pct(d.share_pax_temporada_verano)}</td><td>${d.destinos_regulares}</td></tr>`)}
+</tbody></table>`
+```
+<p class="fuente">Comparación con aeropuertos pares: cuánto más vuela el mes pico que el mes más flojo, qué parte del año cae en verano y cuántos destinos directos tiene.</p>
+
+</div>
+</div>
+
+<h2 id="12" data-idx="12 — Pronóstico">Lo que viene</h2>
+
+Proyección de pasajeros de línea a 6 meses (Holt-Winters sobre la serie pospandemia). La banda marca el rango donde cae el 80 % de las simulaciones. No incluye anuncios de rutas nuevas ni cambios de aerolíneas.
+
+```js
+const obs = pronostico.filter((d) => d.tipo === "observado");
+const fut = pronostico.filter((d) => d.tipo === "pronostico");
+```
+
+```js
+Plot.plot({
+  width,
+  height: 280,
+  marginLeft: 50,
+  y: {grid: true, label: "Pasajeros por mes", tickFormat: compacto},
+  x: {label: null},
+  marks: [
+    Plot.areaY(fut, {x: "periodo", y1: "p10", y2: "p90", fill: ACENTO, fillOpacity: 0.15}),
+    Plot.lineY(obs.slice(-30), {x: "periodo", y: "pasajeros", stroke: TINTA, strokeWidth: 1.8}),
+    Plot.lineY([obs.at(-1), ...fut], {x: "periodo", y: "pasajeros", stroke: ACENTO, strokeWidth: 2, strokeDasharray: "4,3"}),
+    Plot.ruleY([0]),
+    Plot.tip(fut, Plot.pointerX({x: "periodo", y: "pasajeros", title: (d) => `${MESES[d.periodo.getUTCMonth()]} ${d.periodo.getUTCFullYear()}\n${entero(d.pasajeros)} (rango ${entero(d.p10)}–${entero(d.p90)})`}))
+  ]
+})
+```
+
+<h2 data-idx="Línea de tiempo">Hitos</h2>
+
+```js
+html`<table class="editorial"><tbody>${hitos.map((h) => html`<tr><td style="width:7rem">${h.fecha}</td><td style="text-align:left">${h.titulo}</td><td><a href=${h.fuente} target="_blank" rel="noopener">${h.tipo_fuente === "prensa" ? "prensa" : "fuente"}</a></td></tr>`)}</tbody></table>`
+```
+
+<h2 data-idx="Síntesis">Lo que muestran los datos</h2>
 
 ```js
 const delAnio = mensual.filter((d) => d.anio === ref.anio).sort((a, b) => b.pasajeros - a.pasajeros);
@@ -380,15 +634,8 @@ const rutasRef = rutas.filter((d) => d.anio === ref.anio).sort((a, b) => b.pasaj
 const shareTop = rutasRef[0].pasajeros / d3.sum(rutasRef, (d) => d.pasajeros);
 ```
 
-- **Una temporada fuerte:** en ${ref.anio} el mes con más pasajeros (${MESES[delAnio[0].mes - 1]}) movió ${decimal1(ref.ratio_pico_valle)} veces más gente que el más flojo (${MESES[delAnio.at(-1).mes - 1]}).
-- **Un puente aéreo con Buenos Aires:** ${pct(shareTop)} de los pasajeros de vuelos regulares viajaron entre Mar del Plata y ${rutasRef[0].ciudad}.
-- **Mercado concentrado:** el índice de concentración de aerolíneas fue ${entero(ref.hhi_aerolineas)} sobre 10.000.
-- **Aviones llenos:** la ocupación estimada fue ${pct(ref.lf_estimado)} en ${ref.anio}.
-
-<style>
-.hero { margin: 2rem 0 1rem; }
-.hero h1 { font-size: 3rem; margin: 0; max-width: none; }
-.hero h2 { font-weight: 400; color: var(--theme-foreground-muted); max-width: 46rem; }
-.timeline { list-style: none; padding-left: 0; }
-.timeline li { border-left: 2px solid var(--theme-foreground-faintest); padding: 0.25rem 0 0.75rem 1rem; }
-</style>
+- **Lejos del récord:** ${ref.anio} cerró con ${pct(ref.pasajeros_comerciales / record.pasajeros)} de los pasajeros de ${record.anio}.
+- **Una temporada fuerte:** el mes pico (${MESES[delAnio[0].mes - 1]}) movió ${decimal1(ref.ratio_pico_valle)} veces más gente que el más flojo (${MESES[delAnio.at(-1).mes - 1]}).
+- **Un puente con Buenos Aires:** ${pct(shareTop)} de los pasajeros de vuelos regulares viajaron entre Mar del Plata y ${rutasRef[0].ciudad}.
+- **Más que aerolíneas:** ${pct(noLinea / totalMovs)} de los movimientos son taxis aéreos, privados, oficiales o escuelas.
+- **El avión es minoritario para el turismo:** ${pct1(turRef.share)} de los turistas llegaron en avión en ${turRef.anio}.

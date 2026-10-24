@@ -48,7 +48,8 @@ def tendencia(con: duckdb.DuckDBPyConnection, marts: Path = MARTS) -> pd.DataFra
         s = s[s.index <= ultimo_completo] if pd.notna(ultimo_completo) else s
     else:
         s = _mensual_linea(con)["pasajeros"].astype(float)
-    s = _tramo_continuo(s.interpolate(limit=2))
+    # Meses dentro del rango sin ninguna fila = 0 vuelos (ej. abril–junio 2020): no son huecos.
+    s = _tramo_continuo(s.fillna(0) if larga.exists() else s.interpolate(limit=2))
     if len(s) < 36:
         log.warning("Tendencia: serie corta (%d meses)", len(s))
         return pd.DataFrame(columns=["periodo", "pasajeros", "tendencia", "estacional", "residuo"])

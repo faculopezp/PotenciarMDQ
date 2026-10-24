@@ -84,8 +84,9 @@ def export(marts: Path = MARTS, out: Path = WEB_DATA) -> list[Path]:
             encoding="utf-8",
         )
         written.append(dest)
-    hitos = [{**h, "fecha": str(h["fecha"])} for h in load_yaml("hitos.yaml")["hitos"]]
-    dest = out / "hitos.json"
-    dest.write_text(json.dumps(hitos, ensure_ascii=False, indent=1), encoding="utf-8")
-    written.append(dest)
+    for nombre, clave in (("hitos", "hitos"), ("eventos", "eventos")):
+        filas = [{**h, "fecha": str(h["fecha"])} for h in load_yaml(f"{nombre}.yaml")[clave]]
+        dest = out / f"{nombre}.json"
+        dest.write_text(json.dumps(filas, ensure_ascii=False, indent=1), encoding="utf-8")
+        written.append(dest)
     return written

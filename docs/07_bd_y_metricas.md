@@ -112,3 +112,22 @@ Validación real: con matrícula (2026) mediana 52 min; con método por modelo (
 (con coordenadas), `mart_mdq_verano`, `mart_mdq_aerolineas`, `mart_mdq_aeronaves`,
 `mart_mdq_rotaciones`, `mart_mdq_tramos`, `mart_mdq_aviacion_general`, `mart_benchmark_pares`,
 `mart_mdq_explorador`. Todos en `sql/`.
+
+## Ampliación 2026-10-24: toda la aviación, serie larga y analítica
+
+| Objeto | Qué agrega |
+|---|---|
+| `fct_movimiento.segmento`, `es_linea`, `es_vuelo_local` | Segmentos: línea regular, charter de línea, taxi aéreo, privado, oficial/militar, escuelas, trabajo aéreo (`config/mdq.yaml → segmentos`) |
+| `fct_municipal_mensual` | Series del portal municipal en formato largo (dataset, serie, año, mes, valor, unidad) |
+| `fct_mdq_vuelos_hist` | Movimientos 2015–2019 del portal municipal (muestra ~52 %), con segmento y familia |
+| `dim_clima` | Clima diario en MDQ (Open-Meteo): código de tiempo, lluvia, viento, ráfagas, temperatura |
+| `mart_mdq_segmentos_*`, `mart_mdq_avion_tipico`, `mart_mdq_operadores` | Perfil de cada segmento, avión típico (por movimientos y por pasajeros), operadores y orígenes |
+| `mart_mdq_serie_larga`, `mart_mdq_turismo`, `mart_mdq_findes_largos` | Serie 2001+, turistas vs pasajeros aéreos, visitantes por fin de semana largo |
+| `mart_ranking_nacional`, `mart_red_aeropuertos` | Puesto de MDQ por pasajeros y por PageRank en la red de cabotaje |
+| `mart_mdq_dias_atipicos` | Gráfico de control diario + clima; eventos con fuente en `config/eventos.yaml` |
+| `mart_mdq_tendencia`, `mart_mdq_pronostico` | STL sobre la serie larga; Holt-Winters a 6 meses con banda del 80 % |
+
+**Aeronave faltante (2019+, MDQ):** 37 % de los movimientos no tienen modelo. 2019: 100 % (el CSV de ANAC no lo
+informa); 2020: 82 %; 2021+: 15–25 %, concentrado en vuelos oficiales/militares (91 % sin modelo). El reporte de
+QA ("Aeronave faltante en el foco") cuantifica por año, segmento y rango de pasajeros cuántos se podrían
+inferir (ej. > 96 pasajeros solo puede ser un jet de fuselaje angosto).

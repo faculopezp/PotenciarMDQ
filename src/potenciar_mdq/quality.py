@@ -86,6 +86,16 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                median(tiempo_en_tierra_min) AS mediana_min
         FROM fct_rotacion GROUP BY ALL ORDER BY 1, 2, 3""")]
 
+    out += ["## Aeronave faltante en el foco (potencial de inferencia por pasajeros)", "", _table(con, """
+        SELECT anio, segmento,
+               count(*) AS movimientos,
+               count(*) FILTER (aeronave IS NULL) AS sin_aeronave,
+               count(*) FILTER (aeronave IS NULL AND pasajeros > 96) AS sin_aeronave_mas_de_96_pax,
+               count(*) FILTER (aeronave IS NULL AND pasajeros BETWEEN 20 AND 96) AS sin_aeronave_20_a_96_pax,
+               count(*) FILTER (aeronave IS NULL AND coalesce(pasajeros, 0) < 20) AS sin_aeronave_menos_de_20_pax
+        FROM f WHERE aeropuerto = getvariable('foco')
+        GROUP BY ALL ORDER BY anio, movimientos DESC""")]
+
     out += ["## Meses sin movimientos en el foco", "", _table(con, """
         WITH rango AS (
           SELECT range AS m FROM range(

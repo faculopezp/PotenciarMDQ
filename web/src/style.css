@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
 @import url("observablehq:default.css");
 @import url("observablehq:theme-air.css");
+@import url("./components/inputs.css");
 
 :root {
   --papel: #f5f1ea;
@@ -93,17 +94,30 @@ h3 { font-size: 1.35rem; margin-top: 2.5rem; }
 a { color: var(--acento); }
 table { font-family: var(--sans-serif); }
 
-/* Una sola animación: entrada suave por sección, solo CSS y respetando "reducir movimiento". */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    #observablehq-main h2, .cifras, .fichas {
-      animation: entrar linear both; animation-timeline: view(); animation-range: entry 0% entry 40%;
-    }
-  }
-}
-@keyframes entrar { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+/* Sin animaciones: el contenido tiene que verse siempre (design-taste: movimiento mínimo). */
 
 @media (max-width: 900px) {
   .portada { grid-template-columns: 1fr; }
   .cifras { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Gráficos: tipografía del sitio (Plot fija la fuente inline). */
+svg[class^="plot"] { font-family: var(--sans-serif) !important; font-size: 12px !important; }
+figure figcaption, .fuente { font-family: var(--monospace); font-size: 11px; letter-spacing: 0.06em; color: var(--tinta-2); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+.grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem; align-items: start; }
+@media (max-width: 1000px) { .grid-2, .grid-2-1 { grid-template-columns: 1fr; } }
+table.editorial { width: 100%; border-collapse: collapse; font-size: 14px; border-top: 2px solid var(--tinta); }
+table.editorial th { font-family: var(--monospace); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tinta-2); text-align: right; padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--filete); }
+table.editorial th:first-child, table.editorial td:first-child { text-align: left; padding-left: 0; }
+table.editorial td { padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--filete); text-align: right; font-variant-numeric: tabular-nums; }
+table.editorial tr.foco td { color: var(--acento); font-weight: 600; }
+.chip { display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: baseline; }
+
+table.editorial td:first-child { white-space: nowrap; }
+h2[data-idx]::before {
+  content: attr(data-idx); display: block; font-family: var(--monospace); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--acento); margin-bottom: 0.4rem;
+}
+figure h2, figure h3 { margin: 0 0 0.5rem; padding: 0; border: none; font-size: 1.15rem; max-width: none; }
+figure h2::before { content: none; }

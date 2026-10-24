@@ -9,6 +9,10 @@ title: Metodología y fuentes
 | Dato | Fuente | Cobertura |
 |---|---|---|
 | Cada aterrizaje y despegue (fecha, hora, aerolínea, avión, origen/destino, pasajeros) | ANAC — "Aterrizajes y despegues procesados por la ANAC", Portal de Datos Abiertos de Transporte | 2019 → hoy, se actualiza mensualmente |
+| Pasajeros y movimientos mensuales del aeropuerto, por ruta | Municipio de General Pueyrredon — datos.mardelplata.gob.ar | 2001–2020 (se usa hasta 2018) |
+| Vuelos individuales (muestra, sin pasajeros) | Municipio de General Pueyrredon | 2015–2018 (≈ 52 % de los movimientos) |
+| Turistas arribados, estadía, fines de semana largos | EMTURyC vía datos.mardelplata.gob.ar | 2007–2025 |
+| Clima diario en el aeropuerto | Open-Meteo (reanálisis ERA5) | 2019 → hoy |
 | Coordenadas y nombres de aeropuertos | OurAirports (dominio público) | — |
 | Feriados nacionales | Calendario oficial (paquete `holidays`) | — |
 | Hitos históricos | Notas de prensa y fuentes secundarias, marcadas como tales | — |
@@ -19,7 +23,9 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 
 - **Movimiento:** un aterrizaje o un despegue en Mar del Plata. Un vuelo de ida y vuelta son dos movimientos acá.
 - **Pasajeros:** los que bajan más los que suben en Mar del Plata (estándar internacional de aeropuertos). No hay doble conteo.
-- **Vuelos comerciales:** regulares y no regulares (charter, taxi aéreo). El resto (privados, escuela, oficiales) se muestra aparte.
+- **Segmentos:** cada movimiento se clasifica según la clase de vuelo que informa la ANAC: *línea regular*; *charter de línea* (no regular con avión u operador de línea); *taxi aéreo* (el resto de los no regulares: jets y turbohélices ejecutivos, avionetas, helicópteros); *privado*; *oficial y militar*; *escuelas de vuelo*; *trabajo aéreo*. Ningún movimiento queda sin segmento.
+- **Modelo de avión faltante:** la ANAC no informa el modelo en 2019 y en parte de 2020, y en ~20 % de los movimientos posteriores (sobre todo vuelos oficiales y militares). Esos movimientos cuentan en su segmento pero no en los gráficos de flota.
+- **Serie larga:** hasta 2018 se usan los datos municipales y desde 2019 los de la ANAC. En 2019, año que cubren ambas fuentes, difieren menos de 4 % por mes. Desde 2021 el Municipio publica pasajeros de un solo sentido, por eso no se usa.
 - **Datos provisorios:** la ANAC marca como provisorios los últimos meses; pueden cambiar.
 - **Hora local:** hora UTC − 3.
 
@@ -33,6 +39,11 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 | Tiempo en tierra (turnaround) | Aterrizaje → siguiente despegue del mismo avión en MDQ | Igual que arriba; validado contra matrícula en 2026 (medianas 51 vs 52 min) |
 | Hora pico de diseño | 30.ª hora con más pasajeros del año (Standard Busy Rate) | — |
 | Concentración (HHI) | Suma de las cuotas de mercado al cuadrado × 10.000 | — |
+| Tendencia | Descomposición estacional STL (período 12) de los pasajeros mensuales | Suaviza; los extremos se revisan con cada dato nuevo |
+| Días atípicos | Desvío respecto de la mediana del mismo día de la semana ±3 semanas, en desvíos robustos (MAD); atípico si supera 3 | Los paros se rotulan solo con fuente de prensa |
+| Pronóstico | Holt-Winters (log, tendencia amortiguada, estacionalidad anual) sobre la serie pospandemia; banda = 80 % de 2.000 simulaciones | No anticipa rutas nuevas ni cambios de aerolíneas |
+| Peso en la red | PageRank de la red de vuelos de cabotaje reconstruidos | — |
+| Avión típico | Familia con más movimientos por segmento; "capacidad observada" = p95 de pasajeros de ese modelo en ese segmento en todo el país | En aviación general es pasajeros llevados, no asientos |
 
 ## Lo que no se puede medir con estos datos
 

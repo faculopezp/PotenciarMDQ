@@ -2,13 +2,13 @@
 title: Explorador
 ---
 
-<link rel="stylesheet" href="./components/inputs.css">
 
 ```js
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 import * as Inputs from "@observablehq/inputs";
-import {FOCO, entero, MESES, DIAS, CATEGORIAS, CLASES, columnas} from "./components/util.js";
+import {FOCO, entero, MESES, DIAS, CATEGORIAS, CLASES, SEGMENTOS, columnas} from "./components/util.js";
+import {html} from "htl";
 ```
 
 # Explorador
@@ -29,7 +29,7 @@ const categoriasLista = [...new Set(base.map((d) => d.aeronave_categoria))];
 ```js
 const filtros = view(Inputs.form({
   anios: Inputs.checkbox(anios, {label: "Años", value: anios, format: String}),
-  tipo: Inputs.radio(["Todos", "Comerciales", "No comerciales"], {label: "Vuelos", value: "Comerciales"}),
+  segmentos: Inputs.checkbox(SEGMENTOS, {label: "Segmentos", format: (s) => s.nombre, value: SEGMENTOS}),
   aerolinea: Inputs.select(["Todas", ...aerolineasLista], {label: "Aerolínea"}),
   categoria: Inputs.select(["Todas", ...categoriasLista], {label: "Tipo de avión", format: (c) => CATEGORIAS[c] ?? c}),
   movimiento: Inputs.radio(["Ambos", "aterrizaje", "despegue"], {label: "Movimiento", value: "Ambos"}),
@@ -40,7 +40,7 @@ const filtros = view(Inputs.form({
 ```js
 const f = base.filter((d) =>
   filtros.anios.includes(d.anio)
-  && (filtros.tipo === "Todos" || (filtros.tipo === "Comerciales") === d.es_comercial)
+  && filtros.segmentos.some((s) => s.id === d.segmento)
   && (filtros.aerolinea === "Todas" || d.aerolinea_nombre === filtros.aerolinea)
   && (filtros.categoria === "Todas" || d.aeronave_categoria === filtros.categoria)
   && (filtros.movimiento === "Ambos" || d.tipo_movimiento === filtros.movimiento));
