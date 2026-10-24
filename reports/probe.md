@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-24 03:12 UTC
+# Probe de fuentes — 2026-10-24 03:30 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -106,8 +106,19 @@
 ## `ourairports` (static_file)
 - HTTP 200, content-type `application/octet-stream`
 
+## `anac_aeropuertos` (static_file)
+- HTTP 200, content-type `text/csv`
+```
+﻿local;oaci;iata;tipo;denominacion;coordenadas;latitud;longitud;elev;uom_elev;ref;distancia_ref;direccion_ref;condicion;control;region;fir;uso;trafico;sna;concesionado;provincia;inhab
+ACB;;;Aeródromo;"CORONEL BOGADO/AGROSERVICIOS";"33°16'20""S  60°34'14""W";-60.57066000;-33.27226000;44.00;Metros;"Coronel Bogado";6.0;NE;PRIVADO;NOCONTROL;RACE;SAEF;AEROAPP;Nacional;NO;NO;"SANTA FÉ";NO
+ACH;;;Aeródromo;"GENERAL ACHA";"37°24' 6""S  64°36'49""W";-64.61351000;-37.40164000;277.00;Metros;"General Acha";3.0;SO;PUBLICO;NOCONTROL;RACE;SAEF;CIVIL;Nacional;NO;NO;"LA PAMPA";NO
+ACM;;;Aeródromo;"ARRECIFES/LA CURA MALAL";"34° 4'33""S  60° 8'30""W";-60.14170000;-34.07574000;37.00;Metros;Arrecifes;4.0;OSO;PRIVADO;NOCONTROL;RACE;SAEF;CIVIL;Nacional;NO;NO;"BUENOS AIRES";NO
+ADO;SAWD;PUD;Aeródromo;"PUERTO DESEADO";"47°44' 6""S  65°54'15""W";-65.90410000;-47.73511000;82.00;Metros;"Puerto Deseado";2.0;N;PUBLICO;AERADIO;RASU;SAVF;CIVIL;Nacional;NO;NO;"SANTA CRUZ";NO
+ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""W";-62.26462000;-28.85541000;75.00;Metros;Bandera;4.0;N;PRIVADO;NOCONTROL;RANO;SACF;AEROAPP;Nacional;NO;NO;"SANTIAGO DEL ESTERO";NO
+```
+
 ## `clima_mdq` (openmeteo)
-- HTTP 200 `https://archive-api.open-meteo.com/v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-18&daily=weather_code%2Cprecipitation_`
+- ❌ RetryError: HTTPSConnectionPool(host='archive-api.open-meteo.com', port=443): Max retries exceeded with url: /v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-18&daily=weather_code%2Cprecipitation_sum%2Cwind_speed_10m_max%2Cwind_gusts_10m_max%2Ctemperature_2m_max&timezone=America%2FArgentina%2FBuenos_Aires (Caused by ResponseError('too many 503 error responses'))
 
 ## `anac_informes_mensuales` (url_pattern)
 - 0/60 URLs existen

@@ -61,7 +61,7 @@
 
 | pct_aeronave_otro | pct_aerolinea_sin_regla | pct_sin_distancia | pct_sin_asientos |
 |---|---|---|---|
-| 0.14 | 7.25 | 2.56 | 43.4 |
+| 0.14 | 7.25 | 0.9 | 43.4 |
 
 ## Aeronaves sin clasificar (top 25 → ampliar config/aeronaves.yaml)
 
@@ -89,34 +89,90 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| I.A-1124 | 165 |
 | AGW-AW 109SP | 165 |
+| I.A-1124 | 165 |
 | SLG-4 TSI | 154 |
 
-## Códigos sin coordenadas (top 20 → revisar dim_aeropuerto)
+## Códigos sin coordenadas (top 25 → revisar dim_aeropuerto)
 
-| origen_destino | movimientos |
-|---|---|
-| SPJC | 40556 |
-| 2278 | 11069 |
-| 3073 | 4193 |
-| 2976 | 3794 |
-| 3017 | 3696 |
-| RAT | 2615 |
-| 2324 | 1729 |
-| 2463 | 943 |
-| 2870 | 866 |
-| NDL | 835 |
-| BGI | 611 |
-| SLA | 587 |
-| HAL | 514 |
-| HNR | 500 |
-| MLE | 486 |
-| MBI | 426 |
-| HOP | 415 |
-| 2417 | 413 |
-| 2999 | 410 |
-| 2341 | 406 |
+| origen_destino | movimientos | clasificacion | segmento | aeropuerto_que_lo_informa |
+|---|---|---|---|---|
+| 2278 | 11069 | internacional | privado | SAL |
+| 3073 | 4193 | internacional | charter_linea | SAL |
+| 2976 | 3794 | internacional | taxi_aereo | SAL |
+| 3017 | 3696 | internacional | taxi_aereo | SAL |
+| RAT | 2615 | cabotaje | charter_linea | SAL |
+| 2324 | 1729 | internacional | oficial | POS |
+| 2463 | 943 | internacional | privado | POS |
+| 2870 | 866 | internacional | privado | FDO |
+| BGI | 611 | cabotaje | privado | FDO |
+| SLA | 587 | cabotaje | privado | ROS |
+| HAL | 514 | cabotaje | privado | FDO |
+| HNR | 500 | cabotaje | taxi_aereo | GRA |
+| MLE | 486 | cabotaje | privado | ROS |
+| HOP | 415 | cabotaje | oficial | PAL |
+| 2417 | 413 | internacional | privado | FDO |
+| 2999 | 410 | internacional | privado | FDO |
+| 2341 | 406 | internacional | oficial | PAR |
+| 2628 | 402 | internacional | privado | FDO |
+| 2855 | 381 | internacional | privado | FDO |
+| 2666 | 371 | internacional | privado | FDO |
+| 2346 | 339 | internacional | privado | FDO |
+| 3075 | 334 | internacional | privado | SAL |
+| 2489 | 319 | internacional | privado | SIS |
+| 2682 | 315 | internacional | oficial | SVO |
+| 2634 | 312 | internacional | privado | SAL |
+
+## Resolución de códigos de origen/destino
+
+| fuente | codigos | movimientos | movimientos_foco |
+|---|---|---|---|
+| ourairports_local | 694 | 3045465 | 46896 |
+| ourairports_oaci | 604 | 649834 | 609 |
+| sin_resolver | 824 | 56043 | 482 |
+| anac | 18 | 2562 | 148 |
+
+## Lista ANAC vs OurAirports (mismo código, distancia > 5 km)
+
+| codigos_en_ambas | mas_de_5_km | mediana_km |
+|---|---|---|
+| 671 | 671 | 3645.6 |
+
+| codigo | nombre_anac | nombre_ourairports | distancia_km |
+|---|---|---|---|
+| IAC | LA QUIACA/DR. GUILLERMO EUGENIO SNOPEK | La Quiaca Airport | 5732.9 |
+| SMF | SAN MARTÍN/FINCA LA FRONTERA | Finca La Frontera Airport | 5500.7 |
+| TAR | TARTAGAL/GENERAL ENRIQUE MOSCONI | General Enrique Mosconi Airport | 5483.8 |
+| ORA | ORÁN | Orán Airport | 5464.4 |
+| SLV | EMBARCACIÓN/SALVITA | Salvita Airport | 5424.8 |
+| CLI | CALILEGUA | Calilegua Airport | 5419.7 |
+| VIT | SANTA VICTORIA | Santa Victoria Airport | 5415.8 |
+| PDA | JUJUY/PUERTA DE AVALOS | Puerta De Avalos Airport | 5396.7 |
+| CCS | CACHI | Cachi Airport | 5380.3 |
+| JUJ | JUJUY/GOBERNADOR GUZMÁN | Gobernador Horacio Guzman International Airport | 5370.1 |
+| HFC | SALTA/FINCA LAS COSTAS | Finca Las Costas Heliport | 5358.6 |
+| GBL | SALTA/GENERAL BELGRANO | General Belgrano Airport | 5354.0 |
+| HGB | SALTA/CENTRO CÍVICO GRAND BOURG | Centro Cívico Grand Bourg Heliport | 5352.5 |
+| HHM | SALTA/HOSPITAL DE MILAGRO | Hospital De Milagro Heliport | 5349.9 |
+| SAL | SALTA/GENERAL D. MARTÍN MIGUEL DE GÜEMES | Martín Miguel de Güemes International Airport | 5345.5 |
+| FDD | FORTÍN DRAGONES/EL DESAFÍO | El Desafio | 5344.8 |
+| HTE | SALTA/TEMET | Temet Helipad | 5336.5 |
+| LLA | LAS LAJITAS/AEROSOLUCIONES | AeroSoluciones Airport | 5228.9 |
+| CAF | CAFAYATE | Cafayate Airport | 5223.9 |
+| PCA | PIQUETE CABADO/SAS AEROAPLICACIONES | SAS Aeroaplicaciones Airport | 5215.0 |
+
+## Vista previa de la lista ANAC (formato de coordenadas)
+
+| codigo | oaci | iata | nombre | lat | lon |
+|---|---|---|---|---|---|
+| BHT | BHT |  | BRAGADO/HARAS TRELLIRIS | -60.57884 | -35.33147 |
+| CLT | CLT | CCT | COLONIA CATRIEL | -67.82881 | -37.90819 |
+| DIO | DIO |  | TANDIL/COMANDANTE EDUARDO A. OLIVERO | -58.98268 | -37.34678 |
+| ELZ | ELZ |  | ELIZALDE | -57.9625 | -34.975 |
+| GAR | GAR |  | GENERAL ALVEAR | -59.90699 | -35.97895 |
+| GLM | GLM |  | GUALEGUAYCHÚ/BLM CABAÑAS | -58.52222222 | -32.9775 |
+| GOR | SACT |  | GOBERNADOR GORDILLO/CHAMICAL | -66.29403 | -30.34416 |
+| GRZ | GRZ |  | GENERAL RODRIGUEZ | -59.00055556 | -34.58277778 |
 
 ## Tramos reconstruidos (cabotaje comercial)
 
