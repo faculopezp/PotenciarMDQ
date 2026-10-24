@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-24 04:24 UTC
+# Probe de fuentes — 2026-10-24 04:32 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -119,6 +119,58 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 
 ## `opensky_aeronaves` (static_file)
 - HTTP 200, content-type `text/csv; charset=utf-8`
+
+## `madhel` (static_file)
+- HTTP 200, content-type `text/html`
+```
+<!DOCTYPE html>
+<html lang="es" ng-app='angularApp'>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+```
+- URLs encontradas:
+  - `#main-navbar-collapse`
+  - `$sanitize`
+  - `Book/Gatsby`
+  - `Book/Gatsby/ch/4?key=value`
+  - `Book/Moby`
+  - `Book/Moby/ch/1`
+  - `Book/Scarlet`
+  - `Iterator`
+  - `_blank`
+  - `acerca.html`
+  - `book.html`
+  - `chapter.html`
+  - `data:`
+  - `data:image/svg+xml;base64,${btoa(i)}`
+  - `http://ais.anac.gob.ar`
+  - `http://angularjs.org/`
+  - `http://www.openstreetmap.org/copyright`
+  - `https://ais.anac.gob.ar/notam/json`
+  - `https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js`
+  - `https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.2.31/angular-sanitize.js`
+  - `https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.3/angular-route.js`
+  - `https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.7/angular.min.js`
+  - `https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js`
+  - `https://datos.anac.gob.ar/madhel/api/v2/airports/`
+  - `https://datos.anac.gob.ar/madhel/api/v2/info/legal/disclaimer/web-app`
+  - `https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB5QEo5K82nS5ovG5qeQdL64XWXQ6emz5A&libraries=marker&loading=async&callback=initMap`
+  - `https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js`
+  - `https://twitter.com/anacargentina?lang=es`
+  - `https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js`
+  - `https://www.anac.gob.ar`
+  - `https://www.facebook.com/ANAC-248699361838722/`
+  - `https://www.googletagmanager.com/gtag/js?id=G-SR3CKD1CLW`
+  - `https://www.youtube.com/user/anacnoticias`
+  - `index.html`
+  - `js/angular-leaflet-directive.min.js`
+  - `js/app.js`
+  - `js/mapa.js`
+  - `mailto:`
+  - `resourceUrl`
+  - `url`
 
 ## `opensky_indice` (static_file)
 - HTTP 200, content-type `text/html`
