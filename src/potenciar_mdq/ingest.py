@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import logging
+import re
 from datetime import UTC, datetime
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 from potenciar_mdq.http import PoliteSession, download
 from potenciar_mdq.settings import RAW, REPORTS, sources
@@ -87,6 +88,29 @@ def _preview(http: PoliteSession, url: str, n_lines: int = 3) -> list[str]:
     return [line[:300] for line in text.splitlines()[:n_lines]]
 
 
+_URL_RX = re.compile(
+    r"""(?:src|href|action|url|fetch|get|post|ajax)\s*[:=(]\s*["'`]([^"'`\s]{3,200})["'`]""", re.I
+)
+
+
+def _scan(http: PoliteSession, url: str, follow_js: bool = True) -> list[str]:
+    """URLs referenciadas por una página (y sus .js): para descubrir endpoints sin documentar."""
+    try:
+        html = http.get(url).text
+    except Exception as exc:  # noqa: BLE001 - es solo exploración
+        return [f"- (scan falló: {type(exc).__name__})"]
+    found = {u for u in _URL_RX.findall(html)}
+    if follow_js:
+        for js in [u for u in found if u.split("?")[0].endswith(".js")][:15]:
+            try:
+                found |= set(_URL_RX.findall(http.get(urljoin(url, js)).text))
+            except Exception:  # noqa: BLE001, S112
+                continue
+    interesantes = sorted(u for u in found if not u.endswith((".css", ".png", ".svg", ".ico",
+                                                               ".jpg", ".woff", ".woff2")))
+    return ["- URLs encontradas:", *[f"  - `{u}`" for u in interesantes[:120]]]
+
+
 def probe() -> Path:
     """Valida cada fuente y escribe reports/probe.md (no descarga datos)."""
     http = _session()
@@ -140,6 +164,8 @@ def probe() -> Path:
                 r.close()
                 if cfg.get("preview"):
                     lines += ["```", *_preview(http, cfg["url"], n_lines=6), "```"]
+                if cfg.get("scan"):
+                    lines += _scan(http, cfg["url"], cfg.get("scan_follow_js", True))
         except Exception as exc:  # noqa: BLE001 - el probe reporta, no corta
             lines.append(f"- ❌ {type(exc).__name__}: {exc}")
         lines.append("")

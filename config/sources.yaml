@@ -65,6 +65,16 @@ sources:
     url: https://opensky-network.org/datasets/metadata/aircraftDatabase.csv
     enabled: true
     verified: false
+  # MADHEL (Manual de Aeródromos y Helipuertos, ANAC/AIS). Sin API documentada: el probe escanea
+  # la página y sus .js para encontrar el endpoint de datos (ver reports/probe.md). Objetivo:
+  # resolver los códigos numéricos del CSV de movimientos (ej. 2278, 3073, 2574).
+  madhel:
+    kind: static_file
+    url: https://ais.anac.gob.ar/madhel/
+    preview: true
+    scan: true
+    enabled: false        # solo probe hasta encontrar el endpoint
+    verified: false
   opensky_indice:
     kind: static_file
     url: https://opensky-network.org/datasets/metadata/
