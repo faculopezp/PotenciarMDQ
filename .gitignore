@@ -11,6 +11,8 @@ data/processed/*
 data/marts/*
 !data/**/.gitkeep
 !data/reference/*
+!data/municipal/
+!data/municipal/**
 
 reports/network_*.json
 
