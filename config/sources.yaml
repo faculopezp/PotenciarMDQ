@@ -75,6 +75,13 @@ sources:
     scan: true
     enabled: false        # solo probe hasta encontrar el endpoint
     verified: false
+  # Endpoint de datos de MADHEL, hallado escaneando js de ais.anac.gob.ar/madhel (2026-10-24).
+  madhel_api:
+    kind: static_file
+    url: https://datos.anac.gob.ar/madhel/api/v2/airports/
+    preview: true
+    enabled: true
+    verified: false
   opensky_indice:
     kind: static_file
     url: https://opensky-network.org/datasets/metadata/

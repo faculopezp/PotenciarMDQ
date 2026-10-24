@@ -39,7 +39,7 @@ def standardize() -> None:
     """raw -> processed (parquet con esquema canónico)."""
     typer.echo(anac_movimientos.build())
     for step in (generic.build_yvera, generic.build_dim_aeropuerto, generic.build_anac_aeropuertos,
-                 generic.build_opensky,
+                 generic.build_opensky, generic.build_madhel,
                  generic.build_clima,
                  municipal.build):
         try:

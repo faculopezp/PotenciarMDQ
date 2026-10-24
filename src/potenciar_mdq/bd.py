@@ -99,6 +99,11 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
         con.execute("CREATE TABLE ref_opensky (registration VARCHAR, typecode VARCHAR, "
                     "manufacturername VARCHAR, model VARCHAR)")
 
+    # MADHEL (opcional, esquema a descubrir): se carga tal cual para explorar en reports/qa.
+    madhel = processed / "madhel.parquet"
+    if madhel.exists():
+        con.execute("CREATE TABLE ref_madhel AS SELECT * FROM read_parquet(?)", [str(madhel)])
+
     # Portal municipal (opcional): series mensuales 2001+ y vuelos individuales 2015–2019.
     for tabla, archivo, ddl in [
         ("mun_series", "mun_series.parquet",

@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import csv
 import io
+import json
 import logging
 import re
 from pathlib import Path
@@ -197,4 +198,24 @@ def build_opensky(raw_dir: Path = RAW / "opensky_aeronaves", out: Path = PROCESS
           FROM read_csv({_q(str(files[-1]))}, all_varchar=true, header=true, ignore_errors=true)
           WHERE regexp_matches(upper(trim(registration)), '^L[VQ]-')
         ) TO {_q(str(dest))} (FORMAT parquet)""")
+    return dest
+
+
+def build_madhel(raw_dir: Path = RAW / "madhel_api", out: Path = PROCESSED) -> Path:
+    """MADHEL /api/v2/airports/ (JSON) -> processed/madhel.parquet, columnas tal cual vengan."""
+    files = sorted(p for p in raw_dir.rglob("*") if p.is_file())
+    if not files:
+        raise FileNotFoundError(f"No hay respuesta de MADHEL en {raw_dir}")
+    data = json.loads(files[-1].read_text(encoding="utf-8"))
+    if isinstance(data, dict):  # paginado o envuelto: {"results": [...]} / {"data": [...]}
+        data = next((v for v in data.values() if isinstance(v, list)), [data])
+    tmp = out / "madhel.jsonl"
+    tmp.parent.mkdir(parents=True, exist_ok=True)
+    tmp.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in data), encoding="utf-8")
+    dest = out / "madhel.parquet"
+    duckdb.connect().execute(
+        f"COPY (SELECT * FROM read_json_auto({_q(str(tmp))}, format='newline_delimited', "
+        f"sample_size=-1)) TO {_q(str(dest))} (FORMAT parquet)"
+    )
+    log.info("madhel: %d registros", len(data))
     return dest

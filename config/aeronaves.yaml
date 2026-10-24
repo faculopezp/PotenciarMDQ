@@ -238,6 +238,7 @@ modelos:
 # - Flyest: Bombardier CRJ200 de 50 asientos (aviacionline).
 # - Aerolíneas Argentinas con más de 96 pasajeros: el E190 tiene 96 asientos, solo puede ser un 737.
 inferencia:
-  - {operador: 'AVIAN|AVIANCA', pax_min: 0, pax_max: 72, familia: ATR 42/72, categoria: turbohelice_regional}
-  - {operador: 'FLYEST', pax_min: 0, pax_max: 50, familia: Bombardier CRJ, categoria: jet_regional}
-  - {operador: 'AEROLINEAS ARGENTINAS|AUSTRAL', pax_min: 97, pax_max: 200, familia: Boeing 737, categoria: jet_fuselaje_angosto}
+# anio_hasta: Avianca Argentina dejó de volar en 2019; Flyest cerró en 2020.
+  - {operador: 'AVIAN|AVIANCA', anio_hasta: 2020, pax_min: 0, pax_max: 72, familia: ATR 42/72, categoria: turbohelice_regional}
+  - {operador: 'FLYEST', anio_hasta: 2020, pax_min: 0, pax_max: 50, familia: Bombardier CRJ, categoria: jet_regional}
+  - {operador: 'AEROLINEAS ARGENTINAS|AUSTRAL', anio_hasta: 2099, pax_min: 97, pax_max: 200, familia: Boeing 737, categoria: jet_fuselaje_angosto}

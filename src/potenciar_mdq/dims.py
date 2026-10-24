@@ -74,12 +74,13 @@ def build_dim_aeronave(con: duckdb.DuckDBPyConnection) -> None:
     inferencia = cfg.get("inferencia", [])
     con.execute(
         "CREATE OR REPLACE TABLE ref_inferencia_aeronave (orden INT, operador VARCHAR, "
-        "pax_min DOUBLE, pax_max DOUBLE, familia VARCHAR, categoria VARCHAR)"
+        "anio_hasta INT, pax_min DOUBLE, pax_max DOUBLE, familia VARCHAR, categoria VARCHAR)"
     )
     if inferencia:
         con.executemany(
-            "INSERT INTO ref_inferencia_aeronave VALUES (?, ?, ?, ?, ?, ?)",
-            [(i, r["operador"], r["pax_min"], r["pax_max"], r["familia"], r["categoria"])
+            "INSERT INTO ref_inferencia_aeronave VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [(i, r["operador"], r.get("anio_hasta", 2099), r["pax_min"], r["pax_max"],
+              r["familia"], r["categoria"])
              for i, r in enumerate(inferencia)],
         )
 

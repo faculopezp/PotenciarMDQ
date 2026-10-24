@@ -59,6 +59,7 @@ j AS (
     ON e.aeronave IS NULL AND e.clase_vuelo IN ('regular', 'no_regular')
    AND regexp_matches(upper(strip_accents(coalesce(e.aerolinea, ''))), r.operador)
    AND e.pasajeros BETWEEN r.pax_min AND r.pax_max
+   AND year(e.fecha) <= r.anio_hasta
 )
 SELECT
   row_number() OVER (ORDER BY j.ts_utc, j.aeropuerto, j.tipo_movimiento, j.origen_destino)

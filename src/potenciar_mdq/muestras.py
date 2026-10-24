@@ -105,6 +105,24 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
         WHERE f.aeronave_icao IS NULL AND f.aeronave_modelo IS NOT NULL AND o.typecode <> ''
         GROUP BY ALL ORDER BY 3 DESC LIMIT 30""")]
 
+    existe = con.execute("SELECT count(*) FROM duckdb_tables() WHERE table_name = 'ref_madhel'")
+    if existe.fetchall()[0][0]:
+        out += ["## 7. MADHEL (datos.anac.gob.ar/madhel/api/v2/airports/)", "",
+                f"Registros: {con.execute('SELECT count(*) FROM ref_madhel').fetchall()[0][0]}", "",
+                "Columnas:", "", _table(con, "SELECT column_name, column_type FROM "
+                                             "(DESCRIBE ref_madhel)"),
+                "Primeras filas:", "", _table(con, "SELECT * FROM ref_madhel LIMIT 5"),
+                "Códigos numéricos del CSV de movimientos encontrados en MADHEL:", "",
+                _table(con, """
+            WITH n AS (
+              SELECT origen_destino AS codigo, count(*) AS movimientos FROM fct_movimiento
+              WHERE regexp_matches(origen_destino, '^[0-9]+$') GROUP BY 1
+            )
+            SELECT n.codigo, n.movimientos, CAST(t AS VARCHAR)[:300] AS registro_madhel
+            FROM n JOIN ref_madhel t
+              ON regexp_matches(CAST(t AS VARCHAR), '[^0-9]' || n.codigo || '[^0-9]')
+            ORDER BY n.movimientos DESC LIMIT 25""")]
+
     con.close()
     out_dir.mkdir(parents=True, exist_ok=True)
     dest = out_dir / "muestras.md"
