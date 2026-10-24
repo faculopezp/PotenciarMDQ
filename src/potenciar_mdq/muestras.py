@@ -121,9 +121,10 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                   SELECT origen_destino AS codigo, count(*) AS movimientos FROM fct_movimiento
                   WHERE regexp_matches(origen_destino, '^[0-9]+$') GROUP BY 1
                 )
-                SELECT n.codigo, n.movimientos, CAST(t AS VARCHAR)[:300] AS registro_madhel
+                SELECT n.codigo, n.movimientos, t.human_readable_identifier AS registro_madhel
                 FROM n JOIN ref_madhel t
-                  ON regexp_matches(CAST(t AS VARCHAR), '[^0-9]' || n.codigo || '[^0-9]')
+                  ON t.local_identifier = n.codigo
+              OR regexp_matches(t.human_readable_identifier, '[(/ ]' || n.codigo || '[)/ ]')
                 ORDER BY n.movimientos DESC LIMIT 25""")]
     except Exception as exc:  # noqa: BLE001
         out += ["## 7. MADHEL", "", f"Error explorando MADHEL: `{type(exc).__name__}: {exc}`"]
