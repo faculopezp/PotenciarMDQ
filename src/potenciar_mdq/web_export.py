@@ -33,6 +33,7 @@ MARTS_WEB = {
     "mart_mdq_segmentos_mensual": "mdq_segmentos_mensual",
     "mart_mdq_segmentos_anual": "mdq_segmentos_anual",
     "mart_mdq_avion_tipico": "mdq_avion_tipico",
+    "mart_mdq_perfil_aeronave": "mdq_perfil_aeronave",
     "mart_mdq_operadores": "mdq_operadores",
     "mart_ranking_nacional": "ranking_nacional",
     "mart_mdq_dias_atipicos": "mdq_dias_atipicos",

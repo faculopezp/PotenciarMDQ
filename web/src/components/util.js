@@ -20,6 +20,18 @@ export const SEGMENTOS = [
   {id: "charter_linea", nombre: "Charter de línea"},
   {id: "trabajo_aereo", nombre: "Trabajo aéreo"}
 ];
+// Perfil de aeronave (config/mdq.yaml → perfil_aeronave). Secuencia de "más pesado" a "más liviano".
+export const PERFILES = [
+  {id: "jet_ejecutivo", nombre: "Jet ejecutivo", color: "#0d366b"},
+  {id: "turbohelice_basico", nombre: "Turbohélice 5+ pax (básico)", color: "#3987e5"},
+  {id: "turbohelice_chico", nombre: "Turbohélice < 5 pax", color: "#86b6ef"},
+  {id: "piston", nombre: "Pistón (liviano)", color: "#eda100"},
+  {id: "helicoptero", nombre: "Helicóptero", color: "#1baf7a"},
+  {id: "avion_de_linea", nombre: "Avión de línea", color: "#6b675e"},
+  {id: "sin_dato", nombre: "Sin dato / otro", color: "#d6d3cb"}
+];
+export const PERFIL_NOMBRE = Object.fromEntries(PERFILES.map((p) => [p.id, p.nombre]));
+export const perfilColor = {domain: PERFILES.map((p) => p.nombre), range: PERFILES.map((p) => p.color)};
 export const SEG_NOMBRE = Object.fromEntries(SEGMENTOS.map((s) => [s.id, s.nombre]));
 export const SEG_COLOR = Object.fromEntries(SEGMENTOS.map((s, i) => [s.id, CAT[i]]));
 export const segColor = {domain: SEGMENTOS.map((s) => s.nombre), range: SEGMENTOS.map((s) => SEG_COLOR[s.id])};

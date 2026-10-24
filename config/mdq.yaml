@@ -39,6 +39,23 @@ segmentos:
     trabajo_aereo: Trabajo aéreo
     otro: Otro
 
+# Perfil de aeronave (independiente de la clase de vuelo que declara ANAC).
+# "Avión básico" del taxi aéreo / ejecutivo: turbohélice que lleva 5 o más pasajeros (capacidad
+# observada p95 de esa familia en aviación general en todo el país). Pistón = avión liviano
+# (privado y escuelas). Si un vuelo a pistón está declarado como taxi aéreo, se conserva el segmento
+# y se marca como "taxi aéreo en avión liviano".
+perfil_aeronave:
+  basico_categorias: [turbohelice_ejecutivo]
+  basico_min_pax: 5
+  nombres:
+    jet_ejecutivo: Jet ejecutivo
+    turbohelice_basico: Turbohélice 5+ pax (básico)
+    turbohelice_chico: Turbohélice < 5 pax
+    piston: Pistón (liviano)
+    helicoptero: Helicóptero
+    avion_de_linea: Avión de línea
+    sin_dato: Sin dato / otro
+
 # Correcciones de código de aeropuerto por errores de carga detectados.
 correcciones_aeropuerto:
   - de: MDB          # Batán (aeródromo chico de Mar del Plata)

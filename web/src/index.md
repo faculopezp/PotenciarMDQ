@@ -311,7 +311,7 @@ ${d3.sort(segRef, (d) => -d.movimientos).map((d) => html`<tr><td><span class="ch
 
 ### El avión típico de cada segmento
 
-El modelo con más aterrizajes y despegues en ${ref.anio}. En taxi aéreo se muestra también el que más pasajeros lleva: la avioneta más frecuente casi no transporta gente.
+El modelo con más aterrizajes y despegues en ${ref.anio}. En taxi aéreo y privados se muestra además el **avión básico**: el turbohélice de 5 o más pasajeros más frecuente (el estándar del vuelo ejecutivo). El pistón más frecuente es aviación liviana y casi no lleva pasajeros.
 
 ```js
 const tip = avionTipico.filter((d) => d.anio === ref.anio);
@@ -319,7 +319,9 @@ const fichas = SEGMENTOS.flatMap((s) => {
   const top = tip.find((d) => d.segmento === s.id && d.ranking === 1);
   const porPax = tip.find((d) => d.segmento === s.id && d.ranking_por_pasajeros === 1);
   const out = top ? [{...top, etiqueta: s.nombre}] : [];
-  if (porPax && top && porPax.aeronave_familia !== top.aeronave_familia && porPax.pasajeros > 0) out.push({...porPax, etiqueta: `${s.nombre} · el que más pasajeros lleva`});
+  const basico = tip.find((d) => d.segmento === s.id && d.perfil === "turbohelice_basico" && d.ranking_en_perfil === 1);
+  if (basico && ["taxi_aereo", "privado"].includes(s.id) && basico.aeronave_familia !== top?.aeronave_familia) out.push({...basico, etiqueta: `${s.nombre} · avión básico (turbohélice 5+ pax)`});
+  if (porPax && top && porPax.aeronave_familia !== top.aeronave_familia && porPax.aeronave_familia !== basico?.aeronave_familia && porPax.pasajeros > 0) out.push({...porPax, etiqueta: `${s.nombre} · el que más pasajeros lleva`});
   return out;
 });
 ```

@@ -8,7 +8,7 @@ import * as d3 from "d3";
 import * as Inputs from "@observablehq/inputs";
 import {html} from "htl";
 import {TINTA, TINTA_2, ACENTO, OTRO, SEQ, SEGMENTOS, SEG_NOMBRE, SEG_COLOR, segColor, entero, pct, decimal1,
-  MESES, DIAS, CATEGORIAS, datos, columnas} from "./components/util.js";
+  MESES, DIAS, CATEGORIAS, PERFILES, PERFIL_NOMBRE, perfilColor, datos, columnas} from "./components/util.js";
 ```
 
 ```js
@@ -17,6 +17,7 @@ const segAnual = datos(FileAttachment("data/mdq_segmentos_anual.json"));
 const avionTipico = datos(FileAttachment("data/mdq_avion_tipico.json"));
 const operadores = datos(FileAttachment("data/mdq_operadores.json"));
 const historiaSeg = datos(FileAttachment("data/mdq_historia_segmentos.json"));
+const perfilAero = datos(FileAttachment("data/mdq_perfil_aeronave.json"));
 const base = columnas(FileAttachment("data/mdq_explorador.json"));
 ```
 
@@ -83,19 +84,53 @@ Plot.plot({
 })
 ```
 
+### Con qué vuela
+
+Criterio: el **avión básico** de taxi aéreo y vuelos ejecutivos es un turbohélice que lleva 5 o más pasajeros (King Air, Caravan, PC-12). El pistón es aviación liviana: privados y escuelas. La clase de vuelo la declara cada operador a la ANAC y no se modifica: si un vuelo a pistón figura como taxi aéreo, se cuenta como *taxi aéreo en avión liviano*.
+
+```js
+const perfAnio = perfilAero.filter((d) => d.anio === anioSel && ["taxi_aereo", "privado", "instruccion", "oficial"].includes(d.segmento));
+const perfSeg = perfilAero.filter((d) => d.anio === anioSel && d.segmento === segSel.id);
+const share = (id) => d3.sum(perfSeg.filter((d) => d.perfil === id), (d) => d.share_en_segmento);
+```
+
+```js
+perfSeg.length ? html`<div class="cifras">
+  <div><span class="rotulo">Jet ejecutivo</span><span class="valor">${pct(share("jet_ejecutivo"))}</span><p class="nota">de los movimientos del segmento</p></div>
+  <div><span class="rotulo">Turbohélice 5+ pax</span><span class="valor">${pct(share("turbohelice_basico"))}</span><p class="nota">el avión básico de taxi/ejecutivo</p></div>
+  <div><span class="rotulo">Pistón (liviano)</span><span class="valor">${pct(share("piston"))}</span><p class="nota">${segSel.id === "taxi_aereo" ? "taxi aéreo en avión liviano" : "aviación liviana"}</p></div>
+  <div><span class="rotulo">Sin dato del avión</span><span class="valor">${pct(share("sin_dato"))}</span><p class="nota">ANAC no informa el modelo</p></div>
+</div>` : ""
+```
+
+```js
+Plot.plot({
+  title: `Perfil de aeronave por segmento · ${anioSel}`,
+  width, height: 220, marginLeft: 140,
+  x: {label: "% de los movimientos del segmento", tickFormat: "%", domain: [0, 1]},
+  y: {label: null, domain: ["Taxi aéreo", "Privado", "Escuelas de vuelo", "Oficial y militar"]},
+  color: {...perfilColor, legend: true},
+  marks: [
+    Plot.barX(perfAnio, {y: (d) => SEG_NOMBRE[d.segmento], x: "share_en_segmento", fill: (d) => PERFIL_NOMBRE[d.perfil] ?? d.perfil,
+      order: perfilColor.domain, tip: true,
+      title: (d) => `${SEG_NOMBRE[d.segmento]} · ${PERFIL_NOMBRE[d.perfil]}\n${entero(d.movimientos)} movimientos (${pct(d.share_en_segmento)})\n${decimal1(d.pax_promedio ?? 0)} pax promedio`})
+  ]
+})
+```
+
 ### El avión típico
 
-Las familias de aviones con más movimientos en ${anioSel}, y las que más pasajeros llevan.
+Las familias de aviones con más movimientos en ${anioSel}, las que más pasajeros llevan y el avión básico (turbohélice 5+ pax más frecuente).
 
 ```js
 const tipicos = avionTipico.filter((d) => d.anio === anioSel && d.segmento === segSel.id).sort((a, b) => a.ranking - b.ranking);
 ```
 
 ```js
-tipicos.length ? html`<table class="editorial"><thead><tr><th>Familia</th><th>Tipo</th><th>Movimientos</th><th>% del segmento</th><th>Pasajeros</th><th>Pax prom.</th><th>Capacidad obs. (p95)</th><th>En tierra</th><th>Vuelo</th><th>Hora</th><th>Orígenes/destinos</th></tr></thead><tbody>
-${tipicos.map((d) => html`<tr class=${d.ranking === 1 ? "foco" : ""}><td>${d.aeronave_familia}</td><td>${CATEGORIAS[d.aeronave_categoria] ?? d.aeronave_categoria}</td><td>${entero(d.movimientos)}</td><td>${pct(d.share_en_segmento)}</td><td>${entero(d.pasajeros)}</td><td>${decimal1(d.pax_promedio)}</td><td>${d.capacidad_observada_p95 ?? "—"}</td><td>${d.tiempo_en_tierra_mediano_min != null ? `${Math.round(d.tiempo_en_tierra_mediano_min)} min` : "—"}</td><td>${d.duracion_vuelo_mediana_min != null ? `${Math.round(d.duracion_vuelo_mediana_min)} min` : "—"}</td><td>${d.hora_mas_frecuente}h</td><td>${d.principales_origenes_destinos ?? "—"}</td></tr>`)}
+tipicos.length ? html`<table class="editorial"><thead><tr><th>Familia</th><th>Tipo</th><th>Perfil</th><th>Movimientos</th><th>% del segmento</th><th>Pasajeros</th><th>Pax prom.</th><th>Capacidad obs. (p95)</th><th>En tierra</th><th>Vuelo</th><th>Hora</th><th>Orígenes/destinos</th></tr></thead><tbody>
+${tipicos.map((d) => html`<tr class=${d.perfil === "turbohelice_basico" ? "foco" : ""}><td>${d.aeronave_familia}</td><td>${CATEGORIAS[d.aeronave_categoria] ?? d.aeronave_categoria}</td><td>${PERFIL_NOMBRE[d.perfil] ?? "—"}</td><td>${entero(d.movimientos)}</td><td>${pct(d.share_en_segmento)}</td><td>${entero(d.pasajeros)}</td><td>${decimal1(d.pax_promedio)}</td><td>${d.capacidad_observada_p95 ?? "—"}</td><td>${d.tiempo_en_tierra_mediano_min != null ? `${Math.round(d.tiempo_en_tierra_mediano_min)} min` : "—"}</td><td>${d.duracion_vuelo_mediana_min != null ? `${Math.round(d.duracion_vuelo_mediana_min)} min` : "—"}</td><td>${d.hora_mas_frecuente}h</td><td>${d.principales_origenes_destinos ?? "—"}</td></tr>`)}
 </tbody></table>
-<p class="fuente">Resaltado: el "avión básico" del segmento (más movimientos). Capacidad observada = percentil 95 de pasajeros de ese modelo en ese segmento en todo el país. Tiempo en tierra solo con matrícula (desde 2026) o en aviación de línea.</p>` : html`<p class="muted">Sin datos de aeronave para este segmento.</p>`
+<p class="fuente">Resaltado: el avión básico (turbohélice 5+ pax). Capacidad observada = percentil 95 de pasajeros de ese modelo en ese segmento en todo el país. Tiempo en tierra solo con matrícula (desde 2026) o en aviación de línea.</p>` : html`<p class="muted">Sin datos de aeronave para este segmento.</p>`
 ```
 
 ### Quién vuela y desde dónde

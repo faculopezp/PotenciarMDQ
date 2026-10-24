@@ -38,3 +38,32 @@ def test_classify_aeronave(codigo, esperado):
 )
 def test_classify_aerolinea(nombre, esperado):
     assert classify_aerolinea(nombre, load_yaml("aerolineas.yaml")["aerolineas"]) == esperado
+
+
+def test_perfil_aeronave_basico_taxi():
+    import duckdb
+
+    from potenciar_mdq import bd
+    from potenciar_mdq.settings import SQL
+
+    con = duckdb.connect()
+    bd.set_variables(con)
+    filas = (
+        [("Beech King Air", "turbohelice_ejecutivo", False, 7)] * 40      # 5+ pax: básico
+        + [("Daher TBM", "turbohelice_ejecutivo", False, 3)] * 40         # < 5 pax
+        + [("Cessna (pistón)", "aviacion_general_piston", False, 3)] * 40
+        + [("Learjet", "jet_ejecutivo", False, 6)] * 40
+        + [("Boeing 737", "jet_fuselaje_angosto", True, 150)] * 40
+    )
+    con.execute("CREATE TABLE fct_movimiento (aeronave_familia VARCHAR, aeronave_categoria VARCHAR,"
+                " es_linea BOOLEAN, pasajeros INT)")
+    con.executemany("INSERT INTO fct_movimiento VALUES (?, ?, ?, ?)", filas)
+    con.execute((SQL / "bd" / "70_dim_perfil.sql").read_text())
+    perfil = dict(con.execute("SELECT aeronave_familia, perfil FROM dim_perfil_familia").fetchall())
+    assert perfil == {
+        "Beech King Air": "turbohelice_basico",
+        "Daher TBM": "turbohelice_chico",
+        "Cessna (pistón)": "piston",
+        "Learjet": "jet_ejecutivo",
+        "Boeing 737": "avion_de_linea",
+    }

@@ -26,6 +26,7 @@ TABLAS = [
     "fct_movimiento",
     "fct_tramo",
     "fct_rotacion",
+    "dim_perfil_familia",
     "dim_clima",
     "fct_municipal_mensual",
     "fct_mdq_vuelos_hist",
@@ -51,6 +52,9 @@ def set_variables(con: duckdb.DuckDBPyConnection) -> None:
     seg = cfg["segmentos"]
     con.execute(f"SET VARIABLE categorias_linea = {_lit(seg['categorias_aeronave_linea'])}")
     con.execute(f"SET VARIABLE operadores_linea = {_lit(seg['tipos_operador_linea'])}")
+    perfil = cfg["perfil_aeronave"]
+    con.execute(f"SET VARIABLE basico_categorias = {_lit(perfil['basico_categorias'])}")
+    con.execute(f"SET VARIABLE basico_min_pax = {int(perfil['basico_min_pax'])}")
 
 
 def connect(path: Path = BD, read_only: bool = False) -> duckdb.DuckDBPyConnection:
