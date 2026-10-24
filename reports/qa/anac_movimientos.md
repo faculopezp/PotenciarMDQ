@@ -4,7 +4,7 @@
 
 | source_file | filas | pct_fecha_null | pct_hora_null | pct_pax_null | pct_aeronave_null | pct_con_matricula | pct_provisorio | desde | hasta |
 |---|---|---|---|---|---|---|---|---|---|
-| 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580764 | 0.0 | 0.0 | 0.0 | 100.0 | 0.0 | 0.0 | 2018-12-31 | 2019-12-31 |
+| 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580697 | 0.0 | 0.0 | 0.0 | 100.0 | 0.0 | 0.0 | 2019-01-01 | 2019-12-31 |
 | 20261024_202012-informe-ministerio-actualizado-dic-final.csv | 212726 | 0.0 | 0.0 | 0.0 | 85.3 | 0.0 | 0.0 | 2019-12-31 | 2020-12-31 |
 | 20261024_202112-informe-ministerio-actualizado-dic-final.csv | 329781 | 0.0 | 0.0 | 0.0 | 14.06 | 0.0 | 0.0 | 2020-12-31 | 2021-12-31 |
 | 20261024_202212-informe-ministerio-actualizado-dic-final.csv | 477903 | 0.0 | 0.0 | 0.0 | 15.28 | 0.0 | 0.0 | 2021-12-31 | 2022-12-31 |
@@ -35,8 +35,8 @@
 
 | clase_vuelo | es_comercial | filas |
 |---|---|---|
-| regular | True | 2122318 |
-| vuelo_privado_con_matricula_nacional | False | 542060 |
+| regular | True | 2122252 |
+| vuelo_privado_con_matricula_nacional | False | 542059 |
 | vuelo_escuela | False | 505222 |
 | no_regular | True | 300365 |
 | vuelo_oficial_nacional | False | 209269 |
@@ -89,8 +89,8 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| AGW-AW 109SP | 165 |
 | I.A-1124 | 165 |
+| AGW-AW 109SP | 165 |
 | SLG-4 TSI | 154 |
 
 ## Códigos sin coordenadas (top 20 → revisar dim_aeropuerto)
@@ -122,7 +122,7 @@
 
 | tramos | despegues_cabotaje | pct_emparejado |
 |---|---|---|
-| 778474 | 915331 | 85.0 |
+| 778460 | 915317 | 85.0 |
 
 ## Rotaciones: método por matrícula vs por modelo
 
@@ -194,7 +194,7 @@
 | 2022-10-04 | BO-737-76N | Aerolíneas Argentinas | 162 | 129.0 | 1.256 |
 | 2023-05-21 | PA-PA-46R-350 | Sin dato | 5 | 4.0 | 1.25 |
 | 2020-12-22 | PAA-PA-A-34-200T | Sin dato | 5 | 4.0 | 1.25 |
-| 2022-09-02 | CE-525 | Sin dato | 6 | 5.0 | 1.2 |
+| 2022-12-29 | CE-525 | Sin dato | 6 | 5.0 | 1.2 |
 
 ## Reconciliación vs fuente oficial (config/reconciliacion.csv)
 

@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-24 02:24 UTC
+# Probe de fuentes — 2026-10-24 02:30 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -120,7 +120,359 @@
 ## `mdp_portal_catalogo` (dkan_package)
 - OK `https://datos.mardelplata.gob.ar/?q=api/3/action`: 446 datasets; coinciden: ['arribos-de-turistas', 'turismo-estable-estadía-promedio', 'turismo-en-fines-de-semana-largo', 'movimientos-del-aeropuerto-internacional-astor-piazzolla', 'pasajeros-del-aeropuerto-astor-piazzolla', 'vuelos-comerciales-pasajeros-por-tramo', 'vuelos-comerciales-vuelos-por-tramo', 'vuelos-del-aeropuerto-internacional-astor-piazzolla', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30062022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-31032022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30092021', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30092022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-31122022', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-emtur-al-31032023', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-emtur-al-30062023', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-y-cultura-emturyc-al-4', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-11', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-31', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-11', 'presupuesto-de-recursos-y-gastos-2026-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-12', 'presupuesto-de-recursos-y-gastos-2026-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5']
 ### `movimientos-del-aeropuerto-internacional-astor-piazzolla`
-- ❌ AttributeError: 'list' object has no attribute 'get'
+  - `csv` Movimientos del aeropuerto. Año 2020 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2020.csv — mod Date changed  Jue, 21/01/2021 - 10:16
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,648000,568000,246000,18000,1000,8000,12000,2000,6000,9000,,
+    > Internacional,12000,7000,2000,2000,0,0,2000,0,1000,0,,
+  - `csv` Movimientos del aeropuerto. Año 2019 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2019_0.csv — mod Date changed  Jue, 21/01/2021 - 10:15
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,1023000,800000,626000,526000,486000,369000,398000,430000,373000,477000,373000,433000
+    > Internacional,15000,5000,1000,4000,0,3000,1000,1000,0,3000,2000,0
+  - `csv` Movimientos del aeropuerto. Año 2018 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2018_0.csv — mod Date changed  Lun, 09/09/2019 - 10:34
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,955,825,703,583,546,474,506,562,522,611,594,693
+    > Internacional,23,4,3,3,1,0,0,0,0,2,3,3
+  - `csv` Movimientos del aeropuerto. Año 2017 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2017.csv — mod Date changed  Mié, 21/11/2018 - 08:26
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,586,493,352,339,291,298,310,308,311,415,353,590
+    > Internacional,14,2,1,3,3,1,0,0,1,10,1,12
+  - `csv` Movimientos del aeropuerto. Año 2016 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2016.csv — mod Date changed  Mié, 21/11/2018 - 08:27
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,549,381,292,162,160,155,188,191,206,223,182,419
+    > Internacional,16,2,3,0,1,0,1,0,0,2,0,4
+  - `csv` Movimientos del aeropuerto. Año 2015 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2015.csv — mod Date changed  Mié, 21/11/2018 - 09:05
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,463,407,275,277,253,252,356,366,417,415,397,419
+    > Internacional,20,7,1,0,0,0,0,0,1,2,0,1
+  - `csv` Movimientos del aeropuerto. Año 2014 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2014.csv — mod Date changed  Mié, 21/11/2018 - 08:30
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,451,337,283,271,266,228,227,229,259,252,272,293
+    > Internacional,19,4,0,0,5,1,0,0,3,0,0,6
+  - `csv` Movimientos del aeropuerto. Año 2013 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2013.csv — mod Date changed  Mié, 21/11/2018 - 08:30
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,382,325,293,255,262,266,241,297,300,328,280,313
+    > Internacional,37,4,5,2,1,3,0,0,0,3,0,2
+  - `csv` Movimientos del aeropuerto. Año 2012 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2012.csv — mod Date changed  Mié, 21/11/2018 - 09:03
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,364,310,245,220,219,178,193,193,255,253,266,268
+    > Internacional,20,4,0,1,0,0,1,0,0,0,0,2
+  - `csv` Movimientos del aeropuerto. Año 2011 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2011.csv — mod Date changed  Mié, 21/11/2018 - 08:31
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,363,285,229,236,139,52,104,157,119,176,146,266
+    > Internacional,18,2,1,3,0,0,1,1,2,2,2,4
+  - `csv` Movimientos del aeropuerto. Año 2010 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2010.csv — mod Date changed  Mié, 21/11/2018 - 08:32
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,390,343,251,233,222,225,201,208,205,206,114,238
+    > Internacional,15,7,0,0,3,1,2,0,1,1,2,2
+  - `csv` Movimientos del aeropuerto. Año 2009 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2009.csv — mod Date changed  Mié, 21/11/2018 - 08:33
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,283,259,250,263,205,213,158,167,107,141,224,284
+    > Internacional,14,4,2,0,0,1,0,0,1,6,1,5
+  - `csv` Movimientos del aeropuerto. Año 2008 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2008.csv — mod Date changed  Mié, 21/11/2018 - 08:33
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,317,303,227,225,145,160,158,200,196,250,282,250
+    > Internacional,20,13,1,0,0,0,0,1,1,0,2,3
+  - `csv` Movimientos del aeropuerto. Año 2007 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2007.csv — mod Date changed  Mié, 21/11/2018 - 08:33
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,328,233,199,148,135,133,167,158,142,187,182,160
+    > Internacional,24,1,2,1,0,1,1,0,0,0,2,6
+  - `csv` Movimientos del aeropuerto. Año 2006 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2006.csv — mod Date changed  Mié, 21/11/2018 - 08:34
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,358,264,241,188,193,172,177,169,166,162,187,202
+    > Internacional,9,2,2,0,0,1,0,0,0,0,1,5
+  - `csv` Movimientos del aeropuerto. Año 2005 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2005.csv — mod Date changed  Mié, 21/11/2018 - 08:34
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,402,373,236,202,204,174,178,186,178,195,197,230
+    > Internacional,10,3,4,0,0,1,0,0,0,0,2,3
+  - `csv` Movimientos del aeropuerto. Año 2004 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2004.csv — mod Date changed  Mié, 21/11/2018 - 08:35
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,547,443,360,314,310,310,273,315,296,279,167,208
+    > Internacional,5,11,3,0,1,0,0,0,2,2,0,1
+  - `csv` Movimientos del aeropuerto. Año 2003 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2003.csv — mod Date changed  Mié, 21/11/2018 - 08:35
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,722,657,493,437,374,332,340,349,326,325,348,372
+    > Internacional,10,9,0,1,1,1,2,1,0,0,2,6
+  - `csv` Movimientos del aeropuerto. Año 2002 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2002.csv — mod Date changed  Mié, 21/11/2018 - 09:05
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,"1,073",902,674,591,533,513,577,545,511,530,517,513
+    > Internacional,5,1,0,0,0,0,1,3,0,0,1,0
+  - `csv` Movimientos del Aeropuerto. Año 2001 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2001.csv — mod Date changed  Mié, 21/11/2018 - 08:25
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Cabotaje,"1,203","1,033",830,577,437,376,348,410,424,457,602,678
+    > Internacional,20,9,1,0,0,1,1,0,1,1,1,3
+### `pasajeros-del-aeropuerto-astor-piazzolla`
+  - `csv` Pasajeros arribados y embarcados. Año 2022 — https://datos.mardelplata.gob.ar/sites/default/files/Pasajeros%20arribados%20y%20embarcados.%20A%C3%B1o%202022.csv — mod Date changed  Vie, 04/11/2022 - 19:46
+    > ;ene-22;feb-22;mar-22;abr-22;may-22;jun-22;jul-22;ago-22;sep-22;oct-22;nov-22;dic-22
+    > Pasajeros Cabotaje;37;34;29;16;16;14;17;17;17;;;
+    > Pasajeros Internacional;0;0;0;0;0;0;0;0;0;;;
+  - `csv` Pasajeros arribados y embarcados. Año 2021 — https://datos.mardelplata.gob.ar/sites/default/files/Pasajeros%20arribados%20y%20embarcados.%20A%C3%B1o%202021.csv — mod Date changed  Vie, 04/11/2022 - 19:45
+    > ;ene-21;feb-21;mar-21;abr-21;may-21;jun-21;jul-21;ago-21;sep-21;oct-21;nov-21;dic-21
+    > Pasajeros Cabotaje;13;12;7;5;2;2;4;5;5;6;11;14
+    > Pasajeros  Internacional;0;0;0;0;0;0;0;0;0;0;0;0
+  - `csv` Pasajeros arribados y embarcados. Año 2020 — https://datos.mardelplata.gob.ar/sites/default/files/Pasajeros%20arribados%20y%20embarcados.%20A%C3%B1o%202020.csv — mod Date changed  Vie, 04/11/2022 - 19:44
+    > ;ene-20;feb-20;mar-20;abr-20;may-20;jun-20;jul-20;ago-20;sep-20;oct-20;nov-20;dic-20
+    > Pasajeros  Cabotaje;50;42;15;0;0;0;0;0;0;0;1;3
+    > Pasajeros  Internacional;0;0;0;0;0;0;0;0;0;0;0;0
+  - `csv` Pasajeros arribados y embarcados. Año 2019 — https://datos.mardelplata.gob.ar/sites/default/files/Pasajeros%20arribados%20y%20embarcados.%20A%C3%B1o%202019.csv — mod Date changed  Vie, 04/11/2022 - 19:45
+    > ;ene-19;feb-19;mar-19;abr-19;may-19;jun-19;jul-19;ago-19;sep-19;oct-19;nov-19;dic-19
+    > Pasajeros  Cabotaje;61;50;34;29;26;22;24;26;24;24;25;32
+    > Pasajeros  Internacional;0;0;0;0;0;0;0;0;0;0;0;0
+### `vuelos-del-aeropuerto-internacional-astor-piazzolla`
+  - `csv` Vuelos históricos del Aeropuerto Internacional Astor Piazzolla 2015-2019 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-historicos-2015-2019.csv — mod Date changed  Mar, 09/02/2021 - 10:53
+    > Fecha,Hora,Clase de Vuelo,Clasificaci�n Vuelo,Tipo de Movimiento,Origen OACI,Destino OACI,Aerolinea Nombre,Aeronave
+    > 10/01/2015,0,Regular,Cabotaje,Aterrizaje,SAZM,SABE,Aerol�neas Argentinas,BOEING B-737
+    > 10/01/2015,7,Regular,Cabotaje,Despegue,SABE,SAZM,Aerol�neas Argentinas,BOEING B-737
+    > 10/01/2015,7,Regular,Cabotaje,Aterrizaje,SABE,SAZM,Aerol�neas Argentinas,BOEING B-737
+### `vuelos-comerciales-pasajeros-por-tramo`
+  - `csv` Pasajeros por tramo. Año 2024 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2024.csv — mod Date changed  Lun, 26/05/2025 - 11:04
+    > Ruta;Ene;Feb;Mar;Abr;May;Jun;Jul;Ago;Sep;Oct;Nov;Dic
+    > Aeroparque - Mar del Plata;14205;12143;9993;7527;6641;5547;6858;5726;6470;8336;9610;9610
+    > C�rdoba - Mar del Plata;1902;1693;1448;626;0;0;758;693;543;650;736;682
+    > Tucum�n - Mar del Plata;1605;1125;689;154;0;0;0;0;0;0;0;0
+  - `csv` Pasajeros por tramo. Año 2023 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2023.csv — mod Date changed  Lun, 26/05/2025 - 11:04
+    > Ruta;Ene;Feb;Mar;Abr;May;Jun;Jul;Ago;Sep;Oct;Nov;Dic
+    > Aeroparque - Mar del Plata;14288;9980;10059;7068;7043;6825;6817;6832;8033;9496;10893;11788
+    > C�rdoba - Mar del Plata;1404;1386;1318;923;547;770;964;896;929;1111;1157;1388
+    > Tucum�n - Mar del Plata;2337;1692;1265;367;0;0;0;0;0;657;729;817
+  - `csv` Pasajeros por tramo. Año 2022 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2022.csv — mod Date changed  Lun, 26/05/2025 - 11:03
+    > Ruta;Ene;Feb;Mar;Abr;May;Jun;Jul;Ago;Sep;Oct;Nov;Dic
+    > Aeroparque - Mar del Plata;12390;11669;9030;6135;6284;5865;6385;6403;6431;7907;9019;10238
+    > C�rdoba - Mar del Plata;1889;1645;1496;773;660;608;730;698;554;733;829;1013
+    > Tucum�n - Mar del Plata;1403;1163;850;62;0;0;0;0;0;658;920;1366
+  - `csv` Pasajeros por tramo. Año 2021 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2021.csv — mod Date changed  Lun, 26/05/2025 - 11:03
+    > Ruta;Ene;Feb;Mar;Abr;May;Jun;Jul;Ago;Sep;Oct;Nov;Dic
+    > Aeroparque - Mar del Plata;0;0;1478;1900;834;549;2144;2181;2305;3013;5165;7614
+    > C�rdoba - Mar del Plata;820;652;0;0;0;0;0;0;0;0;0;0
+    > Tucum�n - Mar del Plata;733;676;0;0;0;0;0;48;0;0;0;0
+  - `csv` Pasajeros por tramo. Año 2020 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2020.csv — mod Date changed  Jue, 21/01/2021 - 11:22
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,28438,22915,10185,8,0,21,0,0,0,0,0,0
+    > Ezeiza - Mar del Plata,3503,3064,1930,0,0,0,0,0,0,90,0,0
+    > Bah�a Blanca - Mar del Plata,2240,2241,1013,1,0,0,0,0,0,0,0,0
+  - `csv` Pasajeros por tramo. Año 2019 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2019_1.csv — mod Date changed  Jue, 21/01/2021 - 11:21
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,39380,32414,24457,22009,18944,14969,16162,18306,16084,16431,17433,21454
+    > Ezeiza - Mar del Plata,4277,3468,4113,3436,3471,3845,3335,3905,3289,3268,2704,2987
+    > Bah�a Blanca - Mar del Plata,3170,2779,2525,2524,2241,2271,2634,2240,1789,1792,2018,2445
+  - `csv` Pasajeros por tramo. Año 2018 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2018_0.csv — mod Date changed  Lun, 09/12/2019 - 14:30
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,42680,34903,26546,24705,24056,21888,24777,25468,22943,24908,22927,27872
+    > Ezeiza - Mar del Plata,4727,4174,4150,3901,3919,3416,3747,4034,4041,4141,3451,3860
+    > Bah�a Blanca - Mar del Plata,3691,2995,3357,3100,3267,2886,3535,3314,2924,2947,2743,2932
+  - `csv` Pasajeros por tramo. Año 2017 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2017_0.csv — mod Date changed  Lun, 09/12/2019 - 14:30
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,29810,24829,17281,10567,9736,9061,11595,11201,10566,11716,11854,23588
+    > Ezeiza - Mar del Plata,5,3,0,3127,3563,4012,4407,4332,4243,3899,4333,4216
+    > Bah�a Blanca - Mar del Plata,0,0,0,2022,2488,2211,3026,2752,2806,2917,3035,2894
+  - `csv` Pasajeros por tramo. Año 2016 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2016_0.csv — mod Date changed  Lun, 09/12/2019 - 14:31
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,23351,18362,14687,10968,10659,8741,11032,11315,12192,11942,11168,16419
+    > Ezeiza - Mar del Plata,86,0,2,0,4,0,0,0,0,3,0,10
+    > Bah�a Blanca - Mar del Plata,238,0,0,0,0,0,0,0,0,8,0,0
+  - `csv` Pasajeros por tramo. Año 2015 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2015_0.csv — mod Date changed  Lun, 09/12/2019 - 14:31
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,24009,19596,11350,9559,9275,7548,8637,12290,14785,14568,14622,16155
+    > Ezeiza - Mar del Plata,0,0,57,0,0,76,46,0,3,0,0,58
+    > Bah�a Blanca - Mar del Plata,692,562,596,463,504,538,767,624,696,688,736,743
+  - `csv` Pasajeros por tramo. Año 2014 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2014_0.csv — mod Date changed  Lun, 09/12/2019 - 14:31
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,18504,15620,9376,8176,8311,6610,6329,6648,9291,10539,10069,10869
+    > Ezeiza - Mar del Plata,11,0,6,101,0,0,95,31,36,0,0,8
+    > Bah�a Blanca - Mar del Plata,385,425,434,381,348,322,416,479,552,566,542,844
+  - `csv` Pasajeros por tramo. Año 2013 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2013_0.csv — mod Date changed  Lun, 09/12/2019 - 14:32
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,16210,13340,9885,8180,8250,7755,7433,8139,9187,8946,11069,10032
+    > Ezeiza - Mar del Plata,5,0,35,0,0,0,0,44,0,0,0,171
+    > Bah�a Blanca - Mar del Plata,448,351,405,313,437,358,324,433,410,489,648,524
+  - `csv` Pasajeros por tramo. Año 2012 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2012_0.csv — mod Date changed  Lun, 09/12/2019 - 14:32
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,16598,12855,8899,7416,7008,5233,6345,5250,6927,7997,8769,9817
+    > Ezeiza - Mar del Plata,49,8,6,1,1,0,0,0,0,2,0,34
+    > Bah�a Blanca - Mar del Plata,261,267,254,231,212,201,236,329,254,321,308,371
+  - `csv` Pasajeros por tramo. Año 2011 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2011_0.csv — mod Date changed  Lun, 09/12/2019 - 14:33
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,17250,14027,8516,7869,6892,2159,2583,5790,5915,6925,6145,7878
+    > Ezeiza - Mar del Plata,138,210,91,6,0,0,0,111,66,0,0,30
+    > Bah�a Blanca - Mar del Plata,4,0,156,76,89,1,32,28,2,62,76,194
+  - `csv` Pasajeros por tramo. Año 2010 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2010_0.csv — mod Date changed  Lun, 09/12/2019 - 14:33
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,20529,15971,9707,8329,7204,7051,5443,6399,7221,7809,249,8158
+    > Ezeiza - Mar del Plata,6,171,3,8,0,0,29,58,0,4,0,188
+    > Bah�a Blanca - Mar del Plata,0,142,0,0,0,0,0,24,0,0,7,29
+  - `csv` Pasajeros por tramo. Año 2009 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2009_0.csv — mod Date changed  Lun, 09/12/2019 - 14:33
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,9300,9806,8543,7408,5882,6165,5369,7268,6260,5254,10909,11111
+    > Ezeiza - Mar del Plata,24,174,2,107,7,0,0,0,0,7,0,94
+    > Bah�a Blanca - Mar del Plata,108,0,0,5,35,141,307,82,0,21,39,31
+  - `csv` Pasajeros por tramo. Año 2008 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2008_0.csv — mod Date changed  Lun, 09/12/2019 - 14:34
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,9663,9249,7445,5974,3918,4578,3368,4447,5378,5139,7292,6553
+    > Ezeiza - Mar del Plata,10,1,5,14,3,0,5,27,0,203,141,61
+    > Bah�a Blanca - Mar del Plata,131,87,103,26,0,19,28,41,126,0,0,183
+  - `csv` Pasajeros por tramo. Año 2007 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2007_0.csv — mod Date changed  Lun, 09/12/2019 - 14:34
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,19260,14348,10011,7547,6586,4438,4923,5961,5964,6269,5564,5948
+    > Ezeiza - Mar del Plata,62,0,173,2,2,108,7,3,0,86,120,19
+    > Bah�a Blanca - Mar del Plata,87,143,73,81,29,31,166,89,155,122,101,159
+  - `csv` Pasajeros por tramo. Año 2006 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2006_0.csv — mod Date changed  Lun, 09/12/2019 - 14:34
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,23055,18934,14628,11898,11313,10682,9176,9524,8296,8678,7632,10277
+    > Ezeiza - Mar del Plata,25,2,15,0,8,0,199,0,0,93,1343,923
+    > Bah�a Blanca - Mar del Plata,84,255,22,128,0,84,14,63,0,64,20,98
+  - `csv` Pasajeros por tramo. Año 2005 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2005_0.csv — mod Date changed  Lun, 09/12/2019 - 14:35
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,27592,23317,15389,13161,12222,12106,10289,12558,10641,12529,11045,13317
+    > Ezeiza - Mar del Plata,124,0,12,8,8,95,8,83,0,99,15,20
+    > Bah�a Blanca - Mar del Plata,69,103,50,0,17,61,41,16,27,67,6,51
+  - `csv` Pasajeros por tramo. Año 2004 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2004_0.csv — mod Date changed  Lun, 09/12/2019 - 14:35
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,31240,26704,16729,13351,12118,11107,11132,12342,12643,12554,12311,13112
+    > Ezeiza - Mar del Plata,30,0,0,6,0,0,91,0,0,139,0,13
+    > Bah�a Blanca - Mar del Plata,138,78,83,65,23,137,64,84,6,0,17,0
+  - `csv` Pasajeros por tramo. Año 2003 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2003_0.csv — mod Date changed  Lun, 09/12/2019 - 14:35
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,30888,27625,18390,14043,11826,10393,12718,11553,12540,14395,14636,15859
+    > Ezeiza - Mar del Plata,291,146,0,2,108,33,40,0,0,0,137,64
+    > Bah�a Blanca - Mar del Plata,185,235,140,148,151,47,73,127,89,134,121,105
+  - `csv` Pasajeros por tramo. Año 2002 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2002_0.csv — mod Date changed  Lun, 09/12/2019 - 14:35
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,30073,29474,22990,17082,14464,13689,15319,14319,14021,15788,16175,17300
+    > Ezeiza - Mar del Plata,20,0,7,112,0,176,0,236,0,0,0,32
+    > Bah�a Blanca - Mar del Plata,255,302,380,230,84,13,159,204,113,112,135,103
+  - `csv` Pasajeros por tramo. Año 2001 — https://datos.mardelplata.gob.ar/sites/default/files/pasajeros-tramo-2001_0.csv — mod Date changed  Lun, 09/12/2019 - 14:36
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,46718,34930,28945,21267,15243,13495,13859,14203,13762,13217,23348,20807
+    > Ezeiza - Mar del Plata,13,0,118,0,73,0,146,188,418,80,216,1483
+    > Bah�a Blanca - Mar del Plata,727,986,369,306,255,351,209,76,23,172,202,179
+### `vuelos-comerciales-vuelos-por-tramo`
+  - `csv` Vuelos por tramo. Año 2020 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2020.csv — mod Date changed  Jue, 21/01/2021 - 11:28
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,278000,225000,137000,2000,0,6000,3000,0,0,0,,
+    > Ezeiza - Mar del Plata,56000,55000,34000,0,0,0,0,1000,0,4000,,
+    > Bah�a Blanca - Mar del Plata,54000,50000,28000,2000,0,0,0,0,0,0,,
+  - `csv` Vuelos por tramo. Año 2019 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2019_1.csv — mod Date changed  Jue, 21/01/2021 - 11:27
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,531000,414000,356000,323000,281000,196000,208000,230000,195000,217000,202000,243000
+    > Ezeiza - Mar del Plata,66000,58000,64000,57000,61000,62000,58000,61000,53000,56000,49000,53000
+    > Bah�a Blanca - Mar del Plata,63000,56000,63000,57000,62000,61000,59000,53000,39000,40000,48000,54000
+  - `csv` Vuelos por tramo. Año 2018 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2018_0.csv — mod Date changed  Lun, 09/12/2019 - 14:42
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,515,436,419,412,380,345,367,394,337,383,336,403
+    > Ezeiza - Mar del Plata,67,57,64,61,63,55,61,62,58,61,52,62
+    > Bah�a Blanca - Mar del Plata,67,58,65,60,63,55,60,61,58,60,91,63
+  - `csv` Vuelos por tramo. Año 2017 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2017_0.csv — mod Date changed  Lun, 09/12/2019 - 14:43
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,308,254,211,137,113,115,142,137,137,168,158,332
+    > Ezeiza - Mar del Plata,5,1,3,53,63,60,62,61,59,59,59,60
+    > Bah�a Blanca - Mar del Plata,2,0,0,54,62,58,64,60,59,61,59,58
+  - `csv` Vuelos por tramo. Año 2016 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2016_0.csv — mod Date changed  Lun, 09/12/2019 - 14:43
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,272,208,190,146,152,136,147,150,146,147,141,206
+    > Ezeiza - Mar del Plata,3,0,1,1,1,1,0,0,0,2,0,2
+    > Bah�a Blanca - Mar del Plata,18,0,1,0,0,0,0,1,1,2,0,0
+  - `csv` Vuelos por tramo. Año 2015 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2015_0.csv — mod Date changed  Lun, 09/12/2019 - 14:43
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,339,287,189,187,172,171,204,241,260,243,245,251
+    > Ezeiza - Mar del Plata,2,0,5,0,1,1,1,0,1,0,1,3
+    > Bah�a Blanca - Mar del Plata,55,44,56,43,55,54,60,53,57,54,57,55
+  - `csv` Vuelos por tramo. Año 2014 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2014_0.csv — mod Date changed  Lun, 09/12/2019 - 14:44
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,297,233,180,176,178,148,143,148,174,168,181,185
+    > Ezeiza - Mar del Plata,6,1,1,4,0,0,3,2,2,0,0,2
+    > Bah�a Blanca - Mar del Plata,32,46,50,43,44,39,49,46,51,45,52,59
+  - `csv` Vuelos por tramo. Año 2013 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2013_0.csv — mod Date changed  Lun, 09/12/2019 - 14:44
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,253,218,193,183,185,183,165,195,189,211,186,191
+    > Ezeiza - Mar del Plata,3,0,2,1,0,0,0,1,0,0,0,6
+    > Bah�a Blanca - Mar del Plata,51,45,49,34,45,42,37,52,46,53,52,53
+  - `csv` Vuelos por tramo. Año 2012 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2012_0.csv — mod Date changed  Lun, 09/12/2019 - 14:44
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,263,225,174,156,141,132,140,140,161,174,172,171
+    > Ezeiza - Mar del Plata,3,2,2,1,1,1,0,0,1,1,0,3
+    > Bah�a Blanca - Mar del Plata,41,40,48,33,32,31,29,29,44,44,42,40
+  - `csv` Vuelos por tramo. Año 2011 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2011_0.csv — mod Date changed  Lun, 09/12/2019 - 14:45
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,270,220,155,162,111,47,74,124,100,138,103,165
+    > Ezeiza - Mar del Plata,8,5,2,2,0,0,0,1,2,0,1,4
+    > Bah�a Blanca - Mar del Plata,1,0,10,9,13,1,11,9,3,11,17,28
+  - `csv` Vuelos por tramo. Año 2010 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2010_0.csv — mod Date changed  Lun, 09/12/2019 - 14:45
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,324,263,210,187,169,178,166,172,171,159,9,182
+    > Ezeiza - Mar del Plata,3,4,1,2,0,0,3,3,0,3,3,8
+    > Bah�a Blanca - Mar del Plata,0,1,0,1,0,0,0,2,0,0,2,2
+  - `csv` Vuelos por tramo. Año 2009 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2009_0.csv — mod Date changed  Lun, 09/12/2019 - 14:46
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,192,187,203,184,159,140,117,128,82,94,180,223
+    > Ezeiza - Mar del Plata,7,6,2,8,2,3,0,0,1,5,1,8
+    > Bah�a Blanca - Mar del Plata,1,1,0,1,1,4,7,3,0,1,2,1
+  - `csv` Vuelos por tramo. Año 2008 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2008_0.csv — mod Date changed  Lun, 09/12/2019 - 14:46
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,213,212,182,167,126,141,124,159,158,175,207,165
+    > Ezeiza - Mar del Plata,6,4,3,8,3,1,2,4,0,6,5,5
+    > Bah�a Blanca - Mar del Plata,10,6,3,3,0,2,2,4,1,1,0,3
+  - `csv` Vuelos por tramo. Año 2007 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2007_0.csv — mod Date changed  Lun, 09/12/2019 - 14:47
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,238,178,150,122,113,97,107,122,103,117,114,85
+    > Ezeiza - Mar del Plata,7,2,5,2,2,3,3,3,0,5,4,7
+    > Bah�a Blanca - Mar del Plata,9,7,3,2,1,2,4,4,10,12,9,10
+  - `csv` Vuelos por tramo. Año 2006 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2006_0.csv — mod Date changed  Lun, 09/12/2019 - 14:47
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,278,229,192,160,157,153,145,137,121,120,103,139
+    > Ezeiza - Mar del Plata,7,2,2,1,3,1,6,1,0,4,36,21
+    > Bah�a Blanca - Mar del Plata,4,7,3,5,0,2,3,3,1,4,3,6
+  - `csv` Vuelos por tramo. Año 2005 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2005_0.csv — mod Date changed  Lun, 09/12/2019 - 14:48
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,344,326,200,167,168,159,155,165,143,159,155,176
+    > Ezeiza - Mar del Plata,7,2,7,1,3,1,4,1,1,2,4,3
+    > Bah�a Blanca - Mar del Plata,4,6,3,1,1,5,5,3,4,3,1,3
+  - `csv` Vuelos por tramo. Año 2004 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2004_0.csv — mod Date changed  Lun, 09/12/2019 - 14:48
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,507,412,322,298,297,273,254,273,261,243,151,163
+    > Ezeiza - Mar del Plata,5,5,1,1,2,2,2,0,1,5,0,2
+    > Bah�a Blanca - Mar del Plata,10,7,8,10,2,8,8,11,1,1,1,0
+  - `csv` Vuelos por tramo. Año 2003 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2003_0.csv — mod Date changed  Lun, 09/12/2019 - 14:48
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,637,565,464,413,348,308,321,304,316,314,322,338
+    > Ezeiza - Mar del Plata,10,10,1,2,2,4,3,0,1,0,6,3
+    > Bah�a Blanca - Mar del Plata,14,17,11,15,16,5,9,9,8,10,8,8
+  - `csv` Vuelos por tramo. Año 2002 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2002_0.csv — mod Date changed  Lun, 09/12/2019 - 14:49
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,884,777,617,553,530,480,527,512,477,500,471,489
+    > Ezeiza - Mar del Plata,3,0,2,1,0,7,1,3,0,0,0,4
+    > Bah�a Blanca - Mar del Plata,16,17,17,16,2,3,19,15,9,12,10,9
+  - `csv` Vuelos por tramo. Año 2001 — https://datos.mardelplata.gob.ar/sites/default/files/vuelos-tramo-2001_0.csv — mod Date changed  Lun, 09/12/2019 - 14:49
+    > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
+    > Aeroparque - Mar del Plata,946,819,758,545,418,329,296,387,395,419,558,553
+    > Ezeiza - Mar del Plata,2,1,1,1,3,2,2,5,16,4,4,22
+    > Bah�a Blanca - Mar del Plata,29,23,20,17,15,19,17,6,4,17,12,9
+### `arribos-de-turistas`
+  - `csv` Arribos de turistas 2007-2025 — https://datos.mardelplata.gob.ar/sites/default/files/Arribos-Turisticos-por-mes-2007-2025.csv — mod Date changed  Mié, 08/07/2026 - 13:00
+    > Mes;2007;2008;2009;2010;2011;2012;2013;2014;2015;2016;2017;2018;2019;2020;2021;2022;2023;2024;2025
+    > Enero;1.422.547;1.337.838;1.321.784;1.411.820;1.437.571;1.463.852;1.404.985;1.422.550;1.472.464;1.381.896;1.399.071;1.380.590;1.290.276;1.383.870;834.779;1.327.732;1.494.586;1.401.422;1.378.520
+    > Febrero;1.109.344;1.171.826;1.129.601;1.165.370;1.115.055;1.252.839;1.177.236;1.155.817;1.229.299;1.218.370;1.188.766;1.213.463;1.100.400;1.263.355;810.799;1.215.092;1.249.469;1.141.012;1.062.056
+    > Marzo;683.866;744.354;619.312;701.466;856.555;699.128;789.714;744.902;762.051;771.527;702.908;824.970;778.132;406.036;603.017;749.259;800.993;822.096;738.161
+### `turismo-en-fines-de-semana-largo`
+  - `csv` Visitantes fines de semana largos 2007-2025 — https://datos.mardelplata.gob.ar/sites/default/files/visitantes-fines-de-semana-largos-2007-2025.csv — mod Date changed  Mar, 28/07/2026 - 12:58
+    > Anio;Carnavales;27 de febrero;24 de marzo;Semana Santa;2 de Abril;1ro mayo;25 de Mayo;17 de Junio;20 de Junio;9 de Julio;17 de Agosto;24 de septiembre;12 de Octubre;20 de noviembre;8 de Diciembre;Navidad;A�o nuevo
+    > 2007;n/h;;n/h;228.311;126.545;;68.205;n/h;28.378;63.872;94.067;;123.704;;n/h;161.119;
+    > 2008;n/h;;n/h;233.708;n/h;;n/h;n/h;32.446;n/h;104.870;;124.211;;152.024;n/h;
+    > 2009;n/h;;n/h;209.074;n/h;97.719;98.677;n/h;49.738;n/h;91.270;;123.250;;n/h;n/h;
+### `turismo-estable-estadía-promedio`
+  - `csv` Estadía promedio 2007-2024 — https://datos.mardelplata.gob.ar/sites/default/files/estadia-promedio-2007-2024.csv — mod Date changed  Lun, 26/05/2025 - 09:30
+    > Mes;2006;2007;2008;2009;2010;2011;2012;2013;2014;2015;2016;2017;2018;2019;2020;2021;2022;2023;2024
+    > Enero;6.3;7.6;7.6;6.8;7;7.1;6.7;6.2;6.3;6.5;6.3;6;6,3;6,3;6,6;6,3;6,4;6,8;6,2
+    > Febrero;5.5;6.5;6;5.3;5.6;5.8;5.4;5.4;5.4;5.5;5.4;5.2;5,5;5,6;6;5,6;5,8;5,7;5,5
+    > Marzo;2.5;4.2;4.3;3.3;2.9;3.6;2.6;3.4;3.7;3.6;3.1;2.6;2,5;2,8;-;2,8;3,3;3,5;3,0
+  - `csv` Estadía Promedio 2007-2021 — https://datos.mardelplata.gob.ar/sites/default/files/estadia-promedio-2007-2021.csv — mod Date changed  Jue, 10/11/2022 - 15:41
+    > Mes;2006;2007;2008;2009;2010;2011;2012;2013;2014;2015;2016;2017;2018;2019;2020;2021
+    > Enero;6.3;7.6;7.6;6.8;7;7.1;6.7;6.2;6.3;6.5;6.3;6;6,3;6,3;6,6;6,3
+    > Febrero;5.5;6.5;6;5.3;5.6;5.8;5.4;5.4;5.4;5.5;5.4;5.2;5,5;5,6;6;5,6
+    > Marzo;2.5;4.2;4.3;3.3;2.9;3.6;2.6;3.4;3.7;3.6;3.1;2.6;2,5;2,8;-;2,8
+  - `csv` Turistas estables 2007-2020 — https://datos.mardelplata.gob.ar/sites/default/files/turistas-estables-2007-2020.csv — mod Date changed  Jue, 10/11/2022 - 15:45
+    > Mes;2007;2008;2009;2010;2011;2012;2013;2014;2015;2016;2017;2018;2019;2020
+    > Enero;348.100;328.687;289.801;320.676;328.935;314.665;282.874;289.143;306.639;279.415;270.719;278.713;263.104;296.590
+    > Febrero;255.794;241.859;212.553;233.748;228.865;232.774;226.091;221.736;241.211;225.258;221.226;237.590;218.241;263.235
+    > Marzo;91.738;104.263;64.977;64.855;98.142;57.811;86.858;89.542;87.941;77.082;58.028;66.333;71.022;-
 
 ## `series_tiempo_busqueda` (static_file)
 - HTTP 200, content-type `application/json`
