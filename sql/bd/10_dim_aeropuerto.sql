@@ -19,7 +19,7 @@ k AS (
   WHERE iso_country = 'AR' AND local_code IS NOT NULL
   UNION ALL BY NAME
   SELECT codigo, 2 AS prioridad, 'anac' AS fuente_coord,
-         coalesce(oaci, codigo) AS ident, iata AS iata_code, nombre AS name,
+         oaci AS ident, iata AS iata_code, nombre AS name,
          NULL AS municipality, CASE WHEN lat < -60 THEN 'AQ' ELSE 'AR' END AS iso_country,
          provincia AS iso_region, lat AS latitude_deg, lon AS longitude_deg, tipo AS type,
          codigo AS local_code, oaci AS gps_code, 3 AS rango

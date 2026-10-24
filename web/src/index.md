@@ -407,12 +407,13 @@ const enSudamerica = (d) => d.lat >= -56 && d.lat <= -14 && d.lon >= -76 && d.lo
 const nombreDestino = (d) => d.codigo === "MDP" ? "Vuelos locales (ida y vuelta a MDQ)"
   : /mar del plata/i.test(d.ciudad ?? "") ? `${d.nombre ?? d.codigo}` : d.ciudad ?? d.nombre ?? d.codigo;
 const esLinea = modoMapa.startsWith("Línea");
+const numerico = (d) => /^\d+$/.test(d.codigo);
 const puntos = esLinea
   ? rutas.filter((d) => d.anio === anioMapa && d.lat != null && d.pasajeros >= 50)
       .map((d) => ({...d, valor: d.pasajeros, internacional: d.clasificacion_vuelo === "internacional"}))
   : d3.rollups(destinos.filter((d) => d.anio === anioMapa), (v) => ({
       ...v[0], valor: d3.sum(v, (d) => d.movimientos), pasajeros: d3.sum(v, (d) => d.pasajeros),
-      internacional: v.some((d) => d.clasificacion_vuelo === "internacional"),
+      internacional: v.some((d) => d.clasificacion_vuelo === "internacional") && !numerico(v[0]),
       segmento: d3.greatest(d3.rollups(v, (g) => d3.sum(g, (d) => d.movimientos), (d) => d.segmento), (g) => g[1])[0]
     }), (d) => d.codigo).map(([, d]) => d);
 const enMapa = puntos.filter((d) => d.lat != null && enSudamerica(d) && d.codigo !== "MDP");
@@ -458,7 +459,7 @@ Plot.plot({
 html`<table class="editorial"><thead><tr><th>Destino</th><th>${esLinea ? "Pasajeros" : "Movim."}</th><th>${esLinea ? "Salidas/sem." : "Segmento principal"}</th></tr></thead><tbody>
 ${d3.sort(puntos, (d) => -d.valor).slice(0, 16).map((d) => html`<tr class=${d.internacional ? "foco" : ""}><td>${nombreDestino(d)}${d.internacional ? ` (${PAIS(d.pais)})` : ""} <span class="muted">${d.codigo}</span></td><td>${entero(d.valor)}</td><td>${esLinea ? decimal1(d.salidas_semanales_promedio) : SEG_NOMBRE[d.segmento] ?? d.segmento}</td></tr>`)}
 </tbody></table>
-<p class="fuente">${fueraMapa.length ? `Fuera del mapa: ${fueraMapa.map((d) => `${nombreDestino(d)} (${PAIS(d.pais)})`).join(", ")}. ` : ""}${sinUbicar.length ? `${entero(d3.sum(sinUbicar, (d) => d.valor))} ${unidad} a ${sinUbicar.length} códigos sin ubicación conocida.` : ""}</p>`
+<p class="fuente">${fueraMapa.length ? `Fuera del mapa: ${fueraMapa.map((d) => `${nombreDestino(d)} (${PAIS(d.pais)})`).join(", ")}. ` : ""}${sinUbicar.length ? `${entero(d3.sum(sinUbicar, (d) => d.valor))} ${unidad} a ${sinUbicar.length} códigos que no figuran en la lista oficial de ANAC ni en OurAirports.` : ""}</p>`
 ```
 
 </div>
@@ -467,13 +468,17 @@ ${d3.sort(puntos, (d) => -d.valor).slice(0, 16).map((d) => html`<tr class=${d.in
 ### Vuelos al exterior
 
 ```js
-const intl = destinos.filter((d) => d.clasificacion_vuelo === "internacional");
+// Códigos numéricos: ANAC los clasifica como internacionales, pero no figuran en ninguna lista
+// de aeródromos (ni la oficial ni OurAirports); no se cuentan como exterior.
+const esNumerico = (d) => /^\d+$/.test(d.codigo);
+const intl = destinos.filter((d) => d.clasificacion_vuelo === "internacional" && !esNumerico(d));
+const numericos = destinos.filter((d) => d.anio === anioMapa && esNumerico(d));
 const intlAnio = intl.filter((d) => d.anio === anioMapa);
 const intlTotal = d3.sum(intlAnio, (d) => d.movimientos);
 const intlLinea = d3.sum(intlAnio.filter((d) => d.es_linea), (d) => d.movimientos);
 const paisesTop = d3.groupSort(intl.filter((d) => d.pais), (v) => -d3.sum(v, (d) => d.movimientos), (d) => d.pais).slice(0, 5);
-const grupoPais = (d) => d.pais == null ? "Sin identificar" : paisesTop.includes(d.pais) ? PAIS(d.pais) : "Otros países";
-const ordenPais = [...paisesTop.map(PAIS), "Otros países", "Sin identificar"];
+const grupoPais = (d) => d.pais == null ? "Sin ubicar" : paisesTop.includes(d.pais) ? PAIS(d.pais) : "Otros países";
+const ordenPais = [...paisesTop.map(PAIS), "Otros países", "Sin ubicar"];
 ```
 
 <div class="cifras c3">
@@ -517,7 +522,7 @@ Plot.plot({
 </div>
 </div>
 
-<p class="fuente">Fuente: ANAC, clase y clasificación de cada vuelo. Ubicación de cada código: lista oficial de aeródromos de la ANAC y OurAirports (código local, OACI e IATA). "Sin identificar": la ANAC informa un código numérico interno que no figura en ninguna de las dos listas.</p>
+<p class="fuente">Fuente: ANAC, clase y clasificación de cada vuelo. Ubicación de cada código: lista oficial de aeródromos y helipuertos de la ANAC y OurAirports (código local, OACI e IATA). Se excluyen ${entero(d3.sum(numericos, (d) => d.movimientos))} movimientos de ${anioMapa} con código numérico: la ANAC los marca como internacionales, pero el código no figura en ninguna lista de aeródromos.</p>
 
 <h2 id="07" data-idx="07 — Mercado">Quién vuela</h2>
 

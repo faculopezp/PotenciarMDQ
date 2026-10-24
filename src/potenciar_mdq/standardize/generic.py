@@ -133,12 +133,19 @@ def build_anac_aeropuertos(raw_dir: Path = RAW / "anac_aeropuertos", out: Path =
 
     registros = []
     for f in filas:
-        lat = coordenada(f.get(c_lat)) if c_lat else None
-        lon = coordenada(f.get(c_lon)) if c_lon else None
-        if (lat is None or lon is None) and c_coord and f.get(c_coord):
+        # "coordenadas" (DMS con hemisferio) es la fuente principal: en el archivo real las
+        # columnas latitud/longitud vienen invertidas (verificado 2026-10-24, ver docs/02).
+        lat = lon = None
+        if c_coord and f.get(c_coord):
             partes = re.split(r"(?<=[NSEOW])\s*[,;]?\s*|\s*[,;]\s*", f[c_coord].strip(), maxsplit=1)
             if len(partes) == 2:
                 lat, lon = coordenada(partes[0]), coordenada(partes[1])
+        if (lat is None or lon is None) and c_lat and c_lon:
+            lat, lon = coordenada(f.get(c_lat)), coordenada(f.get(c_lon))
+            # Invertidas: "lat" con valor de longitud continental (-53,5 a -75) y "lon" con una
+            # latitud continental (-21 a -56). Solo respaldo: el DMS de "coordenadas" manda.
+            if lat is not None and lon is not None and -75 <= lat <= -53.5 and -56 <= lon <= -21:
+                lat, lon = lon, lat
         if lat is not None and not (-91 < lat < 0) or lon is not None and not (-180 < lon < 0):
             lat = lon = None  # fuera de Argentina/Antártida: dato roto
         codigo = (f.get(c_local) or "").strip().upper()

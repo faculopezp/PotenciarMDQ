@@ -33,6 +33,9 @@ def test_lista_anac_csv(tmp_path: Path):
     (raw / "20261024_aeropuertos_detalle.csv").write_text(
         "local;oaci;iata;tipo;denominacion;coordenadas;latitud;longitud;provincia\n"
         "MDP;SAZM;MDQ;Aeródromo;MAR DEL PLATA;;-37,9342;-57,5733;BUENOS AIRES\n"
+        "ACB;;;Aeródromo;CORONEL BOGADO;\"33°16'20\"\"S  60°34'14\"\"W\";"
+        "-60.57066;-33.27226;SANTA FE\n"
+        "INV;;;Aeródromo;INVERTIDO;;-60.5;-33.2;X\n"
         "2278;;;Helipuerto;HELIPUERTO X;37°50'00\"S 57°30'00\"O;;;BUENOS AIRES\n"
         "999;;;Aeródromo;ROTO;;45,0;10,0;X\n",
         encoding="latin-1",
@@ -42,6 +45,10 @@ def test_lista_anac_csv(tmp_path: Path):
     assert rows["MDP"][1:] == pytest.approx((-37.9342, -57.5733))
     assert rows["2278"][1:] == pytest.approx((-(37 + 50 / 60), -57.5))  # desde "coordenadas"
     assert rows["999"][1:] == (None, None)  # fuera de rango
+    # formato real: DMS en "coordenadas" manda; latitud/longitud vienen invertidas
+    acb = (-(33 + 16 / 60 + 20 / 3600), -(60 + 34 / 60 + 14 / 3600))
+    assert rows["ACB"][1:] == pytest.approx(acb)
+    assert rows["INV"][1:] == pytest.approx((-33.2, -60.5))
 
 
 def test_dim_aeropuerto_resuelve_por_fuente():

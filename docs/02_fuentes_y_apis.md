@@ -114,3 +114,15 @@ Verificado por `pmdq probe` desde GitHub Actions (vista previa en `reports/probe
 | `turismo-estable-estadía-promedio` | Estadía promedio y turistas estables por mes | 2006–2024 | Decimal con punto o coma según el año; `-` = sin dato |
 
 Con esto la serie de movimientos llega a **2001** y se puede cruzar aviación con turismo (2007+).
+## Lista oficial de aeródromos (ANAC / Secretaría de Transporte) — verificada 2026-10-24
+
+- URL: `datos.transporte.gob.ar/.../aeropuertos_detalle.csv` (`config/sources.yaml → anac_aeropuertos`).
+- Columnas: `local;oaci;iata;tipo;denominacion;coordenadas;latitud;longitud;elev;...;provincia;inhab`.
+- **Las columnas `latitud` y `longitud` vienen invertidas** (ej. ACB Coronel Bogado: `coordenadas`
+  33°16'20"S 60°34'14"W, `latitud` -60.57). Se usa `coordenadas` (DMS con hemisferio) como fuente
+  principal. El cruce contra OurAirports queda en reports/qa ("Lista ANAC vs OurAirports").
+- Los **códigos numéricos** del CSV de movimientos (ej. 2278, 3073, 2574) no están en esta lista
+  ni en OurAirports. ANAC los clasifica como "internacional" aunque los informan aeropuertos del
+  interior (Salta, Posadas, San Fernando). En la web no se cuentan como vuelos al exterior.
+- Resolución de códigos (dim_aeropuerto): OurAirports AR `local_code` → lista ANAC → Antártida →
+  OACI (`ident` y `gps_code`; ej. SPJC Lima figura en OurAirports con ident SPIM).
