@@ -93,6 +93,9 @@ def test_perfil_aeronave_basico_taxi():
         ("TEA-P2002 SIERRA", "Tecnam P2002 Sierra", None, True),
         ("PA-PA-34-200-T", "Piper PA-34 Seneca", "PA34", False),
         ("PA-PA-31-T", "Piper Cheyenne (PA-31T/42)", None, False),
+        ("PAA-PA-A-31-T", "Piper Cheyenne (PA-31T/42)", None, False),
+        ("BE-B-300", "Beechcraft King Air 350 (B300)", "B350", False),
+        ("CIR-SR 22T", "Cirrus SR22T", "S22T", False),
     ],
 )
 def test_modelo_aeronave(codigo, modelo, icao, biplaza):

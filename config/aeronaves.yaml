@@ -63,8 +63,8 @@ categorias:
     familia_regex: {'PC-?24': Pilatus PC-24, 'SF-?50': Cirrus Vision Jet, '^LJ|LEARJET': Learjet, '^CE-?[5-7]\d\d|^TXA-?[5-7]\d\d|CITATION': Cessna Citation, '^(BE|HAB)-?400|BEECHJET': Beechjet 400, '800XP|^RAY-?(8|4)00': Hawker, '135BJ|LEGACY|PRAETOR': Embraer Legacy/Praetor, 'BD-?[17]00': Bombardier Challenger/Global, 'EMB-?50[05]|PHENOM': Embraer Phenom, '^GU|GULF': Gulfstream, 'FALCON|^DAS': Dassault Falcon, 'CL-?6|CHALLENGER': Bombardier Challenger, 'HAW|HAWKER': Hawker, '^HDJ': HondaJet}
     patron: '(PC-?24|SF-?50|^LJ|LEARJET|^CE-?[5-7]\d\d|^TXA-?[5-7]\d\d|^(BE|HAB)-?400|BEECHJET|800XP|^RAY-?[48]00|135BJ|PRAETOR|BD-?[17]00|CITATION|EMB-?50[05]|PHENOM|^GU-(?!AA|GA)|GULF|FALCON|^DAS-|CL-?6\d\d|CHALLENGER|GLOBAL|^HAW|HAWKER(?!.*B-?200)|^HDJ|LEGACY)'
   - categoria: turbohelice_ejecutivo
-    familia_regex: {'PA-?31-?T|PA-?42|CHEYENNE': Piper Cheyenne, 'PA.?46-?[56]00 ?TP': Piper M500/M600, '690': Aero Commander 690, 'B-?200|BE-?200|[ABCEF]-?90|300|350|-100|^TXA-?200|KING': Beech King Air, '208|CARAVAN': Cessna Caravan, 'PC-?12': Pilatus PC-12, 'TBM': Daher TBM, 'PA-?31T|PA-?42|CHEYENNE': Piper Cheyenne}
-    patron: '(PA-?31-?T|PA.?46-?[56]00 ?TP|BE-B-90|B-?200|BE-?200|B200GT|[ACEF]-?90|^TXA-?B?[23]00|^BE-?(B-?)?300|B-?350|^BE-?[AB]-?100|KING ?AIR|CE-?208|^TXA-?208|CARAVAN|PC-?12|TBM|PA-?31T|PA-?42|CHEYENNE|CE-?441|CONQUEST|AERO ?COMMANDER|690)'
+    familia_regex: {'PA-?A?-?31-?T|PA-?42|CHEYENNE': Piper Cheyenne, 'PA.?46-?[56]00 ?TP': Piper M500/M600, '690': Aero Commander 690, 'B-?200|BE-?200|[ABCEF]-?90|300|350|-100|^TXA-?200|KING': Beech King Air, '208|CARAVAN': Cessna Caravan, 'PC-?12': Pilatus PC-12, 'TBM': Daher TBM, 'PA-?31T|PA-?42|CHEYENNE': Piper Cheyenne}
+    patron: '(PA-?A?-?31-?T|PA.?46-?[56]00 ?TP|BE-B-90|B-?200|BE-?200|B200GT|[ACEF]-?90|^TXA-?B?[23]00|^BE-?(B-?)?300|B-?350|^BE-?[AB]-?100|KING ?AIR|CE-?208|^TXA-?208|CARAVAN|PC-?12|TBM|PA-?31T|PA-?42|CHEYENNE|CE-?441|CONQUEST|AERO ?COMMANDER|690)'
   - categoria: helicoptero
     familia_regex: {'^BEL|^EL-|BELL': Bell, '^RO-|(?<![A-Z])R-?(22|44|66)': Robinson, 'AS-?3[35]0|EC-?1\d\d|H1[2-6]\d|^EUR': Airbus Helicopters, 'AW-?1\d\d|A-?109': Leonardo/Agusta}
     patron: '(^BEL-|^EL-|BELL|^RO-|(?<![A-Z])R-?(22|44|66)|AS-?3[35]0|EC-?1[2-5]\d|H1[2-6]\d|^EUR-|AW-?1\d\d|A[ -]?109|S-?76|BK-?117)'
@@ -113,7 +113,8 @@ modelos:
   - {patron: 'CRJ ?-?200|CRJ2', modelo: Bombardier CRJ200, icao: CRJ2}
   # turbohélices ejecutivos
   - {patron: 'B-?200 ?-?GT|B200GT', modelo: Beechcraft King Air B200GT, icao: BE20}
-  - {patron: 'B-?300|300-?LW|BE-300|B-?350', modelo: Beechcraft King Air 300/350, icao: BE30}
+  - {patron: 'B-?300|B-?350', modelo: Beechcraft King Air 350 (B300), icao: B350}
+  - {patron: '300-?LW|BE-300', modelo: Beechcraft King Air 300, icao: BE30}
   - {patron: '(BE|TXA|BEF|HAB)-?B?-?200', modelo: Beechcraft King Air 200/B200, icao: BE20}
   - {patron: 'A-?100', modelo: Beechcraft King Air A100, icao: BE10}
   - {patron: 'F-?90', modelo: Beechcraft King Air F90, icao: BE9T}
@@ -124,7 +125,7 @@ modelos:
   - {patron: 'PC-?24', modelo: Pilatus PC-24, icao: PC24}
   - {patron: 'PA.?46-?500 ?TP', modelo: Piper M500 (PA-46-500TP), icao: P46T}
   - {patron: 'PA.?46-?600 ?TP', modelo: Piper M600 (PA-46-600TP), icao: P46T}
-  - {patron: 'PA-?31-?T|PA-?42', modelo: Piper Cheyenne (PA-31T/42), icao: ''}
+  - {patron: 'PA-?A?-?31-?T|PA-?42', modelo: Piper Cheyenne (PA-31T/42), icao: ''}
   - {patron: '690', modelo: Aero Commander 690, icao: ''}
   - {patron: 'TBM', modelo: Daher TBM 700, icao: ''}
   # jets ejecutivos
@@ -138,7 +139,9 @@ modelos:
   - {patron: '525', modelo: Cessna Citation CJ1/M2 (525), icao: C525}
   - {patron: '560-?X|560XL', modelo: Cessna Citation Excel/XLS (560XL), icao: C56X}
   - {patron: '560', modelo: Cessna Citation V/Ultra/Encore (560), icao: C560}
-  - {patron: '-55[01]', modelo: Cessna Citation II/Bravo (550/551), icao: C550}
+  - {patron: '550-?B', modelo: Cessna Citation Bravo (550B), icao: C55B}
+  - {patron: '-551', modelo: Cessna Citation II/SP (551), icao: C551}
+  - {patron: '-550', modelo: Cessna Citation II/Bravo (550), icao: C550}
   - {patron: '-50[01]', modelo: Cessna Citation I (500/501), icao: C501}
   - {patron: '-510', modelo: Cessna Citation Mustang (510), icao: C510}
   - {patron: '-680', modelo: Cessna Citation Sovereign (680), icao: C680}
@@ -162,8 +165,12 @@ modelos:
   - {patron: '^(CE|TXA|TXI)-?([A-Z]{1,2}-?)?152', modelo: Cessna 152, icao: C152, biplaza: true}
   - {patron: '^(CE|TXA|TXI)-?([A-Z]{1,2}-?)?172', modelo: Cessna 172, icao: C172}
   - {patron: '^(CE|TXA|TXI)-?([A-Z]{1,2}-?)?177', modelo: Cessna 177, icao: ''}
+  - {patron: '^(CE|TXA)-?T?R-?182', modelo: Cessna 182RG, icao: C82R}
   - {patron: '^(CE|TXA|TXI)-?([A-Z]{1,2}-?)?182', modelo: Cessna 182, icao: C182}
+  - {patron: '^(CE|TXA)-?T-?206', modelo: Cessna T206, icao: T206}
   - {patron: '^(CE|TXA|TXI)-?([A-Z]{1,2}-?)?206', modelo: Cessna 206, icao: C206}
+  - {patron: '^(CE|TXA)-?P-?210', modelo: Cessna P210, icao: P210}
+  - {patron: '^(CE|TXA)-?T-?210', modelo: Cessna T210, icao: T210}
   - {patron: '^(CE|TXA|TXI)-?([A-Z]{1,2}-?)?210', modelo: Cessna 210, icao: C210}
   - {patron: '^CE-?140', modelo: Cessna 140, icao: '', biplaza: true}
   - {patron: '^CE-?310', modelo: Cessna 310, icao: C310}
@@ -198,6 +205,7 @@ modelos:
   - {patron: 'GA-?7', modelo: Grumman American GA-7 Cougar, icao: ''}
   - {patron: 'RV-?(4|7|8|12)|RV ?12|RV7|RV4|RV8', modelo: Van's RV-4/7/8/12, icao: '', biplaza: true}
   - {patron: 'RV-?(6|9|10)|RV6|RV10|RV9', modelo: Van's RV-6/9/10, icao: ''}
+  - {patron: 'SR-?22T|SR 22T', modelo: Cirrus SR22T, icao: S22T}
   - {patron: 'SR-?22|SR 22', modelo: Cirrus SR22, icao: SR22}
   - {patron: 'SR-?20', modelo: Cirrus SR20, icao: SR20}
   - {patron: 'BARON.*58|^(BE|TXA|HAB|BEF)-?G?-?58', modelo: Beechcraft Baron 58, icao: BE58}

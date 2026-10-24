@@ -102,7 +102,10 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
     # MADHEL (opcional, esquema a descubrir): se carga tal cual para explorar en reports/qa.
     madhel = processed / "madhel.parquet"
     if madhel.exists():
-        con.execute("CREATE TABLE ref_madhel AS SELECT * FROM read_parquet(?)", [str(madhel)])
+        try:
+            con.execute("CREATE TABLE ref_madhel AS SELECT * FROM read_parquet(?)", [str(madhel)])
+        except Exception as exc:  # noqa: BLE001 - fuente exploratoria
+            log.warning("MADHEL no se pudo cargar: %s", exc)
 
     # Portal municipal (opcional): series mensuales 2001+ y vuelos individuales 2015–2019.
     for tabla, archivo, ddl in [
