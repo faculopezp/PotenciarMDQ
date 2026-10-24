@@ -97,3 +97,20 @@ GET https://datos.mardelplata.gob.ar/?q=api/3/action/package_list
 | ANAC movimientos × DNTA | (`anio`,`mes`,`aeropuerto`) | Reconciliación de totales |
 | MDQ × INDEC EOH | (`anio`,`mes`) | ¿El avión explica la ocupación hotelera fuera de temporada? |
 | ANAC × `config/aeronaves.yaml` | regex sobre `aeronave` | Categoría de flota (jet/turbohélice/aviación general) |
+
+## Hallazgo 2026-10-24: series municipales (datos.mardelplata.gob.ar, DKAN)
+
+Verificado por `pmdq probe` desde GitHub Actions (vista previa en `reports/probe.md`):
+
+| Dataset (slug) | Contenido | Cobertura | Problemas de formato |
+|---|---|---|---|
+| `movimientos-del-aeropuerto-internacional-astor-piazzolla` | Movimientos mensuales cabotaje / internacional (formato ancho, un CSV por año) | **2001–2020** | 2019–2020 vienen ×1000; miles con coma entre comillas (`"1,073"`) |
+| `vuelos-del-aeropuerto-internacional-astor-piazzolla` | Movimientos individuales (fecha, hora, clase, OACI origen/destino, aerolínea, aeronave; sin pasajeros) | **2015–2019** | Latin-1, coma como separador, hora sin minutos |
+| `pasajeros-del-aeropuerto-astor-piazzolla` | Pasajeros arribados + embarcados por mes, en miles | 2020–2022 (+ a confirmar) | `;`, meses como `ene-22`, valores en miles |
+| `vuelos-comerciales-pasajeros-por-tramo` | Pasajeros por ruta y mes | 2022–2024 (+) | `;`, Latin-1 |
+| `vuelos-comerciales-vuelos-por-tramo` | Vuelos por ruta y mes | 2018–2020 (+) | 2019–2020 ×1000 |
+| `arribos-de-turistas` | Turistas arribados por mes | **2007–2025** | Punto de miles (`1.422.547`) |
+| `turismo-en-fines-de-semana-largo` | Visitantes por fin de semana largo | 2007–2025 | `n/h` = no hubo |
+| `turismo-estable-estadía-promedio` | Estadía promedio y turistas estables por mes | 2006–2024 | Decimal con punto o coma según el año; `-` = sin dato |
+
+Con esto la serie de movimientos llega a **2001** y se puede cruzar aviación con turismo (2007+).
