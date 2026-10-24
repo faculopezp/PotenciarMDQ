@@ -86,7 +86,7 @@ Plot.plot({
 
 ### Con qué vuela
 
-Criterio: el **avión básico** de taxi aéreo y vuelos ejecutivos es un turbohélice que lleva 5 o más pasajeros (King Air, Caravan, PC-12). El pistón es aviación liviana. Los vuelos declarados como taxi aéreo en **biplazas** de entrenamiento (Cessna 150/152, Tecnam P2002/P92, Bristell, Piper Tomahawk) se analizan como privados: no son oferta de taxi. Los bimotores a pistón (Seneca, Navajo, Baron) siguen como taxi, porque hay operadores que los ofrecen.
+Criterio: el **avión básico** de taxi aéreo y vuelos ejecutivos es un turbohélice que lleva 5 o más pasajeros (King Air, Caravan, PC-12). Un taxi aéreo a pistón cuenta como taxi solo si el avión tiene **6 plazas o más** (piloto + 5 pasajeros: Seneca, Navajo, Baron, Malibu, Cessna 206/210, Tecnam P2012). Si se declara como taxi en un avión más chico (Cessna 150/172/182, Tecnam P2002/P92, Cirrus, PA-28), se analiza como privado.
 
 ```js
 const perfAnio = perfilAero.filter((d) => d.anio === anioSel && ["taxi_aereo", "privado", "instruccion", "oficial"].includes(d.segmento));
@@ -98,7 +98,7 @@ const share = (id) => d3.sum(perfSeg.filter((d) => d.perfil === id), (d) => d.sh
 perfSeg.length ? html`<div class="cifras">
   <div><span class="rotulo">Jet ejecutivo</span><span class="valor">${pct(share("jet_ejecutivo"))}</span><p class="nota">de los movimientos del segmento</p></div>
   <div><span class="rotulo">Turbohélice 5+ pax</span><span class="valor">${pct(share("turbohelice_basico"))}</span><p class="nota">el avión básico de taxi/ejecutivo</p></div>
-  <div><span class="rotulo">Pistón (liviano)</span><span class="valor">${pct(share("piston"))}</span><p class="nota">${segSel.id === "taxi_aereo" ? "bimotores y monomotores de 4+ plazas" : "aviación liviana"}</p></div>
+  <div><span class="rotulo">Pistón (liviano)</span><span class="valor">${pct(share("piston"))}</span><p class="nota">${segSel.id === "taxi_aereo" ? "pistón de 6+ plazas (Seneca, Navajo, Baron…)" : "aviación liviana"}</p></div>
   <div><span class="rotulo">Sin dato del avión</span><span class="valor">${pct(share("sin_dato"))}</span><p class="nota">ANAC no informa el modelo</p></div>
 </div>` : ""
 ```

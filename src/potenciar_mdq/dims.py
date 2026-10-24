@@ -36,21 +36,58 @@ def classify_aeronave(name: str, cfg: dict) -> tuple[str, str, str]:
     return fabricante, cfg["default"]["familia"], cfg["default"]["categoria"]
 
 
-def modelo_aeronave(name: str, cfg: dict, familia: str) -> tuple[str, str | None, bool]:
-    """'BO-B737-8SH' -> ('Boeing 737-800', 'B738', False). Sin regla: (familia, None, False)."""
+def modelo_aeronave(name: str, cfg: dict, familia: str) -> tuple[str, str | None, int | None]:
+    """'BO-B737-8SH' -> ('Boeing 737-800', 'B738', None); 'CE-150-M' -> ('Cessna 150', 'C150', 2).
+
+    Sin regla: (familia, None, None). plazas solo está cargado para pistón.
+    """
     up = name.upper().strip()
     for m in cfg.get("modelos", []):
         if re.search(m["patron"], up):
-            return m["modelo"], (m.get("icao") or None), bool(m.get("biplaza", False))
-    return familia, None, False
+            return m["modelo"], (m.get("icao") or None), m.get("plazas")
+    return familia, None, None
+
+
+_SIGLA = re.compile(r"\b[A-Z](?:\.\s?[A-Z])+\b\.?")          # L.A.D.E. / S.A / S. A. / S.R.L
+_SOCIETARIO = {"SA", "SAS", "SRL", "LTDA", "LTD", "INC", "SAU", "SACI", "SAIC", "SACIF", "SE",
+               "LIMITED", "LLC", "CORP", "SCA", "SAF"}
+_VACIAS = {"DE", "DEL", "LA", "EL", "LOS", "LAS", "Y"}
+_SUFIJO_RX = re.compile(
+    r"[\s,.\-]*\b(S\.?\s?A\.?\s?S\.?|S\.?\s?A\.?\s?U\.?|S\.?\s?A\.?|S\.?\s?R\.?\s?L\.?|"
+    r"LTDA\.?|LTD\.?|INC\.?|LIMITED|LLC)\s*$", re.I)
+
+
+def clave_operador(name: str) -> str:
+    """'L.A.D.E.' -> 'LADE'; 'HANGAR UNO S.A' / 'HANGAR UNO S.A.' -> 'HANGAR UNO'.
+
+    Clave de agrupación: sin acentos, siglas con puntos colapsadas, sin forma societaria final ni
+    artículos/preposiciones. Dos nombres con la misma clave son el mismo operador.
+    """
+    s = _norm(name)
+    s = _SIGLA.sub(lambda m: re.sub(r"[.\s]", "", m.group(0)) + " ", s)
+    tokens = re.sub(r"[^A-Z0-9]+", " ", s).split()
+    while tokens and tokens[-1] in _SOCIETARIO:
+        tokens.pop()
+    return " ".join(t for t in tokens if t not in _VACIAS)
+
+
+def nombre_visible(name: str) -> str:
+    """'HANGAR UNO S.A.' -> 'Hangar Uno'; conserva acentos y artículos del original."""
+    s = re.sub(r"\s+", " ", name).strip()
+    prev = None
+    while prev != s:
+        prev, s = s, _SUFIJO_RX.sub("", s).strip()
+    s = s.title() if s else name.title()
+    return re.sub(r"\b(?=[MDCLXVI]+\b)M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})\b",
+                  lambda m: m.group(0).upper(), s, flags=re.I)
 
 
 def classify_aerolinea(name: str, rules: list[dict]) -> tuple[str, str]:
-    n = _norm(name)
+    n, k = _norm(name), clave_operador(name)
     for r in rules:
-        if re.search(r["patron"], n):
-            return (r["nombre"] or name.title()), r["tipo"]
-    return name.title(), "otra"
+        if re.search(r["patron"], n) or re.search(r["patron"], k):
+            return (r["nombre"] or nombre_visible(name)), r["tipo"]
+    return nombre_visible(name), "otra"
 
 
 def build_dim_aeronave(con: duckdb.DuckDBPyConnection) -> None:
@@ -67,20 +104,22 @@ def build_dim_aeronave(con: duckdb.DuckDBPyConnection) -> None:
     con.execute(
         "CREATE OR REPLACE TABLE dim_aeronave "
         "(aeronave VARCHAR PRIMARY KEY, fabricante VARCHAR, familia VARCHAR, categoria VARCHAR, "
-        "modelo VARCHAR, icao_tipo VARCHAR, es_biplaza BOOLEAN)"
+        "modelo VARCHAR, icao_tipo VARCHAR, plazas INT)"
     )
     if rows:
         con.executemany("INSERT INTO dim_aeronave VALUES (?, ?, ?, ?, ?, ?, ?)", rows)
     inferencia = cfg.get("inferencia", [])
     con.execute(
         "CREATE OR REPLACE TABLE ref_inferencia_aeronave (orden INT, operador VARCHAR, "
-        "anio_hasta INT, pax_min DOUBLE, pax_max DOUBLE, familia VARCHAR, categoria VARCHAR)"
+        "anio_hasta INT, pax_min DOUBLE, pax_max DOUBLE, familia VARCHAR, modelo VARCHAR, "
+        "categoria VARCHAR, modelos_validos VARCHAR[])"
     )
     if inferencia:
         con.executemany(
-            "INSERT INTO ref_inferencia_aeronave VALUES (?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO ref_inferencia_aeronave VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [(i, r["operador"], r.get("anio_hasta", 2099), r["pax_min"], r["pax_max"],
-              r["familia"], r["categoria"])
+              r["familia"], r.get("modelo", r["familia"]), r["categoria"],
+              r.get("modelos_validos", []))
              for i, r in enumerate(inferencia)],
         )
 
@@ -93,16 +132,24 @@ def _existe(con: duckdb.DuckDBPyConnection, tabla: str) -> bool:
 
 def build_dim_aerolinea(con: duckdb.DuckDBPyConnection) -> None:
     rules = load_yaml("aerolineas.yaml")["aerolineas"]
-    names = [r[0] for r in con.execute(
-        "SELECT DISTINCT aerolinea FROM stg_movimiento WHERE aerolinea IS NOT NULL"
-    ).fetchall()]
-    rows = [(n, *classify_aerolinea(n, rules)) for n in names]
+    conteo = con.execute(
+        "SELECT aerolinea, count(*) FROM stg_movimiento WHERE aerolinea IS NOT NULL GROUP BY 1"
+    ).fetchall()
+    # Variantes del mismo operador (misma clave): todas toman el nombre y tipo de la más frecuente.
+    grupos: dict[str, list[tuple[int, str]]] = {}
+    for n, c in conteo:
+        grupos.setdefault(clave_operador(n), []).append((c, n))
+    rows = []
+    for clave, variantes in grupos.items():
+        nombre, tipo = classify_aerolinea(max(variantes)[1], rules)
+        rows += [(n, nombre, tipo, clave, len(variantes)) for _, n in variantes]
     con.execute(
         "CREATE OR REPLACE TABLE dim_aerolinea "
-        "(aerolinea VARCHAR PRIMARY KEY, aerolinea_nombre VARCHAR, aerolinea_tipo VARCHAR)"
+        "(aerolinea VARCHAR PRIMARY KEY, aerolinea_nombre VARCHAR, aerolinea_tipo VARCHAR, "
+        "aerolinea_clave VARCHAR, variantes_nombre INT)"
     )
     if rows:
-        con.executemany("INSERT INTO dim_aerolinea VALUES (?, ?, ?)", rows)
+        con.executemany("INSERT INTO dim_aerolinea VALUES (?, ?, ?, ?, ?)", rows)
 
 
 def build_dim_fecha(con: duckdb.DuckDBPyConnection, desde: date, hasta: date) -> None:

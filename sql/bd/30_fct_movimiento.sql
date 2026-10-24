@@ -23,7 +23,9 @@ j AS (
   SELECT
     e.*,
     al.aerolinea_nombre, al.aerolinea_tipo,
-    an.fabricante, an.familia, an.categoria, an.modelo, an.icao_tipo, an.es_biplaza,
+    an.fabricante, an.familia, an.categoria, an.modelo, an.icao_tipo, an.plazas,
+    an.categoria = 'aviacion_general_piston'
+      OR list_contains(getvariable('taxi_modelos_piston'), an.modelo)  AS es_piston,
     round(haversine_km(a1.lat, a1.lon, a2.lat, a2.lon))                AS distancia_km,
     coalesce(ca.capacidad, cn.capacidad)                               AS capacidad,
     CASE WHEN ca.capacidad IS NOT NULL THEN 'p95_aerolinea_aeronave'
@@ -34,9 +36,12 @@ j AS (
       WHEN e.clase_vuelo = 'no_regular'
        AND (list_contains(getvariable('categorias_linea'), an.categoria)
             OR list_contains(getvariable('operadores_linea'), al.aerolinea_tipo)) THEN 'charter_linea'
-      -- Taxi aéreo declarado en un biplaza (entrenador/LSA, ver config/aeronaves.yaml → modelos):
-      -- no es oferta de taxi; se analiza como privado (segmento_reclasificado = true).
-      WHEN e.clase_vuelo = 'no_regular' AND an.es_biplaza THEN 'privado'
+      -- Taxi aéreo declarado en un pistón con menos de taxi_min_plazas (config/mdq.yaml): no es
+      -- oferta de taxi; se analiza como privado (segmento_reclasificado = true).
+      WHEN e.clase_vuelo = 'no_regular'
+       AND (an.categoria = 'aviacion_general_piston'
+            OR list_contains(getvariable('taxi_modelos_piston'), an.modelo))
+       AND coalesce(an.plazas, 0) < getvariable('taxi_min_plazas') THEN 'privado'
       WHEN e.clase_vuelo = 'no_regular' THEN 'taxi_aereo'
       WHEN e.clase_vuelo LIKE 'vuelo_privado%' THEN 'privado'
       WHEN e.clase_vuelo LIKE 'vuelo_oficial%' THEN 'oficial'
@@ -45,6 +50,7 @@ j AS (
       ELSE 'otro'
     END                                                                AS segmento,
     r.familia                                                          AS familia_inferida,
+    r.modelo                                                           AS modelo_inferido,
     r.categoria                                                        AS categoria_inferida
   FROM e
   LEFT JOIN dim_aerolinea al ON al.aerolinea = e.aerolinea
@@ -85,7 +91,7 @@ SELECT
   j.es_comercial,
   j.clase_vuelo = 'regular'                        AS es_regular,
   j.segmento,
-  j.clase_vuelo = 'no_regular' AND coalesce(j.es_biplaza, false)
+  j.clase_vuelo = 'no_regular' AND coalesce(j.es_piston, false)
     AND j.segmento = 'privado'                     AS segmento_reclasificado,
   j.segmento IN ('linea_regular', 'charter_linea') AS es_linea,
   j.clasificacion_vuelo,
@@ -107,8 +113,9 @@ SELECT
   coalesce(j.categoria, 'sin_dato')                AS aeronave_categoria,
   j.modelo                                         AS aeronave_modelo,
   j.icao_tipo                                      AS aeronave_icao,
-  coalesce(j.es_biplaza, false)                    AS es_biplaza,
+  j.plazas                                         AS aeronave_plazas,
   coalesce(j.familia, j.familia_inferida, 'Sin dato') AS aeronave_familia_inferida,
+  coalesce(j.modelo, j.modelo_inferido, j.familia, 'Sin dato') AS aeronave_modelo_inferido,
   j.familia IS NULL AND j.familia_inferida IS NOT NULL AS aeronave_inferida,
   j.matricula,
   CASE WHEN j.matricula IS NULL THEN NULL

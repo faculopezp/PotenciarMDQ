@@ -47,6 +47,10 @@ segmentos:
 perfil_aeronave:
   basico_categorias: [turbohelice_ejecutivo]
   basico_min_pax: 5
+  # Taxi aéreo a pistón: mínimo de plazas (con piloto) para contarlo como taxi. 6 = piloto + 5
+  # pasajeros, el mismo umbral que el avión básico. Menos plazas -> se analiza como privado.
+  taxi_min_plazas: 6
+  taxi_modelos_piston_extra: [Robinson R22, Robinson R44]   # helicópteros a pistón
   nombres:
     jet_ejecutivo: Jet ejecutivo
     turbohelice_basico: Turbohélice 5+ pax (básico)

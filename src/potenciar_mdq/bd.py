@@ -55,6 +55,8 @@ def set_variables(con: duckdb.DuckDBPyConnection) -> None:
     perfil = cfg["perfil_aeronave"]
     con.execute(f"SET VARIABLE basico_categorias = {_lit(perfil['basico_categorias'])}")
     con.execute(f"SET VARIABLE basico_min_pax = {int(perfil['basico_min_pax'])}")
+    con.execute(f"SET VARIABLE taxi_min_plazas = {int(perfil['taxi_min_plazas'])}")
+    con.execute(f"SET VARIABLE taxi_modelos_piston = {_lit(perfil['taxi_modelos_piston_extra'])}")
 
 
 def connect(path: Path = BD, read_only: bool = False) -> duckdb.DuckDBPyConnection:

@@ -33,7 +33,8 @@ def test_classify_aeronave(codigo, esperado):
         ("FB LÍNEAS AÉREAS - FLYBONDI", ("Flybondi", "low_cost")),
         ("JETSMART AIRLINES S.A.", ("JetSMART", "low_cost")),
         ("COMPAÑIA PANAMEÑA DE AVIACION", ("Copa Airlines", "extranjera")),
-        ("TENIL S.A.", ("Tenil S.A.", "otra")),
+        ("TENIL S.A.", ("Tenil", "otra")),
+        ("L.A.D.E.", ("LADE", "estatal")),
     ],
 )
 def test_classify_aerolinea(nombre, esperado):
@@ -70,40 +71,40 @@ def test_perfil_aeronave_basico_taxi():
 
 
 @pytest.mark.parametrize(
-    "codigo,modelo,icao,biplaza",
+    "codigo,modelo,icao,plazas",
     [
         # 737: código de cliente = NG; "737-8" pelado o con MAX = MAX 8 (verificado por matrícula)
-        ("BO-737-800", "Boeing 737-800", "B738", False),
-        ("BO-B737-800", "Boeing 737-800", "B738", False),
-        ("BO-737-8SH", "Boeing 737-800", "B738", False),
-        ("BO-B737-8MB", "Boeing 737-800", "B738", False),
-        ("BO-737-8", "Boeing 737 MAX 8", "B38M", False),
-        ("BO-B737-8", "Boeing 737 MAX 8", "B38M", False),
-        ("BO-737-8 MAX", "Boeing 737 MAX 8", "B38M", False),
-        ("BO-B737-8MAX", "Boeing 737 MAX 8", "B38M", False),
-        ("BO-B-737-76N", "Boeing 737-700", "B737", False),
-        ("BO-737-7BD", "Boeing 737-700", "B737", False),
+        ("BO-737-800", "Boeing 737-800", "B738", None),
+        ("BO-B737-800", "Boeing 737-800", "B738", None),
+        ("BO-737-8SH", "Boeing 737-800", "B738", None),
+        ("BO-B737-8MB", "Boeing 737-800", "B738", None),
+        ("BO-737-8", "Boeing 737 MAX 8", "B38M", None),
+        ("BO-B737-8", "Boeing 737 MAX 8", "B38M", None),
+        ("BO-737-8 MAX", "Boeing 737 MAX 8", "B38M", None),
+        ("BO-B737-8MAX", "Boeing 737 MAX 8", "B38M", None),
+        ("BO-B-737-76N", "Boeing 737-700", "B737", None),
+        ("BO-737-7BD", "Boeing 737-700", "B737", None),
         # colisiones detectadas al revisar las 911 denominaciones
-        ("BE-1900D", "Beechcraft 1900D", "B190", False),
-        ("EUR-EC-145", "Airbus/MBB BK117/H145", None, False),
-        ("MAX-MH-1521", "Otra", None, False),
-        ("EMB-ERJ190100IGW", "Embraer E190", "E190", False),
-        ("BE-B-200-GT", "Beechcraft King Air B200GT", "BE20", False),
-        ("CE-150-M", "Cessna 150", "C150", True),
-        ("TEA-P2002 SIERRA", "Tecnam P2002 Sierra", None, True),
-        ("PA-PA-34-200-T", "Piper PA-34 Seneca", "PA34", False),
-        ("PA-PA-31-T", "Piper Cheyenne (PA-31T/42)", None, False),
-        ("PAA-PA-A-31-T", "Piper Cheyenne (PA-31T/42)", None, False),
-        ("BE-B-300", "Beechcraft King Air 350 (B300)", "B350", False),
-        ("CIR-SR 22T", "Cirrus SR22T", "S22T", False),
+        ("BE-1900D", "Beechcraft 1900D", "B190", None),
+        ("EUR-EC-145", "Airbus/MBB BK117/H145", None, None),
+        ("MAX-MH-1521", "Otra", None, None),
+        ("EMB-ERJ190100IGW", "Embraer E190", "E190", None),
+        ("BE-B-200-GT", "Beechcraft King Air B200GT", "BE20", None),
+        ("CE-150-M", "Cessna 150", "C150", 2),
+        ("TEA-P2002 SIERRA", "Tecnam P2002 Sierra", None, 2),
+        ("PA-PA-34-200-T", "Piper PA-34 Seneca", "PA34", 6),
+        ("PA-PA-31-T", "Piper Cheyenne (PA-31T/42)", None, None),
+        ("PAA-PA-A-31-T", "Piper Cheyenne (PA-31T/42)", None, None),
+        ("BE-B-300", "Beechcraft King Air 350 (B300)", "B350", None),
+        ("CIR-SR 22T", "Cirrus SR22T", "S22T", 5),
     ],
 )
-def test_modelo_aeronave(codigo, modelo, icao, biplaza):
+def test_modelo_aeronave(codigo, modelo, icao, plazas):
     from potenciar_mdq.dims import modelo_aeronave
 
     cfg = load_yaml("aeronaves.yaml")
     _, familia, _ = classify_aeronave(codigo, cfg)
-    assert modelo_aeronave(codigo, cfg, familia) == (modelo, icao, biplaza)
+    assert modelo_aeronave(codigo, cfg, familia) == (modelo, icao, plazas)
 
 
 @pytest.mark.parametrize(
@@ -119,3 +120,22 @@ def test_modelo_aeronave(codigo, modelo, icao, biplaza):
 def test_correcciones_clasificacion(codigo, esperado):
     _, familia, categoria = classify_aeronave(codigo, load_yaml("aeronaves.yaml"))
     assert (familia, categoria) == esperado
+
+
+@pytest.mark.parametrize(
+    "a,b",
+    [
+        ("LADE", "L.A.D.E."),
+        ("HANGAR UNO S.A", "HANGAR UNO S.A."),
+        ("BANCO SAFRA S.A.", "BANCO SAFRA S. A."),
+        ("CENTRO AVIACION CIVIL SAN JUAN", "CENTRO DE AVIACION CIVIL SAN JUAN"),
+        ("MD HELICÓPTEROS S.A.", "MD. HELICOPTEROS"),
+        ("VOLAR", "VOLAR S.R.L"),
+        ("ENRIQUE PINEYRO", "ENRIQUE PIÑEYRO"),
+        ("SERVICIOS  AEREOS SUDAMERICANOS S.A.", "SERVICIOS AEREOS SUDAMERICANOS S.A"),
+    ],
+)
+def test_clave_operador_agrupa_variantes(a, b):
+    from potenciar_mdq.dims import clave_operador
+
+    assert clave_operador(a) == clave_operador(b)

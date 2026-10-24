@@ -61,8 +61,26 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                min(pasajeros) AS pax_min, max(pasajeros) AS pax_max
         FROM m WHERE aeronave_inferida GROUP BY ALL ORDER BY anio, movimientos DESC""")]
 
-    out += ["## 4. Taxi aéreo declarado en biplaza → analizado como privado", "", _table(con, """
-        SELECT anio, aeronave_modelo, count(*) AS movimientos,
+    out += ["## 3b. Backtest de las reglas (línea 2021+ en el foco, avión conocido)", "",
+            "Se aplica cada regla como si no se supiera el avión y se compara con el real.", "",
+            _table(con, """
+        WITH b AS (
+          SELECT m.aeronave_familia AS familia_real, m.aeronave_modelo AS modelo_real, r.*
+          FROM m JOIN ref_inferencia_aeronave r
+            ON regexp_matches(upper(strip_accents(coalesce(m.aerolinea, ''))), r.operador)
+           AND m.pasajeros BETWEEN r.pax_min AND r.pax_max AND m.anio <= r.anio_hasta
+          WHERE m.es_linea AND m.aeronave IS NOT NULL AND m.anio >= 2021
+        )
+        SELECT orden, operador, pax_min, pax_max, modelo AS modelo_inferido, count(*) AS vuelos,
+               round(100.0 * count(*) FILTER (familia_real = familia) / count(*), 1)
+                 AS pct_acierto_familia,
+               round(100.0 * count(*) FILTER (list_contains(modelos_validos, modelo_real))
+                     / count(*), 1) AS pct_acierto_modelo
+        FROM b GROUP BY ALL ORDER BY orden""")]
+
+    out += ["## 4. Taxi aéreo a pistón con menos de taxi_min_plazas → analizado como privado", "",
+            _table(con, """
+        SELECT anio, aeronave_modelo, aeronave_plazas, count(*) AS movimientos,
                round(avg(pasajeros), 2) AS pax_promedio, max(pasajeros) AS pax_max
         FROM m WHERE segmento_reclasificado
         GROUP BY ALL ORDER BY anio, movimientos DESC""")]
@@ -114,7 +132,8 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                     f"{con.execute('SELECT count(*) FROM ref_madhel').fetchall()[0][0]}", "",
                     "Columnas:", "", _table(con, "SELECT column_name, column_type FROM "
                                                  "(DESCRIBE ref_madhel)"),
-                    "Primeras filas:", "", _table(con, "SELECT COLUMNS(*)::VARCHAR FROM ref_madhel LIMIT 3"),
+                    "Primeras filas:", "",
+                    _table(con, "SELECT COLUMNS(*)::VARCHAR FROM ref_madhel LIMIT 3"),
                     "Códigos numéricos del CSV de movimientos encontrados en MADHEL:", "",
                     _table(con, """
                 WITH n AS (
