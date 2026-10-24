@@ -12,9 +12,7 @@ data/marts/*
 !data/**/.gitkeep
 !data/reference/*
 
-reports/probe.md
 reports/network_*.json
-reports/qa/*.md
 
 web/node_modules/
 web/dist/
