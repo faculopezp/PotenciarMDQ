@@ -121,3 +121,7 @@ h2[data-idx]::before {
 }
 figure h2, figure h3 { margin: 0 0 0.5rem; padding: 0; border: none; font-size: 1.15rem; max-width: none; }
 figure h2::before { content: none; }
+
+/* Mapa + tabla: columnas que no se deforman por textos largos */
+.grid-2-1.mapa { grid-template-columns: minmax(0, 540px) minmax(0, 1fr); gap: 2.5rem; }
+.grid-2-1.mapa table.editorial td:first-child { white-space: normal; }

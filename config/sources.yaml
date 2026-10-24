@@ -47,6 +47,16 @@ sources:
     enabled: true
     verified: true      # local_code == código ANAC (MDP, AER, BCA...) verificado 2026-10-24
 
+  # Lista oficial de aeródromos y helipuertos (ANAC vía Secretaría de Transporte): código local
+  # (el mismo que usa el CSV de movimientos, incluidos los numéricos), OACI, IATA y coordenadas.
+  # OurAirports no tiene muchos aeródromos chicos/helipuertos ni los códigos numéricos.
+  anac_aeropuertos:
+    kind: static_file
+    url: https://datos.transporte.gob.ar/dataset/62b3fe5f-ffe6-4d8f-9d59-bfabe75d1ee8/resource/eb54e49e-9a5a-4614-91f4-526c650d0105/download/aeropuertos_detalle.csv
+    preview: true        # el probe muestra las primeras líneas (formato de coordenadas)
+    enabled: true
+    verified: false
+
   # Clima diario en el aeropuerto (reanálisis ERA5 vía Open-Meteo, sin clave). Fin = hoy − 6 días.
   clima_mdq:
     kind: openmeteo

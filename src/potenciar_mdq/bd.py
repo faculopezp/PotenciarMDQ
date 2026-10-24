@@ -76,6 +76,17 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
         log.warning("Sin OurAirports (%s): distancias y coordenadas quedan NULL", oa)
         con.execute(f"CREATE TABLE ourairports ({OURAIRPORTS_COLS})")
 
+    # Lista oficial ANAC (opcional): resuelve códigos locales que OurAirports no tiene.
+    anac_ap = processed / "anac_aeropuertos.parquet"
+    if anac_ap.exists():
+        con.execute("CREATE TABLE anac_aeropuertos AS SELECT * FROM read_parquet(?)",
+                    [str(anac_ap)])
+    else:
+        log.warning("Sin lista ANAC de aeropuertos: solo OurAirports")
+        con.execute("CREATE TABLE anac_aeropuertos (codigo VARCHAR, oaci VARCHAR, iata VARCHAR, "
+                    "nombre VARCHAR, tipo VARCHAR, provincia VARCHAR, lat DOUBLE, lon DOUBLE, "
+                    "archivo VARCHAR)")
+
     # Portal municipal (opcional): series mensuales 2001+ y vuelos individuales 2015–2019.
     for tabla, archivo, ddl in [
         ("mun_series", "mun_series.parquet",
@@ -124,6 +135,7 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
     con.execute("DROP TABLE mun_series")
     con.execute("DROP TABLE mun_vuelos_hist")
     con.execute("DROP TABLE ourairports")
+    con.execute("DROP TABLE anac_aeropuertos")
 
     if export:
         export.mkdir(parents=True, exist_ok=True)

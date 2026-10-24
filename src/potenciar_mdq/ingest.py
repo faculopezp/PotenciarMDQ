@@ -138,6 +138,8 @@ def probe() -> Path:
                     f"- HTTP {r.status_code}, content-type `{r.headers.get('Content-Type')}`"
                 )
                 r.close()
+                if cfg.get("preview"):
+                    lines += ["```", *_preview(http, cfg["url"], n_lines=6), "```"]
         except Exception as exc:  # noqa: BLE001 - el probe reporta, no corta
             lines.append(f"- ❌ {type(exc).__name__}: {exc}")
         lines.append("")

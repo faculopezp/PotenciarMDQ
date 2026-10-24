@@ -24,6 +24,7 @@ MARTS_WEB = {
     "mart_mdq_aerolineas": "mdq_aerolineas",
     "mart_mdq_aeronaves": "mdq_aeronaves",
     "mart_mdq_rutas": "mdq_rutas",
+    "mart_mdq_destinos": "mdq_destinos",
     "mart_mdq_verano": "mdq_verano",
     "mart_mdq_rotaciones": "mdq_rotaciones",
     "mart_mdq_tramos": "mdq_tramos",

@@ -67,10 +67,29 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
         SELECT aeronave, count(*) AS movimientos FROM f WHERE aeronave_categoria = 'otro'
         GROUP BY 1 ORDER BY 2 DESC LIMIT 25""")]
 
-    out += ["## Códigos sin coordenadas (top 20 → revisar dim_aeropuerto)", "", _table(con, """
-        SELECT origen_destino, count(*) AS movimientos FROM f
+    out += ["## Códigos sin coordenadas (top 25 → revisar dim_aeropuerto)", "", _table(con, """
+        SELECT origen_destino, count(*) AS movimientos,
+               mode(clasificacion_vuelo) AS clasificacion, mode(segmento) AS segmento,
+               mode(aeropuerto) AS aeropuerto_que_lo_informa
+        FROM f
         WHERE distancia_km IS NULL AND origen_destino IS NOT NULL
-        GROUP BY 1 ORDER BY 2 DESC LIMIT 20""")]
+        GROUP BY 1 ORDER BY 2 DESC LIMIT 25""")]
+    out += ["## Resolución de códigos de origen/destino", "", _table(con, """
+        SELECT coalesce(ap.fuente_coord, 'sin_resolver') AS fuente,
+               count(DISTINCT f.origen_destino) AS codigos, count(*) AS movimientos,
+               count(*) FILTER (f.aeropuerto = getvariable('foco')) AS movimientos_foco
+        FROM f LEFT JOIN dim_aeropuerto ap ON ap.codigo = f.origen_destino
+        WHERE f.origen_destino IS NOT NULL GROUP BY 1 ORDER BY 3 DESC""")]
+    out += ["## Lista ANAC vs OurAirports (mismo código, distancia > 5 km)", "", _table(con, """
+        SELECT (SELECT count(*) FROM ref_aeropuerto_cruce) AS codigos_en_ambas,
+               (SELECT count(*) FROM ref_aeropuerto_cruce WHERE distancia_km > 5) AS mas_de_5_km,
+               (SELECT median(distancia_km) FROM ref_aeropuerto_cruce) AS mediana_km"""),
+        _table(con, """
+        SELECT codigo, nombre_anac, nombre_ourairports, distancia_km FROM ref_aeropuerto_cruce
+        WHERE distancia_km > 5 ORDER BY distancia_km DESC LIMIT 20""")]
+    out += ["## Vista previa de la lista ANAC (formato de coordenadas)", "", _table(con, """
+        SELECT codigo, oaci, iata, nombre, lat, lon FROM dim_aeropuerto
+        WHERE fuente_coord = 'anac' ORDER BY codigo LIMIT 8""")]
 
     out += ["## Tramos reconstruidos (cabotaje comercial)", "", _table(con, """
         SELECT

@@ -19,6 +19,7 @@ const diario = datos(FileAttachment("data/mdq_diario.json"));
 const horaSemana = datos(FileAttachment("data/mdq_hora_semana.json"));
 const aerolineas = datos(FileAttachment("data/mdq_aerolineas.json"));
 const rutas = datos(FileAttachment("data/mdq_rutas.json"));
+const destinos = datos(FileAttachment("data/mdq_destinos.json"));
 const verano = datos(FileAttachment("data/mdq_verano.json"));
 const rotaciones = datos(FileAttachment("data/mdq_rotaciones.json"));
 const tramos = datos(FileAttachment("data/mdq_tramos.json"));
@@ -66,7 +67,7 @@ const primerAnio = d3.min(serieLarga, (d) => d.anio);
     <li><span>03</span><a href="#03">Una ciudad de temporada</a></li>
     <li><span>04</span><a href="#04">Todo lo que vuela</a></li>
     <li><span>05</span><a href="#05">Asientos y ocupación</a></li>
-    <li><span>06</span><a href="#06">A dónde se puede volar</a></li>
+    <li><span>06</span><a href="#06">A dónde se vuela (y el exterior)</a></li>
     <li><span>07</span><a href="#07">Quién vuela</a></li>
     <li><span>08</span><a href="#08">En qué aviones</a></li>
     <li><span>09</span><a href="#09">Un día en el aeropuerto</a></li>
@@ -388,36 +389,60 @@ Plot.plot({
 
 <div class="note">La ANAC no publica asientos: se estiman con la capacidad típica observada de cada avión (ver <a href="./metodologia">metodología</a>).</div>
 
-<h2 id="06" data-idx="06 — Conectividad">A dónde se puede volar</h2>
+<h2 id="06" data-idx="06 — Conectividad">A dónde se vuela</h2>
+
+La línea aérea conecta a Mar del Plata casi solo con el resto del país. Los vuelos al exterior existen, pero son de aviación general: jets ejecutivos, taxis aéreos, aviones privados y vuelos oficiales, sobre todo a Uruguay. Para verlos, elegí *Toda la aviación*.
 
 ```js
 const anioMapa = view(Inputs.select(anios.slice().reverse(), {label: "Año", value: ref.anio, format: String}));
+const modoMapa = view(Inputs.radio(["Línea aérea (pasajeros)", "Toda la aviación (movimientos)"], {value: "Línea aérea (pasajeros)"}));
 ```
 
 ```js
-const rutasAnio = rutas.filter((d) => d.anio === anioMapa && d.lat != null && d.pasajeros >= 50);
-const maxPax = d3.max(rutasAnio, (d) => d.pasajeros);
+const PAIS = (c) => c == null ? "Sin identificar" : c === "FK" ? "Islas Malvinas" : c === "AR" ? "Argentina" : new Intl.DisplayNames(["es"], {type: "region"}).of(c);
+// Cono sur: Argentina, Chile, Uruguay, Paraguay y el sur de Brasil. Lo demás va en la lista.
+const enSudamerica = (d) => d.lat >= -56 && d.lat <= -14 && d.lon >= -76 && d.lon <= -38;
+const nombreDestino = (d) => d.codigo === "MDP" ? "Vuelos locales (ida y vuelta a MDQ)"
+  : /mar del plata/i.test(d.ciudad ?? "") ? `${d.nombre ?? d.codigo}` : d.ciudad ?? d.nombre ?? d.codigo;
+const esLinea = modoMapa.startsWith("Línea");
+const puntos = esLinea
+  ? rutas.filter((d) => d.anio === anioMapa && d.lat != null && d.pasajeros >= 50)
+      .map((d) => ({...d, valor: d.pasajeros, internacional: d.clasificacion_vuelo === "internacional"}))
+  : d3.rollups(destinos.filter((d) => d.anio === anioMapa), (v) => ({
+      ...v[0], valor: d3.sum(v, (d) => d.movimientos), pasajeros: d3.sum(v, (d) => d.pasajeros),
+      internacional: v.some((d) => d.clasificacion_vuelo === "internacional"),
+      segmento: d3.greatest(d3.rollups(v, (g) => d3.sum(g, (d) => d.movimientos), (d) => d.segmento), (g) => g[1])[0]
+    }), (d) => d.codigo).map(([, d]) => d);
+const enMapa = puntos.filter((d) => d.lat != null && enSudamerica(d) && d.codigo !== "MDP");
+const fueraMapa = puntos.filter((d) => d.lat != null && !enSudamerica(d));
+const sinUbicar = puntos.filter((d) => d.lat == null);
+const maxValor = d3.max(enMapa, (d) => d.valor);
 const foco = rutas.find((d) => d.foco_lat != null);
-const etiquetas = rutasAnio.filter((d) => !rutasAnio.some((o) => o.pasajeros > d.pasajeros && Math.hypot(o.lon - d.lon, o.lat - d.lat) < 1));
+const etiquetas = d3.sort(enMapa.filter((d) => Math.hypot(d.lon - foco.foco_lon, d.lat - foco.foco_lat) > 1.2), (d) => -d.valor)
+  .filter((d, i, arr) => !arr.slice(0, i).some((o) => Math.hypot(o.lon - d.lon, o.lat - d.lat) < 2.2)).slice(0, 12);
+const unidad = esLinea ? "pasajeros" : "movimientos";
 ```
 
-<div class="grid-2-1">
+<div class="grid-2-1 mapa">
 <div>
 
 ```js
 Plot.plot({
-  width: Math.min(width * 0.6, 760),
-  height: Math.min(width * 0.6, 760) * 1.05,
-  projection: {type: "mercator", inset: 40,
-    domain: {type: "MultiPoint", coordinates: [[foco.foco_lon, foco.foco_lat], ...rutasAnio.map((d) => [d.lon, d.lat])]}},
-  r: {range: [3, 20]},
+  width: 540, height: 700,
+  projection: {type: "mercator", inset: 30,
+    domain: {type: "MultiPoint", coordinates: [[foco.foco_lon, foco.foco_lat], [-68.3, -54.8], [-65.0, -22.0], ...enMapa.map((d) => [d.lon, d.lat])]}},
+  r: {range: [2.5, 20]},
+  color: {domain: ["Argentina", "Exterior"], range: [TINTA_2, ACENTO], legend: true},
   marks: [
     Plot.geo(paises, {fill: TINTA, fillOpacity: 0.05, stroke: TINTA, strokeOpacity: 0.25}),
-    Plot.link(rutasAnio, {x1: "foco_lon", y1: "foco_lat", x2: "lon", y2: "lat", stroke: ACENTO, strokeOpacity: 0.55,
-      strokeWidth: (d) => 1 + 8 * Math.sqrt(d.pasajeros / maxPax)}),
-    Plot.dot(rutasAnio, {x: "lon", y: "lat", r: "pasajeros", fill: ACENTO, stroke: "var(--theme-background)", strokeWidth: 2, tip: true,
-      title: (d) => `${d.ciudad}\n${entero(d.pasajeros)} pasajeros\n${decimal1(d.salidas_semanales_promedio)} salidas por semana${d.duracion_mediana_min ? `\n${d.duracion_mediana_min} min de vuelo` : ""}`}),
-    Plot.text(etiquetas, {x: "lon", y: "lat", text: "ciudad", dy: -16, fontSize: 12, fill: TINTA}),
+    Plot.link(enMapa, {x1: () => foco.foco_lon, y1: () => foco.foco_lat, x2: "lon", y2: "lat",
+      stroke: (d) => d.internacional ? "Exterior" : "Argentina", strokeOpacity: 0.45,
+      strokeWidth: (d) => 0.6 + 7 * Math.sqrt(d.valor / maxValor)}),
+    Plot.dot(enMapa, {x: "lon", y: "lat", r: "valor", fill: (d) => d.internacional ? "Exterior" : "Argentina",
+      stroke: "var(--theme-background)", strokeWidth: 1.5, tip: true,
+      title: (d) => `${nombreDestino(d)} (${d.codigo})${d.internacional ? ` · ${PAIS(d.pais)}` : ""}\n${entero(d.valor)} ${unidad}` +
+        (esLinea ? `\n${decimal1(d.salidas_semanales_promedio)} salidas por semana` : `\nSobre todo: ${SEG_NOMBRE[d.segmento] ?? d.segmento}`)}),
+    Plot.text(etiquetas, {x: "lon", y: "lat", text: nombreDestino, dy: -12, fontSize: 11, fill: TINTA, stroke: "var(--theme-background)", strokeWidth: 3}),
     Plot.dot([foco], {x: "foco_lon", y: "foco_lat", r: 6, fill: TINTA}),
     Plot.text([foco], {x: "foco_lon", y: "foco_lat", text: () => "Mar del Plata", dx: 10, textAnchor: "start", fontWeight: "bold"})
   ]
@@ -428,13 +453,69 @@ Plot.plot({
 <div>
 
 ```js
-html`<table class="editorial"><thead><tr><th>Destino</th><th>Pasajeros</th><th>Salidas/sem.</th><th>Min</th></tr></thead><tbody>
-${d3.sort(rutas.filter((d) => d.anio === anioMapa), (d) => -d.pasajeros).slice(0, 14).map((d) => html`<tr><td>${d.ciudad ?? d.codigo}</td><td>${entero(d.pasajeros)}</td><td>${decimal1(d.salidas_semanales_promedio)}</td><td>${d.duracion_mediana_min ?? "—"}</td></tr>`)}
-</tbody></table>`
+html`<table class="editorial"><thead><tr><th>Destino</th><th>${esLinea ? "Pasajeros" : "Movim."}</th><th>${esLinea ? "Salidas/sem." : "Segmento principal"}</th></tr></thead><tbody>
+${d3.sort(puntos, (d) => -d.valor).slice(0, 16).map((d) => html`<tr class=${d.internacional ? "foco" : ""}><td>${nombreDestino(d)}${d.internacional ? ` (${PAIS(d.pais)})` : ""} <span class="muted">${d.codigo}</span></td><td>${entero(d.valor)}</td><td>${esLinea ? decimal1(d.salidas_semanales_promedio) : SEG_NOMBRE[d.segmento] ?? d.segmento}</td></tr>`)}
+</tbody></table>
+<p class="fuente">${fueraMapa.length ? `Fuera del mapa: ${fueraMapa.map((d) => `${nombreDestino(d)} (${PAIS(d.pais)})`).join(", ")}. ` : ""}${sinUbicar.length ? `${entero(d3.sum(sinUbicar, (d) => d.valor))} ${unidad} a ${sinUbicar.length} códigos sin ubicación conocida.` : ""}</p>`
 ```
 
 </div>
 </div>
+
+### Vuelos al exterior
+
+```js
+const intl = destinos.filter((d) => d.clasificacion_vuelo === "internacional");
+const intlAnio = intl.filter((d) => d.anio === anioMapa);
+const intlTotal = d3.sum(intlAnio, (d) => d.movimientos);
+const intlLinea = d3.sum(intlAnio.filter((d) => d.es_linea), (d) => d.movimientos);
+const paisesTop = d3.groupSort(intl.filter((d) => d.pais), (v) => -d3.sum(v, (d) => d.movimientos), (d) => d.pais).slice(0, 5);
+const grupoPais = (d) => d.pais == null ? "Sin identificar" : paisesTop.includes(d.pais) ? PAIS(d.pais) : "Otros países";
+const ordenPais = [...paisesTop.map(PAIS), "Otros países", "Sin identificar"];
+```
+
+<div class="cifras c3">
+  <div><span class="rotulo">Movimientos al/desde el exterior · ${anioMapa}</span><span class="valor">${entero(intlTotal)}</span><div class="nota">${pct1(intlTotal / d3.sum(destinos.filter((d) => d.anio === anioMapa), (d) => d.movimientos))} de todos los movimientos del aeropuerto</div></div>
+  <div><span class="rotulo">De línea aérea</span><span class="valor">${entero(intlLinea)}</span><div class="nota">el resto es aviación general y vuelos oficiales</div></div>
+  <div><span class="rotulo">Países</span><span class="valor">${new Set(intlAnio.filter((d) => d.pais).map((d) => d.pais)).size}</span><div class="nota">${d3.groupSort(intlAnio.filter((d) => d.pais), (v) => -d3.sum(v, (d) => d.movimientos), (d) => d.pais).slice(0, 3).map(PAIS).join(", ")}</div></div>
+</div>
+
+<div class="grid-2">
+<div>
+
+```js
+Plot.plot({
+  title: "Movimientos internacionales por país",
+  width: width / 2 - 40, height: 300, marginLeft: 50,
+  x: {label: null, tickFormat: String}, y: {label: "Movimientos", grid: true},
+  color: {domain: ordenPais, range: [...CAT.slice(0, paisesTop.length), OTRO, "#d6d3cb"], legend: true},
+  marks: [
+    Plot.barY(intl, Plot.groupX({y: "sum"}, {x: "anio", y: "movimientos", fill: grupoPais, order: ordenPais, tip: true})),
+    Plot.ruleY([0])
+  ]
+})
+```
+
+</div>
+<div>
+
+```js
+Plot.plot({
+  title: `Quién vuela al exterior · ${anioMapa}`,
+  width: width / 2 - 40, height: 300, marginLeft: 150,
+  x: {label: "Movimientos", grid: true}, y: {label: null},
+  marks: [
+    Plot.barX(intlAnio, Plot.groupY({x: "sum"}, {y: (d) => SEG_NOMBRE[d.segmento] ?? d.segmento, x: "movimientos",
+      fill: (d) => SEG_COLOR[d.segmento] ?? OTRO, sort: {y: "-x"}, tip: true})),
+    Plot.ruleX([0])
+  ]
+})
+```
+
+</div>
+</div>
+
+<p class="fuente">Fuente: ANAC, clase y clasificación de cada vuelo. Ubicación de cada código: lista oficial de aeródromos de la ANAC y OurAirports (código local, OACI e IATA). "Sin identificar": la ANAC informa un código numérico interno que no figura en ninguna de las dos listas.</p>
 
 <h2 id="07" data-idx="07 — Mercado">Quién vuela</h2>
 
