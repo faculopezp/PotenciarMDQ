@@ -104,3 +104,11 @@ def test_marts_conservan_pasajeros(work: Path):
 def test_no_crea_anio_previo_por_huso_horario(work: Path):
     [(anio_min,)] = q(work, "SELECT min(anio) FROM fct_movimiento")
     assert anio_min == 2025
+
+
+def test_segmentos(work: Path):
+    segs = dict(q(work, "SELECT aeronave, any_value(segmento) FROM fct_movimiento GROUP BY 1"))
+    assert segs["CE-150-M"] == "privado"
+    assert segs["BO-737-8"] == "linea_regular"
+    # no regular con A320 de un operador de línea -> charter de línea
+    assert segs["AIB-A320-232"] == "charter_linea"

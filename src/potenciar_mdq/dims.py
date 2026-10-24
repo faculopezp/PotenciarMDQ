@@ -20,7 +20,12 @@ def classify_aeronave(name: str, cfg: dict) -> tuple[str, str, str]:
     """'BO-737-8Q8' -> ('Boeing', 'Boeing 737', 'jet_fuselaje_angosto')."""
     up = name.upper().strip()
     prefix = up.split("-", 1)[0]
-    fabricante = cfg["fabricantes"].get(prefix, prefix)
+    if prefix in cfg["fabricantes"]:
+        fabricante = cfg["fabricantes"][prefix]
+    elif " " in up:  # formato "EMBRAER E-190" del portal municipal
+        fabricante = up.split()[0].title()
+    else:
+        fabricante = prefix
     for rule in cfg["categorias"]:
         if re.search(rule["patron"], up):
             familia = next(
@@ -41,8 +46,10 @@ def classify_aerolinea(name: str, rules: list[dict]) -> tuple[str, str]:
 
 def build_dim_aeronave(con: duckdb.DuckDBPyConnection) -> None:
     cfg = load_yaml("aeronaves.yaml")
+    extra = (" UNION SELECT DISTINCT aeronave FROM mun_vuelos_hist WHERE aeronave IS NOT NULL"
+             if _existe(con, "mun_vuelos_hist") else "")
     names = [r[0] for r in con.execute(
-        "SELECT DISTINCT aeronave FROM stg_movimiento WHERE aeronave IS NOT NULL"
+        "SELECT DISTINCT aeronave FROM stg_movimiento WHERE aeronave IS NOT NULL" + extra
     ).fetchall()]
     rows = [(n, *classify_aeronave(n, cfg)) for n in names]
     con.execute(
@@ -51,6 +58,12 @@ def build_dim_aeronave(con: duckdb.DuckDBPyConnection) -> None:
     )
     if rows:
         con.executemany("INSERT INTO dim_aeronave VALUES (?, ?, ?, ?)", rows)
+
+
+def _existe(con: duckdb.DuckDBPyConnection, tabla: str) -> bool:
+    return bool(con.execute(
+        "SELECT count(*) FROM information_schema.tables WHERE table_name = ?", [tabla]
+    ).fetchall()[0][0])
 
 
 def build_dim_aerolinea(con: duckdb.DuckDBPyConnection) -> None:

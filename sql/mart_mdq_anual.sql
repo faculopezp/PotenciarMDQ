@@ -8,6 +8,8 @@ a AS (
     count(*)                                                       AS movimientos,
     count(*) FILTER (es_comercial)                                 AS movimientos_comerciales,
     round(count(*) FILTER (NOT es_comercial) / count(*), 4)        AS share_movimientos_no_comerciales,
+    round(count(*) FILTER (NOT es_linea) / count(*), 4)            AS share_movimientos_no_linea,
+    count(*) FILTER (es_linea)                                     AS movimientos_linea,
     coalesce(sum(pasajeros), 0)                                    AS pasajeros,
     coalesce(sum(pasajeros) FILTER (es_comercial), 0)              AS pasajeros_comerciales,
     coalesce(sum(pasajeros) FILTER (clasificacion_vuelo = 'internacional'), 0) AS pasajeros_internacional,
@@ -42,7 +44,7 @@ verano AS (
 ),
 pax_aer AS (
   SELECT anio, aerolinea_nombre, sum(pasajeros) AS pax FROM base
-  WHERE es_comercial AND aerolinea IS NOT NULL GROUP BY anio, aerolinea_nombre
+  WHERE es_linea AND aerolinea IS NOT NULL GROUP BY anio, aerolinea_nombre
 ),
 hhi AS (
   SELECT anio, round(sum(pow(pax / tot, 2)) * 10000) AS hhi_aerolineas

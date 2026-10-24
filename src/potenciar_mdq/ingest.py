@@ -53,6 +53,18 @@ def expand_pattern(cfg: dict) -> list[str]:
     return urls
 
 
+def openmeteo_url(cfg: dict) -> str:
+    from datetime import date, timedelta
+    from urllib.parse import urlencode
+
+    params = {
+        "latitude": cfg["latitud"], "longitude": cfg["longitud"],
+        "start_date": str(cfg["desde"]), "end_date": str(date.today() - timedelta(days=6)),
+        "daily": ",".join(cfg["diario"]), "timezone": cfg["zona_horaria"],
+    }
+    return f"{cfg['url']}?{urlencode(params)}"
+
+
 def _exists(http: PoliteSession, url: str) -> bool:
     r = http.get(url, stream=True)
     r.close()
@@ -116,6 +128,10 @@ def probe() -> Path:
             elif cfg["kind"] == "static_files":
                 ok = [u for u in cfg["urls"] if _exists(http, u)]
                 lines.append(f"- {len(ok)}/{len(cfg['urls'])} URLs responden 200")
+            elif cfg["kind"] == "openmeteo":
+                r = http.get(openmeteo_url(cfg), stream=True)
+                lines.append(f"- HTTP {r.status_code} `{openmeteo_url(cfg)[:160]}`")
+                r.close()
             elif cfg["kind"] == "static_file":
                 r = http.get(cfg["url"], stream=True)
                 lines.append(
@@ -181,6 +197,10 @@ def _ingest_source(http: PoliteSession, sid: str, cfg: dict, force: bool) -> lis
                 p = download(http, r.url, dest_dir / slug / r.id, sid, r.last_modified, force)
                 if p:
                     new_files.append(p)
+    elif cfg["kind"] == "openmeteo":
+        p = download(http, openmeteo_url(cfg), dest_dir, sid, force=force)
+        if p:
+            new_files.append(p)
     elif cfg["kind"] == "static_file":
         p = download(http, cfg["url"], dest_dir, sid, force=force)
         if p:

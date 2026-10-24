@@ -39,3 +39,27 @@ def build_dim_aeropuerto(raw_dir: Path = RAW / "ourairports") -> Path:
     if not files:
         raise FileNotFoundError(f"No hay airports.csv en {raw_dir}")
     return csv_to_parquet(files[-1], PROCESSED / "dim_aeropuerto.parquet")
+
+
+def build_clima(raw_dir: Path = RAW / "clima_mdq") -> Path:
+    """Open-Meteo (JSON diario) -> processed/clima_diario.parquet."""
+    files = sorted(raw_dir.glob("*"))
+    if not files:
+        raise FileNotFoundError(f"No hay datos de clima en {raw_dir}")
+    src = files[-1]
+    dest = PROCESSED / "clima_diario.parquet"
+    con = duckdb.connect()
+    con.execute(
+        f"""
+        COPY (
+          SELECT CAST(unnest(daily.time) AS DATE)           AS fecha,
+                 unnest(daily.weather_code)::INT            AS codigo_tiempo,
+                 unnest(daily.precipitation_sum)            AS precipitacion_mm,
+                 unnest(daily.wind_speed_10m_max)           AS viento_max_kmh,
+                 unnest(daily.wind_gusts_10m_max)           AS rafaga_max_kmh,
+                 unnest(daily.temperature_2m_max)           AS temp_max_c
+          FROM read_json({_q(str(src))})
+        ) TO {_q(str(dest))} (FORMAT parquet)
+        """
+    )
+    return dest

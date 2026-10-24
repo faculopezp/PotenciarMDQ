@@ -27,7 +27,20 @@ j AS (
     round(haversine_km(a1.lat, a1.lon, a2.lat, a2.lon))                AS distancia_km,
     coalesce(ca.capacidad, cn.capacidad)                               AS capacidad,
     CASE WHEN ca.capacidad IS NOT NULL THEN 'p95_aerolinea_aeronave'
-         WHEN cn.capacidad IS NOT NULL THEN 'p95_aeronave' END         AS fuente_capacidad
+         WHEN cn.capacidad IS NOT NULL THEN 'p95_aeronave' END         AS fuente_capacidad,
+    -- Segmento de actividad (ver config/mdq.yaml → segmentos)
+    CASE
+      WHEN e.clase_vuelo = 'regular' THEN 'linea_regular'
+      WHEN e.clase_vuelo = 'no_regular'
+       AND (list_contains(getvariable('categorias_linea'), an.categoria)
+            OR list_contains(getvariable('operadores_linea'), al.aerolinea_tipo)) THEN 'charter_linea'
+      WHEN e.clase_vuelo = 'no_regular' THEN 'taxi_aereo'
+      WHEN e.clase_vuelo LIKE 'vuelo_privado%' THEN 'privado'
+      WHEN e.clase_vuelo LIKE 'vuelo_oficial%' THEN 'oficial'
+      WHEN e.clase_vuelo IN ('vuelo_escuela', 'vuelo_de_adiestramiento') THEN 'instruccion'
+      WHEN e.clase_vuelo = 'trabajo_aereo' OR an.categoria = 'agricola' THEN 'trabajo_aereo'
+      ELSE 'otro'
+    END                                                                AS segmento
   FROM e
   LEFT JOIN dim_aerolinea al ON al.aerolinea = e.aerolinea
   LEFT JOIN dim_aeronave an  ON an.aeronave = e.aeronave
@@ -60,6 +73,8 @@ SELECT
   j.clase_vuelo,
   j.es_comercial,
   j.clase_vuelo = 'regular'                        AS es_regular,
+  j.segmento,
+  j.segmento IN ('linea_regular', 'charter_linea') AS es_linea,
   j.clasificacion_vuelo,
   j.tipo_movimiento,
   -- lugar
@@ -67,6 +82,7 @@ SELECT
   j.aeropuerto_original,
   j.aeropuerto IS DISTINCT FROM j.aeropuerto_original AS aeropuerto_corregido,
   j.origen_destino,
+  j.origen_destino = j.aeropuerto                  AS es_vuelo_local,
   j.distancia_km,
   -- operador y aeronave
   j.aerolinea,
@@ -83,12 +99,14 @@ SELECT
   -- demanda y oferta
   j.pasajeros,
   j.pax_nacional,
-  CASE WHEN j.es_comercial THEN j.capacidad END    AS asientos_estimados,
-  CASE WHEN j.es_comercial THEN j.fuente_capacidad END AS fuente_asientos,
-  CASE WHEN j.es_comercial
+  -- Asientos y ocupación solo para aviación de línea: en taxi aéreo el p95 de pasajeros no es
+  -- una capacidad comparable (se informa aparte en mart_mdq_avion_tipico).
+  CASE WHEN j.segmento IN ('linea_regular', 'charter_linea') THEN j.capacidad END AS asientos_estimados,
+  CASE WHEN j.segmento IN ('linea_regular', 'charter_linea') THEN j.fuente_capacidad END AS fuente_asientos,
+  CASE WHEN j.segmento IN ('linea_regular', 'charter_linea')
        THEN round(j.pasajeros / nullif(j.capacidad, 0), 3) END AS lf_estimado,
   j.pasajeros * j.distancia_km                     AS rpk_est,
-  CASE WHEN j.es_comercial THEN j.capacidad * j.distancia_km END AS ask_est,
+  CASE WHEN j.segmento IN ('linea_regular', 'charter_linea') THEN j.capacidad * j.distancia_km END AS ask_est,
   -- calidad
   j.calidad_dato,
   j.calidad_dato = 'provisorio'                    AS es_provisorio,

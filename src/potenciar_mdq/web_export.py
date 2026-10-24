@@ -29,6 +29,19 @@ MARTS_WEB = {
     "mart_mdq_tramos": "mdq_tramos",
     "mart_mdq_aviacion_general": "mdq_aviacion_general",
     "mart_benchmark_pares": "benchmark_pares",
+    "mart_mdq_segmentos_mensual": "mdq_segmentos_mensual",
+    "mart_mdq_segmentos_anual": "mdq_segmentos_anual",
+    "mart_mdq_avion_tipico": "mdq_avion_tipico",
+    "mart_mdq_operadores": "mdq_operadores",
+    "mart_ranking_nacional": "ranking_nacional",
+    "mart_mdq_dias_atipicos": "mdq_dias_atipicos",
+    "mart_mdq_tendencia": "mdq_tendencia",
+    "mart_mdq_pronostico": "mdq_pronostico",
+    "mart_red_aeropuertos": "red_aeropuertos",
+    "mart_mdq_serie_larga": "mdq_serie_larga",
+    "mart_mdq_turismo": "mdq_turismo",
+    "mart_mdq_findes_largos": "mdq_findes_largos",
+    "mart_mdq_historia_segmentos": "mdq_historia_segmentos",
 }
 COLUMNAR = {"mart_mdq_explorador": "mdq_explorador"}  # tablas grandes: {col: [valores]}
 

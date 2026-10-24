@@ -6,11 +6,11 @@ import logging
 
 import typer
 
+from potenciar_mdq import analitica, quality, web_export
 from potenciar_mdq import bd as bd_mod
 from potenciar_mdq import ingest as ingest_mod
 from potenciar_mdq import marts as marts_mod
-from potenciar_mdq import quality, web_export
-from potenciar_mdq.standardize import anac_movimientos, generic
+from potenciar_mdq.standardize import anac_movimientos, generic, municipal
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
@@ -38,7 +38,8 @@ def ingest(
 def standardize() -> None:
     """raw -> processed (parquet con esquema canónico)."""
     typer.echo(anac_movimientos.build())
-    for step in (generic.build_yvera, generic.build_dim_aeropuerto):
+    for step in (generic.build_yvera, generic.build_dim_aeropuerto, generic.build_clima,
+                 municipal.build):
         try:
             typer.echo(step())
         except Exception as exc:  # noqa: BLE001 - fuentes secundarias: no cortan el pipeline
@@ -60,7 +61,7 @@ def qa() -> None:
 @app.command()
 def marts() -> None:
     """BD -> data/marts/*.parquet."""
-    for p in marts_mod.build():
+    for p in [*marts_mod.build(), *analitica.build()]:
         typer.echo(p)
 
 

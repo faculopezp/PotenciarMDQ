@@ -1,0 +1,24 @@
+# Nombre de ciudad en las planillas municipales (normalizado, sin acentos) -> código ANAC.
+# Verificados contra OurAirports (local_code) el 2026-10-24. Montevideo, São Paulo y Asunción: OACI.
+rutas:
+  aeroparque: AER
+  ezeiza: EZE
+  bahia blanca: BCA
+  cordoba: CBA
+  tucuman: TUC
+  mendoza: DOZ
+  rosario: ROS
+  bariloche: BAR
+  neuquen: NEU
+  salta: SAL
+  comodoro: CRV
+  iguazu: IGU
+  ushuaia: USU
+  el calafate|calafate: ECA
+  puerto madryn|madryn: DRY
+  san juan: JUA
+  santiago del estero: SDE
+  resistencia: SIS
+  montevideo: SUMU
+  sao paulo|san pablo: SBGR
+  asuncion: SGAS

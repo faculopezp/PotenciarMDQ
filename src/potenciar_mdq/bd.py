@@ -26,6 +26,9 @@ TABLAS = [
     "fct_movimiento",
     "fct_tramo",
     "fct_rotacion",
+    "dim_clima",
+    "fct_municipal_mensual",
+    "fct_mdq_vuelos_hist",
 ]
 
 OURAIRPORTS_COLS = (
@@ -45,6 +48,9 @@ def set_variables(con: duckdb.DuckDBPyConnection) -> None:
     con.execute(f"SET VARIABLE pares = {_lit([p['codigo_anac'] for p in cfg['pares']])}")
     con.execute(f"SET VARIABLE comerciales = {_lit(cfg['clases_comerciales'])}")
     con.execute(f"SET VARIABLE utc_offset = {int(cfg['utc_offset_horas'])}")
+    seg = cfg["segmentos"]
+    con.execute(f"SET VARIABLE categorias_linea = {_lit(seg['categorias_aeronave_linea'])}")
+    con.execute(f"SET VARIABLE operadores_linea = {_lit(seg['tipos_operador_linea'])}")
 
 
 def connect(path: Path = BD, read_only: bool = False) -> duckdb.DuckDBPyConnection:
@@ -70,6 +76,31 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
         log.warning("Sin OurAirports (%s): distancias y coordenadas quedan NULL", oa)
         con.execute(f"CREATE TABLE ourairports ({OURAIRPORTS_COLS})")
 
+    # Portal municipal (opcional): series mensuales 2001+ y vuelos individuales 2015–2019.
+    for tabla, archivo, ddl in [
+        ("mun_series", "mun_series.parquet",
+         "dataset VARCHAR, serie VARCHAR, anio INT, mes INT, valor DOUBLE, unidad VARCHAR, "
+         "archivo VARCHAR"),
+        ("mun_vuelos_hist", "mun_vuelos_hist.parquet",
+         "fecha DATE, hora_local INT, clase_vuelo VARCHAR, tipo_movimiento VARCHAR, "
+         "origen_destino_oaci VARCHAR, aerolinea VARCHAR, aeronave VARCHAR, archivo VARCHAR"),
+    ]:
+        if (processed / archivo).exists():
+            con.execute(f"CREATE TABLE {tabla} AS SELECT * FROM read_parquet(?)",
+                        [str(processed / archivo)])
+        else:
+            log.warning("Sin %s: la serie larga queda solo con ANAC", archivo)
+            con.execute(f"CREATE TABLE {tabla} ({ddl})")
+
+    clima = processed / "clima_diario.parquet"
+    if clima.exists():
+        con.execute("CREATE TABLE dim_clima AS SELECT * FROM read_parquet(?)", [str(clima)])
+    else:
+        con.execute(
+            "CREATE TABLE dim_clima (fecha DATE, codigo_tiempo INT, precipitacion_mm DOUBLE, "
+            "viento_max_kmh DOUBLE, rafaga_max_kmh DOUBLE, temp_max_c DOUBLE)"
+        )
+
     cfg = mdq()
     con.execute(
         "CREATE TABLE correcciones (de VARCHAR, a VARCHAR, clases VARCHAR[], motivo VARCHAR)"
@@ -90,6 +121,8 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
         con.execute(sql_file.read_text(encoding="utf-8"))
 
     con.execute("DROP TABLE stg_movimiento")
+    con.execute("DROP TABLE mun_series")
+    con.execute("DROP TABLE mun_vuelos_hist")
     con.execute("DROP TABLE ourairports")
 
     if export:

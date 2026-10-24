@@ -10,6 +10,8 @@ dependencies = [
   "pyyaml>=6.0",
   "typer>=0.12",
   "holidays>=0.60",
+  "statsmodels>=0.14",
+  "networkx>=3.3",
 ]
 
 [project.optional-dependencies]

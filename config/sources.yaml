@@ -47,6 +47,18 @@ sources:
     enabled: true
     verified: true      # local_code == código ANAC (MDP, AER, BCA...) verificado 2026-10-24
 
+  # Clima diario en el aeropuerto (reanálisis ERA5 vía Open-Meteo, sin clave). Fin = hoy − 6 días.
+  clima_mdq:
+    kind: openmeteo
+    url: https://archive-api.open-meteo.com/v1/archive
+    latitud: -37.9342
+    longitud: -57.5733
+    desde: 2019-01-01
+    diario: [weather_code, precipitation_sum, wind_speed_10m_max, wind_gusts_10m_max, temperature_2m_max]
+    zona_horaria: America/Argentina/Buenos_Aires
+    enabled: true
+    verified: false
+
   # --- Serie 2014–2018 (agregada: los CSV por movimiento empiezan en 2019) ---
   anac_informes_mensuales:
     kind: url_pattern

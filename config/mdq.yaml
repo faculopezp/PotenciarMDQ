@@ -18,6 +18,27 @@ pares:
 # Clases de vuelo (slug) que cuentan como aviación comercial.
 clases_comerciales: [regular, no_regular]
 
+# Segmentos de actividad (columna fct_movimiento.segmento), en orden de evaluación:
+#   linea_regular  clase "Regular"
+#   charter_linea  "No regular" con avión de línea o con operador de línea (charters, LADE)
+#   taxi_aereo     resto de "No regular": jets/turbohélices ejecutivos, avionetas, helicópteros
+#   privado        "Vuelo privado" (matrícula nacional o extranjera)
+#   oficial        "Vuelo oficial": militares, policía, gobierno
+#   instruccion    "Vuelo escuela" y "adiestramiento"
+#   trabajo_aereo  "Trabajo aéreo" o aviones agrícolas
+segmentos:
+  categorias_aeronave_linea: [jet_fuselaje_angosto, jet_fuselaje_ancho, jet_regional, turbohelice_regional]
+  tipos_operador_linea: [bandera, low_cost, regional, estatal]
+  nombres:
+    linea_regular: Línea regular
+    charter_linea: Charter de línea
+    taxi_aereo: Taxi aéreo
+    privado: Privado
+    oficial: Oficial y militar
+    instruccion: Escuelas de vuelo
+    trabajo_aereo: Trabajo aéreo
+    otro: Otro
+
 # Correcciones de código de aeropuerto por errores de carga detectados.
 correcciones_aeropuerto:
   - de: MDB          # Batán (aeródromo chico de Mar del Plata)

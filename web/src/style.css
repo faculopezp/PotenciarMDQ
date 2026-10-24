@@ -1,0 +1,109 @@
+/* Tema editorial (design-taste · editorial-minimal), pensado para escritorio.
+   Papel cálido + tinta + un acento bermellón; serif de display, mono para etiquetas; filetes finos. */
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+@import url("observablehq:default.css");
+@import url("observablehq:theme-air.css");
+
+:root {
+  --papel: #f5f1ea;
+  --papel-2: #efeae1;
+  --tinta: #1a1a18;
+  --tinta-2: #6b675e;
+  --acento: #c73e1d;
+  --filete: rgba(26, 26, 24, 0.14);
+
+  --theme-background: var(--papel);
+  --theme-background-alt: var(--papel-2);
+  --theme-foreground: var(--tinta);
+  --theme-foreground-muted: var(--tinta-2);
+  --theme-foreground-focus: var(--acento);
+  --serif: "Newsreader", Georgia, serif;
+  --sans-serif: "IBM Plex Sans", system-ui, sans-serif;
+  --monospace: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+body { background: var(--papel); color: var(--tinta); }
+
+/* Escritorio: columna ancha para gráficos, texto acotado a ~70 caracteres. */
+#observablehq-main { max-width: 1320px; }
+#observablehq-main p, #observablehq-main li { max-width: 68ch; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; color: var(--tinta); }
+h2 {
+  font-size: 2.1rem; margin-top: 7rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--filete); max-width: none;
+}
+h3 { font-size: 1.35rem; margin-top: 2.5rem; }
+
+/* Índice de sección: "01 — Título" */
+.idx {
+  display: block; font-family: var(--monospace); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--acento); margin-bottom: 0.4rem;
+}
+.etiqueta, .muted {
+  font-family: var(--monospace); font-size: 12px; letter-spacing: 0.08em; color: var(--tinta-2);
+}
+
+/* Portada asimétrica 7/5 */
+.portada {
+  display: grid; grid-template-columns: 7fr 5fr; gap: 3rem; align-items: end;
+  padding: 10vh 0 3rem; border-bottom: 1px solid var(--filete);
+}
+.portada h1 {
+  font-size: clamp(3.4rem, 6.4vw, 6.4rem); line-height: 0.98; font-weight: 400;
+  margin: 0; max-width: 12ch;
+}
+.portada h1 em { color: var(--acento); font-style: italic; }
+.portada .bajada { font-family: var(--serif); font-size: 1.3rem; line-height: 1.45; color: var(--tinta-2); max-width: 32ch; }
+.indice { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--filete); }
+.indice li {
+  display: grid; grid-template-columns: 3rem 1fr; padding: 0.45rem 0; max-width: none;
+  border-bottom: 1px solid var(--filete); font-family: var(--sans-serif); font-size: 14px;
+}
+.indice li span { font-family: var(--monospace); color: var(--acento); font-size: 12px; }
+.indice a { color: var(--tinta); text-decoration: none; }
+.indice a:hover { color: var(--acento); }
+
+/* Métricas como tabla tipográfica con filetes (en lugar de tarjetas redondeadas) */
+.cifras {
+  display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--tinta);
+  border-bottom: 1px solid var(--filete); margin: 2rem 0;
+}
+.cifras > div { padding: 1rem 1.25rem 1.25rem 0; border-right: 1px solid var(--filete); }
+.cifras > div:last-child { border-right: none; }
+.cifras .valor { display: block; font-family: var(--serif); font-size: 3rem; line-height: 1.05; font-weight: 400; }
+.cifras .rotulo { font-family: var(--monospace); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tinta-2); }
+.cifras .nota { font-family: var(--sans-serif); font-size: 13px; color: var(--tinta-2); margin-top: 0.35rem; max-width: none; }
+.cifras.c3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Tarjetas: esquinas rectas, papel sobre papel */
+.card { background: var(--papel-2); border: 1px solid var(--filete); border-radius: 2px; box-shadow: none; }
+.card h2 { font-family: var(--monospace); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; border: none; margin: 0; padding: 0; color: var(--tinta-2); }
+
+/* Ficha de avión típico */
+.fichas { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0; border-top: 2px solid var(--tinta); }
+.ficha { padding: 1rem 1.25rem 1.25rem 0; border-bottom: 1px solid var(--filete); }
+.ficha .seg { font-family: var(--monospace); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--acento); }
+.ficha .modelo { font-family: var(--serif); font-size: 1.6rem; line-height: 1.15; margin: 0.2rem 0 0.6rem; }
+.ficha dl { display: grid; grid-template-columns: 1fr auto; gap: 0.15rem 1rem; margin: 0; font-family: var(--sans-serif); font-size: 13px; }
+.ficha dt { color: var(--tinta-2); }
+.ficha dd { margin: 0; font-family: var(--monospace); text-align: right; }
+
+.note { background: var(--papel-2); border-left: 2px solid var(--acento); }
+a { color: var(--acento); }
+table { font-family: var(--sans-serif); }
+
+/* Una sola animación: entrada suave por sección, solo CSS y respetando "reducir movimiento". */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    #observablehq-main h2, .cifras, .fichas {
+      animation: entrar linear both; animation-timeline: view(); animation-range: entry 0% entry 40%;
+    }
+  }
+}
+@keyframes entrar { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 900px) {
+  .portada { grid-template-columns: 1fr; }
+  .cifras { grid-template-columns: repeat(2, 1fr); }
+}
