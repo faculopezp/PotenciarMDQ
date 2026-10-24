@@ -89,8 +89,8 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| AGW-AW 109SP | 165 |
 | I.A-1124 | 165 |
+| AGW-AW 109SP | 165 |
 | SLG-4 TSI | 154 |
 
 ## Códigos sin coordenadas (top 20 → revisar dim_aeropuerto)
@@ -164,6 +164,65 @@
 | SAL | modelo | escala_larga | 554 | 149.0 |
 | SAL | modelo | pernocte | 2664 | 1103.0 |
 | SAL | modelo | rotacion | 22399 | 57.0 |
+
+## Aeronave faltante en el foco (potencial de inferencia por pasajeros)
+
+| anio | segmento | movimientos | sin_aeronave | sin_aeronave_mas_de_96_pax | sin_aeronave_20_a_96_pax | sin_aeronave_menos_de_20_pax |
+|---|---|---|---|---|---|---|
+| 2019 | linea_regular | 5324 | 5324 | 445 | 4757 | 122 |
+| 2019 | taxi_aereo | 967 | 967 | 0 | 7 | 960 |
+| 2019 | privado | 807 | 807 | 0 | 5 | 802 |
+| 2019 | oficial | 669 | 669 | 0 | 8 | 661 |
+| 2019 | instruccion | 539 | 539 | 0 | 0 | 539 |
+| 2019 | trabajo_aereo | 50 | 50 | 0 | 0 | 50 |
+| 2019 | charter_linea | 32 | 32 | 0 | 5 | 27 |
+| 2020 | linea_regular | 1351 | 1265 | 275 | 968 | 22 |
+| 2020 | privado | 443 | 306 | 0 | 0 | 306 |
+| 2020 | taxi_aereo | 413 | 276 | 0 | 1 | 275 |
+| 2020 | oficial | 411 | 397 | 0 | 2 | 395 |
+| 2020 | instruccion | 382 | 223 | 0 | 0 | 223 |
+| 2020 | trabajo_aereo | 19 | 19 | 0 | 0 | 19 |
+| 2020 | charter_linea | 3 | 3 | 0 | 2 | 1 |
+| 2021 | linea_regular | 1128 | 3 | 0 | 0 | 3 |
+| 2021 | privado | 977 | 16 | 0 | 0 | 16 |
+| 2021 | taxi_aereo | 699 | 26 | 0 | 0 | 26 |
+| 2021 | oficial | 689 | 585 | 0 | 18 | 567 |
+| 2021 | instruccion | 421 | 0 | 0 | 0 | 0 |
+| 2021 | charter_linea | 31 | 0 | 0 | 0 | 0 |
+| 2021 | trabajo_aereo | 12 | 0 | 0 | 0 | 0 |
+| 2022 | linea_regular | 2820 | 60 | 0 | 1 | 59 |
+| 2022 | privado | 1246 | 46 | 0 | 0 | 46 |
+| 2022 | oficial | 897 | 791 | 0 | 20 | 771 |
+| 2022 | taxi_aereo | 816 | 46 | 0 | 2 | 44 |
+| 2022 | instruccion | 539 | 1 | 0 | 0 | 1 |
+| 2022 | charter_linea | 66 | 21 | 0 | 1 | 20 |
+| 2022 | trabajo_aereo | 3 | 0 | 0 | 0 | 0 |
+| 2023 | linea_regular | 3593 | 89 | 0 | 5 | 84 |
+| 2023 | privado | 1433 | 56 | 0 | 0 | 56 |
+| 2023 | oficial | 1222 | 1131 | 0 | 14 | 1117 |
+| 2023 | taxi_aereo | 838 | 107 | 0 | 0 | 107 |
+| 2023 | instruccion | 392 | 3 | 0 | 0 | 3 |
+| 2023 | charter_linea | 91 | 68 | 0 | 5 | 63 |
+| 2023 | trabajo_aereo | 2 | 0 | 0 | 0 | 0 |
+| 2024 | linea_regular | 3233 | 57 | 0 | 4 | 53 |
+| 2024 | privado | 1513 | 275 | 0 | 1 | 274 |
+| 2024 | oficial | 1491 | 1408 | 0 | 38 | 1370 |
+| 2024 | taxi_aereo | 787 | 100 | 0 | 0 | 100 |
+| 2024 | instruccion | 417 | 1 | 0 | 0 | 1 |
+| 2024 | charter_linea | 89 | 57 | 0 | 3 | 54 |
+| 2025 | linea_regular | 2949 | 48 | 0 | 9 | 39 |
+| 2025 | oficial | 1172 | 1056 | 0 | 55 | 1001 |
+| 2025 | privado | 1150 | 55 | 0 | 0 | 55 |
+| 2025 | taxi_aereo | 907 | 34 | 0 | 0 | 34 |
+| 2025 | instruccion | 543 | 0 | 0 | 0 | 0 |
+| 2025 | charter_linea | 102 | 65 | 0 | 15 | 50 |
+| 2025 | trabajo_aereo | 2 | 0 | 0 | 0 | 0 |
+| 2026 | linea_regular | 1942 | 57 | 0 | 12 | 45 |
+| 2026 | privado | 972 | 42 | 0 | 0 | 42 |
+| 2026 | oficial | 794 | 635 | 0 | 43 | 592 |
+| 2026 | taxi_aereo | 487 | 23 | 0 | 0 | 23 |
+| 2026 | instruccion | 186 | 0 | 0 | 0 | 0 |
+| 2026 | charter_linea | 74 | 58 | 0 | 11 | 47 |
 
 ## Meses sin movimientos en el foco
 
