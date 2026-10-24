@@ -1,4 +1,4 @@
-data/
-tests/
-reports/
-.venv/
+/data/
+/tests/
+/reports/
+/.venv/
