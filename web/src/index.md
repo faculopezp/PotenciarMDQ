@@ -460,7 +460,7 @@ Plot.plot({
 html`<table class="editorial"><thead><tr><th>Destino</th><th>${esLinea ? "Pasajeros" : "Movim."}</th><th>${esLinea ? "Salidas/sem." : "Segmento principal"}</th></tr></thead><tbody>
 ${d3.sort(puntos, (d) => -d.valor).slice(0, 16).map((d) => html`<tr class=${d.internacional ? "foco" : ""}><td>${nombreDestino(d)}${d.internacional ? ` (${PAIS(d.pais)})` : ""} <span class="muted">${d.codigo}</span></td><td>${entero(d.valor)}</td><td>${esLinea ? decimal1(d.salidas_semanales_promedio) : SEG_NOMBRE[d.segmento] ?? d.segmento}</td></tr>`)}
 </tbody></table>
-<p class="fuente">${fueraMapa.length ? `Fuera del mapa: ${fueraMapa.map((d) => `${nombreDestino(d)} (${PAIS(d.pais)})`).join(", ")}. ` : ""}${sinUbicar.length ? `${entero(d3.sum(sinUbicar, (d) => d.valor))} ${unidad} a ${sinUbicar.length} códigos que no figuran en la lista oficial de ANAC ni en OurAirports.` : ""}</p>`
+<p class="fuente">${fueraMapa.length ? `Fuera del mapa: ${fueraMapa.map((d) => `${nombreDestino(d)} (${PAIS(d.pais)})`).join(", ")}. ` : ""}${sinUbicar.length ? `${entero(d3.sum(sinUbicar, (d) => d.valor))} ${unidad} a ${sinUbicar.length} lugares sin coordenadas públicas (en su mayoría lugares aptos denunciados).` : ""}</p>`
 ```
 
 </div>
@@ -469,8 +469,8 @@ ${d3.sort(puntos, (d) => -d.valor).slice(0, 16).map((d) => html`<tr class=${d.in
 ### Vuelos al exterior
 
 ```js
-// Códigos numéricos: ANAC los clasifica como internacionales, pero no figuran en ninguna lista
-// de aeródromos (ni la oficial ni OurAirports); no se cuentan como exterior.
+// Códigos numéricos = Lugares Aptos Denunciados (LAD): pistas registradas por denuncia, no
+// aeródromos, sin coordenadas públicas. ANAC los marca como internacionales, pero están en el país.
 const esNumerico = (d) => /^\d+$/.test(d.codigo);
 const intl = destinos.filter((d) => d.clasificacion_vuelo === "internacional" && !esNumerico(d));
 const numericos = destinos.filter((d) => d.anio === anioMapa && esNumerico(d));
@@ -523,7 +523,7 @@ Plot.plot({
 </div>
 </div>
 
-<p class="fuente">Fuente: ANAC, clase y clasificación de cada vuelo. Ubicación de cada código: lista oficial de aeródromos y helipuertos de la ANAC y OurAirports (código local, OACI e IATA). Se excluyen ${entero(d3.sum(numericos, (d) => d.movimientos))} movimientos de ${anioMapa} con código numérico: la ANAC los marca como internacionales, pero el código no figura en ninguna lista de aeródromos.</p>
+<p class="fuente">Fuente: ANAC, clase y clasificación de cada vuelo. Ubicación de cada código: lista oficial de aeródromos y helipuertos de la ANAC y OurAirports (código local, OACI e IATA). Se excluyen ${entero(d3.sum(numericos, (d) => d.movimientos))} movimientos de ${anioMapa} hacia o desde <b>lugares aptos denunciados</b> (LAD, código numérico): superficies aptas para aterrizar registradas por su dueño ante la ANAC, que no son aeródromos (art. 25 del Código Aeronáutico) y no tienen coordenadas públicas. La ANAC los marca como internacionales, pero están en el país.</p>
 
 <h2 id="07" data-idx="07 — Mercado">Quién vuela</h2>
 

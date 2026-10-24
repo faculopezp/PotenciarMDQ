@@ -87,7 +87,7 @@ def test_perfil_aeronave_basico_taxi():
         # colisiones detectadas al revisar las 911 denominaciones
         ("BE-1900D", "Beechcraft 1900D", "B190", None),
         ("EUR-EC-145", "Airbus/MBB BK117/H145", None, None),
-        ("MAX-MH-1521", "Otra", None, None),
+        ("MAX-MH-1521", "Max Holste MH.1521 Broussard", None, None),
         ("EMB-ERJ190100IGW", "Embraer E190", "E190", None),
         ("BE-B-200-GT", "Beechcraft King Air B200GT", "BE20", None),
         ("CE-150-M", "Cessna 150", "C150", 2),

@@ -41,11 +41,15 @@ def modelo_aeronave(name: str, cfg: dict, familia: str) -> tuple[str, str | None
 
     Sin regla: (familia, None, None). plazas solo está cargado para pistón.
     """
-    up = name.upper().strip()
-    for m in cfg.get("modelos", []):
-        if re.search(m["patron"], up):
-            return m["modelo"], (m.get("icao") or None), m.get("plazas")
+    m = _regla_modelo(name, cfg)
+    if m:
+        return m["modelo"], (m.get("icao") or None), m.get("plazas")
     return familia, None, None
+
+
+def _regla_modelo(name: str, cfg: dict) -> dict | None:
+    up = name.upper().strip()
+    return next((m for m in cfg.get("modelos", []) if re.search(m["patron"], up)), None)
 
 
 _SIGLA = re.compile(r"\b[A-Z](?:\.\s?[A-Z])+\b\.?")          # L.A.D.E. / S.A / S. A. / S.R.L
@@ -100,6 +104,9 @@ def build_dim_aeronave(con: duckdb.DuckDBPyConnection) -> None:
     rows = []
     for n in names:
         fabricante, familia, categoria = classify_aeronave(n, cfg)
+        regla = _regla_modelo(n, cfg)
+        if categoria == cfg["default"]["categoria"] and regla and regla.get("categoria"):
+            familia, categoria = regla.get("familia", regla["modelo"]), regla["categoria"]
         rows.append((n, fabricante, familia, categoria, *modelo_aeronave(n, cfg, familia)))
     con.execute(
         "CREATE OR REPLACE TABLE dim_aeronave "

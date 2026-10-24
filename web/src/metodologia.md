@@ -24,7 +24,11 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **Movimiento:** un aterrizaje o un despegue en Mar del Plata. Un vuelo de ida y vuelta son dos movimientos acá.
 - **Pasajeros:** los que bajan más los que suben en Mar del Plata (estándar internacional de aeropuertos). No hay doble conteo.
 - **Segmentos:** cada movimiento se clasifica según la clase de vuelo que informa la ANAC: *línea regular*; *charter de línea* (no regular con avión u operador de línea); *taxi aéreo* (el resto de los no regulares: jets y turbohélices ejecutivos, avionetas, helicópteros); *privado*; *oficial y militar*; *escuelas de vuelo*; *trabajo aéreo*. Ningún movimiento queda sin segmento.
-- **Modelo de avión faltante:** la ANAC no informa el modelo en 2019 y en parte de 2020, y en ~20 % de los movimientos posteriores (sobre todo vuelos oficiales y militares). Esos movimientos cuentan en su segmento pero no en los gráficos de flota.
+- **Lugares aptos denunciados (LAD):** los orígenes/destinos con código numérico son superficies aptas registradas por denuncia ante la ANAC, que no son aeródromos (art. 25 del Código Aeronáutico). No tienen coordenadas públicas: no aparecen en el mapa ni se cuentan como vuelos al exterior, aunque la ANAC los clasifique como internacionales.
+- **Modelo de avión:** las denominaciones de la ANAC se estandarizan a un modelo con designador ICAO (ej. `BO-737-800`, `BO-B737-800` y `BO-737-8SH` son el Boeing 737-800). Validado contra OpenSky por matrícula (95 % de coincidencia).
+- **Operadores:** variantes del mismo nombre (`LADE` / `L.A.D.E.`, `S.A.` / `SA`) se unifican.
+- **Taxi aéreo a pistón:** cuenta como taxi solo con 6 plazas o más (piloto + 5 pasajeros); si no, se analiza como privado.
+- **Modelo de avión faltante:** la ANAC no informa el modelo en 2019 y en parte de 2020, y en ~20 % de los movimientos posteriores (sobre todo vuelos oficiales y militares). En vuelos de Aerolíneas se infiere por pasajeros a bordo: hasta 96 → E190 (acierta 93 % en 2021+), 97–128 → 737 sin variante, más de 128 → 737-800/MAX 8 (95 %). Avian 2019 → ATR 72-600; Flyest → CRJ200. Lo inferido se marca como tal.
 - **Serie larga:** hasta 2018 se usan los datos municipales y desde 2019 los de la ANAC. En 2019, año que cubren ambas fuentes, difieren menos de 4 % por mes. Desde 2021 el Municipio publica pasajeros de un solo sentido, por eso no se usa.
 - **Datos provisorios:** la ANAC marca como provisorios los últimos meses; pueden cambiar.
 - **Hora local:** hora UTC − 3.

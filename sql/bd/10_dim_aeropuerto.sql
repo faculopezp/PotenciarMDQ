@@ -33,6 +33,16 @@ k AS (
   UNION ALL BY NAME
   SELECT gps_code AS codigo, 5 AS prioridad, 'ourairports_oaci' AS fuente_coord, * FROM oa
   WHERE regexp_matches(gps_code, '^[A-Z]{4}$') AND gps_code <> ident
+  UNION ALL BY NAME
+  -- Códigos numéricos = Lugares Aptos Denunciados (LAD, art. 25 Código Aeronáutico): superficies
+  -- aptas registradas por denuncia, no aeródromos. Sin coordenadas públicas (no están en la lista
+  -- de aeródromos ni en MADHEL). ANAC los marca como "internacional", pero están en Argentina.
+  SELECT DISTINCT origen_destino AS codigo, 6 AS prioridad, 'lad_sin_coordenadas' AS fuente_coord,
+         NULL AS ident, NULL AS iata_code, 'Lugar apto denunciado ' || origen_destino AS name,
+         NULL AS municipality, 'AR' AS iso_country, NULL AS iso_region,
+         NULL::DOUBLE AS latitude_deg, NULL::DOUBLE AS longitude_deg,
+         'lugar_apto_denunciado' AS type, NULL AS local_code, NULL AS gps_code, 9 AS rango
+  FROM stg_movimiento WHERE regexp_matches(origen_destino, '^[0-9]+$')
 ),
 u AS (
   SELECT * FROM k

@@ -200,7 +200,7 @@ modelos:
   - {patron: 'P2006', modelo: Tecnam P2006T, icao: '', plazas: 4}
   - {patron: 'P2010', modelo: Tecnam P2010, icao: '', plazas: 4}
   - {patron: 'P2012', modelo: Tecnam P2012 Traveller, icao: '', plazas: 11}
-  - {patron: '^BRT-', modelo: BRM Aero Bristell, icao: '', plazas: 2}
+  - {patron: '^BRT-|BRISTELL', modelo: BRM Aero Bristell, icao: '', plazas: 2}
   - {patron: 'HARMONY', modelo: Evektor Harmony LSA, icao: '', plazas: 2}
   - {patron: 'PETREL|^PRP-912', modelo: Ultraliviano (Petrel/912), icao: '', plazas: 2}
   - {patron: '^AB-?115|^AB-?95', modelo: Aero Boero 95/115, icao: '', plazas: 3}
@@ -215,7 +215,7 @@ modelos:
   - {patron: 'SR-?20', modelo: Cirrus SR20, icao: SR20, plazas: 5}
   - {patron: 'BARON.*58|^(BE|TXA|HAB|BEF)-?G?-?58', modelo: Beechcraft Baron 58, icao: BE58, plazas: 6}
   - {patron: 'BARON|B-?55|E-?55|95-?[ABCD]?-?55', modelo: Beechcraft Baron 55, icao: BE55, plazas: 6}
-  - {patron: '(BE|TXA|RAY)-?[ABG]?-?36|B-36', modelo: Beechcraft Bonanza 36, icao: BE36, plazas: 6}
+  - {patron: '(BE|BEF|TXA|RAY)-?[ABG]?-?36|B-36', modelo: Beechcraft Bonanza 36, icao: BE36, plazas: 6}
   - {patron: '(BE)-?.*3[35]', modelo: Beechcraft Bonanza 33/35, icao: '', plazas: 5}
   - {patron: '^MO-', modelo: Mooney M20, icao: '', plazas: 4}
   - {patron: 'EL BOYERO', modelo: Petrolini El Boyero, icao: '', plazas: 2}
@@ -233,12 +233,33 @@ modelos:
   - {patron: '^CE-?T-?303', modelo: Cessna T303 Crusader, icao: '', plazas: 6}
   - {patron: '^CE-?T240', modelo: Cessna TTx (T240), icao: '', plazas: 4}
   - {patron: 'BE-?65-?B?-?80', modelo: Beechcraft Queen Air, icao: '', plazas: 9}
-  - {patron: 'DUKE', modelo: Beechcraft Duke, icao: '', plazas: 6}
+  - {patron: 'DUKE|^BE-?B-?60', modelo: Beechcraft Duke, icao: '', plazas: 6}
   - {patron: 'BE-?D?-?95', modelo: Beechcraft Travel Air, icao: '', plazas: 4}
   - {patron: 'TXA-F-?33', modelo: Beechcraft Bonanza 33/35, icao: '', plazas: 5}
   - {patron: 'DA ?42', modelo: Diamond DA42, icao: DA42, plazas: 4}
   - {patron: 'PA-J-?3', modelo: Piper J-3 Cub, icao: J3, plazas: 2}
-  - {patron: '^BE-?C?-?23', modelo: Beechcraft Musketeer (23), icao: '', plazas: 4}
+  # Identificadas por el usuario (2026-10-24). familia/categoria: se usan cuando la clasificación
+  # por familia cae en "otro".
+  - {patron: '^TSA-S2R', modelo: Thrush S2R-T34, icao: '', familia: Thrush, categoria: agricola}
+  - {patron: '^WEA-620', modelo: Weatherly 620A, icao: '', familia: Weatherly, categoria: agricola}
+  - {patron: '^DIP-CDP', modelo: Dipierro CDP 001, icao: '', familia: Experimental, categoria: aviacion_general_piston}
+  - {patron: '^LO-L-?18', modelo: Lockheed L-18 Lodestar, icao: '', familia: Lockheed, categoria: aviacion_general_piston}
+  - {patron: '^RAB-S19', modelo: Rans S-19 Venterra, icao: '', plazas: 2, familia: Rans, categoria: aviacion_general_piston}
+  - {patron: '^RSC-S6', modelo: Rans S-6S Coyote II, icao: '', plazas: 2, familia: Rans, categoria: aviacion_general_piston}
+  - {patron: '^ST-105', modelo: Stinson 105 Voyager, icao: '', familia: Stinson, categoria: aviacion_general_piston}
+  - {patron: '^MAX-MH-?1521', modelo: Max Holste MH.1521 Broussard, icao: '', familia: Max Holste, categoria: aviacion_general_piston}
+  - {patron: '^PT-S-?2', modelo: Pitts S-2B, icao: '', plazas: 2, familia: Pitts, categoria: aviacion_general_piston}
+  - {patron: '^MAC-MB-?308', modelo: Macchi MB-308, icao: '', familia: Macchi, categoria: aviacion_general_piston}
+  - {patron: '^AE-7-?EC', modelo: Aeronca 7EC Champion, icao: '', plazas: 2, familia: Aeronca, categoria: aviacion_general_piston}
+  - {patron: '^EXP-EXPRESS', modelo: Express Design Express CT, icao: '', familia: Experimental, categoria: aviacion_general_piston}
+  - {patron: '^EFL-EA ?300', modelo: Extra EA-300/L, icao: '', plazas: 2, familia: Extra, categoria: aviacion_general_piston}
+  - {patron: '^SLG-(SLING )?4', modelo: Sling 4, icao: '', plazas: 4, familia: Sling, categoria: aviacion_general_piston}
+  - {patron: '^SLG-SLING 2', modelo: Sling 2, icao: '', plazas: 2, familia: Sling, categoria: aviacion_general_piston}
+  - {patron: '^MT-MU-?2', modelo: Mitsubishi MU-2B, icao: MU2, familia: Mitsubishi MU-2, categoria: turbohelice_ejecutivo}
+  - {patron: '^EAE-EA ?500', modelo: Extra EA-500, icao: '', familia: Extra, categoria: turbohelice_ejecutivo}
+  - {patron: '^HDP-UH-?1', modelo: Bell UH-1D Iroquois, icao: UH1, familia: Bell, categoria: helicoptero}
+  - {patron: '^LBG-SH ?2', modelo: Schweizer SGM 1-29 / SH-2 (planeador), icao: '', familia: Planeador, categoria: otro}
+  - {patron: '^BE-?[BC]?-?23', modelo: Beechcraft Musketeer (23), icao: '', plazas: 4}
   # helicópteros
   - {patron: 'R-?44|RO-?44|RAVEN', modelo: Robinson R44, icao: R44, plazas: 4}
   - {patron: 'R-?66', modelo: Robinson R66, icao: R66}

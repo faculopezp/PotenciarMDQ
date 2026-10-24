@@ -67,6 +67,7 @@ def test_dim_aeropuerto_resuelve_por_fuente():
         ('HNR', NULL, NULL, 'AERÓDROMO ARG', 'Aeródromo', 'CHUBUT', -43.0, -65.0, 'f'),
         ('MDP', 'SAZM', 'MDQ', 'MAR DEL PLATA', 'Aeródromo', 'BUENOS AIRES', -37.95, -57.58, 'f')
       ) t(codigo, oaci, iata, nombre, tipo, provincia, lat, lon, archivo)""")
+    con.execute("CREATE TABLE stg_movimiento AS SELECT '2574' AS origen_destino")
     con.execute((SQL / "bd" / "00_macros.sql").read_text())
     con.execute((SQL / "bd" / "10_dim_aeropuerto.sql").read_text())
     d = dict(con.execute("SELECT codigo, fuente_coord FROM dim_aeropuerto").fetchall())
@@ -75,6 +76,7 @@ def test_dim_aeropuerto_resuelve_por_fuente():
     assert d["HNR"] == "anac"  # código local AR, no el aeródromo de EE.UU.
     assert d["MBI"] == "ourairports_local"  # Antártida
     assert d["SPJC"] == "ourairports_oaci"  # OACI nuevo vía gps_code
+    assert d["2574"] == "lad_sin_coordenadas"  # numérico = lugar apto denunciado
     [(n, km)] = con.execute(
         "SELECT count(*), max(distancia_km) FROM ref_aeropuerto_cruce"
     ).fetchall()
