@@ -76,12 +76,24 @@ sources:
     enabled: false
     verified: true
 
+  # Portal municipal (DKAN). Hallados por el probe del 2026-10-24: series propias del aeropuerto
+  # y de turismo que pueden cubrir 2014–2018 y permiten cruzar vuelos con turistas.
   mdp_portal_catalogo:
     kind: dkan_package
     base_url: https://datos.mardelplata.gob.ar
     search_terms: [aeropuerto, turismo, vuelos, arribos]
-    enabled: false      # sin dataset aéreo conocido; solo para explorar
-    verified: false
+    datasets:
+      - movimientos-del-aeropuerto-internacional-astor-piazzolla
+      - pasajeros-del-aeropuerto-astor-piazzolla
+      - vuelos-del-aeropuerto-internacional-astor-piazzolla
+      - vuelos-comerciales-pasajeros-por-tramo
+      - vuelos-comerciales-vuelos-por-tramo
+      - arribos-de-turistas
+      - turismo-en-fines-de-semana-largo
+      - turismo-estable-estadía-promedio
+    resource_formats: [csv, xlsx, xls]
+    enabled: true
+    verified: true      # API DKAN responde vía /?q=api/3/action
 
   series_tiempo_busqueda:
     kind: static_file

@@ -59,6 +59,22 @@ def _exists(http: PoliteSession, url: str) -> bool:
     return r.status_code == 200
 
 
+def _preview(http: PoliteSession, url: str, n_lines: int = 3) -> list[str]:
+    """Primeras líneas de un archivo de texto (para ver encabezados sin bajarlo entero)."""
+    try:
+        r = http.get(url, stream=True)
+        raw = b""
+        for chunk in r.iter_content(chunk_size=4096):
+            raw += chunk
+            if raw.count(b"\n") >= n_lines or len(raw) > 32_768:
+                break
+        r.close()
+    except Exception as exc:  # noqa: BLE001 - es solo una vista previa
+        return [f"(sin vista previa: {type(exc).__name__})"]
+    text = raw.decode("utf-8", errors="replace") if raw[:3] != b"PK\x03" else "(archivo zip/xlsx)"
+    return [line[:300] for line in text.splitlines()[:n_lines]]
+
+
 def probe() -> Path:
     """Valida cada fuente y escribe reports/probe.md (no descarga datos)."""
     http = _session()
@@ -72,11 +88,19 @@ def probe() -> Path:
                 lines.append(f"- OK `{client.base_url}` dataset `{dataset}`: {len(res)} recursos")
                 for r in res:
                     lines.append(f"  - `{r.format}` {r.name} — `{r.id}` — mod {r.last_modified}")
+                    if r.format in ("csv", "xml", "txt") or r.url.lower().endswith(".csv"):
+                        lines += [f"    > {x}" for x in _preview(http, r.url)]
             elif cfg["kind"] == "dkan_package":
                 client = DkanClient(cfg["base_url"], http)
                 slugs = client.package_list()
                 hits = [s for s in slugs if any(t in s for t in cfg.get("search_terms", []))]
                 lines.append(f"- OK `{client.api}`: {len(slugs)} datasets; coinciden: {hits}")
+                for slug in cfg.get("datasets", []):
+                    lines.append(f"### `{slug}`")
+                    for r in client.resources(slug):
+                        lines.append(f"  - `{r.format}` {r.name} — {r.url} — mod {r.last_modified}")
+                        if r.format in ("csv", "txt") or r.url.lower().endswith(".csv"):
+                            lines += [f"    > {x}" for x in _preview(http, r.url, 4)]
             elif cfg["kind"] == "html_links":
                 files, warns = discover_files(
                     http, cfg["url"], cfg["file_extensions"], cfg.get("follow_pattern")
@@ -150,6 +174,13 @@ def _ingest_source(http: PoliteSession, sid: str, cfg: dict, force: bool) -> lis
             p = download(http, f["url"], dest_dir, sid, force=force)
             if p:
                 new_files.append(p)
+    elif cfg["kind"] == "dkan_package":
+        client = DkanClient(cfg["base_url"], http)
+        for slug in cfg.get("datasets", []):
+            for r in client.resources(slug, cfg.get("resource_formats")):
+                p = download(http, r.url, dest_dir / slug / r.id, sid, r.last_modified, force)
+                if p:
+                    new_files.append(p)
     elif cfg["kind"] == "static_file":
         p = download(http, cfg["url"], dest_dir, sid, force=force)
         if p:

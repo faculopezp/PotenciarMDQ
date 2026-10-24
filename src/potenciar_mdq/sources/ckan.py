@@ -60,7 +60,9 @@ class CkanClient:
         out = []
         for r in pkg.get("resources", []):
             fmt = (r.get("format") or "").lower()
-            if wanted and fmt not in wanted:
+            ext = r.get("url", "").lower().rsplit("?", 1)[0].rsplit(".", 1)[-1]
+            # El portal a veces cataloga mal el formato (ANAC 2019 figura como "xml" siendo CSV).
+            if wanted and fmt not in wanted and ext not in wanted:
                 continue
             out.append(
                 Resource(
