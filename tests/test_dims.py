@@ -67,3 +67,52 @@ def test_perfil_aeronave_basico_taxi():
         "Learjet": "jet_ejecutivo",
         "Boeing 737": "avion_de_linea",
     }
+
+
+@pytest.mark.parametrize(
+    "codigo,modelo,icao,biplaza",
+    [
+        # 737: código de cliente = NG; "737-8" pelado o con MAX = MAX 8 (verificado por matrícula)
+        ("BO-737-800", "Boeing 737-800", "B738", False),
+        ("BO-B737-800", "Boeing 737-800", "B738", False),
+        ("BO-737-8SH", "Boeing 737-800", "B738", False),
+        ("BO-B737-8MB", "Boeing 737-800", "B738", False),
+        ("BO-737-8", "Boeing 737 MAX 8", "B38M", False),
+        ("BO-B737-8", "Boeing 737 MAX 8", "B38M", False),
+        ("BO-737-8 MAX", "Boeing 737 MAX 8", "B38M", False),
+        ("BO-B737-8MAX", "Boeing 737 MAX 8", "B38M", False),
+        ("BO-B-737-76N", "Boeing 737-700", "B737", False),
+        ("BO-737-7BD", "Boeing 737-700", "B737", False),
+        # colisiones detectadas al revisar las 911 denominaciones
+        ("BE-1900D", "Beechcraft 1900D", "B190", False),
+        ("EUR-EC-145", "Airbus/MBB BK117/H145", None, False),
+        ("MAX-MH-1521", "Otra", None, False),
+        ("EMB-ERJ190100IGW", "Embraer E190", "E190", False),
+        ("BE-B-200-GT", "Beechcraft King Air B200GT", "BE20", False),
+        ("CE-150-M", "Cessna 150", "C150", True),
+        ("TEA-P2002 SIERRA", "Tecnam P2002 Sierra", None, True),
+        ("PA-PA-34-200-T", "Piper PA-34 Seneca", "PA34", False),
+        ("PA-PA-31-T", "Piper Cheyenne (PA-31T/42)", None, False),
+    ],
+)
+def test_modelo_aeronave(codigo, modelo, icao, biplaza):
+    from potenciar_mdq.dims import modelo_aeronave
+
+    cfg = load_yaml("aeronaves.yaml")
+    _, familia, _ = classify_aeronave(codigo, cfg)
+    assert modelo_aeronave(codigo, cfg, familia) == (modelo, icao, biplaza)
+
+
+@pytest.mark.parametrize(
+    "codigo,esperado",
+    [
+        ("PI-PC-24", ("Pilatus PC-24", "jet_ejecutivo")),
+        ("PA-PA-31-T", ("Piper Cheyenne", "turbohelice_ejecutivo")),
+        ("PA-PA-46-500TP", ("Piper M500/M600", "turbohelice_ejecutivo")),
+        ("GU-GA-7", ("Grumman American", "aviacion_general_piston")),
+        ("CIR-SF50", ("Cirrus Vision Jet", "jet_ejecutivo")),
+    ],
+)
+def test_correcciones_clasificacion(codigo, esperado):
+    _, familia, categoria = classify_aeronave(codigo, load_yaml("aeronaves.yaml"))
+    assert (familia, categoria) == esperado

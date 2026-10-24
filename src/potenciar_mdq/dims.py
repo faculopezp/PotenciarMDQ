@@ -36,6 +36,15 @@ def classify_aeronave(name: str, cfg: dict) -> tuple[str, str, str]:
     return fabricante, cfg["default"]["familia"], cfg["default"]["categoria"]
 
 
+def modelo_aeronave(name: str, cfg: dict, familia: str) -> tuple[str, str | None, bool]:
+    """'BO-B737-8SH' -> ('Boeing 737-800', 'B738', False). Sin regla: (familia, None, False)."""
+    up = name.upper().strip()
+    for m in cfg.get("modelos", []):
+        if re.search(m["patron"], up):
+            return m["modelo"], (m.get("icao") or None), bool(m.get("biplaza", False))
+    return familia, None, False
+
+
 def classify_aerolinea(name: str, rules: list[dict]) -> tuple[str, str]:
     n = _norm(name)
     for r in rules:
@@ -51,13 +60,28 @@ def build_dim_aeronave(con: duckdb.DuckDBPyConnection) -> None:
     names = [r[0] for r in con.execute(
         "SELECT DISTINCT aeronave FROM stg_movimiento WHERE aeronave IS NOT NULL" + extra
     ).fetchall()]
-    rows = [(n, *classify_aeronave(n, cfg)) for n in names]
+    rows = []
+    for n in names:
+        fabricante, familia, categoria = classify_aeronave(n, cfg)
+        rows.append((n, fabricante, familia, categoria, *modelo_aeronave(n, cfg, familia)))
     con.execute(
         "CREATE OR REPLACE TABLE dim_aeronave "
-        "(aeronave VARCHAR PRIMARY KEY, fabricante VARCHAR, familia VARCHAR, categoria VARCHAR)"
+        "(aeronave VARCHAR PRIMARY KEY, fabricante VARCHAR, familia VARCHAR, categoria VARCHAR, "
+        "modelo VARCHAR, icao_tipo VARCHAR, es_biplaza BOOLEAN)"
     )
     if rows:
-        con.executemany("INSERT INTO dim_aeronave VALUES (?, ?, ?, ?)", rows)
+        con.executemany("INSERT INTO dim_aeronave VALUES (?, ?, ?, ?, ?, ?, ?)", rows)
+    inferencia = cfg.get("inferencia", [])
+    con.execute(
+        "CREATE OR REPLACE TABLE ref_inferencia_aeronave (orden INT, operador VARCHAR, "
+        "pax_min DOUBLE, pax_max DOUBLE, familia VARCHAR, categoria VARCHAR)"
+    )
+    if inferencia:
+        con.executemany(
+            "INSERT INTO ref_inferencia_aeronave VALUES (?, ?, ?, ?, ?, ?)",
+            [(i, r["operador"], r["pax_min"], r["pax_max"], r["familia"], r["categoria"])
+             for i, r in enumerate(inferencia)],
+        )
 
 
 def _existe(con: duckdb.DuckDBPyConnection, tabla: str) -> bool:

@@ -181,3 +181,20 @@ def build_anac_aeropuertos(raw_dir: Path = RAW / "anac_aeropuertos", out: Path =
     sin = sum(r["lat"] is None for r in registros)
     log.info("anac_aeropuertos: %d códigos, %d sin coordenadas", len(registros), sin)
     return dest
+
+
+def build_opensky(raw_dir: Path = RAW / "opensky_aeronaves", out: Path = PROCESSED) -> Path:
+    """OpenSky aircraftDatabase.csv -> processed/opensky.parquet (solo matrículas LV-/LQ-)."""
+    files = sorted(p for p in raw_dir.rglob("*") if p.is_file())
+    if not files:
+        raise FileNotFoundError(f"No hay base de OpenSky en {raw_dir}")
+    dest = out / "opensky.parquet"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    duckdb.connect().execute(f"""
+        COPY (
+          SELECT DISTINCT upper(trim(registration)) AS registration,
+                 upper(trim(typecode)) AS typecode, manufacturername, model
+          FROM read_csv({_q(str(files[-1]))}, all_varchar=true, header=true, ignore_errors=true)
+          WHERE regexp_matches(upper(trim(registration)), '^L[VQ]-')
+        ) TO {_q(str(dest))} (FORMAT parquet)""")
+    return dest

@@ -23,7 +23,7 @@ j AS (
   SELECT
     e.*,
     al.aerolinea_nombre, al.aerolinea_tipo,
-    an.fabricante, an.familia, an.categoria,
+    an.fabricante, an.familia, an.categoria, an.modelo, an.icao_tipo, an.es_biplaza,
     round(haversine_km(a1.lat, a1.lon, a2.lat, a2.lon))                AS distancia_km,
     coalesce(ca.capacidad, cn.capacidad)                               AS capacidad,
     CASE WHEN ca.capacidad IS NOT NULL THEN 'p95_aerolinea_aeronave'
@@ -34,13 +34,18 @@ j AS (
       WHEN e.clase_vuelo = 'no_regular'
        AND (list_contains(getvariable('categorias_linea'), an.categoria)
             OR list_contains(getvariable('operadores_linea'), al.aerolinea_tipo)) THEN 'charter_linea'
+      -- Taxi aéreo declarado en un biplaza (entrenador/LSA, ver config/aeronaves.yaml → modelos):
+      -- no es oferta de taxi; se analiza como privado (segmento_reclasificado = true).
+      WHEN e.clase_vuelo = 'no_regular' AND an.es_biplaza THEN 'privado'
       WHEN e.clase_vuelo = 'no_regular' THEN 'taxi_aereo'
       WHEN e.clase_vuelo LIKE 'vuelo_privado%' THEN 'privado'
       WHEN e.clase_vuelo LIKE 'vuelo_oficial%' THEN 'oficial'
       WHEN e.clase_vuelo IN ('vuelo_escuela', 'vuelo_de_adiestramiento') THEN 'instruccion'
       WHEN e.clase_vuelo = 'trabajo_aereo' OR an.categoria = 'agricola' THEN 'trabajo_aereo'
       ELSE 'otro'
-    END                                                                AS segmento
+    END                                                                AS segmento,
+    r.familia                                                          AS familia_inferida,
+    r.categoria                                                        AS categoria_inferida
   FROM e
   LEFT JOIN dim_aerolinea al ON al.aerolinea = e.aerolinea
   LEFT JOIN dim_aeronave an  ON an.aeronave = e.aeronave
@@ -49,6 +54,11 @@ j AS (
   LEFT JOIN dim_capacidad ca ON ca.metodo = 'aerolinea_aeronave'
                             AND ca.aerolinea = e.aerolinea AND ca.aeronave = e.aeronave
   LEFT JOIN dim_capacidad cn ON cn.metodo = 'aeronave' AND cn.aeronave = e.aeronave
+  -- Inferencia de familia para vuelos de línea sin aeronave (reglas disjuntas por operador)
+  LEFT JOIN ref_inferencia_aeronave r
+    ON e.aeronave IS NULL AND e.clase_vuelo IN ('regular', 'no_regular')
+   AND regexp_matches(upper(strip_accents(coalesce(e.aerolinea, ''))), r.operador)
+   AND e.pasajeros BETWEEN r.pax_min AND r.pax_max
 )
 SELECT
   row_number() OVER (ORDER BY j.ts_utc, j.aeropuerto, j.tipo_movimiento, j.origen_destino)
@@ -74,6 +84,8 @@ SELECT
   j.es_comercial,
   j.clase_vuelo = 'regular'                        AS es_regular,
   j.segmento,
+  j.clase_vuelo = 'no_regular' AND coalesce(j.es_biplaza, false)
+    AND j.segmento = 'privado'                     AS segmento_reclasificado,
   j.segmento IN ('linea_regular', 'charter_linea') AS es_linea,
   j.clasificacion_vuelo,
   j.tipo_movimiento,
@@ -92,6 +104,11 @@ SELECT
   j.fabricante                                     AS aeronave_fabricante,
   coalesce(j.familia, 'Sin dato')                  AS aeronave_familia,
   coalesce(j.categoria, 'sin_dato')                AS aeronave_categoria,
+  j.modelo                                         AS aeronave_modelo,
+  j.icao_tipo                                      AS aeronave_icao,
+  coalesce(j.es_biplaza, false)                    AS es_biplaza,
+  coalesce(j.familia, j.familia_inferida, 'Sin dato') AS aeronave_familia_inferida,
+  j.familia IS NULL AND j.familia_inferida IS NOT NULL AS aeronave_inferida,
   j.matricula,
   CASE WHEN j.matricula IS NULL THEN NULL
        WHEN regexp_matches(j.matricula, '^L[VQ]-') THEN 'argentina'

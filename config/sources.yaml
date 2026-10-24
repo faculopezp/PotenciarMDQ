@@ -57,6 +57,21 @@ sources:
     enabled: true
     verified: false
 
+  # Base de aeronaves de OpenSky (matrícula -> designador ICAO, fabricante, modelo). Se usa solo
+  # para validar el modelo estandarizado por matrícula (reports/qa/muestras.md). Matrículas en
+  # el CSV de ANAC desde 2026. El índice se previsualiza para ver si cambió el nombre del archivo.
+  opensky_aeronaves:
+    kind: static_file
+    url: https://opensky-network.org/datasets/metadata/aircraftDatabase.csv
+    enabled: true
+    verified: false
+  opensky_indice:
+    kind: static_file
+    url: https://opensky-network.org/datasets/metadata/
+    preview: true
+    enabled: false        # solo probe
+    verified: false
+
   # Clima diario en el aeropuerto (reanálisis ERA5 vía Open-Meteo, sin clave). Fin = hoy − 6 días.
   clima_mdq:
     kind: openmeteo

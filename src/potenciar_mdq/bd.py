@@ -91,6 +91,14 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
                     "nombre VARCHAR, tipo VARCHAR, provincia VARCHAR, lat DOUBLE, lon DOUBLE, "
                     "archivo VARCHAR)")
 
+    # OpenSky (opcional): matrícula -> tipo ICAO, para validar modelos (reports/qa/muestras.md).
+    osky = processed / "opensky.parquet"
+    if osky.exists():
+        con.execute("CREATE TABLE ref_opensky AS SELECT * FROM read_parquet(?)", [str(osky)])
+    else:
+        con.execute("CREATE TABLE ref_opensky (registration VARCHAR, typecode VARCHAR, "
+                    "manufacturername VARCHAR, model VARCHAR)")
+
     # Portal municipal (opcional): series mensuales 2001+ y vuelos individuales 2015–2019.
     for tabla, archivo, ddl in [
         ("mun_series", "mun_series.parquet",

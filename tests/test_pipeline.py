@@ -112,3 +112,14 @@ def test_segmentos(work: Path):
     assert segs["BO-737-8"] == "linea_regular"
     # no regular con A320 de un operador de línea -> charter de línea
     assert segs["AIB-A320-232"] == "charter_linea"
+
+
+def test_muestras_y_modelo(work: Path):
+    from potenciar_mdq import muestras
+
+    dest = muestras.run(work / "bd.duckdb", work / "qa")
+    texto = dest.read_text(encoding="utf-8")
+    assert "## 1. Vuelos oficiales" in texto and "## 6. Validación contra OpenSky" in texto
+    modelos = dict(q(work, "SELECT aeronave, aeronave_modelo FROM fct_movimiento "
+                           "WHERE aeronave IS NOT NULL"))
+    assert modelos["BO-737-8"] == "Boeing 737 MAX 8"

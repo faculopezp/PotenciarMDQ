@@ -30,6 +30,7 @@ const turismo = datos(FileAttachment("data/mdq_turismo.json"));
 const segMensual = datos(FileAttachment("data/mdq_segmentos_mensual.json"));
 const segAnual = datos(FileAttachment("data/mdq_segmentos_anual.json"));
 const avionTipico = datos(FileAttachment("data/mdq_avion_tipico.json"));
+const aeronavesM = datos(FileAttachment("data/mdq_aeronaves.json"));
 const historiaSeg = datos(FileAttachment("data/mdq_historia_segmentos.json"));
 const ranking = datos(FileAttachment("data/ranking_nacional.json"));
 const red = datos(FileAttachment("data/red_aeropuertos.json"));
@@ -548,11 +549,17 @@ Plot.plot({
 
 <h2 id="08" data-idx="08 — Flota">En qué aviones</h2>
 
-Familias de aviones en los vuelos de línea, por año (2015–2018: muestra municipal).
+Familias de aviones en los vuelos de línea, por año. 2015–2018 sale de la muestra municipal. En 2019–2020 la ANAC no informa el avión: se infiere por operador y pasajeros a bordo (por ejemplo, Aerolíneas con más de 96 pasajeros solo puede ser un 737, porque el E190 tiene 96 asientos). Lo que no se puede inferir queda como "Sin dato".
 
 ```js
-const flota = historiaSeg.filter((d) => ["linea_regular", "charter_linea"].includes(d.segmento) && d.aeronave_familia !== "Sin dato");
-const fam = topN(flota, "aeronave_familia", "movimientos", 6);
+const flotaHist = historiaSeg.filter((d) => d.anio < 2019 && ["linea_regular", "charter_linea"].includes(d.segmento))
+  .map((d) => ({anio: d.anio, familia: d.aeronave_familia, movimientos: d.movimientos}));
+const flotaAnac = aeronavesM.filter((d) => d.es_linea)
+  .map((d) => ({anio: d.anio, familia: d.aeronave_familia_inferida, movimientos: d.movimientos, inferida: d.aeronave_inferida}));
+const flota = [...flotaHist, ...flotaAnac];
+const fam = topN(flota.filter((d) => d.familia !== "Sin dato"), "familia", "movimientos", 6);
+const famLabel = (d) => d.familia === "Sin dato" ? "Sin dato" : fam.label(d);
+const pctInferido = d3.rollup(flotaAnac, (v) => d3.sum(v.filter((d) => d.inferida), (d) => d.movimientos) / d3.sum(v, (d) => d.movimientos), (d) => d.anio);
 ```
 
 ```js
@@ -562,9 +569,34 @@ Plot.plot({
   marginLeft: 50,
   y: {percent: true, label: "% de movimientos de línea", grid: true},
   x: {label: null, tickFormat: "d"},
-  color: {legend: true, domain: [...fam.top, "Otras"], range: [...CAT.slice(0, fam.top.length), OTRO]},
+  color: {legend: true, domain: [...fam.top, "Otras", "Sin dato"], range: [...CAT.slice(0, fam.top.length), OTRO, "#d6d3cb"]},
   marks: [
-    Plot.barY(flota, Plot.stackY(Plot.groupX({y: "sum"}, {x: "anio", y: "movimientos", fill: fam.label, offset: "normalize", inset: 1, tip: true}))),
+    Plot.barY(flota, Plot.stackY(Plot.groupX({y: "sum"}, {x: "anio", y: "movimientos", fill: famLabel, order: [...fam.top, "Otras", "Sin dato"], offset: "normalize", inset: 1, tip: true}))),
+    Plot.text([2019, 2020].filter((a) => pctInferido.get(a) > 0), {x: (a) => a, frameAnchor: "top", dy: -4, text: (a) => `${pct(pctInferido.get(a))} inferido`, fontSize: 10, fill: TINTA_2}),
+    Plot.ruleY([0])
+  ]
+})
+```
+
+### Modelo por modelo
+
+Las denominaciones de la ANAC se estandarizan: `BO-737-800`, `BO-B737-800` y `BO-737-8SH` son el mismo Boeing 737-800, y `BO-737-8` / `BO-B737-8MAX` son el 737 MAX 8 (verificado por matrícula contra la flota publicada de Aerolíneas).
+
+```js
+const modelosLinea = aeronavesM.filter((d) => d.es_linea && d.anio >= 2021 && d.aeronave_familia !== "Sin dato");
+const mod = topN(modelosLinea, "aeronave_modelo", "movimientos", 6);
+```
+
+```js
+Plot.plot({
+  width,
+  height: 300,
+  marginLeft: 50,
+  y: {label: "Movimientos de línea", grid: true},
+  x: {label: null, tickFormat: "d"},
+  color: {legend: true, domain: [...mod.top, "Otras"], range: [...CAT.slice(0, mod.top.length), OTRO]},
+  marks: [
+    Plot.barY(modelosLinea, Plot.groupX({y: "sum"}, {x: "anio", y: "movimientos", fill: mod.label, order: [...mod.top, "Otras"], inset: 1, tip: true})),
     Plot.ruleY([0])
   ]
 })

@@ -6,7 +6,7 @@ import logging
 
 import typer
 
-from potenciar_mdq import analitica, quality, web_export
+from potenciar_mdq import analitica, muestras, quality, web_export
 from potenciar_mdq import bd as bd_mod
 from potenciar_mdq import ingest as ingest_mod
 from potenciar_mdq import marts as marts_mod
@@ -39,6 +39,7 @@ def standardize() -> None:
     """raw -> processed (parquet con esquema canónico)."""
     typer.echo(anac_movimientos.build())
     for step in (generic.build_yvera, generic.build_dim_aeropuerto, generic.build_anac_aeropuertos,
+                 generic.build_opensky,
                  generic.build_clima,
                  municipal.build):
         try:
@@ -57,6 +58,7 @@ def bd() -> None:
 def qa() -> None:
     """Reporte de calidad -> reports/qa/."""
     typer.echo(quality.run())
+    typer.echo(muestras.run())
 
 
 @app.command()

@@ -86,7 +86,7 @@ Plot.plot({
 
 ### Con qué vuela
 
-Criterio: el **avión básico** de taxi aéreo y vuelos ejecutivos es un turbohélice que lleva 5 o más pasajeros (King Air, Caravan, PC-12). El pistón es aviación liviana: privados y escuelas. La clase de vuelo la declara cada operador a la ANAC y no se modifica: si un vuelo a pistón figura como taxi aéreo, se cuenta como *taxi aéreo en avión liviano*.
+Criterio: el **avión básico** de taxi aéreo y vuelos ejecutivos es un turbohélice que lleva 5 o más pasajeros (King Air, Caravan, PC-12). El pistón es aviación liviana. Los vuelos declarados como taxi aéreo en **biplazas** de entrenamiento (Cessna 150/152, Tecnam P2002/P92, Bristell, Piper Tomahawk) se analizan como privados: no son oferta de taxi. Los bimotores a pistón (Seneca, Navajo, Baron) siguen como taxi, porque hay operadores que los ofrecen.
 
 ```js
 const perfAnio = perfilAero.filter((d) => d.anio === anioSel && ["taxi_aereo", "privado", "instruccion", "oficial"].includes(d.segmento));
@@ -98,7 +98,7 @@ const share = (id) => d3.sum(perfSeg.filter((d) => d.perfil === id), (d) => d.sh
 perfSeg.length ? html`<div class="cifras">
   <div><span class="rotulo">Jet ejecutivo</span><span class="valor">${pct(share("jet_ejecutivo"))}</span><p class="nota">de los movimientos del segmento</p></div>
   <div><span class="rotulo">Turbohélice 5+ pax</span><span class="valor">${pct(share("turbohelice_basico"))}</span><p class="nota">el avión básico de taxi/ejecutivo</p></div>
-  <div><span class="rotulo">Pistón (liviano)</span><span class="valor">${pct(share("piston"))}</span><p class="nota">${segSel.id === "taxi_aereo" ? "taxi aéreo en avión liviano" : "aviación liviana"}</p></div>
+  <div><span class="rotulo">Pistón (liviano)</span><span class="valor">${pct(share("piston"))}</span><p class="nota">${segSel.id === "taxi_aereo" ? "bimotores y monomotores de 4+ plazas" : "aviación liviana"}</p></div>
   <div><span class="rotulo">Sin dato del avión</span><span class="valor">${pct(share("sin_dato"))}</span><p class="nota">ANAC no informa el modelo</p></div>
 </div>` : ""
 ```
