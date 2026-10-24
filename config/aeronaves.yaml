@@ -1,0 +1,80 @@
+# Clasificación de aeronaves. ANAC codifica "FABRICANTE-MODELO" (ej. EMB-ERJ190100IGW, BO-737-8Q8,
+# AIB-A320-232, CE-150-M). Reglas armadas sobre los valores reales 2023–2026.
+# Orden importa: primera coincidencia gana (regex Python sobre el texto en mayúsculas).
+# QA reporta las aeronaves que caen en `otro` para ir ampliando.
+
+fabricantes:            # prefijo ANAC -> nombre (solo los frecuentes; el resto queda con el prefijo)
+  BO: Boeing
+  AIB: Airbus
+  EMB: Embraer
+  CE: Cessna
+  BE: Beechcraft
+  RAY: Raytheon/Beechcraft
+  HAB: Hawker Beechcraft
+  TXA: Textron Aviation
+  TXI: Textron Aviation
+  EL: Bell
+  AIR: Air Tractor
+  EB: El Boyero
+  LJ: Learjet
+  PA: Piper
+  PAA: Piper
+  PI: Piper
+  PIP: Piper
+  TEA: Tecnam
+  CIR: Cirrus
+  CIT: Cirrus
+  DOR: Dornier
+  VA: Van's Aircraft
+  TA: Taylorcraft
+  AET: Aerostar
+  EVE: Evektor
+  BT: Britten-Norman
+  LPA: Leonardo/Agusta
+  BRT: Bristell
+  FA: Fairchild
+  BEL: Bell
+  RO: Robinson
+  EUR: Eurocopter
+  AEP: ATR
+  ATR: ATR
+  BOM: Bombardier
+  GU: Gulfstream
+  DAS: Dassault
+  HDJ: Honda
+  AB: Aero Boero
+  GR: Grob
+  MO: Mooney
+
+categorias:
+  - categoria: jet_fuselaje_ancho
+    familia_regex: {'A33\d': Airbus A330, 'A34\d': Airbus A340, 'A35\d': Airbus A350, '747': Boeing 747, '767': Boeing 767, '777': Boeing 777, '787': Boeing 787}
+    patron: '(A3[345]\d|7[4678]7)'
+  - categoria: jet_fuselaje_angosto
+    familia_regex: {'737': Boeing 737, 'A3(19|20|21)|A2[01]N': Airbus A320, '757': Boeing 757}
+    patron: '(737|A3(19|20|21)|A2[01]N|757)'
+  - categoria: jet_regional
+    familia_regex: {'ERJ ?-?19|(?<![A-Z])E-?19|EMB-?19': Embraer E190, 'ERJ ?-?17|(?<![A-Z])E-?17|EMB-?17': Embraer E170/175, '145|135(?!BJ)': Embraer ERJ145, 'CRJ': Bombardier CRJ}
+    patron: '(ERJ ?-?1[79]|EMB-?1[79]\d|(?<![A-Z])E-?1[79][05](?!\d)|EMB-145|ERJ-?145|CRJ)'
+  - categoria: turbohelice_regional
+    familia_regex: {'ATR': ATR 42/72, '1900': Beech 1900, 'SA-?22[67]': Fairchild Metro, '^DOR|228': Dornier 228, 'DHC-?8|DASH': De Havilland Dash 8, 'SAAB|SF-?340': Saab 340}
+    patron: '(ATR|1900|SA-?22[67]|^DOR-?228|DHC-?8|DASH|SAAB|SF-?340|JETSTREAM|J-?41)'
+  - categoria: jet_ejecutivo
+    familia_regex: {'^LJ|LEARJET': Learjet, '^CE-?[5-7]\d\d|^TXA-?[5-7]\d\d|CITATION': Cessna Citation, '^(BE|HAB)-?400|BEECHJET': Beechjet 400, '800XP|^RAY-?(8|4)00': Hawker, '135BJ|LEGACY|PRAETOR': Embraer Legacy/Praetor, 'BD-?[17]00': Bombardier Challenger/Global, 'EMB-?50[05]|PHENOM': Embraer Phenom, '^GU|GULF': Gulfstream, 'FALCON|^DAS': Dassault Falcon, 'CL-?6|CHALLENGER': Bombardier Challenger, 'HAW|HAWKER': Hawker, '^HDJ': HondaJet}
+    patron: '(^LJ|LEARJET|^CE-?[5-7]\d\d|^TXA-?[5-7]\d\d|^(BE|HAB)-?400|BEECHJET|800XP|^RAY-?[48]00|135BJ|PRAETOR|BD-?[17]00|CITATION|EMB-?50[05]|PHENOM|^GU-|GULF|FALCON|^DAS-|CL-?6\d\d|CHALLENGER|GLOBAL|^HAW|HAWKER(?!.*B-?200)|^HDJ|LEGACY)'
+  - categoria: turbohelice_ejecutivo
+    familia_regex: {'B-?200|BE-?200|[ACEF]-?90|300|350|-100|^TXA-?200|KING': Beech King Air, '208|CARAVAN': Cessna Caravan, 'PC-?12': Pilatus PC-12, 'TBM': Daher TBM, 'PA-?31T|PA-?42|CHEYENNE': Piper Cheyenne}
+    patron: '(B-?200|BE-?200|B200GT|[ACEF]-?90|^TXA-?B?[23]00|^BE-?(B-?)?300|B-?350|^BE-?[AB]-?100|KING ?AIR|CE-?208|^TXA-?208|CARAVAN|PC-?12|TBM|PA-?31T|PA-?42|CHEYENNE|CE-?441|CONQUEST|AERO ?COMMANDER|690)'
+  - categoria: helicoptero
+    familia_regex: {'^BEL|^EL-|BELL': Bell, '^RO-|(?<![A-Z])R-?(22|44|66)': Robinson, 'AS-?3[35]0|EC-?1\d\d|H1[2-6]\d|^EUR': Airbus Helicopters, 'AW-?1\d\d|A-?109': Leonardo/Agusta}
+    patron: '(^BEL-|^EL-|BELL|^RO-|(?<![A-Z])R-?(22|44|66)|AS-?3[35]0|EC-?1[2-5]\d|H1[2-6]\d|^EUR-|AW-?1\d\d|A[ -]?109|S-?76|BK-?117)'
+  - categoria: agricola
+    familia_regex: {'AT-?\d{3}|^AIR-': Air Tractor, 'PAWNEE|PA-?25': Piper Pawnee, 'EMB-?20[12]|IPANEMA': Embraer Ipanema}
+    patron: '(^AIR-AT|AT-?80\d|AT-?50\d|PAWNEE|PA-?25|EMB-?20[12]|IPANEMA)'
+  - categoria: aviacion_general_piston
+    familia_regex: {'^CE|^TXI': Cessna (pistón), 'BOYERO': El Boyero, '^PRP': Ultraliviano, '^PA|^PI': Piper, '^TEA': Tecnam, '^CI[RT]': Cirrus, '^VA-': Van's RV, 'BN-?2': BN-2 Islander, '^TXA': Cessna/Beech (pistón), '^BRT': Bristell, '^AB-': Aero Boero, '^GR-': Grob, '^MO-': Mooney, '^BE': Beechcraft (pistón)}
+    patron: '(^CI[RT]-?SR|^CE-?4[01]\d|^TXA-?([A-Z]-?)?(G?36|G?58|206|1\d\d)|^VA-|^TA-|^AET-|^EVE-|LSA|BN-?2|B55|^BE-?95|^BE-?[A-Z]-?33|^(BE|HAB)-?G-?58|^CE-?([A-Z]{1,2}-?)?1\d\d|^CE-?([A-Z]{1,2}-?)?2[0-1]\d|^CE-?3\d\d|^TXI-?1\d\d|BOYERO|^PRP-|^PA-|^PAA-|^PI-|^PIP-|^TEA-|^CIR-|^BRT-|^AB-|^GR-|^MO-|^BE-?(A-?)?(36|33|35|55|58|76|23|24)|BONANZA|BARON)'
+
+default:
+  categoria: otro
+  familia: Otra

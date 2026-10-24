@@ -1,0 +1,62 @@
+# Actualización automática: baja los datos abiertos, reconstruye la BD y los marts, exporta los
+# JSON de la web y, si cambiaron, los commitea en main. Vercel despliega solo al recibir el push.
+name: actualizar-datos
+on:
+  schedule:
+    - cron: "17 11 5,20 * *"   # días 5 y 20 de cada mes, 08:17 hora argentina
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-datos
+  cancel-in-progress: false
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      CONTACT: "github.com/${{ github.repository }}"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv venv && uv pip install -e ".[pdf]"
+
+      - name: Cache de descargas (raw)
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: raw-${{ github.run_id }}
+          restore-keys: raw-
+
+      - name: Probe de fuentes
+        run: uv run pmdq probe
+        continue-on-error: true
+
+      - name: Pipeline completo
+        run: uv run pmdq all
+
+      - name: Publicar reportes y BD como artefacto
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: potenciar-mdq-${{ github.run_number }}
+          path: |
+            reports/
+            data/bd/
+            data/raw/manifest.jsonl
+          retention-days: 90
+
+      - name: Commit de datos de la web si cambiaron
+        run: |
+          git config user.name "potenciar-mdq-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/src/data/*.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios en los datos."
+          else
+            git commit -m "datos: actualización automática $(date -u +%Y-%m-%d)"
+            git push
+          fi

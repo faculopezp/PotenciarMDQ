@@ -1,0 +1,7 @@
+Fecha UTC;Hora UTC;Clase de Vuelo (todos los vuelos);Clasificación Vuelo;Tipo de Movimiento;Aeropuerto;Origen / Destino;Aerolinea Nombre;Aeronave;Pasajeros;PAX;Calidad dato
+05/01/2025;12:00;Regular;Doméstico;Despegue;AER;MDP;AEROLINEA SINTETICA A;BO-737-8;150,00;75,00;DEFINITIVO
+05/01/2025;12:44;Regular;Doméstico;Aterrizaje;MDP;AER;AEROLINEA SINTETICA A;BO-737-8;150,00;75,00;DEFINITIVO
+05/01/2025;13:40;Regular;Doméstico;Despegue;MDP;AER;AEROLINEA SINTETICA A;BO-737-8;140,00;70,00;DEFINITIVO
+20/01/2025;9:05;Vuelo Privado con Matrícula Nacional;Doméstico;Aterrizaje;MDP;CBA;0;CE-150-M;1,00;0,50;DEFINITIVO
+10/07/2025;15:00;Regular;Doméstico;Aterrizaje;MDP;CBA;AEROLINEA SINTETICA B;EMB-ERJ190100IGW;60,00;30,00;PROVISORIO
+13/08/2025;16:50;Regular;Doméstico;Aterrizaje;MDB;AER;AEROLINEA SINTETICA A;EMB-ERJ190100IGW;34,00;17,00;DEFINITIVO

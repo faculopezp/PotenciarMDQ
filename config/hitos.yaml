@@ -1,0 +1,33 @@
+# Línea de tiempo para la web. Solo entra lo que tiene fuente.
+# tipo_fuente: primaria (organismo) | prensa | secundaria. Las de prensa se muestran con esa etiqueta.
+hitos:
+  - fecha: 1954-02-15
+    titulo: Inauguración del aeropuerto
+    fuente: https://www.aeropuertosdelmundo.net/aeropuerto-MDQ/
+    tipo_fuente: secundaria
+    verificado: false
+  - fecha: 2018
+    titulo: Nuevo sistema de aterrizaje ILS
+    fuente: https://www.lacapitalmdp.com/el-aeropuerto-de-mar-del-plata-tendra-un-nuevo-sistema-de-aterrizaje/
+    tipo_fuente: prensa
+    verificado: false
+  - fecha: 2018
+    titulo: "Récord de la década: 454.162 pasajeros"
+    fuente: https://aviacionline.com/menos-vuelos-a-mar-del-plata-durante-el-verano-2025-se-proyecta-una-caida-de-dos-digitos-en-la-oferta
+    tipo_fuente: prensa
+    verificado: false   # contrastar con mart_mdq_anual
+  - fecha: 2024-01
+    titulo: Flybondi empieza a volar a Mar del Plata
+    fuente: https://eleconomista.com.ar/negocios/flybondi-comenzo-volar-mar-plata-50-minutos-cuatro-frecuencias-semana-n69791
+    tipo_fuente: prensa
+    verificado: false
+  - fecha: 2024-09
+    titulo: Suspensión del Corredor Atlántico
+    fuente: https://aviacionline.com/menos-vuelos-a-mar-del-plata-durante-el-verano-2025-se-proyecta-una-caida-de-dos-digitos-en-la-oferta
+    tipo_fuente: prensa
+    verificado: false
+  - fecha: 2025
+    titulo: Ruta directa Rosario – Mar del Plata (2 semanales)
+    fuente: https://www.lacapital.com.ar/la-ciudad/el-aeropuerto-local-ya-cuenta-dos-vuelos-semana-mar-del-plata-n10175665.html
+    tipo_fuente: prensa
+    verificado: false

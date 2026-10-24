@@ -1,0 +1,90 @@
+# Registro de fuentes. `make probe` valida cada una; `make ingest` descarga las enabled.
+# kind: ckan_package | ckan_search | dkan_package | html_links | static_file
+# kind url_pattern: genera URLs desde una plantilla ({yyyy} / {yyyymm}) y baja las que existan.
+# verified: false hasta que `make probe` confirme el endpoint (el entorno de desarrollo no llega a *.gob.ar).
+
+defaults:
+  min_interval_s: 1.0       # rate limit por host
+  timeout_connect_s: 10
+  timeout_read_s: 120
+
+sources:
+  anac_movimientos:
+    kind: ckan_package
+    base_url: https://datos.transporte.gob.ar
+    dataset: aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac
+    resource_formats: [csv]
+    # Cobertura confirmada: un CSV por año desde 2019. Formato real 2023–2026 validado con el espejo.
+    # fallback: mismo dataset federado en datos.gob.ar
+    fallback:
+      base_url: https://datos.gob.ar
+      dataset: transporte-aterrizajes-despegues-procesados-por-administracion-nacional-aviacion-civil-anac
+    enabled: true
+    verified: false
+
+  yvera_conectividad:
+    kind: ckan_package
+    base_url: https://datos.yvera.gob.ar
+    dataset: conectividad-aerea
+    resource_formats: [csv, pdf]
+    fallback:
+      base_url: https://datos.gob.ar
+      dataset: turismo-conectividad-aerea
+    enabled: true
+    verified: false
+
+  anac_dnta:
+    kind: html_links
+    url: https://consultas-publicas.anac.gob.ar/estadisticas-dnta/
+    follow_pattern: /estadisticas-dnta/canal/      # sub-páginas a recorrer (1 nivel)
+    file_extensions: [xlsx, xls, csv, pdf]
+    enabled: true
+    verified: false
+
+  ourairports:
+    kind: static_file
+    url: https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/airports.csv
+    enabled: true
+    verified: true      # local_code == código ANAC (MDP, AER, BCA...) verificado 2026-10-24
+
+  # --- Serie 2014–2018 (agregada: los CSV por movimiento empiezan en 2019) ---
+  anac_informes_mensuales:
+    kind: url_pattern
+    template: https://datos.anac.gob.ar/static/docs/Informe_Mensual_{yyyymm}.pdf
+    desde: 2014-01
+    hasta: 2018-12
+    enabled: true
+    verified: false     # existen 202112 y 202408; años previos a confirmar
+
+  sna_anuales:
+    kind: url_pattern
+    template: https://www.argentina.gob.ar/sites/default/files/estadistica_{yyyy}.pdf
+    desde: 2014-01
+    hasta: 2018-12
+    enabled: true
+    verified: false     # existen 2014 y 2015 (pasajeros por aeropuerto)
+
+  # Espejo de terceros (CSV originales ANAC 2023–2026, sin modificar) — solo si el portal falla.
+  anac_movimientos_espejo:
+    kind: static_files
+    urls:
+      - https://raw.githubusercontent.com/baubyte/anac-datos-2023-2026/main/2023.csv.gz
+      - https://raw.githubusercontent.com/baubyte/anac-datos-2023-2026/main/2024.csv.gz
+      - https://raw.githubusercontent.com/baubyte/anac-datos-2023-2026/main/2025.csv.gz
+      - https://raw.githubusercontent.com/baubyte/anac-datos-2023-2026/main/2026.csv.gz
+    dest_source: anac_movimientos
+    enabled: false
+    verified: true
+
+  mdp_portal_catalogo:
+    kind: dkan_package
+    base_url: https://datos.mardelplata.gob.ar
+    search_terms: [aeropuerto, turismo, vuelos, arribos]
+    enabled: false      # sin dataset aéreo conocido; solo para explorar
+    verified: false
+
+  series_tiempo_busqueda:
+    kind: static_file
+    url: https://apis.datos.gob.ar/series/api/search/?q=pasajeros%20aereos&limit=50
+    enabled: false      # exploratorio
+    verified: false

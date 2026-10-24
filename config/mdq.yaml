@@ -1,0 +1,31 @@
+# Aeropuerto foco y pares de benchmark.
+# codigo_anac verificado contra datos reales ANAC 2023–2026 y OurAirports (local_code) el 2026-10-24.
+
+foco:
+  nombre: Mar del Plata — Astor Piazzolla
+  iata: MDQ
+  oaci: SAZM
+  codigo_anac: MDP
+  verificado: true
+
+pares:
+  - {nombre: Bariloche, iata: BRC, oaci: SAZS, codigo_anac: BAR, verificado: true}
+  - {nombre: Neuquén, iata: NQN, oaci: SAZN, codigo_anac: NEU, verificado: true}
+  - {nombre: Bahía Blanca, iata: BHI, oaci: SAZB, codigo_anac: BCA, verificado: true}
+  - {nombre: Mendoza, iata: MDZ, oaci: SAME, codigo_anac: DOZ, verificado: true}
+  - {nombre: Salta, iata: SLA, oaci: SASA, codigo_anac: SAL, verificado: true}
+
+# Clases de vuelo (slug) que cuentan como aviación comercial.
+clases_comerciales: [regular, no_regular]
+
+# Correcciones de código de aeropuerto por errores de carga detectados.
+correcciones_aeropuerto:
+  - de: MDB          # Batán (aeródromo chico de Mar del Plata)
+    a: MDP
+    clases: [regular]
+    motivo: "13/08/2023: 10 movimientos regulares de E190 de Aerolíneas cargados como MDB"
+
+# Meses que forman la temporada de verano. Diciembre se asigna al verano del año siguiente.
+meses_verano: [12, 1, 2]
+
+utc_offset_horas: -3

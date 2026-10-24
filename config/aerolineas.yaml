@@ -1,0 +1,24 @@
+# Normalización de "Aerolinea Nombre" (ANAC). Regex sobre el texto en mayúsculas sin acentos.
+# Primera coincidencia gana. Sin coincidencia -> nombre = texto original, tipo = otra.
+# tipo: bandera | low_cost | regional | estatal | taxi_aereo | extranjera | carga | otra
+aerolineas:
+  - {patron: '^AEROLINEAS ARGENTINAS', nombre: Aerolíneas Argentinas, tipo: bandera}
+  - {patron: '^AUSTRAL', nombre: Aerolíneas Argentinas, tipo: bandera}   # Austral se fusionó con AR
+  - {patron: 'FLYBONDI', nombre: Flybondi, tipo: low_cost}
+  - {patron: 'JETSMART', nombre: JetSMART, tipo: low_cost}
+  - {patron: 'NORWEGIAN', nombre: Norwegian Argentina, tipo: low_cost}
+  - {patron: '^ANDES L', nombre: Andes Líneas Aéreas, tipo: regional}
+  - {patron: '^AMERICAN JET', nombre: American Jet, tipo: regional}
+  - {patron: '^AVIAN', nombre: Avian (Avianca Argentina), tipo: regional}
+  - {patron: '^LADE', nombre: LADE, tipo: estatal}
+  - {patron: 'FUERZA AEREA ARGENTINA', nombre: Fuerza Aérea Argentina, tipo: estatal}
+  - {patron: '^BAIRES FLY', nombre: Baires Fly, tipo: taxi_aereo}
+  - {patron: '^AEROVIDA', nombre: Aerovida, tipo: taxi_aereo}
+  - {patron: 'LATAM AIRLINES ARGENTINA|LAN ARGENTINA', nombre: LATAM Argentina, tipo: regional}
+  - {patron: 'LATAM|^LAN ', nombre: LATAM, tipo: extranjera}
+  - {patron: '^GOL ', nombre: GOL, tipo: extranjera}
+  - {patron: '^SKY AIRLINE', nombre: Sky Airline, tipo: extranjera}
+  - {patron: 'PANAMENA DE AVIACION', nombre: Copa Airlines, tipo: extranjera}
+  - {patron: '^AZUL', nombre: Azul, tipo: extranjera}
+  - {patron: 'AEROMAS|AEROVIP|AIR CLASS', nombre: null, tipo: taxi_aereo}
+  - {patron: 'DHL|FEDERAL EXPRESS|ATLAS AIR|UNITED PARCEL|CARGO', nombre: null, tipo: carga}

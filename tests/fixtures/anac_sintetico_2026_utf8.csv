@@ -1,0 +1,4 @@
+Fecha UTC;Hora UTC;Clase de Vuelo (todos los vuelos);Clasificación Vuelo;Tipo de Movimiento;Aeropuerto;Origen / Destino;Aerolinea Nombre;Aeronave;Matrícula;Pasajeros;PAX;Calidad dato
+15/01/2026;23:30;Regular;Internacional;Aterrizaje;MDP;SUMU;AEROLINEA SINTETICA A;EMB-ERJ190100IGW;LV-XXX;80;80;DEFINITIVO
+16/01/2026;1:15;No Regular;Doméstico;Despegue;MDP;AER;AEROLINEA SINTETICA C;AIB-A320-232;LV-YYY;170;85;DEFINITIVO
+02/07/2026;15:00;Regular;Doméstico;Aterrizaje;MDP;AER;AEROLINEA SINTETICA A;BO-737-8;LV-ZZZ;;;PROVISORIO
