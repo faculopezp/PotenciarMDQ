@@ -4,6 +4,7 @@
 
 | source_file | filas | pct_fecha_null | pct_hora_null | pct_pax_null | pct_aeronave_null | pct_con_matricula | pct_provisorio | desde | hasta |
 |---|---|---|---|---|---|---|---|---|---|
+| 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580764 | 0.0 | 0.0 | 0.0 | 100.0 | 0.0 | 0.0 | 2018-12-31 | 2019-12-31 |
 | 20261024_202012-informe-ministerio-actualizado-dic-final.csv | 212726 | 0.0 | 0.0 | 0.0 | 85.3 | 0.0 | 0.0 | 2019-12-31 | 2020-12-31 |
 | 20261024_202112-informe-ministerio-actualizado-dic-final.csv | 329781 | 0.0 | 0.0 | 0.0 | 14.06 | 0.0 | 0.0 | 2020-12-31 | 2021-12-31 |
 | 20261024_202212-informe-ministerio-actualizado-dic-final.csv | 477903 | 0.0 | 0.0 | 0.0 | 15.28 | 0.0 | 0.0 | 2021-12-31 | 2022-12-31 |
@@ -34,33 +35,33 @@
 
 | clase_vuelo | es_comercial | filas |
 |---|---|---|
-| regular | True | 1758878 |
-| vuelo_privado_con_matricula_nacional | False | 469783 |
-| vuelo_escuela | False | 424780 |
-| no_regular | True | 272071 |
-| vuelo_oficial_nacional | False | 185580 |
-| vuelo_privado_con_matricula_extranjera | False | 25968 |
-| vuelo_de_adiestramiento | False | 23286 |
-| trabajo_aereo | False | 10051 |
-| vuelo_oficial_extranjero | False | 2813 |
+| regular | True | 2122318 |
+| vuelo_privado_con_matricula_nacional | False | 542060 |
+| vuelo_escuela | False | 505222 |
+| no_regular | True | 300365 |
+| vuelo_oficial_nacional | False | 209269 |
+| vuelo_privado_con_matricula_extranjera | False | 30633 |
+| vuelo_de_adiestramiento | False | 27978 |
+| trabajo_aereo | False | 12788 |
+| vuelo_oficial_extranjero | False | 3341 |
 
 ## Duplicados exactos
 
 | filas_duplicadas |
 |---|
-| 5419 |
+| 8143 |
 
 ## Correcciones de aeropuerto aplicadas
 
 | aeropuerto_original | aeropuerto | filas |
 |---|---|---|
-| MDB | MDP | 8 |
+| MDB | MDP | 9 |
 
 ## Cobertura de enriquecimiento (vuelos comerciales)
 
 | pct_aeronave_otro | pct_aerolinea_sin_regla | pct_sin_distancia | pct_sin_asientos |
 |---|---|---|---|
-| 0.17 | 6.92 | 2.66 | 24.92 |
+| 0.14 | 7.25 | 2.56 | 37.06 |
 
 ## Aeronaves sin clasificar (top 25 → ampliar config/aeronaves.yaml)
 
@@ -96,32 +97,32 @@
 
 | origen_destino | movimientos |
 |---|---|
-| SPJC | 32878 |
-| 2278 | 9509 |
+| SPJC | 40556 |
+| 2278 | 11069 |
 | 3073 | 4193 |
-| 2976 | 3792 |
+| 2976 | 3794 |
 | 3017 | 3696 |
 | RAT | 2615 |
-| 2324 | 1698 |
-| 2870 | 800 |
-| NDL | 763 |
-| 2463 | 704 |
+| 2324 | 1729 |
+| 2463 | 943 |
+| 2870 | 866 |
+| NDL | 835 |
 | BGI | 611 |
 | SLA | 587 |
 | HAL | 514 |
 | HNR | 500 |
 | MLE | 486 |
+| MBI | 426 |
+| HOP | 415 |
+| 2417 | 413 |
 | 2999 | 410 |
-| 2417 | 378 |
-| MBI | 350 |
-| 2666 | 343 |
-| HOP | 339 |
+| 2341 | 406 |
 
 ## Tramos reconstruidos (cabotaje comercial)
 
 | tramos | despegues_cabotaje | pct_emparejado |
 |---|---|---|
-| 649413 | 766775 | 84.7 |
+| 778474 | 915331 | 85.0 |
 
 ## Rotaciones: método por matrícula vs por modelo
 
@@ -168,7 +169,7 @@
 
 | mes_faltante |
 |---|
-| 2019-12 |
+
 
 ## Outliers: load factor estimado > 1,1 en el foco
 
@@ -183,17 +184,17 @@
 | 2023-01-28 | PA-PA-28-181 | Sin dato | 3 | 2.0 | 1.5 |
 | 2023-10-01 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 143 | 97.0 | 1.474 |
 | 2023-02-21 | BE-B-200 | Sin dato | 10 | 7.0 | 1.429 |
+| 2023-01-01 | LJ-35 | Baires Fly | 7 | 5.0 | 1.4 |
+| 2021-12-23 | CE-525 | Sin dato | 7 | 5.0 | 1.4 |
 | 2023-10-06 | CE-650 | Patagonian Air S.A. | 7 | 5.0 | 1.4 |
 | 2024-09-01 | BE-E-90 | Sin dato | 7 | 5.0 | 1.4 |
-| 2021-12-23 | CE-525 | Sin dato | 7 | 5.0 | 1.4 |
-| 2023-01-01 | LJ-35 | Baires Fly | 7 | 5.0 | 1.4 |
-| 2025-01-17 | LJ-31-A | Sin dato | 8 | 6.0 | 1.333 |
 | 2022-12-28 | BO-737-76N | Aerolíneas Argentinas | 172 | 129.0 | 1.333 |
+| 2025-01-17 | LJ-31-A | Sin dato | 8 | 6.0 | 1.333 |
 | 2023-10-01 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 125 | 97.0 | 1.289 |
 | 2022-10-04 | BO-737-76N | Aerolíneas Argentinas | 162 | 129.0 | 1.256 |
 | 2023-05-21 | PA-PA-46R-350 | Sin dato | 5 | 4.0 | 1.25 |
 | 2020-12-22 | PAA-PA-A-34-200T | Sin dato | 5 | 4.0 | 1.25 |
-| 2025-03-03 | BE-C-90-GTI | Sin dato | 6 | 5.0 | 1.2 |
+| 2022-09-02 | CE-525 | Sin dato | 6 | 5.0 | 1.2 |
 
 ## Reconciliación vs fuente oficial (config/reconciliacion.csv)
 
