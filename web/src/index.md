@@ -44,7 +44,7 @@ const eventos = FileAttachment("data/eventos.json").json();
 ```js
 const ref = ultimoAnioCompleto(anual);
 const anios = anual.map((d) => d.anio);
-const largaAnual = d3.rollups(serieLarga, (v) => ({pasajeros: d3.sum(v, (d) => d.pasajeros), meses: v.length, fuente: v[0].fuente}), (d) => d.anio)
+const largaAnual = d3.rollups(serieLarga, (v) => ({pasajeros: d3.sum(v, (d) => d.pasajeros), movimientos: d3.sum(v, (d) => d.movimientos_comerciales), meses: v.length, fuente: v[0].fuente}), (d) => d.anio)
   .map(([anio, v]) => ({anio, ...v})).filter((d) => d.meses === 12);
 const record = d3.greatest(largaAnual, (d) => d.pasajeros);
 const turAnual = d3.rollups(turismo.filter((d) => d.llegados_aereos != null), (v) => ({turistas: d3.sum(v, (d) => d.turistas), llegados: d3.sum(v, (d) => d.llegados_aereos), meses: v.length}), (d) => d.anio)
@@ -113,21 +113,45 @@ Plot.plot({
 })
 ```
 
+<div class="grid-2">
+<div>
+
 ```js
 Plot.plot({
-  width,
-  height: 200,
+  width: width / 2 - 20,
+  height: 220,
   marginLeft: 55,
-  y: {grid: true, label: "Pasajeros por año", tickFormat: compacto},
-  x: {label: null, tickFormat: "d", ticks: 12},
+  y: {grid: true, label: "Pasajeros de línea por año", tickFormat: compacto},
+  x: {label: null, tickFormat: "d", ticks: 8},
   marks: [
-    Plot.barY(largaAnual, {x: "anio", y: "pasajeros", fill: (d) => (d.anio === record.anio ? ACENTO : TINTA), fillOpacity: (d) => (d.fuente === "ANAC" ? 1 : 0.55), inset: 2, tip: true,
+    Plot.barY(largaAnual, {x: "anio", y: "pasajeros", fill: (d) => (d.anio === record.anio ? ACENTO : TINTA), fillOpacity: (d) => (d.fuente === "ANAC" ? 1 : 0.55), inset: 1.5, tip: true,
       title: (d) => `${d.anio}: ${entero(d.pasajeros)} pasajeros (${d.fuente})`}),
     Plot.ruleY([0])
   ]
 })
 ```
-<p class="fuente">Barras claras: Municipio de General Pueyrredon · oscuras: ANAC. En 2019, año que cubren ambas fuentes, difieren menos de 4 % por mes.</p>
+
+</div>
+<div>
+
+```js
+Plot.plot({
+  width: width / 2 - 20,
+  height: 220,
+  marginLeft: 55,
+  y: {grid: true, label: "Movimientos comerciales por año", tickFormat: compacto},
+  x: {label: null, tickFormat: "d", ticks: 8},
+  marks: [
+    Plot.barY(largaAnual.filter((d) => d.movimientos > 0), {x: "anio", y: "movimientos", fill: TINTA, fillOpacity: (d) => (d.fuente === "ANAC" ? 1 : 0.55), inset: 1.5, tip: true,
+      title: (d) => `${d.anio}: ${entero(d.movimientos)} aterrizajes y despegues comerciales (${d.fuente})`}),
+    Plot.ruleY([0])
+  ]
+})
+```
+
+</div>
+</div>
+<p class="fuente">Barras claras: Municipio de General Pueyrredon (2001–2018) · oscuras: ANAC (2019+). En 2019, año que cubren ambas fuentes, difieren menos de 4 % por mes. Movimientos comerciales = vuelos regulares y no regulares; antes de 2019 no hay detalle vuelo por vuelo completo (solo una muestra municipal 2015–2018, usada en la composición por segmento y flota).</p>
 
 <h2 id="02" data-idx="02 — Día por día">El pulso diario</h2>
 

@@ -25,13 +25,18 @@
 
 body { background: var(--papel); color: var(--tinta); }
 
-/* Escritorio: columna ancha para gráficos, texto acotado a ~70 caracteres. */
-#observablehq-main { max-width: 1320px; }
+/* Escritorio: sin barra lateral ni índice derecho; contenido centrado y ancho, texto acotado. */
+:root { --observablehq-max-width: 1760px; }
+#observablehq-main { max-width: none; }
+.barra { display: flex; width: 100%; gap: 1.75rem; align-items: baseline; font-family: var(--sans-serif); font-size: 14px; }
+.barra a { color: var(--tinta-2); text-decoration: none; }
+.barra a:hover, .barra a.activa { color: var(--acento); }
+.barra .marca { font-weight: 600; color: var(--tinta); margin-right: auto; letter-spacing: -0.01em; }
 #observablehq-main p, #observablehq-main li { max-width: 68ch; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
 
 h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; color: var(--tinta); }
 h2 {
-  font-size: 2.1rem; margin-top: 7rem; padding-top: 1.25rem;
+  font-size: 2.1rem; margin-top: 4.5rem; padding-top: 1.25rem;
   border-top: 1px solid var(--filete); max-width: none;
 }
 h3 { font-size: 1.35rem; margin-top: 2.5rem; }
@@ -47,8 +52,8 @@ h3 { font-size: 1.35rem; margin-top: 2.5rem; }
 
 /* Portada asimétrica 7/5 */
 .portada {
-  display: grid; grid-template-columns: 7fr 5fr; gap: 3rem; align-items: end;
-  padding: 10vh 0 3rem; border-bottom: 1px solid var(--filete);
+  display: grid; grid-template-columns: 5fr 7fr; gap: 3rem; align-items: center;
+  padding: 3rem 0 2.5rem; border-bottom: 1px solid var(--filete);
 }
 .portada h1 {
   font-size: clamp(3.4rem, 6.4vw, 6.4rem); line-height: 0.98; font-weight: 400;
@@ -56,7 +61,10 @@ h3 { font-size: 1.35rem; margin-top: 2.5rem; }
 }
 .portada h1 em { color: var(--acento); font-style: italic; }
 .portada .bajada { font-family: var(--serif); font-size: 1.3rem; line-height: 1.45; color: var(--tinta-2); max-width: 32ch; }
-.indice { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--filete); }
+/* Índice de capítulos en dos columnas: la mitad de alto, sin aire muerto en la portada. */
+.indice { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--filete);
+  display: grid; grid-template-columns: 1fr 1fr; grid-auto-flow: column; grid-template-rows: repeat(6, auto);
+  column-gap: 2rem; }
 .indice li {
   display: grid; grid-template-columns: 3rem 1fr; padding: 0.45rem 0; max-width: none;
   border-bottom: 1px solid var(--filete); font-family: var(--sans-serif); font-size: 14px;
@@ -125,3 +133,6 @@ figure h2::before { content: none; }
 /* Mapa + tabla: columnas que no se deforman por textos largos */
 .grid-2-1.mapa { grid-template-columns: minmax(0, 540px) minmax(0, 1fr); gap: 2.5rem; }
 .grid-2-1.mapa table.editorial td:first-child { white-space: normal; }
+
+/* Las grillas de tarjetas de Framework igualan todas las filas a la más alta (grid-auto-rows: 1fr). */
+.grid { grid-auto-rows: auto; }

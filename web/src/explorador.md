@@ -46,11 +46,15 @@ const f = base.filter((d) =>
   && (filtros.movimiento === "Ambos" || d.tipo_movimiento === filtros.movimiento));
 const m = filtros.metrica;
 const total = d3.sum(f, (d) => d[m]);
+// Movimientos sin modelo de avión: se muestran aparte, con el desglose de por qué faltan.
+const sinModelo = f.filter((d) => d.aeronave_familia === "Sin dato");
+const porSegmento = d3.rollups(sinModelo, (v) => d3.sum(v, (d) => d.movimientos), (d) => d.segmento).sort((a, b) => b[1] - a[1]);
+const sinModeloNota = sinModelo.length ? html`<p class="fuente">Sin modelo: ${entero(d3.sum(sinModelo, (d) => d.movimientos))} movimientos (${porSegmento.slice(0, 3).map(([s, n]) => `${SEGMENTOS.find((x) => x.id === s)?.nombre ?? s} ${entero(n)}`).join(" · ")}). La ANAC no informó el avión en 2019 y gran parte de 2020, ni en la mayoría de los vuelos oficiales y militares. En línea 2019–2020 se infiere por pasajeros.</p>` : "";
 ```
 
 <div class="card"><h2>Total con estos filtros</h2><span class="big">${entero(total)}</span> <span class="muted">${m === "movimientos" ? "aterrizajes y despegues" : "pasajeros"}</span></div>
 
-<div class="grid grid-cols-2">
+<div class="grid grid-cols-3">
   <div class="card">${resize((width) => Plot.plot({
     title: "Por mes", width, height: 240, marginLeft: 50,
     x: {domain: d3.range(1, 13), tickFormat: (i) => MESES[i - 1], label: null},
@@ -82,11 +86,11 @@ const total = d3.sum(f, (d) => d[m]);
     marks: [Plot.barX(f.filter((d) => d.origen_destino), Plot.groupY({x: "sum"}, {y: "origen_destino", x: m, fill: FOCO, sort: {y: "-x", limit: 12}, inset: 1, tip: true})), Plot.ruleX([0])]
   }))}</div>
   <div class="card">${resize((width) => Plot.plot({
-    title: "Aviones (top 12)", width, height: 300, marginLeft: 170,
+    title: "Aviones (top 12, con modelo conocido)", width, height: 300, marginLeft: 170,
     x: {grid: true, tickFormat: entero, label: null},
     y: {label: null},
-    marks: [Plot.barX(f, Plot.groupY({x: "sum"}, {y: "aeronave_familia", x: m, fill: FOCO, sort: {y: "-x", limit: 12}, inset: 1, tip: true})), Plot.ruleX([0])]
-  }))}</div>
+    marks: [Plot.barX(f.filter((d) => d.aeronave_familia !== "Sin dato"), Plot.groupY({x: "sum"}, {y: "aeronave_familia", x: m, fill: FOCO, sort: {y: "-x", limit: 12}, inset: 1, tip: true})), Plot.ruleX([0])]
+  }))}${sinModeloNota}</div>
 </div>
 
 <p class="muted">Los códigos de origen/destino son los de ANAC (AER = Aeroparque, CBA = Córdoba, DOZ = Mendoza, BCA = Bahía Blanca...). Datos provisorios en los últimos meses.</p>
