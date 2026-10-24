@@ -184,10 +184,10 @@
 | 2023-01-28 | PA-PA-28-181 | Sin dato | 3 | 2.0 | 1.5 |
 | 2023-10-01 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 143 | 97.0 | 1.474 |
 | 2023-02-21 | BE-B-200 | Sin dato | 10 | 7.0 | 1.429 |
+| 2024-09-01 | BE-E-90 | Sin dato | 7 | 5.0 | 1.4 |
 | 2023-01-01 | LJ-35 | Baires Fly | 7 | 5.0 | 1.4 |
 | 2021-12-23 | CE-525 | Sin dato | 7 | 5.0 | 1.4 |
 | 2023-10-06 | CE-650 | Patagonian Air S.A. | 7 | 5.0 | 1.4 |
-| 2024-09-01 | BE-E-90 | Sin dato | 7 | 5.0 | 1.4 |
 | 2022-12-28 | BO-737-76N | Aerolíneas Argentinas | 172 | 129.0 | 1.333 |
 | 2025-01-17 | LJ-31-A | Sin dato | 8 | 6.0 | 1.333 |
 | 2023-10-01 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 125 | 97.0 | 1.289 |
