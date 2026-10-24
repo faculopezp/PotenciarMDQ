@@ -9,7 +9,8 @@ aerolineas:
   - {patron: 'NORWEGIAN', nombre: Norwegian Argentina, tipo: low_cost}
   - {patron: '^ANDES L', nombre: Andes Líneas Aéreas, tipo: regional}
   - {patron: '^AMERICAN JET', nombre: American Jet, tipo: regional}
-  - {patron: '^AVIAN', nombre: Avian (Avianca Argentina), tipo: regional}
+  - {patron: '^AVIAN( |$)|AVIANCA ARGENTINA', nombre: Avian (Avianca Argentina), tipo: regional}
+  - {patron: 'AVIANCA', nombre: Avianca, tipo: extranjera}   # Avianca (Colombia): no es Avian Argentina
   - {patron: '^LADE', nombre: LADE, tipo: estatal}
   - {patron: 'FUERZA AEREA ARGENTINA', nombre: Fuerza Aérea Argentina, tipo: estatal}
   - {patron: '^BAIRES FLY', nombre: Baires Fly, tipo: taxi_aereo}

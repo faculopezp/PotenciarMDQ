@@ -35,6 +35,8 @@ def test_classify_aeronave(codigo, esperado):
         ("COMPAÑIA PANAMEÑA DE AVIACION", ("Copa Airlines", "extranjera")),
         ("TENIL S.A.", ("Tenil", "otra")),
         ("L.A.D.E.", ("LADE", "estatal")),
+        ("AVIANCA", ("Avianca", "extranjera")),
+        ("AVIAN LINEAS AEREAS S.A.", ("Avian (Avianca Argentina)", "regional")),
     ],
 )
 def test_classify_aerolinea(nombre, esperado):

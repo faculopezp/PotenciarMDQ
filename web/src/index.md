@@ -566,7 +566,7 @@ html`<div class="lejanos">${porDestino.map((d) => html`<div class="lejano">
   <span class="seg">${PAIS_LEJ(d.pais)} · ${entero(d.km)} km</span>
   <div class="modelo">${d.ciudad}</div>
   <p class="resumen">${d.vuelos} ${d.vuelos === 1 ? "movimiento" : "movimientos"}${d.anios[0] !== d.anios[1] ? ` entre ${d.anios[0]} y ${d.anios[1]}` : ` en ${d.anios[0]}`}</p>
-  <ul>${d.ultimos.map((v) => html`<li><span>${v.fecha.toLocaleDateString("es-AR", {timeZone: "UTC"})}</span> ${v.tipo_movimiento === "aterrizaje" ? "llegó" : "salió"} · ${v.aeronave}${v.aerolinea_nombre && v.aerolinea_nombre !== "Sin dato" ? ` · ${v.aerolinea_nombre}` : ""}${v.pasajeros > 0 ? ` · ${v.pasajeros} pax` : ""}</li>`)}</ul>
+  <ul>${d.ultimos.map((v) => html`<li><span>${v.fecha.toLocaleDateString("es-AR", {timeZone: "UTC"})}</span> ${v.tipo_movimiento === "aterrizaje" ? "llegó" : "salió"}${v.aeronave && v.aeronave !== "Sin dato" ? ` · ${v.aeronave}` : ""}${v.aerolinea_nombre && v.aerolinea_nombre !== "Sin dato" ? ` · ${v.aerolinea_nombre}` : ""}${v.pasajeros > 0 ? ` · ${v.pasajeros} pax` : ""}</li>`)}</ul>
 </div>`)}</div>`
 ```
 
