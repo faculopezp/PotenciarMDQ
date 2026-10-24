@@ -32,7 +32,7 @@ body { background: var(--papel); color: var(--tinta); }
 .barra a { color: var(--tinta-2); text-decoration: none; }
 .barra a:hover, .barra a.activa { color: var(--acento); }
 .barra .marca { font-weight: 600; color: var(--tinta); margin-right: auto; letter-spacing: -0.01em; }
-#observablehq-main p, #observablehq-main li { max-width: 68ch; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
+#observablehq-main p, #observablehq-main li { max-width: 88ch; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
 
 h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; color: var(--tinta); }
 h2 {
@@ -78,11 +78,11 @@ h3 { font-size: 1.35rem; margin-top: 2.5rem; }
   display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--tinta);
   border-bottom: 1px solid var(--filete); margin: 2rem 0;
 }
-.cifras > div { padding: 1rem 1.25rem 1.25rem 0; border-right: 1px solid var(--filete); }
+.cifras > div { padding: 1.25rem 1.25rem 1.5rem; border-right: 1px solid var(--filete); text-align: center; }
 .cifras > div:last-child { border-right: none; }
 .cifras .valor { display: block; font-family: var(--serif); font-size: 3rem; line-height: 1.05; font-weight: 400; }
 .cifras .rotulo { font-family: var(--monospace); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tinta-2); }
-.cifras .nota { font-family: var(--sans-serif); font-size: 13px; color: var(--tinta-2); margin-top: 0.35rem; max-width: none; }
+.cifras .nota { font-family: var(--sans-serif); font-size: 13px; color: var(--tinta-2); margin: 0.35rem auto 0; max-width: 32ch; }
 .cifras.c3 { grid-template-columns: repeat(3, 1fr); }
 
 /* Tarjetas: esquinas rectas, papel sobre papel */
@@ -90,8 +90,10 @@ h3 { font-size: 1.35rem; margin-top: 2.5rem; }
 .card h2 { font-family: var(--monospace); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; border: none; margin: 0; padding: 0; color: var(--tinta-2); }
 
 /* Ficha de avión típico */
-.fichas { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0; border-top: 2px solid var(--tinta); }
-.ficha { padding: 1rem 1.25rem 1.25rem 0; border-bottom: 1px solid var(--filete); }
+.fichas { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: 2px solid var(--tinta); border-bottom: 1px solid var(--filete); }
+.ficha { padding: 1rem 1.25rem 1.25rem; border-right: 1px solid var(--filete); }
+.ficha:last-child { border-right: none; }
+.ficha dd { white-space: nowrap; }
 .ficha .seg { font-family: var(--monospace); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--acento); }
 .ficha .modelo { font-family: var(--serif); font-size: 1.6rem; line-height: 1.15; margin: 0.2rem 0 0.6rem; }
 .ficha dl { display: grid; grid-template-columns: 1fr auto; gap: 0.15rem 1rem; margin: 0; font-family: var(--sans-serif); font-size: 13px; }
@@ -136,3 +138,31 @@ figure h2::before { content: none; }
 
 /* Las grillas de tarjetas de Framework igualan todas las filas a la más alta (grid-auto-rows: 1fr). */
 .grid { grid-auto-rows: auto; }
+
+/* Leyendas y aclaraciones: a lo ancho del bloque al que se refieren. */
+#observablehq-main p.leyenda { max-width: none; font-family: var(--sans-serif); font-size: 13px; color: var(--tinta-2); margin-top: 0.5rem; }
+.leyenda-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 0.75rem; }
+#observablehq-main .leyenda-grid p { max-width: none; font-family: var(--sans-serif); font-size: 14px; line-height: 1.5; color: var(--tinta-2); margin: 0; }
+.leyenda-grid b { color: var(--tinta); font-weight: 600; }
+#observablehq-main p.intro-ancha { max-width: 110ch; }
+
+/* Mapa con protagonismo: 3/5 del ancho para el mapa, el resto para la tabla. */
+.mapa-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 3rem; align-items: start; }
+.mapa-grid table.editorial td:first-child { white-space: normal; }
+
+/* Destinos lejanos: tarjetas tipográficas. */
+.lejanos { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--tinta); }
+.lejano { padding: 1rem 1.25rem 1.25rem; border-right: 1px solid var(--filete); border-bottom: 1px solid var(--filete); }
+.lejano:nth-child(4n) { border-right: none; }
+.lejano .seg { font-family: var(--monospace); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--acento); }
+.lejano .modelo { font-family: var(--serif); font-size: 1.5rem; line-height: 1.15; margin: 0.2rem 0 0.3rem; }
+#observablehq-main .lejano p.resumen { font-family: var(--sans-serif); font-size: 13px; color: var(--tinta-2); margin: 0 0 0.5rem; }
+.lejano ul { list-style: none; padding: 0; margin: 0; }
+#observablehq-main .lejano li { font-family: var(--sans-serif); font-size: 13px; line-height: 1.45; padding: 0.25rem 0; border-top: 1px solid var(--filete); max-width: none; }
+.lejano li span { font-family: var(--monospace); font-size: 12px; color: var(--tinta-2); }
+
+@media (max-width: 1100px) {
+  .fichas { grid-template-columns: repeat(2, 1fr); }
+  .lejanos, .leyenda-grid { grid-template-columns: 1fr 1fr; }
+  .mapa-grid { grid-template-columns: 1fr; }
+}

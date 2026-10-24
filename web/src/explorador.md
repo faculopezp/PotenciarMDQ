@@ -49,32 +49,32 @@ const total = d3.sum(f, (d) => d[m]);
 // Movimientos sin modelo de avión: se muestran aparte, con el desglose de por qué faltan.
 const sinModelo = f.filter((d) => d.aeronave_familia === "Sin dato");
 const porSegmento = d3.rollups(sinModelo, (v) => d3.sum(v, (d) => d.movimientos), (d) => d.segmento).sort((a, b) => b[1] - a[1]);
-const sinModeloNota = sinModelo.length ? html`<p class="fuente">Sin modelo: ${entero(d3.sum(sinModelo, (d) => d.movimientos))} movimientos (${porSegmento.slice(0, 3).map(([s, n]) => `${SEGMENTOS.find((x) => x.id === s)?.nombre ?? s} ${entero(n)}`).join(" · ")}). La ANAC no informó el avión en 2019 y gran parte de 2020, ni en la mayoría de los vuelos oficiales y militares. En línea 2019–2020 se infiere por pasajeros.</p>` : "";
+const sinModeloNota = sinModelo.length ? html`<p class="leyenda">Además, ${entero(d3.sum(sinModelo, (d) => d.movimientos))} movimientos sin avión informado (${porSegmento.slice(0, 3).map(([s, n]) => `${SEGMENTOS.find((x) => x.id === s)?.nombre ?? s} ${entero(n)}`).join(" · ")}).</p>` : "";
 ```
 
 <div class="card"><h2>Total con estos filtros</h2><span class="big">${entero(total)}</span> <span class="muted">${m === "movimientos" ? "aterrizajes y despegues" : "pasajeros"}</span></div>
 
 <div class="grid grid-cols-3">
   <div class="card">${resize((width) => Plot.plot({
-    title: "Por mes", width, height: 240, marginLeft: 50,
+    title: "Por mes", width, height: 300, marginLeft: 50,
     x: {domain: d3.range(1, 13), tickFormat: (i) => MESES[i - 1], label: null},
     y: {grid: true, tickFormat: entero, label: null},
     marks: [Plot.barY(f, Plot.groupX({y: "sum"}, {x: "mes", y: m, fill: FOCO, inset: 1, tip: true})), Plot.ruleY([0])]
   }))}</div>
   <div class="card">${resize((width) => Plot.plot({
-    title: "Por día de la semana", width, height: 240, marginLeft: 50,
+    title: "Por día de la semana", width, height: 300, marginLeft: 50,
     x: {domain: d3.range(1, 8), tickFormat: (i) => DIAS[i - 1], label: null},
     y: {grid: true, tickFormat: entero, label: null},
     marks: [Plot.barY(f, Plot.groupX({y: "sum"}, {x: "dia_semana", y: m, fill: FOCO, inset: 1, tip: true})), Plot.ruleY([0])]
   }))}</div>
   <div class="card">${resize((width) => Plot.plot({
-    title: "Por hora local", width, height: 240, marginLeft: 50,
+    title: "Por hora local", width, height: 300, marginLeft: 50,
     x: {domain: d3.range(0, 24), tickFormat: (h) => (h % 3 === 0 ? `${h}h` : ""), label: null},
     y: {grid: true, tickFormat: entero, label: null},
     marks: [Plot.barY(f.filter((d) => d.hora_local != null), Plot.groupX({y: "sum"}, {x: "hora_local", y: m, fill: FOCO, inset: 1, tip: true})), Plot.ruleY([0])]
   }))}</div>
   <div class="card">${resize((width) => Plot.plot({
-    title: "Tipo de vuelo", width, height: 240, marginLeft: 170,
+    title: "Tipo de vuelo", width, height: 300, marginLeft: 170,
     x: {grid: true, tickFormat: entero, label: null},
     y: {label: null},
     marks: [Plot.barX(f, Plot.groupY({x: "sum"}, {y: (d) => CLASES[d.clase_vuelo] ?? d.clase_vuelo, x: m, fill: FOCO, sort: {y: "-x"}, inset: 1, tip: true})), Plot.ruleX([0])]
@@ -93,4 +93,4 @@ const sinModeloNota = sinModelo.length ? html`<p class="fuente">Sin modelo: ${en
   }))}${sinModeloNota}</div>
 </div>
 
-<p class="muted">Los códigos de origen/destino son los de ANAC (AER = Aeroparque, CBA = Córdoba, DOZ = Mendoza, BCA = Bahía Blanca...). Datos provisorios en los últimos meses.</p>
+<p class="leyenda">Códigos de origen/destino: AER = Aeroparque, EZE = Ezeiza, CBA = Córdoba, DOZ = Mendoza, BCA = Bahía Blanca, FDO = San Fernando, MOR = Morón. Los últimos meses pueden cambiar con la actualización mensual.</p>

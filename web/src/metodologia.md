@@ -33,6 +33,17 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **Datos provisorios:** la ANAC marca como provisorios los últimos meses; pueden cambiar.
 - **Hora local:** hora UTC − 3.
 
+## Notas por capítulo
+
+- **01 · Serie larga:** las barras claras (2001–2018) son datos del Municipio y las oscuras (2019+), de la ANAC. Movimientos comerciales = vuelos regulares y no regulares.
+- **04 · Todo lo que vuela, "Desde 2015":** 2015–2018 sale de una muestra municipal de vuelos (≈ 52 % de los movimientos, sin vuelos oficiales ni escuelas); por eso la composición se muestra en porcentaje.
+- **04 · Avión típico:** familia con más movimientos de cada segmento. "Lleva hasta (habitual)" = percentil 95 de pasajeros de esa familia en ese segmento en todo el país. El **avión básico** del taxi aéreo es el turbohélice más frecuente entre los que llevan 5 o más pasajeros.
+- **05 · Asientos:** la ANAC no publica asientos; se estiman con la capacidad típica observada de cada avión (ver tabla de métricas).
+- **06 · A dónde se vuela:** el mapa recorta el cono sur; los destinos fuera del recorte se dibujan como flechas hacia el borde y se detallan en "Destinos lejanos". Ubicación de cada código: lista oficial de aeródromos y helipuertos de la ANAC, OurAirports y MADHEL. Los vuelos a lugares aptos denunciados no se cuentan como exterior.
+- **08 · Flota:** en 2019–2020 el avión se infiere por operador y pasajeros (ver "Modelo de avión faltante"); el resto queda como "Sin dato".
+- **Toda la aviación · Operadores:** "Sin dato" = la ANAC no informa el operador (frecuente en vuelos oficiales y militares).
+- **Explorador:** la familia de avión incluye la inferida para 2019–2020; los movimientos sin avión informado se cuentan aparte.
+
 ## Métricas estimadas (leer con cuidado)
 
 | Métrica | Cómo se calcula | Por qué es una estimación |

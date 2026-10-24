@@ -8,7 +8,7 @@ import * as d3 from "d3";
 import * as Inputs from "@observablehq/inputs";
 import {html} from "htl";
 import {TINTA, TINTA_2, ACENTO, OTRO, SEQ, SEGMENTOS, SEG_NOMBRE, SEG_COLOR, segColor, entero, pct, decimal1,
-  MESES, DIAS, CATEGORIAS, PERFILES, PERFIL_NOMBRE, perfilColor, datos, columnas} from "./components/util.js";
+  MESES, DIAS, CATEGORIAS, PERFILES, PERFIL_NOMBRE, perfilColor, datos, columnas, ALTO, ejeAnios, fechaEje} from "./components/util.js";
 ```
 
 ```js
@@ -72,10 +72,10 @@ const serie = segMensual.filter((d) => d.segmento === segSel.id);
 ```js
 Plot.plot({
   width,
-  height: 260,
+  height: ALTO.serie,
   marginLeft: 45,
   y: {grid: true, label: "Movimientos por mes", tickFormat: entero},
-  x: {label: null},
+  x: {label: null, tickFormat: fechaEje},
   marks: [
     Plot.rectY(serie, {x1: "periodo", x2: (d) => d3.utcMonth.offset(d.periodo, 1), y: "movimientos", fill: SEG_COLOR[segSel.id], inset: 0.5, tip: true,
       title: (d) => `${MESES[d.mes - 1]} ${d.anio}\n${entero(d.movimientos)} movimientos\n${entero(d.movimientos_locales)} locales`}),
@@ -86,7 +86,7 @@ Plot.plot({
 
 ### Con qué vuela
 
-Criterio: el **avión básico** de taxi aéreo y vuelos ejecutivos es un turbohélice que lleva 5 o más pasajeros (King Air, Caravan, PC-12). Un taxi aéreo a pistón cuenta como taxi solo si el avión tiene **6 plazas o más** (piloto + 5 pasajeros: Seneca, Navajo, Baron, Malibu, Cessna 206/210, Tecnam P2012). Si se declara como taxi en un avión más chico (Cessna 150/172/182, Tecnam P2002/P92, Cirrus, PA-28), se analiza como privado.
+<p class="intro-ancha">El <b>avión básico</b> del taxi aéreo y el vuelo ejecutivo es un turbohélice para 5 o más pasajeros, como el King Air o el Caravan. Arriba están los jets (Learjet, Citation); abajo, la aviación liviana a pistón, que es la de los privados y las escuelas de vuelo.</p>
 
 ```js
 const perfAnio = perfilAero.filter((d) => d.anio === anioSel && ["taxi_aereo", "privado", "instruccion", "oficial"].includes(d.segmento));
@@ -98,15 +98,15 @@ const share = (id) => d3.sum(perfSeg.filter((d) => d.perfil === id), (d) => d.sh
 perfSeg.length ? html`<div class="cifras">
   <div><span class="rotulo">Jet ejecutivo</span><span class="valor">${pct(share("jet_ejecutivo"))}</span><p class="nota">de los movimientos del segmento</p></div>
   <div><span class="rotulo">Turbohélice 5+ pax</span><span class="valor">${pct(share("turbohelice_basico"))}</span><p class="nota">el avión básico de taxi/ejecutivo</p></div>
-  <div><span class="rotulo">Pistón (liviano)</span><span class="valor">${pct(share("piston"))}</span><p class="nota">${segSel.id === "taxi_aereo" ? "pistón de 6+ plazas (Seneca, Navajo, Baron…)" : "aviación liviana"}</p></div>
-  <div><span class="rotulo">Sin dato del avión</span><span class="valor">${pct(share("sin_dato"))}</span><p class="nota">ANAC no informa el modelo</p></div>
+  <div><span class="rotulo">Pistón</span><span class="valor">${pct(share("piston"))}</span><p class="nota">${segSel.id === "taxi_aereo" ? "bimotores y aviones de 6+ plazas (Seneca, Navajo, Baron)" : "aviación liviana"}</p></div>
+  <div><span class="rotulo">Modelo desconocido</span><span class="valor">${pct(share("sin_dato"))}</span><p class="nota">vuelos sin avión informado</p></div>
 </div>` : ""
 ```
 
 ```js
 Plot.plot({
   title: `Perfil de aeronave por segmento · ${anioSel}`,
-  width, height: 220, marginLeft: 140,
+  width, height: ALTO.medio, marginLeft: 140,
   x: {label: "% de los movimientos del segmento", tickFormat: "%", domain: [0, 1]},
   y: {label: null, domain: ["Taxi aéreo", "Privado", "Escuelas de vuelo", "Oficial y militar"]},
   color: {...perfilColor, legend: true},
@@ -120,17 +120,16 @@ Plot.plot({
 
 ### El avión típico
 
-Las familias de aviones con más movimientos en ${anioSel}, las que más pasajeros llevan y el avión básico (turbohélice 5+ pax más frecuente).
+Las familias de aviones con más movimientos en ${anioSel}. Resaltado, el avión básico.
 
 ```js
 const tipicos = avionTipico.filter((d) => d.anio === anioSel && d.segmento === segSel.id).sort((a, b) => a.ranking - b.ranking);
 ```
 
 ```js
-tipicos.length ? html`<table class="editorial"><thead><tr><th>Familia</th><th>Tipo</th><th>Perfil</th><th>Movimientos</th><th>% del segmento</th><th>Pasajeros</th><th>Pax prom.</th><th>Capacidad obs. (p95)</th><th>En tierra</th><th>Vuelo</th><th>Hora</th><th>Orígenes/destinos</th></tr></thead><tbody>
+tipicos.length ? html`<table class="editorial"><thead><tr><th>Familia</th><th>Tipo</th><th>Perfil</th><th>Movimientos</th><th>% del segmento</th><th>Pasajeros</th><th>Pax prom.</th><th>Lleva hasta</th><th>En tierra</th><th>Vuelo</th><th>Hora</th><th>Orígenes/destinos</th></tr></thead><tbody>
 ${tipicos.map((d) => html`<tr class=${d.perfil === "turbohelice_basico" ? "foco" : ""}><td>${d.aeronave_familia}</td><td>${CATEGORIAS[d.aeronave_categoria] ?? d.aeronave_categoria}</td><td>${PERFIL_NOMBRE[d.perfil] ?? "—"}</td><td>${entero(d.movimientos)}</td><td>${pct(d.share_en_segmento)}</td><td>${entero(d.pasajeros)}</td><td>${decimal1(d.pax_promedio)}</td><td>${d.capacidad_observada_p95 ?? "—"}</td><td>${d.tiempo_en_tierra_mediano_min != null ? `${Math.round(d.tiempo_en_tierra_mediano_min)} min` : "—"}</td><td>${d.duracion_vuelo_mediana_min != null ? `${Math.round(d.duracion_vuelo_mediana_min)} min` : "—"}</td><td>${d.hora_mas_frecuente}h</td><td>${d.principales_origenes_destinos ?? "—"}</td></tr>`)}
-</tbody></table>
-<p class="fuente">Resaltado: el avión básico (turbohélice 5+ pax). Capacidad observada = percentil 95 de pasajeros de ese modelo en ese segmento en todo el país. Tiempo en tierra solo con matrícula (desde 2026) o en aviación de línea.</p>` : html`<p class="muted">Sin datos de aeronave para este segmento.</p>`
+</tbody></table>` : html`<p class="muted">Sin datos de aeronave para este segmento.</p>`
 ```
 
 ### Quién vuela y desde dónde
@@ -146,7 +145,7 @@ const ops = operadores.filter((d) => d.anio === anioSel && d.segmento === segSel
 Plot.plot({
   title: "Operadores",
   width: width / 2 - 20,
-  height: 300,
+  height: ALTO.medio,
   marginLeft: 220,
   x: {grid: true, label: "Movimientos", tickFormat: entero},
   y: {label: null},
@@ -161,7 +160,7 @@ Plot.plot({
 Plot.plot({
   title: "Orígenes y destinos",
   width: width / 2 - 20,
-  height: 300,
+  height: ALTO.medio,
   marginLeft: 220,
   x: {grid: true, label: "Movimientos", tickFormat: entero},
   y: {label: null},
@@ -171,7 +170,6 @@ Plot.plot({
 
 </div>
 </div>
-<p class="fuente">"Sin dato": la ANAC no informa el operador (frecuente en vuelos oficiales y militares).</p>
 
 ### Cuándo vuela
 
@@ -183,7 +181,7 @@ const celdas = d3.rollups(base.filter((d) => d.anio === anioSel && d.segmento ==
 ```js
 Plot.plot({
   width,
-  height: 240,
+  height: ALTO.medio,
   padding: 0.06,
   x: {label: "Hora local", tickFormat: (h) => `${h}h`, domain: d3.range(0, 24)},
   y: {domain: d3.range(1, 8), tickFormat: (i) => DIAS[i - 1], label: null},
@@ -201,10 +199,11 @@ const comp = segAnual.map((d) => ({...d, nombre: SEG_NOMBRE[d.segmento] ?? d.seg
 ```js
 Plot.plot({
   width,
-  height: 300,
+  height: ALTO.serie,
   marginLeft: 50,
+  marginBottom: 45,
   y: {grid: true, label: "Movimientos por año", tickFormat: entero},
-  x: {label: null, tickFormat: "d"},
+  x: ejeAnios,
   color: {...segColor, legend: true},
   marks: [
     Plot.barY(comp, Plot.stackY({x: "anio", y: "movimientos", fill: "nombre", order: segColor.domain, inset: 0.5, tip: true,
@@ -214,4 +213,4 @@ Plot.plot({
 })
 ```
 
-<div class="note">Segmentos según la clase de vuelo de la ANAC: los "No regulares" con aviones de línea son charters; el resto de los no regulares (jets y turbohélices ejecutivos, avionetas, helicópteros) se cuentan como taxi aéreo. Ver <a href="./metodologia">metodología</a>.</div>
+<p class="leyenda">Cómo se arma cada segmento y qué se hace con los datos incompletos: <a href="./metodologia">Metodología</a>.</p>

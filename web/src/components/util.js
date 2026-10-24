@@ -110,3 +110,10 @@ export function topN(rows, key, value, n = 6, otras = "Otras") {
 }
 
 export const fechaLarga = (d) => d.toLocaleDateString("es-AR", {day: "numeric", month: "long", year: "numeric", timeZone: "UTC"});
+
+// Tamaños estándar: series anchas (todo el ancho) y gráficos de media columna.
+export const ALTO = {serie: 380, medio: 300};
+// Eje de años en barras: rotado 45° para que no se encimen.
+export const ejeAnios = {label: null, tickFormat: "d", tickRotate: -45};
+// Ejes de fecha en castellano: "ene / 2024" en enero, el mes abreviado el resto del año.
+export const fechaEje = (d) => (d.getUTCMonth() === 0 ? `${MESES[0]}\n${d.getUTCFullYear()}` : MESES[d.getUTCMonth()]);
