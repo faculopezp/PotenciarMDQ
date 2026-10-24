@@ -136,43 +136,29 @@
 
 | codigos_en_ambas | mas_de_5_km | mediana_km |
 |---|---|---|
-| 671 | 671 | 3645.6 |
+| 671 | 6 | 0.0 |
 
 | codigo | nombre_anac | nombre_ourairports | distancia_km |
 |---|---|---|---|
-| IAC | LA QUIACA/DR. GUILLERMO EUGENIO SNOPEK | La Quiaca Airport | 5732.9 |
-| SMF | SAN MARTÍN/FINCA LA FRONTERA | Finca La Frontera Airport | 5500.7 |
-| TAR | TARTAGAL/GENERAL ENRIQUE MOSCONI | General Enrique Mosconi Airport | 5483.8 |
-| ORA | ORÁN | Orán Airport | 5464.4 |
-| SLV | EMBARCACIÓN/SALVITA | Salvita Airport | 5424.8 |
-| CLI | CALILEGUA | Calilegua Airport | 5419.7 |
-| VIT | SANTA VICTORIA | Santa Victoria Airport | 5415.8 |
-| PDA | JUJUY/PUERTA DE AVALOS | Puerta De Avalos Airport | 5396.7 |
-| CCS | CACHI | Cachi Airport | 5380.3 |
-| JUJ | JUJUY/GOBERNADOR GUZMÁN | Gobernador Horacio Guzman International Airport | 5370.1 |
-| HFC | SALTA/FINCA LAS COSTAS | Finca Las Costas Heliport | 5358.6 |
-| GBL | SALTA/GENERAL BELGRANO | General Belgrano Airport | 5354.0 |
-| HGB | SALTA/CENTRO CÍVICO GRAND BOURG | Centro Cívico Grand Bourg Heliport | 5352.5 |
-| HHM | SALTA/HOSPITAL DE MILAGRO | Hospital De Milagro Heliport | 5349.9 |
-| SAL | SALTA/GENERAL D. MARTÍN MIGUEL DE GÜEMES | Martín Miguel de Güemes International Airport | 5345.5 |
-| FDD | FORTÍN DRAGONES/EL DESAFÍO | El Desafio | 5344.8 |
-| HTE | SALTA/TEMET | Temet Helipad | 5336.5 |
-| LLA | LAS LAJITAS/AEROSOLUCIONES | AeroSoluciones Airport | 5228.9 |
-| CAF | CAFAYATE | Cafayate Airport | 5223.9 |
-| PCA | PIQUETE CABADO/SAS AEROAPLICACIONES | SAS Aeroaplicaciones Airport | 5215.0 |
+| HRR | MORRISON | Morrison Heliport | 102.0 |
+| ROH | ROBERTS/FUMIGACIONES HERBINSEC | Fumigaciones Herbinsec Airport | 65.0 |
+| HPG | PIEDRA DEL ÁGUILA/TRANSENER S.A. | Transener S.A. Heliport | 29.7 |
+| HHL | LAS LAJAS/EA. HAYCHOL | Estancia Haychol Heliport | 11.1 |
+| RAI | RANCHOS/LA IGUALDAD | La Igualdad Airport | 10.0 |
+| YPY | YAPEYÚ | Yapeyú Airport | 9.8 |
 
 ## Vista previa de la lista ANAC (formato de coordenadas)
 
 | codigo | oaci | iata | nombre | lat | lon |
 |---|---|---|---|---|---|
-| BHT | BHT |  | BRAGADO/HARAS TRELLIRIS | -60.57884 | -35.33147 |
-| CLT | CLT | CCT | COLONIA CATRIEL | -67.82881 | -37.90819 |
-| DIO | DIO |  | TANDIL/COMANDANTE EDUARDO A. OLIVERO | -58.98268 | -37.34678 |
-| ELZ | ELZ |  | ELIZALDE | -57.9625 | -34.975 |
-| GAR | GAR |  | GENERAL ALVEAR | -59.90699 | -35.97895 |
-| GLM | GLM |  | GUALEGUAYCHÚ/BLM CABAÑAS | -58.52222222 | -32.9775 |
-| GOR | SACT |  | GOBERNADOR GORDILLO/CHAMICAL | -66.29403 | -30.34416 |
-| GRZ | GRZ |  | GENERAL RODRIGUEZ | -59.00055556 | -34.58277778 |
+| BHT |  |  | BRAGADO/HARAS TRELLIRIS | -35.33138888888889 | -60.57888888888889 |
+| CLT |  | CCT | COLONIA CATRIEL | -37.908055555555556 | -67.82888888888888 |
+| DIO |  |  | TANDIL/COMANDANTE EDUARDO A. OLIVERO | -37.346666666666664 | -58.98277777777778 |
+| ELZ |  |  | ELIZALDE | -34.975 | -57.9625 |
+| GAR |  |  | GENERAL ALVEAR | -35.97888888888889 | -59.90694444444444 |
+| GLM |  |  | GUALEGUAYCHÚ/BLM CABAÑAS | -32.9775 | -58.522222222222226 |
+| GOR | SACT |  | GOBERNADOR GORDILLO/CHAMICAL | -30.344166666666666 | -66.29416666666667 |
+| GRZ |  |  | GENERAL RODRIGUEZ | -34.58277777777778 | -59.00055555555556 |
 
 ## Tramos reconstruidos (cabotaje comercial)
 
