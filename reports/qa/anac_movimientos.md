@@ -61,14 +61,13 @@
 
 | pct_aeronave_otro | pct_aerolinea_sin_regla | pct_sin_distancia | pct_sin_asientos |
 |---|---|---|---|
-| 0.14 | 7.12 | 0.9 | 43.4 |
+| 0.13 | 7.12 | 0.9 | 43.4 |
 
 ## Aeronaves sin clasificar (top 25 → ampliar config/aeronaves.yaml)
 
 | aeronave | movimientos |
 |---|---|
 | AIB-A-330-223 | 1515 |
-| EAE-EA500 | 521 |
 | LBG-SH2 | 511 |
 | CE-C-501 | 457 |
 | BE-B-36-TC | 416 |
@@ -84,14 +83,15 @@
 | CC-LY | 224 |
 | BE-65-B-80 | 215 |
 | BE-C-23 | 211 |
-| AE-7-EC | 210 |
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| I.A-1124 | 165 |
 | AGW-AW 109SP | 165 |
-| SLG-4 TSI | 154 |
+| I.A-1124 | 165 |
 | CE-T-303 | 153 |
+| BE-M-35 | 151 |
+| ARH-EC 130 B4 | 142 |
+| TWC-500-C | 140 |
 
 ## Códigos sin coordenadas (top 25 → revisar dim_aeropuerto)
 
@@ -129,7 +129,8 @@
 |---|---|---|---|
 | ourairports_local | 694 | 3045465 | 46896 |
 | ourairports_oaci | 604 | 649834 | 609 |
-| sin_resolver | 824 | 56043 | 482 |
+| lad_sin_coordenadas | 663 | 48193 | 266 |
+| sin_resolver | 161 | 7850 | 216 |
 | anac | 18 | 2562 | 148 |
 
 ## Lista ANAC vs OurAirports (mismo código, distancia > 5 km)
@@ -225,10 +226,10 @@
 | 2020 | taxi_aereo | 324 | 276 | 0 | 1 | 275 |
 | 2020 | trabajo_aereo | 19 | 19 | 0 | 0 | 19 |
 | 2020 | charter_linea | 3 | 3 | 0 | 2 | 1 |
-| 2021 | privado | 1211 | 16 | 0 | 0 | 16 |
+| 2021 | privado | 1212 | 16 | 0 | 0 | 16 |
 | 2021 | linea_regular | 1128 | 3 | 0 | 0 | 3 |
 | 2021 | oficial | 689 | 585 | 0 | 18 | 567 |
-| 2021 | taxi_aereo | 465 | 26 | 0 | 0 | 26 |
+| 2021 | taxi_aereo | 464 | 26 | 0 | 0 | 26 |
 | 2021 | instruccion | 421 | 0 | 0 | 0 | 0 |
 | 2021 | charter_linea | 31 | 0 | 0 | 0 | 0 |
 | 2021 | trabajo_aereo | 12 | 0 | 0 | 0 | 0 |
@@ -240,9 +241,9 @@
 | 2022 | charter_linea | 68 | 23 | 0 | 1 | 22 |
 | 2022 | trabajo_aereo | 3 | 0 | 0 | 0 | 0 |
 | 2023 | linea_regular | 3593 | 89 | 0 | 5 | 84 |
-| 2023 | privado | 1667 | 56 | 0 | 0 | 56 |
+| 2023 | privado | 1668 | 56 | 0 | 0 | 56 |
 | 2023 | oficial | 1222 | 1131 | 0 | 14 | 1117 |
-| 2023 | taxi_aereo | 604 | 107 | 0 | 0 | 107 |
+| 2023 | taxi_aereo | 603 | 107 | 0 | 0 | 107 |
 | 2023 | instruccion | 392 | 3 | 0 | 0 | 3 |
 | 2023 | charter_linea | 91 | 68 | 0 | 5 | 63 |
 | 2023 | trabajo_aereo | 2 | 0 | 0 | 0 | 0 |
@@ -260,9 +261,9 @@
 | 2025 | charter_linea | 102 | 65 | 0 | 15 | 50 |
 | 2025 | trabajo_aereo | 2 | 0 | 0 | 0 | 0 |
 | 2026 | linea_regular | 1942 | 57 | 0 | 12 | 45 |
-| 2026 | privado | 1128 | 42 | 0 | 0 | 42 |
+| 2026 | privado | 1131 | 42 | 0 | 0 | 42 |
 | 2026 | oficial | 794 | 635 | 0 | 43 | 592 |
-| 2026 | taxi_aereo | 331 | 23 | 0 | 0 | 23 |
+| 2026 | taxi_aereo | 328 | 23 | 0 | 0 | 23 |
 | 2026 | instruccion | 186 | 0 | 0 | 0 | 0 |
 | 2026 | charter_linea | 74 | 58 | 0 | 11 | 47 |
 
