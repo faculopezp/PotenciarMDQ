@@ -39,6 +39,7 @@ select = ["E", "F", "I", "B", "UP"]
 [tool.ruff.lint.per-file-ignores]
 # SQL embebido: las líneas largas se leen mejor que partidas.
 "src/potenciar_mdq/quality.py" = ["E501"]
+"src/potenciar_mdq/auditoria.py" = ["E501"]
 
 [tool.ruff.lint.flake8-bugbear]
 extend-immutable-calls = ["typer.Option", "typer.Argument"]

@@ -123,3 +123,10 @@ def test_muestras_y_modelo(work: Path):
     modelos = dict(q(work, "SELECT aeronave, aeronave_modelo FROM fct_movimiento "
                            "WHERE aeronave IS NOT NULL"))
     assert modelos["BO-737-8"] == "Boeing 737 MAX 8"
+
+
+def test_auditoria(work: Path):
+    from potenciar_mdq import auditoria
+
+    texto = auditoria.run(work / "bd.duckdb", work / "qa").read_text(encoding="utf-8")
+    assert "## 1. Completitud por año" in texto and "## 2C." in texto and "## 3." in texto

@@ -6,7 +6,7 @@ import logging
 
 import typer
 
-from potenciar_mdq import analitica, muestras, quality, web_export
+from potenciar_mdq import analitica, auditoria, muestras, quality, web_export
 from potenciar_mdq import bd as bd_mod
 from potenciar_mdq import ingest as ingest_mod
 from potenciar_mdq import marts as marts_mod
@@ -59,6 +59,10 @@ def qa() -> None:
     """Reporte de calidad -> reports/qa/."""
     typer.echo(quality.run())
     typer.echo(muestras.run())
+    try:
+        typer.echo(auditoria.run())
+    except Exception as exc:  # noqa: BLE001 - la auditoría informa, no corta el pipeline
+        typer.echo(f"skip auditoria: {type(exc).__name__}: {exc}")
 
 
 @app.command()

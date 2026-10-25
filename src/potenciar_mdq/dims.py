@@ -139,8 +139,11 @@ def _existe(con: duckdb.DuckDBPyConnection, tabla: str) -> bool:
 
 def build_dim_aerolinea(con: duckdb.DuckDBPyConnection) -> None:
     rules = load_yaml("aerolineas.yaml")["aerolineas"]
+    extra = (" UNION ALL SELECT aerolinea FROM mun_vuelos_hist WHERE aerolinea IS NOT NULL"
+             if _existe(con, "mun_vuelos_hist") else "")
     conteo = con.execute(
-        "SELECT aerolinea, count(*) FROM stg_movimiento WHERE aerolinea IS NOT NULL GROUP BY 1"
+        "SELECT aerolinea, count(*) FROM (SELECT aerolinea FROM stg_movimiento "
+        f"WHERE aerolinea IS NOT NULL{extra}) GROUP BY 1"
     ).fetchall()
     # Variantes del mismo operador (misma clave): todas toman el nombre y tipo de la más frecuente.
     grupos: dict[str, list[tuple[int, str]]] = {}
