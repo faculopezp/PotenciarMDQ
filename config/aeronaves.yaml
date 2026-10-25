@@ -299,12 +299,12 @@ modelos:
 # - Avian (Avianca Argentina): ATR 72-600 en cabotaje, Aeroparque–MDQ desde 2017; dejó de volar en 2019.
 # - Flyest: Bombardier CRJ200 de 50 asientos; cerró en 2020.
 # - Aerolíneas Argentinas: E190 de 96 asientos; 737-700; 737-800 y MAX 8 (misma cabina).
-#   Backtest MDQ 2023–2026: <=96 pax -> E190 acierta 94,8 %; 97–128 pax no separa 737-700 (43 %) de
-#   737-800/MAX (33 %) ni de E190 (23 %, datos con más pasajeros que asientos); >128 pax -> 737-800 o
-#   MAX 8 acierta 95 % (737-800 solo: 71 %).
+#   Backtest 2021+ (avión conocido): <=96 pax -> E190 acierta 93 %; >128 pax -> 737-800 o MAX 8
+#   acierta 95 %. Contra el avión real del portal municipal 2019: <=96 -> E190 acierta 97,7 %.
 inferencia:
   - {operador: 'AVIAN|AVIANCA', anio_hasta: 2020, pax_min: 1, pax_max: 72, familia: ATR 42/72, modelo: ATR 72-600, categoria: turbohelice_regional, modelos_validos: [ATR 72]}
   - {operador: 'FLYEST', anio_hasta: 2020, pax_min: 1, pax_max: 50, familia: Bombardier CRJ, modelo: Bombardier CRJ200, categoria: jet_regional, modelos_validos: [Bombardier CRJ200]}
   - {operador: 'AEROLINEAS ARGENTINAS|AUSTRAL', anio_hasta: 2099, pax_min: 1, pax_max: 96, familia: Embraer E190, modelo: Embraer E190, categoria: jet_regional, modelos_validos: [Embraer E190]}
-  - {operador: 'AEROLINEAS ARGENTINAS|AUSTRAL', anio_hasta: 2099, pax_min: 97, pax_max: 128, familia: Boeing 737, modelo: Boeing 737 (variante s/d), categoria: jet_fuselaje_angosto, modelos_validos: [Boeing 737-700, Boeing 737-800, Boeing 737 MAX 8]}
+  # 97–128 pasajeros: SIN regla. Validado contra el portal municipal 2019 (auditoría): 30 % de esos
+  # vuelos eran E190 (ANAC registra E190 con más de 96 pasajeros), así que no se puede asignar.
   - {operador: 'AEROLINEAS ARGENTINAS|AUSTRAL', anio_hasta: 2099, pax_min: 129, pax_max: 200, familia: Boeing 737, modelo: Boeing 737-800 / MAX 8, categoria: jet_fuselaje_angosto, modelos_validos: [Boeing 737-800, Boeing 737 MAX 8]}
