@@ -86,12 +86,12 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| I.A-1124 | 165 |
 | AGW-AW 109SP | 165 |
+| I.A-1124 | 165 |
 | CE-T-303 | 153 |
 | BE-M-35 | 151 |
 | ARH-EC 130 B4 | 142 |
-| TWC-500-C | 140 |
+| BE-D-95-A | 140 |
 
 ## Códigos sin coordenadas (top 25 → revisar dim_aeropuerto)
 
