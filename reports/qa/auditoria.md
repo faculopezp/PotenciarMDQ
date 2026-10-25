@@ -8,7 +8,7 @@ País:
 
 | anio | movimientos | pct_sin_operador | pct_sin_aeronave | pct_sin_matricula | pct_sin_pasajeros | pct_sin_hora | pct_sin_od | pct_od_lad |
 |---|---|---|---|---|---|---|---|---|
-| 2019 | 580749 | 31.4 | 100.0 | 100.0 | 0.0 | 0.0 | 0.0 | 0.9 |
+| 2019 | 580749 | 31.4 | 99.8 | 100.0 | 0.0 | 0.0 | 0.0 | 0.9 |
 | 2020 | 212686 | 48.6 | 85.3 | 100.0 | 0.0 | 0.0 | 0.0 | 1.1 |
 | 2021 | 329800 | 54.3 | 14.1 | 100.0 | 0.0 | 0.0 | 0.0 | 1.2 |
 | 2022 | 477930 | 38.3 | 15.3 | 100.0 | 0.0 | 0.0 | 0.0 | 1.3 |
@@ -21,7 +21,7 @@ Foco (MDQ):
 
 | anio | movimientos | pct_sin_operador | pct_sin_aeronave | pct_sin_matricula | pct_sin_pasajeros | pct_sin_hora | pct_sin_od | pct_od_lad |
 |---|---|---|---|---|---|---|---|---|
-| 2019 | 8388 | 32.1 | 100.0 | 100.0 | 0.0 | 0.0 | 0.0 | 0.2 |
+| 2019 | 8388 | 32.1 | 83.8 | 100.0 | 0.0 | 0.0 | 0.0 | 0.2 |
 | 2020 | 3022 | 50.6 | 82.4 | 100.0 | 0.0 | 0.0 | 0.0 | 0.2 |
 | 2021 | 3957 | 66.0 | 15.9 | 100.0 | 0.0 | 0.0 | 0.0 | 0.9 |
 | 2022 | 6387 | 49.9 | 15.1 | 100.0 | 0.0 | 0.0 | 0.0 | 0.4 |
@@ -35,10 +35,10 @@ Foco 2021+, por segmento:
 | segmento | movimientos | pct_sin_operador | pct_sin_aeronave | pct_sin_pasajeros |
 |---|---|---|---|---|
 | linea_regular | 15665 | 0.3 | 2.0 | 0.0 |
-| privado | 8552 | 92.6 | 5.7 | 0.0 |
+| privado | 8596 | 92.7 | 5.7 | 0.0 |
 | oficial | 6265 | 85.7 | 89.5 | 0.0 |
 | taxi_aereo | 3072 | 84.1 | 10.9 | 0.0 |
-| instruccion | 2695 | 89.8 | 0.2 | 0.0 |
+| instruccion | 2651 | 89.6 | 0.2 | 0.0 |
 | charter_linea | 457 | 15.8 | 59.3 | 0.0 |
 | trabajo_aereo | 19 | 100.0 | 0.0 | 0.0 |
 
@@ -53,9 +53,9 @@ Foco, por segmento:
 
 | segmento | faltan_con_matricula | recuperables_unanime |
 |---|---|---|
-| privado | 925 | 47 |
+| privado | 969 | 47 |
 | oficial | 589 | 161 |
-| instruccion | 330 | 186 |
+| instruccion | 286 | 186 |
 | taxi_aereo | 261 | 34 |
 | charter_linea | 2 | 2 |
 | linea_regular | 2 | 1 |
@@ -73,8 +73,8 @@ Qué se recupera (foco, top 12):
 | SAETA | 14 |
 | CEAP - AERO CHANNEL S.R.L- CIAC TIPO II | 13 |
 | TWR SRL | 10 |
-| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
 | PRESIDENCIA DE LA NACION | 10 |
+| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
 | FLIGHT CENTER- TWR S.R.L-CIAC TIPO III | 9 |
 
 ## 2B. Aeronave por matrícula
@@ -104,7 +104,7 @@ Comparación con la regla vigente (operador con >= 80 % de consistencia):
 
 | operador_inferido_80 | en_foco |
 |---|---|
-| 36758 | 599 |
+| 21208 | 453 |
 
 Aeronave faltante con matrícula presente en OpenSky (registro externo):
 
@@ -135,11 +135,27 @@ Aeronaves recuperables, por segmento y modelo municipal:
 | linea_regular | BOEING B-737 | 138 |
 | charter_linea | EMBRAER E-145 | 9 |
 
+## 4. Aplicado en la base (fct_movimiento)
+
+| ambito | operador_por_matricula | operador_por_otro_extremo | aeronave_del_municipio |
+|---|---|---|---|
+| MDQ | 431 | 22 | 1356 |
+| resto del país | 20229 | 526 | 0 |
+
+Validación: qué habría dicho la inferencia por pasajeros en los vuelos cuyo avión se recuperó del portal municipal (ANAC 2019, foco):
+
+| inferida | real | vuelos | pct |
+|---|---|---|---|
+| Boeing 737 | Boeing 737 | 110 | 70.1 |
+| Boeing 737 | Embraer E190 | 47 | 29.9 |
+| Embraer E190 | Embraer E190 | 1158 | 97.7 |
+| Embraer E190 | Boeing 737 | 27 | 2.3 |
+
 ## 3. Sin cruce posible con las fuentes actuales
 
 | caso | movimientos_foco |
 |---|---|
-| Aeronave sin matrícula (2019–2025) | 17082 |
+| Aeronave sin matrícula (2019–2025) | 15726 |
 | Operador sin matrícula (2019–2025) | 20536 |
 | Origen/destino en lugar apto denunciado (sin coordenadas) | 266 |
 | Pasajeros sin dato | 0 |

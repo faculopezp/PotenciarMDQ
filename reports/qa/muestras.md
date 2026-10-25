@@ -6,7 +6,7 @@ Perfil del faltante:
 
 | movimientos | sin_operador | vuelos_locales | con_pasajeros | con_matricula |
 |---|---|---|---|---|
-| 5606 | 4619 | 2603 | 877 | 635 |
+| 5606 | 4652 | 2603 | 877 | 635 |
 
 Orígenes/destinos más frecuentes:
 
@@ -27,11 +27,11 @@ Operadores informados:
 
 | aerolinea_nombre | movimientos |
 |---|---|
-| Sin dato | 4619 |
+| Sin dato | 4652 |
 | LADE | 523 |
-| Fuerza Aérea Argentina | 113 |
 | Ejercito Argentino | 96 |
-| Centro De Extension Profesional Aeronautica Prefectura Naval Argentina Cepa - Ciac Tipo I | 93 |
+| Fuerza Aérea Argentina | 90 |
+| Centro De Extension Profesional Aeronautica Prefectura Naval Argentina Cepa - Ciac Tipo I | 85 |
 | Usmil - Guardia Nac.F.Aer. (Eeuu) | 36 |
 | Presidencia De La Nacion | 28 |
 | Embajada De Los Estados Unidos | 24 |
@@ -69,7 +69,7 @@ Por operador y familia inferida:
 
 | anio | aerolinea_nombre | aeronave_familia_inferida | movimientos | pax_promedio | pax_max |
 |---|---|---|---|---|---|
-| 2019 | Aerolíneas Argentinas | Embraer E190 | 4129 | 70.6 | 96 |
+| 2019 | Aerolíneas Argentinas | Embraer E190 | 2951 | 70.8 | 96 |
 | 2019 | Avian (Avianca Argentina) | ATR 42/72 | 601 | 44.4 | 72 |
 | 2019 | Avian (Avianca Argentina) | Sin dato | 16 | 76.1 | 89 |
 | 2019 | Flyest S.A. Líneas Aéreas | Bombardier CRJ | 13 | 40.4 | 44 |
@@ -84,32 +84,32 @@ Muestra (20 filas):
 |---|---|---|---|---|---|---|---|---|---|---|
 | 2019-01-31 | 9 | regular | cabotaje | aterrizaje | AER | Avian (Avianca Argentina) |  |  | 59 | ATR 42/72 |
 | 2019-08-06 | 20 | regular | cabotaje | despegue | EZE | Aerolíneas Argentinas |  |  | 50 | Embraer E190 |
-| 2019-05-21 | 8 | regular | cabotaje | aterrizaje | AER | Aerolíneas Argentinas |  |  | 81 | Embraer E190 |
 | 2019-11-11 | 22 | regular | cabotaje | aterrizaje | AER | Aerolíneas Argentinas |  |  | 82 | Embraer E190 |
 | 2019-02-07 | 19 | regular | cabotaje | aterrizaje | BCA | Aerolíneas Argentinas |  |  | 53 | Embraer E190 |
-| 2019-02-25 | 19 | regular | cabotaje | despegue | EZE | Aerolíneas Argentinas |  |  | 55 | Embraer E190 |
 | 2019-01-31 | 10 | regular | cabotaje | despegue | BCA | Aerolíneas Argentinas |  |  | 67 | Embraer E190 |
 | 2019-09-06 | 19 | regular | cabotaje | aterrizaje | AER | Aerolíneas Argentinas |  |  | 92 | Embraer E190 |
 | 2019-08-04 | 12 | regular | cabotaje | aterrizaje | AER | Aerolíneas Argentinas |  |  | 84 | Embraer E190 |
-| 2019-01-23 | 14 | regular | cabotaje | despegue | AER | Aerolíneas Argentinas |  |  | 91 | Embraer E190 |
 | 2020-02-05 | 13 | regular | cabotaje | aterrizaje | EZE | Aerolíneas Argentinas |  |  | 64 | Embraer E190 |
 | 2020-03-17 | 8 | regular | cabotaje | despegue | AER | Aerolíneas Argentinas |  |  | 42 | Embraer E190 |
 | 2019-07-15 | 14 | regular | cabotaje | despegue | CBA | Aerolíneas Argentinas |  |  | 79 | Embraer E190 |
 | 2020-02-04 | 15 | regular | cabotaje | despegue | AER | Aerolíneas Argentinas |  |  | 96 | Embraer E190 |
-| 2019-05-17 | 17 | regular | cabotaje | aterrizaje | AER | Aerolíneas Argentinas |  |  | 90 | Embraer E190 |
-| 2019-01-15 | 13 | regular | cabotaje | despegue | CBA | Aerolíneas Argentinas |  |  | 80 | Embraer E190 |
 | 2019-02-08 | 8 | regular | cabotaje | aterrizaje | AER | Aerolíneas Argentinas |  |  | 79 | Embraer E190 |
 | 2019-01-29 | 19 | regular | cabotaje | aterrizaje | AER | Avian (Avianca Argentina) |  |  | 29 | ATR 42/72 |
 | 2019-04-03 | 13 | regular | cabotaje | aterrizaje | CBA | Aerolíneas Argentinas |  |  | 71 | Embraer E190 |
-| 2019-02-14 | 8 | regular | cabotaje | aterrizaje | AER | Aerolíneas Argentinas |  |  | 87 | Embraer E190 |
+| 2019-07-24 | 9 | regular | cabotaje | aterrizaje | EZE | Aerolíneas Argentinas |  |  | 43 | Embraer E190 |
+| 2019-10-15 | 22 | regular | cabotaje | aterrizaje | AER | Aerolíneas Argentinas |  |  | 84 | Embraer E190 |
+| 2020-02-27 | 10 | regular | cabotaje | despegue | BCA | Aerolíneas Argentinas |  |  | 39 | Embraer E190 |
+| 2019-10-30 | 9 | regular | cabotaje | aterrizaje | EZE | Aerolíneas Argentinas |  |  | 49 | Embraer E190 |
+| 2020-02-28 | 9 | regular | cabotaje | aterrizaje | AER | Aerolíneas Argentinas |  |  | 56 | Embraer E190 |
+| 2019-09-10 | 13 | regular | cabotaje | despegue | AER | Aerolíneas Argentinas |  |  | 88 | Embraer E190 |
 
 ## 3. Inferencias aplicadas (config/aeronaves.yaml → inferencia)
 
 | anio | aerolinea_nombre | aeronave_familia_inferida | movimientos | pax_min | pax_max |
 |---|---|---|---|---|---|
-| 2019 | Aerolíneas Argentinas | Embraer E190 | 4163 | 1 | 96 |
+| 2019 | Aerolíneas Argentinas | Embraer E190 | 2978 | 1 | 96 |
 | 2019 | Avian (Avianca Argentina) | ATR 42/72 | 662 | 2 | 72 |
-| 2019 | Aerolíneas Argentinas | Boeing 737 | 443 | 97 | 179 |
+| 2019 | Aerolíneas Argentinas | Boeing 737 | 286 | 97 | 179 |
 | 2019 | Flyest S.A. Líneas Aéreas | Bombardier CRJ | 20 | 15 | 46 |
 | 2020 | Aerolíneas Argentinas | Embraer E190 | 978 | 4 | 96 |
 | 2020 | Aerolíneas Argentinas | Boeing 737 | 275 | 97 | 178 |
@@ -199,8 +199,8 @@ Se aplica cada regla como si no se supiera el avión y se compara con el real.
 | 2023 | Grumman American GA-7 Cougar | 4 | 2 | 0.0 | 0 |
 | 2023 | Cessna (pistón) |  | 1 | 7.0 | 7 |
 | 2023 | Pitts S-2B | 2 | 1 | 0.0 | 0 |
-| 2023 | Piper PA-34 Seneca | 6 | 1 | 0.0 | 0 |
 | 2023 | Piper PA-23 Apache/Aztec | 5 | 1 | 0.0 | 0 |
+| 2023 | Piper PA-34 Seneca | 6 | 1 | 0.0 | 0 |
 | 2024 | Cessna 150 | 2 | 44 | 0.0 | 0 |
 | 2024 | Tecnam P2002 Sierra | 2 | 42 | 0.0 | 0 |
 | 2024 | Cessna 152 | 2 | 39 | 0.05 | 1 |
@@ -240,25 +240,24 @@ Se aplica cada regla como si no se supiera el avión y se compara con el real.
 | 2025 | Ultraliviano (Petrel/912) | 2 | 3 | 0.0 | 0 |
 | 2025 | Piper PA-24 Comanche | 4 | 3 | 3.67 | 7 |
 | 2025 | Piper PA-28R Arrow | 4 | 2 | 2.0 | 2 |
-| 2025 | Piper PA-23 Apache/Aztec | 5 | 2 | 1.0 | 2 |
 | 2025 | Beechcraft Bonanza 33/35 | 5 | 2 | 1.0 | 2 |
+| 2025 | Piper PA-23 Apache/Aztec | 5 | 2 | 1.0 | 2 |
 | 2025 | Airbus H125/AS350 |  | 1 | 0.0 | 0 |
 | 2025 | Piper Cub (PA-11/12/18) | 2 | 1 | 0.0 | 0 |
-| 2026 | Cessna 150 | 2 | 106 | 0.0 | 0 |
-| 2026 | Tecnam P2002 Sierra | 2 | 39 | 0.0 | 0 |
-| 2026 | BRM Aero Bristell | 2 | 31 | 0.0 | 0 |
-| 2026 | Cessna 152 | 2 | 17 | 0.0 | 0 |
+| 2026 | Cessna 150 | 2 | 102 | 0.0 | 0 |
+| 2026 | Tecnam P2002 Sierra | 2 | 38 | 0.0 | 0 |
+| 2026 | BRM Aero Bristell | 2 | 19 | 0.0 | 0 |
 | 2026 | Cessna 182 | 4 | 16 | 0.0 | 0 |
-| 2026 | Cessna 172 | 4 | 15 | 0.27 | 2 |
+| 2026 | Cessna 152 | 2 | 14 | 0.0 | 0 |
 | 2026 | Cirrus SR22 | 5 | 14 | 1.43 | 4 |
 | 2026 | Airbus H125/AS350 |  | 12 | 0.25 | 3 |
-| 2026 | Piper PA-28 Cherokee/Warrior/Archer | 4 | 10 | 0.6 | 2 |
+| 2026 | Cessna 172 | 4 | 11 | 0.36 | 2 |
 | 2026 | Tecnam P92 | 2 | 8 | 0.0 | 0 |
 | 2026 | Tecnam Astore | 2 | 7 | 0.0 | 0 |
-| 2026 | Piper PA-38 Tomahawk | 2 | 4 | 0.0 | 0 |
-| 2026 | Tecnam P2006T | 4 | 4 | 0.25 | 1 |
+| 2026 | Piper PA-28 Cherokee/Warrior/Archer | 4 | 6 | 1.0 | 2 |
 | 2026 | Piper PA-28R Arrow | 4 | 3 | 1.0 | 2 |
 | 2026 | Tecnam P2008 | 2 | 3 | 0.0 | 0 |
+| 2026 | Tecnam P2006T | 4 | 3 | 0.33 | 1 |
 | 2026 | Cessna 180 | 4 | 2 | 1.0 | 1 |
 | 2026 | Cessna 188 AgWagon | 1 | 2 | 0.0 | 0 |
 | 2026 | Rans S-6S Coyote II | 2 | 2 | 0.0 | 0 |
@@ -271,46 +270,46 @@ Se aplica cada regla como si no se supiera el avión y se compara con el real.
 
 | aeronave_modelo | aeronave_icao | denominaciones | como_figura_en_anac | movimientos |
 |---|---|---|---|---|
-| Embraer E190 | E190 | 1 | EMB-ERJ190100IGW | 10433 |
-| Boeing 737-800 | B738 | 17 | BO-B-737-81D · BO-737-8Q8 · BO-737-8U3 · BO-B737-81D · BO-B737-8SH · BO-737-8BK · BO-737-8SH · BO-737-81D · BO-737-86N · BO-737-800 · BO-B737-800 · BO-737-8HX · BO-B737-86J · BO-B737-8LP · BO-737-8GJ · BO-B737-8BK · BO-B737-8MB | 2973 |
-| Cessna 150 | C150 | 13 | CE-150-L · CE-150-K · CE-150 · CE-150-H · CE-A-150-L · CE-C-150-L · CE-150-A · CE-150-F · CE-150-G · CE-150-J · CE-150-E · CE-AA-150-L · CE-150-M | 2212 |
-| Boeing 737-700 | B737 | 6 | BO-B-737-76N · BO-737-76N · BO-B-737-700 · BO-737-7K2 · BO-B-737-7BD · BO-737-7BD | 1318 |
-| Tecnam P2002 Sierra |  | 7 | TEA-P2002 SIERRA · TEA-P2002 LSA · TEA-P2002-JF · TEA-P2002JF · TEA-P2002 · TEA-P2002 SIERRA MKII · TEA-P2002 SIERRA MK2 | 1067 |
-| Cessna 152 | C152 | 4 | CE-152-II · CE-152 · CE-152-A · CE-C-152 | 916 |
-| Beechcraft King Air 90 (C90/E90/A90/B90) | BE9L | 12 | RAY-C-90-GT · BE-C90GT · BE-65-A-90 · HAB-C-90-A · RAY-C90A · BE-C-90-A · BE-C-90-B · BE-E-90 · BE-C-90-GTI · BE-C-90 · BE-90-A · BE-C90GTI | 741 |
+| Embraer E190 | E190 | 2 | EMB-ERJ190100IGW · EMBRAER E-190 | 11642 |
+| Boeing 737-800 | B738 | 17 | BO-B-737-81D · BO-737-8Q8 · BO-737-8U3 · BO-B737-81D · BO-B737-8SH · BO-737-8BK · BO-737-8SH · BO-737-81D · BO-737-86N · BO-B737-8BK · BO-B737-8MB · BO-737-800 · BO-B737-800 · BO-737-8HX · BO-B737-86J · BO-B737-8LP · BO-737-8GJ | 2973 |
+| Cessna 150 | C150 | 13 | CE-150-L · CE-150-K · CE-150 · CE-150-H · CE-A-150-L · CE-C-150-L · CE-150-A · CE-150-M · CE-150-F · CE-150-G · CE-150-J · CE-150-E · CE-AA-150-L | 2212 |
+| Boeing 737-700 | B737 | 6 | BO-B-737-76N · BO-737-76N · BO-B-737-7BD · BO-737-7BD · BO-B-737-700 · BO-737-7K2 | 1318 |
+| Tecnam P2002 Sierra |  | 7 | TEA-P2002 SIERRA · TEA-P2002 LSA · TEA-P2002-JF · TEA-P2002JF · TEA-P2002 SIERRA MK2 · TEA-P2002 · TEA-P2002 SIERRA MKII | 1067 |
+| Cessna 152 | C152 | 4 | CE-152-II · CE-152 · CE-C-152 · CE-152-A | 916 |
+| Beechcraft King Air 90 (C90/E90/A90/B90) | BE9L | 12 | RAY-C-90-GT · BE-C90GT · BE-65-A-90 · HAB-C-90-A · RAY-C90A · BE-C-90-A · BE-E-90 · BE-C-90-GTI · BE-C-90 · BE-90-A · BE-C90GTI · BE-C-90-B | 741 |
 | Boeing 737 MAX 8 | B38M | 4 | BO-737-8 MAX · BO-B737-8MAX · BO-737-8 · BO-B737-8 | 734 |
-| Cessna 182 | C182 | 15 | CE-182-C · CE-182-T · CE-182-A · CE-182-B · CE-182-R · CE-A-182-K · CE-A-182-J · CE-T182T · CE-182-D · CE-182 · CE-182-P · CE-182-G · CE-A-182-N · TXA-182T · CE-182-F | 661 |
+| Cessna 182 | C182 | 15 | CE-182-C · CE-182-B · CE-182-A · CE-182-T · CE-182-R · CE-A-182-K · CE-A-182-J · CE-T182T · CE-182-D · CE-182 · CE-A-182-N · CE-182-F · TXA-182T · CE-182-P · CE-182-G | 661 |
 | Learjet 60 | LJ60 | 2 | LJ-60 · LJ-60-XR | 654 |
-| BRM Aero Bristell |  | 4 | BRT-LSA · BRT-BRISTELL LSA · AV1-BRISTELL CLASSIC · BRT-BRISTELL S-LSA | 533 |
-| Tecnam P92 |  | 6 | TEA-P92 ECHO CLA · TEA-P92 ECHO MKII · TEA-P92 EAGLET G5 · TEA-P92-JS · TEA-P92 MKII · TEA-P92 EAGLET | 498 |
+| BRM Aero Bristell |  | 4 | BRT-LSA · BRT-BRISTELL S-LSA · BRT-BRISTELL LSA · AV1-BRISTELL CLASSIC | 533 |
+| Tecnam P92 |  | 6 | TEA-P92 ECHO CLA · TEA-P92 ECHO MKII · TEA-P92 MKII · TEA-P92 EAGLET · TEA-P92 EAGLET G5 · TEA-P92-JS | 498 |
 | Cessna 208B Grand Caravan | C208 | 2 | TXA-208B · CE-208-B | 368 |
-| Piper PA-28 Cherokee/Warrior/Archer | P28A | 11 | PA-PA-28-180 · PAA-PA-A-28-181 · PAA-PA-A-28-140 · PA-PA-28-180-D · PA-PA-28-181 · PAA-PA-A-28-236 · PA-PA-28-235 · PA-PA-28-140 · PA-PA-28-161 · PA-PA-28 · PAA-PA-A-28-180 | 358 |
-| Cessna Citation CJ1/M2 (525) | C525 | 2 | TXA-525 · CE-525 | 277 |
-| Cessna 172 | C172 | 17 | CE-172-S · CE-172-C · CE-172-M · CE-172-N · CE-172-H · CE-A172N · CE-172 · CE-R-172-K · CE-172-RG · CE-R-172-G · CE-172-A · CE-172-E · CE-C-172-M · CE-172-B · CE-172RG · CE-172-L · CE-C-172-L | 272 |
-| Beechcraft Baron 58 | BE58 | 8 | BE-BARON 58 · BE-58 · TXA-58 · BE-58-P · HAB-G-58 · BE-58-TC · BE-G58 · BEF-58 | 266 |
+| Piper PA-28 Cherokee/Warrior/Archer | P28A | 11 | PA-PA-28-180 · PAA-PA-A-28-181 · PAA-PA-A-28-140 · PA-PA-28-180-D · PA-PA-28-140 · PA-PA-28-161 · PA-PA-28 · PAA-PA-A-28-180 · PA-PA-28-181 · PAA-PA-A-28-236 · PA-PA-28-235 | 358 |
+| Cessna Citation CJ1/M2 (525) | C525 | 2 | CE-525 · TXA-525 | 277 |
+| Cessna 172 | C172 | 17 | CE-172-S · CE-172-C · CE-172-N · CE-172-M · CE-172-H · CE-A172N · CE-172 · CE-R-172-K · CE-172-RG · CE-172-B · CE-172RG · CE-172-L · CE-C-172-L · CE-R-172-G · CE-172-A · CE-172-E · CE-C-172-M | 272 |
+| Beechcraft Baron 58 | BE58 | 8 | BE-BARON 58 · BE-58 · TXA-58 · BE-58-P · HAB-G-58 · BEF-58 · BE-58-TC · BE-G58 | 266 |
 | Airbus H125/AS350 | AS50 | 3 | ARH-AS-350-B3 · EUR-AS-350-B3 · ECU-AS-350-B3 | 253 |
 | Piper M500 (PA-46-500TP) | P46T | 2 | PAA-PA 46-500TP · PA-PA-46-500TP | 241 |
-| Piper PA-31 Navajo | PA31 | 7 | PA-PA-31 · PAA-PA-A-31-350 · PA-PA-31-325 · PA-PA-31-350 · PAA-PA-A-31-325 · PAA-PA-A-31-310 · PA-PA-31P-350 | 240 |
+| Piper PA-31 Navajo | PA31 | 7 | PA-PA-31 · PAA-PA-A-31-350 · PA-PA-31-325 · PAA-PA-A-31-325 · PAA-PA-A-31-310 · PA-PA-31P-350 · PA-PA-31-350 | 240 |
 | Beechcraft King Air 200/B200 | BE20 | 3 | BE-200 · BE-B-200 · TXA-B200 | 225 |
-| Piper PA-46 Malibu/Mirage | PA46 | 4 | PA-PA-46-350-P · PA-PA-46R-350T · PA-PA-46R-350 · PA-PA-46-350T | 220 |
+| Piper PA-46 Malibu/Mirage | PA46 | 4 | PA-PA-46-350-P · PA-PA-46-350T · PA-PA-46R-350T · PA-PA-46R-350 | 220 |
 | Cirrus SR22 | SR22 | 2 | CIR-SR-22 · CIT-SR22 | 208 |
 | Cessna Citation V/Ultra/Encore (560) | C560 | 1 | CE-560 | 207 |
 | Learjet 45 | LJ45 | 2 | LJ-LJ45 · LJ-45 | 200 |
-| Beechcraft King Air B200GT | BE20 | 4 | HAB-B-200-GT · BEF-B200GT · BE-B-200-GT · TXA-B200GT | 199 |
-| Piper PA-38 Tomahawk | PA38 | 2 | PA-PA-38-112 · PAA-PA-A-38-112 | 177 |
-| Piper PA-28R Arrow | P28R | 7 | PAA-PA-A-28R201T · PA-PA-28R-200 · PA-PA-28-200R · PA-PA-28R-180 · PA-PA-28-R-201T · PAA-PA-A-28-R200 · PAA-PA-A-28-R201 | 177 |
+| Beechcraft King Air B200GT | BE20 | 4 | HAB-B-200-GT · BE-B-200-GT · BEF-B200GT · TXA-B200GT | 199 |
+| Piper PA-38 Tomahawk | PA38 | 2 | PAA-PA-A-38-112 · PA-PA-38-112 | 177 |
+| Piper PA-28R Arrow | P28R | 7 | PAA-PA-A-28R201T · PA-PA-28R-200 · PA-PA-28-R-201T · PAA-PA-A-28-R200 · PAA-PA-A-28-R201 · PA-PA-28-200R · PA-PA-28R-180 | 177 |
 | Piper PA-34 Seneca | PA34 | 3 | PA-PA-34-200-T · PAA-PA-A-34-200T · PA-PA-34-200 | 173 |
-| Cessna Citation Excel/XLS (560XL) | C56X | 3 | TXA-560XL · CE-560-XL · CE-560-XI | 171 |
+| Cessna Citation Excel/XLS (560XL) | C56X | 3 | TXA-560XL · CE-560-XI · CE-560-XL | 171 |
 | Cessna Citation II/Bravo (550) | C550 | 1 | CE-550 | 171 |
 | Tecnam P2006T |  | 1 | TEA-P2006T | 159 |
 | Learjet 31 | LJ31 | 2 | LJ-31-A · LJ-31 | 158 |
+| Boeing 737 |  | 1 | BOEING B-737 | 138 |
 | Tecnam Astore |  | 1 | TEA-ASTORE | 135 |
 | Beechcraft Baron 55 | BE55 | 5 | TXA-95-B55 · BE-E55 · BE-BARON B-55 · BE-BARON E-55 · BE-95-B55 | 130 |
 | Cessna Citation II/SP (551) | C551 | 2 | CE-551 · CE-551-CITATION | 128 |
-| Beechcraft Bonanza 36 | BE36 | 9 | BE-A-36 · BEF-A36 · BE-36 · TXA-G36 · BE-B-36-TC · BE-36 B 36TC · BE-G36 · BE-A36 · TXA-A-36 | 118 |
+| Beechcraft Bonanza 36 | BE36 | 9 | BE-A-36 · BEF-A36 · BE-36 · TXA-G36 · BE-B-36-TC · BE-36 B 36TC · BE-A36 · TXA-A-36 · BE-G36 | 118 |
 | Airbus/MBB BK117/H145 |  | 6 | ARH-MBB-BK117 C2 · ARH-MBB-BK117 D-2 · EUR-EC-145 · EUR-MBB-BK-117C2 · EUR-MBB-BK-117C1 · ADG-MBB-BK-117C2 | 117 |
-| Fairchild Metro III/23 (SA227) | SW4 | 2 | FA-SA-227-AC · FA-SA-227-DC | 105 |
-| Cessna Citation I (500/501) | C501 | 3 | CE-501 · CE-500 · CE-C-501 | 99 |
+| Fairchild Metro III/23 (SA227) | SW4 | 2 | FA-SA-227-DC · FA-SA-227-AC | 105 |
 
 ## 6. Validación contra OpenSky (matrícula → tipo ICAO, todo el país)
 
@@ -325,25 +324,25 @@ Discrepancias (revisar regla o dato de OpenSky):
 | aeronave | aeronave_modelo | aeronave_icao | icao_opensky | modelo_opensky | matriculas | ejemplo |
 |---|---|---|---|---|---|---|
 | CE-550 | Cessna Citation II/Bravo (550) | C550 | C55B | Citation Bravo | 3 | LV-BEU |
-| TXA-525 | Cessna Citation CJ1/M2 (525) | C525 | C25M | Citation M2 | 2 | LV-GMQ |
-| LJ-45 | Learjet 45 | LJ45 | LJ75 |  | 2 | LQ-IJK |
+| LJ-45 | Learjet 45 | LJ45 | LJ40 | Learjet 40 XR | 2 | LV-CJY |
 | CE-500 | Cessna Citation I (500/501) | C501 | C500 | Citation I | 2 | LV-BID |
 | CE-T-210-N | Cessna T210 | T210 | C210 |  | 2 | LV-GQC |
-| LJ-45 | Learjet 45 | LJ45 | LJ40 | Learjet 40 XR | 2 | LV-CJY |
+| LJ-45 | Learjet 45 | LJ45 | LJ75 |  | 2 | LQ-IJK |
+| TXA-525 | Cessna Citation CJ1/M2 (525) | C525 | C25M | Citation M2 | 2 | LV-GMQ |
 | BE-A-36 | Beechcraft Bonanza 36 | BE36 | BT36 |  | 1 | LV-CDB |
-| CE-500 | Cessna Citation I (500/501) | C501 | C500 | Cessna Citation I | 1 | LV-BPW |
-| RO-R66 | Robinson R66 | R66 | AT76 | ATR 72 600 | 1 | LV-GUI |
-| TXA-T206H | Cessna T206 | T206 | C206 |  | 1 | LV-JKN |
 | RO-R-44RAVEN-II | Robinson R44 | R44 | R66 |  | 1 | LV-JWU |
-| BOM-BD-700-1A11 | Bombardier Global Express | GLEX | GL5T | Global 5000 | 1 | LV-GQE |
-| LAN-L2KC LEGACY | Embraer Legacy 600 | E35L | LEG2 |  | 1 | LV-X544 |
+| CE-500 | Cessna Citation I (500/501) | C501 | C500 | Cessna Citation I | 1 | LV-BPW |
 | CIR-SR 22T | Cirrus SR22T | S22T | SR22 |  | 1 | LV-IVV |
-| CE-152 | Cessna 152 | C152 | C150 |  | 1 | LV-IWB |
+| TXA-T206H | Cessna T206 | T206 | C206 |  | 1 | LV-JKN |
 | BE-36 | Beechcraft Bonanza 36 | BE36 | BT36 |  | 1 | LV-CNH |
 | BOM-BD-100-1A10 | Bombardier Challenger 300/350 | CL30 | CL35 | Challenger 350 | 1 | LV-HAT |
-| CE-R-172-G | Cessna 172 | C172 | C72R |  | 1 | LV-APA |
-| TXA-G36 | Beechcraft Bonanza 36 | BE36 | BE33 |  | 1 | LV-JUC |
+| BOM-BD-700-1A11 | Bombardier Global Express | GLEX | GL5T | Global 5000 | 1 | LV-GQE |
 | LJ-45 | Learjet 45 | LJ45 | LJ40 | Learjet 40 | 1 | LQ-BFS |
+| CE-R-172-G | Cessna 172 | C172 | C72R |  | 1 | LV-APA |
+| CE-152 | Cessna 152 | C152 | C150 |  | 1 | LV-IWB |
+| LAN-L2KC LEGACY | Embraer Legacy 600 | E35L | LEG2 |  | 1 | LV-X544 |
+| RO-R66 | Robinson R66 | R66 | AT76 | ATR 72 600 | 1 | LV-GUI |
+| TXA-G36 | Beechcraft Bonanza 36 | BE36 | BE33 |  | 1 | LV-JUC |
 | CE-525 | Cessna Citation CJ1/M2 (525) | C525 | C25M | Citation M2 | 1 | LV-GUL |
 
 Tipos ICAO sugeridos por OpenSky para modelos sin designador:
@@ -354,32 +353,32 @@ Tipos ICAO sugeridos por OpenSky para modelos sin designador:
 | Tecnam P92 | ECHO | 10 |
 | Tecnam P2006T | P06T | 5 |
 | Piper Cheyenne (PA-31T/42) | PAY2 | 4 |
+| Aero Commander 690 | AC90 | 3 |
 | Tecnam Astore | ASTO | 3 |
 | BRM Aero Bristell | NG5 | 3 |
-| Airbus/MBB BK117/H145 | EC45 | 3 |
-| Aero Commander 690 | AC90 | 3 |
 | Piper Cheyenne (PA-31T/42) | PAY1 | 3 |
+| Airbus/MBB BK117/H145 | EC45 | 3 |
 | Beechcraft Bonanza 33/35 | BE35 | 2 |
-| Aeronca 7EC Champion | CH7A | 2 |
-| Piper PA-32 Saratoga/Lance | P32T | 2 |
-| Piper PA-32 Saratoga/Lance | PA32 | 2 |
-| Tecnam P2010 | TWEN | 2 |
 | Air Tractor AT-802 | AT8T | 2 |
+| Tecnam P2010 | TWEN | 2 |
+| Piper PA-32 Saratoga/Lance | PA32 | 2 |
 | Learjet 25 | LJ25 | 2 |
-| Evektor Harmony LSA | EV97 | 1 |
-| Bombardier Challenger | CL61 | 1 |
-| Extra EA-500 | EA50 | 1 |
-| Tecnam P2012 Traveller | P212 | 1 |
-| Cessna TTx (T240) | C240 | 1 |
-| Piper Cub (PA-11/12/18) | PA11 | 1 |
-| Mooney M20 | M20P | 1 |
-| Beechcraft Bonanza 33/35 | BE33 | 1 |
-| Piper Aerostar 600/601 | AEST | 1 |
+| Piper PA-32 Saratoga/Lance | P32T | 2 |
+| Aeronca 7EC Champion | CH7A | 2 |
+| Cessna 177 | C177 | 1 |
+| Otra | FA20 | 1 |
+| Otra | C206 | 1 |
+| Bell | B222 | 1 |
+| Piper PA-32 Saratoga/Lance | P32R | 1 |
+| Tecnam P2008 | P208 | 1 |
+| Piper Cheyenne (PA-31T/42) | PAY3 | 1 |
 | Van's RV-4/7/8/12 | RV7 | 1 |
 | Airbus/MBB BK117/H145 | BK17 | 1 |
-| Piper Cheyenne (PA-31T/42) | PAY3 | 1 |
-| Tecnam P2008 | P208 | 1 |
-| Otra | L8 | 1 |
+| Piper Aerostar 600/601 | AEST | 1 |
+| Air Tractor AT-401/402 | AT3T | 1 |
+| Bombardier Challenger | CL61 | 1 |
+| Mooney M20 | M20T | 1 |
+| Sling 4 | SLG4 | 1 |
 
 ## 7. MADHEL (datos.anac.gob.ar/madhel/api/v2/airports/)
 

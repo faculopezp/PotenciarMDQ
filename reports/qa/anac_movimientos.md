@@ -4,7 +4,7 @@
 
 | source_file | filas | pct_fecha_null | pct_hora_null | pct_pax_null | pct_aeronave_null | pct_con_matricula | pct_provisorio | desde | hasta |
 |---|---|---|---|---|---|---|---|---|---|
-| 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580697 | 0.0 | 0.0 | 0.0 | 100.0 | 0.0 | 0.0 | 2019-01-01 | 2019-12-31 |
+| 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580697 | 0.0 | 0.0 | 0.0 | 99.77 | 0.0 | 0.0 | 2019-01-01 | 2019-12-31 |
 | 20261024_202012-informe-ministerio-actualizado-dic-final.csv | 212726 | 0.0 | 0.0 | 0.0 | 85.3 | 0.0 | 0.0 | 2019-12-31 | 2020-12-31 |
 | 20261024_202112-informe-ministerio-actualizado-dic-final.csv | 329781 | 0.0 | 0.0 | 0.0 | 14.06 | 0.0 | 0.0 | 2020-12-31 | 2021-12-31 |
 | 20261024_202212-informe-ministerio-actualizado-dic-final.csv | 477903 | 0.0 | 0.0 | 0.0 | 15.28 | 0.0 | 0.0 | 2021-12-31 | 2022-12-31 |
@@ -61,7 +61,7 @@
 
 | pct_aeronave_otro | pct_aerolinea_sin_regla | pct_sin_distancia | pct_sin_asientos |
 |---|---|---|---|
-| 0.13 | 7.37 | 0.9 | 43.4 |
+| 0.13 | 7.28 | 0.9 | 43.4 |
 
 ## Aeronaves sin clasificar (top 25 → ampliar config/aeronaves.yaml)
 
@@ -91,7 +91,7 @@
 | CE-T-303 | 153 |
 | BE-M-35 | 151 |
 | ARH-EC 130 B4 | 142 |
-| BE-D-95-A | 140 |
+| TWC-500-C | 140 |
 
 ## Códigos sin coordenadas (top 25 → revisar dim_aeropuerto)
 
@@ -165,7 +165,7 @@
 
 | tramos | despegues_cabotaje | pct_emparejado |
 |---|---|---|
-| 778786 | 915317 | 85.1 |
+| 777481 | 915317 | 84.9 |
 
 ## Rotaciones: método por matrícula vs por modelo
 
@@ -173,37 +173,37 @@
 |---|---|---|---|---|
 | BAR | matricula | escala_larga | 191 | 165.0 |
 | BAR | matricula | pernocte | 94 | 1040.5 |
-| BAR | matricula | rotacion | 4153 | 68.0 |
+| BAR | matricula | rotacion | 4152 | 68.0 |
 | BAR | modelo | escala_larga | 837 | 148.0 |
 | BAR | modelo | pernocte | 367 | 925.0 |
 | BAR | modelo | rotacion | 31347 | 64.0 |
-| BCA | matricula | escala_larga | 68 | 198.5 |
+| BCA | matricula | escala_larga | 67 | 195.0 |
 | BCA | matricula | pernocte | 28 | 1139.0 |
-| BCA | matricula | rotacion | 1037 | 49.0 |
+| BCA | matricula | rotacion | 1036 | 49.0 |
 | BCA | modelo | escala_larga | 131 | 178.0 |
 | BCA | modelo | pernocte | 281 | 605.0 |
 | BCA | modelo | rotacion | 5126 | 52.0 |
-| DOZ | matricula | escala_larga | 135 | 201.0 |
+| DOZ | matricula | escala_larga | 134 | 200.0 |
 | DOZ | matricula | pernocte | 323 | 633.0 |
-| DOZ | matricula | rotacion | 3927 | 61.0 |
+| DOZ | matricula | rotacion | 3926 | 61.0 |
 | DOZ | modelo | escala_larga | 561 | 190.0 |
 | DOZ | modelo | pernocte | 924 | 613.0 |
 | DOZ | modelo | rotacion | 26748 | 57.0 |
-| MDP | matricula | escala_larga | 272 | 235.0 |
+| MDP | matricula | escala_larga | 270 | 236.0 |
 | MDP | matricula | pernocte | 105 | 1143.0 |
-| MDP | matricula | rotacion | 1328 | 52.0 |
-| MDP | modelo | escala_larga | 364 | 206.0 |
-| MDP | modelo | pernocte | 97 | 1413.0 |
-| MDP | modelo | rotacion | 7344 | 52.0 |
-| NEU | matricula | escala_larga | 295 | 211.0 |
-| NEU | matricula | pernocte | 775 | 993.0 |
+| MDP | matricula | rotacion | 1326 | 52.0 |
+| MDP | modelo | escala_larga | 370 | 203.5 |
+| MDP | modelo | pernocte | 178 | 574.0 |
+| MDP | modelo | rotacion | 7798 | 52.0 |
+| NEU | matricula | escala_larga | 294 | 210.0 |
+| NEU | matricula | pernocte | 773 | 991.0 |
 | NEU | matricula | rotacion | 3694 | 53.0 |
 | NEU | modelo | escala_larga | 515 | 247.0 |
 | NEU | modelo | pernocte | 1252 | 1028.0 |
 | NEU | modelo | rotacion | 18595 | 53.0 |
 | SAL | matricula | escala_larga | 241 | 161.0 |
 | SAL | matricula | pernocte | 1125 | 1118.0 |
-| SAL | matricula | rotacion | 4112 | 56.0 |
+| SAL | matricula | rotacion | 4110 | 56.0 |
 | SAL | modelo | escala_larga | 554 | 149.0 |
 | SAL | modelo | pernocte | 2664 | 1103.0 |
 | SAL | modelo | rotacion | 22399 | 57.0 |
@@ -212,13 +212,13 @@
 
 | anio | segmento | movimientos | sin_aeronave | sin_aeronave_mas_de_96_pax | sin_aeronave_20_a_96_pax | sin_aeronave_menos_de_20_pax |
 |---|---|---|---|---|---|---|
-| 2019 | linea_regular | 5324 | 5324 | 445 | 4757 | 122 |
+| 2019 | linea_regular | 5324 | 3977 | 288 | 3579 | 110 |
 | 2019 | taxi_aereo | 964 | 964 | 0 | 7 | 957 |
 | 2019 | privado | 803 | 803 | 0 | 5 | 798 |
 | 2019 | oficial | 669 | 669 | 0 | 8 | 661 |
 | 2019 | instruccion | 546 | 546 | 0 | 0 | 546 |
 | 2019 | trabajo_aereo | 50 | 50 | 0 | 0 | 50 |
-| 2019 | charter_linea | 32 | 32 | 0 | 5 | 27 |
+| 2019 | charter_linea | 32 | 23 | 0 | 5 | 18 |
 | 2020 | linea_regular | 1351 | 1265 | 275 | 968 | 22 |
 | 2020 | privado | 532 | 306 | 0 | 0 | 306 |
 | 2020 | oficial | 411 | 397 | 0 | 2 | 395 |
@@ -261,10 +261,10 @@
 | 2025 | charter_linea | 102 | 65 | 0 | 15 | 50 |
 | 2025 | trabajo_aereo | 2 | 0 | 0 | 0 | 0 |
 | 2026 | linea_regular | 1942 | 57 | 0 | 12 | 45 |
-| 2026 | privado | 976 | 42 | 0 | 0 | 42 |
+| 2026 | privado | 1020 | 42 | 0 | 0 | 42 |
 | 2026 | oficial | 794 | 635 | 0 | 43 | 592 |
-| 2026 | instruccion | 353 | 0 | 0 | 0 | 0 |
 | 2026 | taxi_aereo | 314 | 23 | 0 | 0 | 23 |
+| 2026 | instruccion | 309 | 0 | 0 | 0 | 0 |
 | 2026 | charter_linea | 76 | 58 | 0 | 11 | 47 |
 
 ## Meses sin movimientos en el foco
