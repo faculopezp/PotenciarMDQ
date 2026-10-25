@@ -86,7 +86,7 @@ Plot.plot({
 
 ### Con qué vuela
 
-<p class="intro-ancha">El <b>avión básico</b> del taxi aéreo y el vuelo ejecutivo es un turbohélice para 5 o más pasajeros, como el King Air o el Caravan. Arriba están los jets (Learjet, Citation); abajo, la aviación liviana a pistón, que es la de los privados y las escuelas de vuelo.</p>
+<p class="intro-ancha">De más pesado a más liviano: jets ejecutivos (Learjet, Citation), turbohélices (King Air, Caravan: el <b>avión básico</b> del taxi aéreo), pistones de 6 o más plazas (Seneca, Navajo, Baron) y pistones livianos, los de los privados y las escuelas de vuelo.</p>
 
 ```js
 const perfAnio = perfilAero.filter((d) => d.anio === anioSel && ["taxi_aereo", "privado", "instruccion", "oficial"].includes(d.segmento));
@@ -97,8 +97,8 @@ const share = (id) => d3.sum(perfSeg.filter((d) => d.perfil === id), (d) => d.sh
 ```js
 perfSeg.length ? html`<div class="cifras">
   <div><span class="rotulo">Jet ejecutivo</span><span class="valor">${pct(share("jet_ejecutivo"))}</span><p class="nota">de los movimientos del segmento</p></div>
-  <div><span class="rotulo">Turbohélice 5+ pax</span><span class="valor">${pct(share("turbohelice_basico"))}</span><p class="nota">el avión básico de taxi/ejecutivo</p></div>
-  <div><span class="rotulo">Pistón</span><span class="valor">${pct(share("piston"))}</span><p class="nota">${segSel.id === "taxi_aereo" ? "bimotores y aviones de 6+ plazas (Seneca, Navajo, Baron)" : "aviación liviana"}</p></div>
+  <div><span class="rotulo">Turbohélice</span><span class="valor">${pct(share("turbohelice"))}</span><p class="nota">el avión básico del taxi aéreo</p></div>
+  <div><span class="rotulo">Pistón</span><span class="valor">${pct(share("piston_6") + share("piston_liviano"))}</span><p class="nota">${pct(share("piston_6"))} de 6+ plazas · ${pct(share("piston_liviano"))} liviano</p></div>
   <div><span class="rotulo">Modelo desconocido</span><span class="valor">${pct(share("sin_dato"))}</span><p class="nota">vuelos sin avión informado</p></div>
 </div>` : ""
 ```
@@ -128,7 +128,7 @@ const tipicos = avionTipico.filter((d) => d.anio === anioSel && d.segmento === s
 
 ```js
 tipicos.length ? html`<table class="editorial"><thead><tr><th>Familia</th><th>Tipo</th><th>Perfil</th><th>Movimientos</th><th>% del segmento</th><th>Pasajeros</th><th>Pax prom.</th><th>Lleva hasta</th><th>En tierra</th><th>Vuelo</th><th>Hora</th><th>Orígenes/destinos</th></tr></thead><tbody>
-${tipicos.map((d) => html`<tr class=${d.perfil === "turbohelice_basico" ? "foco" : ""}><td>${d.aeronave_familia}</td><td>${CATEGORIAS[d.aeronave_categoria] ?? d.aeronave_categoria}</td><td>${PERFIL_NOMBRE[d.perfil] ?? "—"}</td><td>${entero(d.movimientos)}</td><td>${pct(d.share_en_segmento)}</td><td>${entero(d.pasajeros)}</td><td>${decimal1(d.pax_promedio)}</td><td>${d.capacidad_observada_p95 ?? "—"}</td><td>${d.tiempo_en_tierra_mediano_min != null ? `${Math.round(d.tiempo_en_tierra_mediano_min)} min` : "—"}</td><td>${d.duracion_vuelo_mediana_min != null ? `${Math.round(d.duracion_vuelo_mediana_min)} min` : "—"}</td><td>${d.hora_mas_frecuente}h</td><td>${d.principales_origenes_destinos ?? "—"}</td></tr>`)}
+${tipicos.map((d) => html`<tr class=${d.perfil === "turbohelice" && d.ranking_en_perfil === 1 ? "foco" : ""}><td>${d.aeronave_familia}</td><td>${CATEGORIAS[d.aeronave_categoria] ?? d.aeronave_categoria}</td><td>${PERFIL_NOMBRE[d.perfil] ?? "—"}</td><td>${entero(d.movimientos)}</td><td>${pct(d.share_en_segmento)}</td><td>${entero(d.pasajeros)}</td><td>${decimal1(d.pax_promedio)}</td><td>${d.capacidad_observada_p95 ?? "—"}</td><td>${d.tiempo_en_tierra_mediano_min != null ? `${Math.round(d.tiempo_en_tierra_mediano_min)} min` : "—"}</td><td>${d.duracion_vuelo_mediana_min != null ? `${Math.round(d.duracion_vuelo_mediana_min)} min` : "—"}</td><td>${d.hora_mas_frecuente}h</td><td>${d.principales_origenes_destinos ?? "—"}</td></tr>`)}
 </tbody></table>` : html`<p class="muted">Sin datos de aeronave para este segmento.</p>`
 ```
 
@@ -149,9 +149,16 @@ Plot.plot({
   marginLeft: 220,
   x: {grid: true, label: "Movimientos", tickFormat: entero},
   y: {label: null},
-  marks: [Plot.barX(ops.filter((d) => d.dimension === "operador"), {x: "movimientos", y: "valor", sort: {y: "-x"}, fill: SEG_COLOR[segSel.id], inset: 1, tip: true}), Plot.ruleX([0])]
+  marks: [Plot.barX(ops.filter((d) => d.dimension === "operador" && d.valor !== "Sin dato"), {x: "movimientos", y: "valor", sort: {y: "-x"}, fill: SEG_COLOR[segSel.id], inset: 1, tip: true}), Plot.ruleX([0])]
 })
 ```
+
+```js
+const sinOp = d3.sum(ops.filter((d) => d.dimension === "operador" && d.valor === "Sin dato"), (d) => d.movimientos);
+const totOp = perfil?.movimientos ?? d3.sum(ops.filter((d) => d.dimension === "operador"), (d) => d.movimientos);
+```
+
+${sinOp ? html`<p class="leyenda">Además, ${entero(sinOp)} movimientos (${pct(sinOp / totOp)}) sin operador informado.</p>` : ""}
 
 </div>
 <div>

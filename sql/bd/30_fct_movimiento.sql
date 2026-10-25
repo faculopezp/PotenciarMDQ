@@ -1,13 +1,26 @@
 -- Hecho principal: 1 fila = 1 aterrizaje o despegue, enriquecido con calendario, aerolínea,
 -- aeronave, distancia y métricas estimadas. Ver docs/07_bd_y_metricas.md.
 CREATE OR REPLACE TABLE fct_movimiento AS
-WITH s AS (
+-- Operador por matrícula (desde 2026 ANAC informa matrícula): si un movimiento no trae operador
+-- pero su matrícula vuela con un mismo operador en >= 80 % de los vuelos que sí lo traen, se usa ese.
+WITH mo AS (
+  SELECT matricula, aerolinea FROM (
+    SELECT matricula, aerolinea, n, n / sum(n) OVER (PARTITION BY matricula) AS share
+    FROM (SELECT matricula, aerolinea, count(*) AS n FROM stg_movimiento
+          WHERE matricula IS NOT NULL AND aerolinea IS NOT NULL GROUP BY matricula, aerolinea)
+  ) QUALIFY row_number() OVER (PARTITION BY matricula ORDER BY n DESC) = 1 AND share >= 0.8
+),
+s AS (
   SELECT
-    s.* EXCLUDE (aeropuerto),
+    s.* EXCLUDE (aeropuerto, aerolinea),
+    coalesce(s.aerolinea, mo.aerolinea)            AS aerolinea,
+    s.aerolinea                                    AS aerolinea_original,
+    s.aerolinea IS NULL AND mo.aerolinea IS NOT NULL AS operador_inferido,
     s.aeropuerto                                   AS aeropuerto_original,
     coalesce(c.a, s.aeropuerto)                    AS aeropuerto,
     CAST(s.fecha + s.hora_utc AS TIMESTAMP)        AS ts_utc
   FROM stg_movimiento s
+  LEFT JOIN mo ON mo.matricula = s.matricula
   LEFT JOIN correcciones c
     ON s.aeropuerto = c.de AND list_contains(c.clases, s.clase_vuelo)
 ),
@@ -33,6 +46,10 @@ j AS (
     -- Segmento de actividad (ver config/mdq.yaml → segmentos)
     CASE
       WHEN e.clase_vuelo = 'regular' THEN 'linea_regular'
+      -- Escuelas de vuelo que declaran el vuelo como privado o no regular
+      WHEN (e.clase_vuelo = 'no_regular' OR e.clase_vuelo LIKE 'vuelo_privado%')
+       AND regexp_matches(upper(strip_accents(coalesce(e.aerolinea, ''))), getvariable('patron_escuela'))
+        THEN 'instruccion'
       WHEN e.clase_vuelo = 'no_regular'
        AND (list_contains(getvariable('categorias_linea'), an.categoria)
             OR list_contains(getvariable('operadores_linea'), al.aerolinea_tipo)) THEN 'charter_linea'
@@ -91,8 +108,9 @@ SELECT
   j.es_comercial,
   j.clase_vuelo = 'regular'                        AS es_regular,
   j.segmento,
-  j.clase_vuelo = 'no_regular' AND coalesce(j.es_piston, false)
-    AND j.segmento = 'privado'                     AS segmento_reclasificado,
+  (j.clase_vuelo = 'no_regular' AND coalesce(j.es_piston, false) AND j.segmento = 'privado')
+    OR (j.segmento = 'instruccion' AND j.clase_vuelo NOT IN ('vuelo_escuela', 'vuelo_de_adiestramiento'))
+                                                   AS segmento_reclasificado,
   j.segmento IN ('linea_regular', 'charter_linea') AS es_linea,
   j.clasificacion_vuelo,
   j.tipo_movimiento,
@@ -105,6 +123,8 @@ SELECT
   j.distancia_km,
   -- operador y aeronave
   j.aerolinea,
+  j.aerolinea_original,
+  j.operador_inferido,
   coalesce(j.aerolinea_nombre, 'Sin dato')         AS aerolinea_nombre,
   coalesce(j.aerolinea_tipo, 'sin_dato')           AS aerolinea_tipo,
   j.aeronave,

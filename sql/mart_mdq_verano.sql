@@ -11,6 +11,6 @@ SELECT
   count(DISTINCT m.fecha)                         AS dias_con_datos
 FROM fct_movimiento m
 LEFT JOIN dim_aeropuerto ap ON ap.codigo = m.origen_destino
-WHERE m.aeropuerto = getvariable('foco') AND m.es_comercial AND m.verano_anio IS NOT NULL
+WHERE m.aeropuerto = getvariable('foco') AND m.es_linea AND m.verano_anio IS NOT NULL
 GROUP BY m.verano_anio, m.origen_destino, ap.ciudad
 ORDER BY m.verano_anio, pasajeros DESC

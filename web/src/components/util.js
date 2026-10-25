@@ -1,11 +1,17 @@
 import * as d3 from "d3";
 
-// Paleta: papel/tinta/bermellón (editorial) + categórica validada (skill dataviz) en orden fijo.
+// ── Paleta del sitio (ver docs/11_paleta.md). Cada color tiene un único significado. ──
+// Base editorial: papel, tinta y un acento bermellón reservado para lo que se destaca
+// (Mar del Plata en comparaciones, récords, alertas, el exterior en el mapa).
+export const PAPEL = "#f5f1ea";
 export const TINTA = "#1a1a18";
 export const TINTA_2 = "#6b675e";
 export const ACENTO = "#c73e1d";
+export const OTRO = "#a3a29c";        // "otras" / resto agrupado
+export const SIN_DATO = "#d6d3cb";    // dato faltante: siempre el gris más claro
+// Categórica (validada por contraste y daltonismo), en orden fijo: la usan los segmentos.
 export const CAT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6"];
-export const OTRO = "#a3a29c";
+// Secuencial (intensidad: calendarios, mapas de calor) y divergente (más/menos).
 export const SEQ = ["#cde2fb", "#86b6ef", "#3987e5", "#1c5cab", "#0d366b"];
 export const DIV = {neg: "#c73e1d", mid: "#efeae1", pos: "#2a78d6"};
 export const FOCO = TINTA;
@@ -20,17 +26,26 @@ export const SEGMENTOS = [
   {id: "charter_linea", nombre: "Charter de línea"},
   {id: "trabajo_aereo", nombre: "Trabajo aéreo"}
 ];
-// Perfil de aeronave (config/mdq.yaml → perfil_aeronave). Secuencia de "más pesado" a "más liviano".
+// Perfil de aeronave, de más pesado a más liviano: turbina en azules, pistón en ámbar,
+// helicóptero en verde, avión de línea en gris tinta.
 export const PERFILES = [
   {id: "jet_ejecutivo", nombre: "Jet ejecutivo", color: "#0d366b"},
-  {id: "turbohelice_basico", nombre: "Turbohélice 5+ pax (básico)", color: "#3987e5"},
-  {id: "turbohelice_chico", nombre: "Turbohélice < 5 pax", color: "#86b6ef"},
-  {id: "piston", nombre: "Pistón (liviano)", color: "#eda100"},
+  {id: "turbohelice", nombre: "Turbohélice", color: "#3987e5"},
+  {id: "piston_6", nombre: "Pistón 6+ plazas", color: "#c98500"},
+  {id: "piston_liviano", nombre: "Pistón liviano", color: "#f2c55c"},
   {id: "helicoptero", nombre: "Helicóptero", color: "#1baf7a"},
   {id: "avion_de_linea", nombre: "Avión de línea", color: "#6b675e"},
-  {id: "sin_dato", nombre: "Sin dato / otro", color: "#d6d3cb"}
+  {id: "sin_dato", nombre: "Sin dato", color: "#d6d3cb"}
 ];
-export const PERFIL_NOMBRE = Object.fromEntries(PERFILES.map((p) => [p.id, p.nombre]));
+// Para tablas por familia (sin plazas): pistón a secas.
+export const PERFIL_EXTRA = {piston: {nombre: "Pistón", color: "#eda100"}};
+export const PERFIL_NOMBRE = {...Object.fromEntries(PERFILES.map((p) => [p.id, p.nombre])), piston: "Pistón"};
+// Color por categoría de aeronave (para gráficos sin perfil calculado, ej. Explorador).
+export const CATEGORIA_COLOR = {
+  jet_ejecutivo: "#0d366b", turbohelice_ejecutivo: "#3987e5", aviacion_general_piston: "#eda100",
+  helicoptero: "#1baf7a", agricola: "#008300", jet_fuselaje_angosto: TINTA_2, jet_fuselaje_ancho: TINTA_2,
+  jet_regional: TINTA_2, turbohelice_regional: TINTA_2, otro: OTRO, sin_dato: SIN_DATO
+};
 export const perfilColor = {domain: PERFILES.map((p) => p.nombre), range: PERFILES.map((p) => p.color)};
 export const SEG_NOMBRE = Object.fromEntries(SEGMENTOS.map((s) => [s.id, s.nombre]));
 export const SEG_COLOR = Object.fromEntries(SEGMENTOS.map((s, i) => [s.id, CAT[i]]));

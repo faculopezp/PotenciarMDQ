@@ -4,6 +4,8 @@ title: Metodología y fuentes
 
 # Metodología y fuentes
 
+<div class="metodologia">
+
 ## De dónde salen los datos
 
 | Dato | Fuente | Cobertura |
@@ -19,6 +21,9 @@ title: Metodología y fuentes
 
 Los datos se descargan y procesan automáticamente una vez por mes. El código es abierto.
 
+<div class="met-grid">
+<div>
+
 ## Cómo se cuenta
 
 - **Movimiento:** un aterrizaje o un despegue en Mar del Plata. Un vuelo de ida y vuelta son dos movimientos acá.
@@ -33,6 +38,10 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **Datos provisorios:** la ANAC marca como provisorios los últimos meses; pueden cambiar.
 - **Hora local:** hora UTC − 3.
 
+
+</div>
+<div>
+
 ## Notas por capítulo
 
 - **01 · Serie larga:** las barras claras (2001–2018) son datos del Municipio y las oscuras (2019+), de la ANAC. Movimientos comerciales = vuelos regulares y no regulares.
@@ -43,6 +52,10 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **08 · Flota:** en 2019–2020 el avión se infiere por operador y pasajeros (ver "Modelo de avión faltante"); el resto queda como "Sin dato".
 - **Toda la aviación · Operadores:** "Sin dato" = la ANAC no informa el operador (frecuente en vuelos oficiales y militares).
 - **Explorador:** la familia de avión incluye la inferida para 2019–2020; los movimientos sin avión informado se cuentan aparte.
+
+
+</div>
+</div>
 
 ## Métricas estimadas (leer con cuidado)
 
@@ -60,11 +73,37 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 | Peso en la red | PageRank de la red de vuelos de cabotaje reconstruidos | — |
 | Avión típico | Familia con más movimientos por segmento; "capacidad observada" = p95 de pasajeros de ese modelo en ese segmento en todo el país | En aviación general es pasajeros llevados, no asientos |
 
+<div class="met-grid">
+<div>
+
 ## Lo que no se puede medir con estos datos
 
 - Puntualidad y cancelaciones (no hay horarios programados).
 - Tarifas.
 - Origen de los turistas (los pasajeros no tienen nacionalidad ni residencia en este dataset).
+
+
+## Colores
+
+Cada color significa siempre lo mismo en todo el sitio.
+
+```js
+const muestras = [
+  ["Bermellón", ACENTO, "lo que se destaca: Mar del Plata, récords, el exterior"],
+  ["Tinta", TINTA, "datos principales"],
+  ["Gris", OTRO, "otras / resto agrupado"],
+  ["Gris claro", SIN_DATO, "dato faltante"],
+  ...SEGMENTOS.map((x) => [x.nombre, SEG_COLOR[x.id], "segmento"]),
+  ...PERFILES.filter((x) => x.id !== "sin_dato").map((x) => [x.nombre, x.color, "tipo de aeronave"])
+];
+```
+
+```js
+html`<div class="paleta">${muestras.map(([n, c, uso]) => html`<div><span class="muestra" style="background:${c}"></span><span><b>${n}</b><br><span class="muted">${uso}</span></span></div>`)}</div>`
+```
+
+</div>
+<div>
 
 ## Descargar los datos
 
@@ -75,7 +114,11 @@ const archivos = [
   ["Serie diaria", FileAttachment("data/mdq_diario.json")],
   ["Rutas", FileAttachment("data/mdq_rutas.json")],
   ["Aerolíneas", FileAttachment("data/mdq_aerolineas.json")],
-  ["Aeropuertos pares", FileAttachment("data/benchmark_pares.json")]
+  ["Aeropuertos pares", FileAttachment("data/benchmark_pares.json")],
+  ["Orígenes y destinos (toda la aviación)", FileAttachment("data/mdq_destinos.json")],
+  ["Vuelos a destinos lejanos", FileAttachment("data/mdq_vuelos_exoticos.json")],
+  ["Flota por modelo", FileAttachment("data/mdq_aeronaves.json")],
+  ["Segmentos por año", FileAttachment("data/mdq_segmentos_anual.json")]
 ];
 ```
 
@@ -83,6 +126,13 @@ const archivos = [
 html`<ul>${archivos.map(([n, f]) => html`<li><a href=${f.href} download=${f.name}>${n}</a> (JSON)</li>`)}</ul>`
 ```
 
+
+</div>
+</div>
+
+</div>
+
 ```js
 import {html} from "htl";
+import {ACENTO, TINTA, OTRO, SIN_DATO, SEGMENTOS, SEG_COLOR, PERFILES} from "./components/util.js";
 ```

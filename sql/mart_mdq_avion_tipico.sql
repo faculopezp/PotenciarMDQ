@@ -1,5 +1,5 @@
 -- "Avión típico" de cada segmento: top 3 familias por movimientos y top 3 por pasajeros, por año,
--- más el "avión básico" (familia más frecuente con perfil turbohélice 5+ pax, ver dim_perfil_familia).
+-- más el "avión básico" (turbohélice más frecuente, ver dim_perfil_familia).
 -- En taxi aéreo difieren: la avioneta más frecuente casi no lleva pasajeros; el jet ejecutivo sí.
 -- capacidad_observada_p95: percentil 95 de pasajeros de esa familia en ese segmento en todo el país
 -- (proxy de cuántos pasajeros lleva "lleno"; para taxis aéreos y privados es pasajeros, no asientos).
@@ -66,5 +66,5 @@ LEFT JOIN dur d USING (anio, aeronave_familia)
 LEFT JOIN destinos ds USING (anio, segmento, aeronave_familia)
 LEFT JOIN dim_perfil_familia p USING (aeronave_familia)
 QUALIFY ranking <= 3 OR ranking_por_pasajeros <= 3
-     OR (p.perfil = 'turbohelice_basico' AND ranking_en_perfil = 1)
+     OR (p.perfil = 'turbohelice' AND ranking_en_perfil = 1)
 ORDER BY f.anio, f.segmento, ranking

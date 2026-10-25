@@ -64,8 +64,8 @@ def test_perfil_aeronave_basico_taxi():
     con.execute((SQL / "bd" / "70_dim_perfil.sql").read_text())
     perfil = dict(con.execute("SELECT aeronave_familia, perfil FROM dim_perfil_familia").fetchall())
     assert perfil == {
-        "Beech King Air": "turbohelice_basico",
-        "Daher TBM": "turbohelice_chico",
+        "Beech King Air": "turbohelice",
+        "Daher TBM": "turbohelice",
         "Cessna (pistón)": "piston",
         "Learjet": "jet_ejecutivo",
         "Boeing 737": "avion_de_linea",
