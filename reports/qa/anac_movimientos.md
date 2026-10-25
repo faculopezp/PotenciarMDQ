@@ -61,7 +61,7 @@
 
 | pct_aeronave_otro | pct_aerolinea_sin_regla | pct_sin_distancia | pct_sin_asientos |
 |---|---|---|---|
-| 0.13 | 7.12 | 0.9 | 43.4 |
+| 0.13 | 7.37 | 0.9 | 43.4 |
 
 ## Aeronaves sin clasificar (top 25 → ampliar config/aeronaves.yaml)
 
@@ -86,8 +86,8 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| AGW-AW 109SP | 165 |
 | I.A-1124 | 165 |
+| AGW-AW 109SP | 165 |
 | CE-T-303 | 153 |
 | BE-M-35 | 151 |
 | ARH-EC 130 B4 | 142 |
@@ -165,33 +165,33 @@
 
 | tramos | despegues_cabotaje | pct_emparejado |
 |---|---|---|
-| 778460 | 915317 | 85.0 |
+| 778786 | 915317 | 85.1 |
 
 ## Rotaciones: método por matrícula vs por modelo
 
 | aeropuerto | metodo_emparejamiento | tipo_rotacion | n | mediana_min |
 |---|---|---|---|---|
 | BAR | matricula | escala_larga | 191 | 165.0 |
-| BAR | matricula | pernocte | 93 | 1029.0 |
+| BAR | matricula | pernocte | 94 | 1040.5 |
 | BAR | matricula | rotacion | 4153 | 68.0 |
 | BAR | modelo | escala_larga | 837 | 148.0 |
 | BAR | modelo | pernocte | 367 | 925.0 |
 | BAR | modelo | rotacion | 31347 | 64.0 |
-| BCA | matricula | escala_larga | 67 | 195.0 |
+| BCA | matricula | escala_larga | 68 | 198.5 |
 | BCA | matricula | pernocte | 28 | 1139.0 |
-| BCA | matricula | rotacion | 1036 | 49.0 |
+| BCA | matricula | rotacion | 1037 | 49.0 |
 | BCA | modelo | escala_larga | 131 | 178.0 |
 | BCA | modelo | pernocte | 281 | 605.0 |
 | BCA | modelo | rotacion | 5126 | 52.0 |
-| DOZ | matricula | escala_larga | 134 | 200.0 |
-| DOZ | matricula | pernocte | 322 | 633.0 |
-| DOZ | matricula | rotacion | 3925 | 61.0 |
+| DOZ | matricula | escala_larga | 135 | 201.0 |
+| DOZ | matricula | pernocte | 323 | 633.0 |
+| DOZ | matricula | rotacion | 3927 | 61.0 |
 | DOZ | modelo | escala_larga | 561 | 190.0 |
 | DOZ | modelo | pernocte | 924 | 613.0 |
 | DOZ | modelo | rotacion | 26748 | 57.0 |
-| MDP | matricula | escala_larga | 266 | 235.0 |
-| MDP | matricula | pernocte | 95 | 1148.0 |
-| MDP | matricula | rotacion | 1323 | 52.0 |
+| MDP | matricula | escala_larga | 272 | 235.0 |
+| MDP | matricula | pernocte | 105 | 1143.0 |
+| MDP | matricula | rotacion | 1328 | 52.0 |
 | MDP | modelo | escala_larga | 364 | 206.0 |
 | MDP | modelo | pernocte | 97 | 1413.0 |
 | MDP | modelo | rotacion | 7344 | 52.0 |
@@ -213,10 +213,10 @@
 | anio | segmento | movimientos | sin_aeronave | sin_aeronave_mas_de_96_pax | sin_aeronave_20_a_96_pax | sin_aeronave_menos_de_20_pax |
 |---|---|---|---|---|---|---|
 | 2019 | linea_regular | 5324 | 5324 | 445 | 4757 | 122 |
-| 2019 | taxi_aereo | 967 | 967 | 0 | 7 | 960 |
-| 2019 | privado | 807 | 807 | 0 | 5 | 802 |
+| 2019 | taxi_aereo | 964 | 964 | 0 | 7 | 957 |
+| 2019 | privado | 803 | 803 | 0 | 5 | 798 |
 | 2019 | oficial | 669 | 669 | 0 | 8 | 661 |
-| 2019 | instruccion | 539 | 539 | 0 | 0 | 539 |
+| 2019 | instruccion | 546 | 546 | 0 | 0 | 546 |
 | 2019 | trabajo_aereo | 50 | 50 | 0 | 0 | 50 |
 | 2019 | charter_linea | 32 | 32 | 0 | 5 | 27 |
 | 2020 | linea_regular | 1351 | 1265 | 275 | 968 | 22 |
@@ -226,46 +226,46 @@
 | 2020 | taxi_aereo | 324 | 276 | 0 | 1 | 275 |
 | 2020 | trabajo_aereo | 19 | 19 | 0 | 0 | 19 |
 | 2020 | charter_linea | 3 | 3 | 0 | 2 | 1 |
-| 2021 | privado | 1212 | 16 | 0 | 0 | 16 |
+| 2021 | privado | 1211 | 16 | 0 | 0 | 16 |
 | 2021 | linea_regular | 1128 | 3 | 0 | 0 | 3 |
 | 2021 | oficial | 689 | 585 | 0 | 18 | 567 |
 | 2021 | taxi_aereo | 464 | 26 | 0 | 0 | 26 |
-| 2021 | instruccion | 421 | 0 | 0 | 0 | 0 |
+| 2021 | instruccion | 422 | 0 | 0 | 0 | 0 |
 | 2021 | charter_linea | 31 | 0 | 0 | 0 | 0 |
 | 2021 | trabajo_aereo | 12 | 0 | 0 | 0 | 0 |
 | 2022 | linea_regular | 2820 | 60 | 0 | 1 | 59 |
-| 2022 | privado | 1506 | 46 | 0 | 0 | 46 |
+| 2022 | privado | 1495 | 46 | 0 | 0 | 46 |
 | 2022 | oficial | 897 | 791 | 0 | 20 | 771 |
 | 2022 | taxi_aereo | 554 | 44 | 0 | 2 | 42 |
-| 2022 | instruccion | 539 | 1 | 0 | 0 | 1 |
+| 2022 | instruccion | 550 | 1 | 0 | 0 | 1 |
 | 2022 | charter_linea | 68 | 23 | 0 | 1 | 22 |
 | 2022 | trabajo_aereo | 3 | 0 | 0 | 0 | 0 |
 | 2023 | linea_regular | 3593 | 89 | 0 | 5 | 84 |
-| 2023 | privado | 1668 | 56 | 0 | 0 | 56 |
+| 2023 | privado | 1661 | 56 | 0 | 0 | 56 |
 | 2023 | oficial | 1222 | 1131 | 0 | 14 | 1117 |
 | 2023 | taxi_aereo | 603 | 107 | 0 | 0 | 107 |
-| 2023 | instruccion | 392 | 3 | 0 | 0 | 3 |
+| 2023 | instruccion | 399 | 3 | 0 | 0 | 3 |
 | 2023 | charter_linea | 91 | 68 | 0 | 5 | 63 |
 | 2023 | trabajo_aereo | 2 | 0 | 0 | 0 | 0 |
 | 2024 | linea_regular | 3233 | 57 | 0 | 4 | 53 |
-| 2024 | privado | 1756 | 275 | 0 | 1 | 274 |
+| 2024 | privado | 1751 | 275 | 0 | 1 | 274 |
 | 2024 | oficial | 1491 | 1408 | 0 | 38 | 1370 |
 | 2024 | taxi_aereo | 544 | 100 | 0 | 0 | 100 |
-| 2024 | instruccion | 417 | 1 | 0 | 0 | 1 |
+| 2024 | instruccion | 422 | 1 | 0 | 0 | 1 |
 | 2024 | charter_linea | 89 | 57 | 0 | 3 | 54 |
 | 2025 | linea_regular | 2949 | 48 | 0 | 9 | 39 |
-| 2025 | privado | 1463 | 55 | 0 | 0 | 55 |
+| 2025 | privado | 1458 | 55 | 0 | 0 | 55 |
 | 2025 | oficial | 1172 | 1056 | 0 | 55 | 1001 |
-| 2025 | taxi_aereo | 594 | 34 | 0 | 0 | 34 |
-| 2025 | instruccion | 543 | 0 | 0 | 0 | 0 |
+| 2025 | taxi_aereo | 593 | 34 | 0 | 0 | 34 |
+| 2025 | instruccion | 549 | 0 | 0 | 0 | 0 |
 | 2025 | charter_linea | 102 | 65 | 0 | 15 | 50 |
 | 2025 | trabajo_aereo | 2 | 0 | 0 | 0 | 0 |
 | 2026 | linea_regular | 1942 | 57 | 0 | 12 | 45 |
-| 2026 | privado | 1131 | 42 | 0 | 0 | 42 |
+| 2026 | privado | 976 | 42 | 0 | 0 | 42 |
 | 2026 | oficial | 794 | 635 | 0 | 43 | 592 |
-| 2026 | taxi_aereo | 328 | 23 | 0 | 0 | 23 |
-| 2026 | instruccion | 186 | 0 | 0 | 0 | 0 |
-| 2026 | charter_linea | 74 | 58 | 0 | 11 | 47 |
+| 2026 | instruccion | 353 | 0 | 0 | 0 | 0 |
+| 2026 | taxi_aereo | 314 | 23 | 0 | 0 | 23 |
+| 2026 | charter_linea | 76 | 58 | 0 | 11 | 47 |
 
 ## Meses sin movimientos en el foco
 
