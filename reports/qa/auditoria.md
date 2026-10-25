@@ -72,9 +72,9 @@ Qué se recupera (foco, top 12):
 | CWO S.A. - SUN FLIGHT- CIAC TIPO II | 25 |
 | SAETA | 14 |
 | CEAP - AERO CHANNEL S.R.L- CIAC TIPO II | 13 |
-| TWR SRL | 10 |
 | PRESIDENCIA DE LA NACION | 10 |
 | RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
+| TWR SRL | 10 |
 | FLIGHT CENTER- TWR S.R.L-CIAC TIPO III | 9 |
 
 ## 2B. Aeronave por matrícula
@@ -146,8 +146,7 @@ Validación: qué habría dicho la inferencia por pasajeros en los vuelos cuyo a
 
 | inferida | real | vuelos | pct |
 |---|---|---|---|
-| Boeing 737 | Boeing 737 | 110 | 70.1 |
-| Boeing 737 | Embraer E190 | 47 | 29.9 |
+| Boeing 737 | Boeing 737 | 61 | 100.0 |
 | Embraer E190 | Embraer E190 | 1158 | 97.7 |
 | Embraer E190 | Boeing 737 | 27 | 2.3 |
 

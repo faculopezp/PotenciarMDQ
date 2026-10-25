@@ -91,7 +91,7 @@
 | CE-T-303 | 153 |
 | BE-M-35 | 151 |
 | ARH-EC 130 B4 | 142 |
-| TWC-500-C | 140 |
+| BE-D-95-A | 140 |
 
 ## Códigos sin coordenadas (top 25 → revisar dim_aeropuerto)
 
