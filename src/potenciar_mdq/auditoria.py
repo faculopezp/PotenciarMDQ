@@ -144,7 +144,8 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
             CREATE TEMP TABLE cruce AS
             WITH a AS (
               SELECT movimiento_id, fecha, hora_local, tipo_movimiento, origen_destino,
-                     aerolinea_nombre AS nombre, aeronave, segmento
+                     aerolinea_nombre AS nombre, segmento,
+                     CASE WHEN aeronave_fuente = 'anac' THEN aeronave END AS aeronave
               FROM fct_movimiento WHERE aeropuerto = getvariable('foco') AND anio = 2019
             ),
             k AS (
@@ -165,7 +166,7 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                       AND anio = 2019) AS movimientos_anac_2019,
                    (SELECT count(*) FROM mun) AS registros_municipales_2019,
                    (SELECT count(*) FROM fct_movimiento WHERE aeropuerto = getvariable('foco')
-                      AND anio = 2019 AND aeronave IS NULL) AS anac_sin_aeronave,
+                      AND anio = 2019 AND aeronave_fuente IS DISTINCT FROM 'anac') AS anac_sin_aeronave,
                    count(DISTINCT movimiento_id) FILTER (c_anac = 1 AND c_mun = 1) AS cruces_1_a_1,
                    count(DISTINCT movimiento_id) FILTER (c_anac = 1 AND c_mun = 1 AND aeronave IS NULL
                      AND av_mun IS NOT NULL) AS aeronave_recuperable
@@ -174,6 +175,26 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
             SELECT segmento, av_mun AS aeronave_municipal, count(*) AS movimientos
             FROM cruce WHERE c_anac = 1 AND c_mun = 1 AND aeronave IS NULL AND av_mun IS NOT NULL
             GROUP BY ALL ORDER BY 3 DESC LIMIT 15""")]
+
+    # ── Lo aplicado en la base y validación de la inferencia ───────────────────────────────
+    out += ["## 4. Aplicado en la base (fct_movimiento)", "", _table(con, """
+        SELECT CASE WHEN aeropuerto = getvariable('foco') THEN 'MDQ' ELSE 'resto del país' END AS ambito,
+          count(*) FILTER (operador_fuente = 'matricula') AS operador_por_matricula,
+          count(*) FILTER (operador_fuente = 'otro_extremo') AS operador_por_otro_extremo,
+          count(*) FILTER (aeronave_fuente = 'municipal') AS aeronave_del_municipio
+        FROM fct_movimiento GROUP BY 1 ORDER BY 1"""),
+            "Validación: qué habría dicho la inferencia por pasajeros en los vuelos cuyo avión se "
+            "recuperó del portal municipal (ANAC 2019, foco):", "", _table(con, """
+        WITH v AS (
+          SELECT f.aeronave_familia AS real, r.familia AS inferida
+          FROM fct_movimiento f JOIN ref_inferencia_aeronave r
+            ON regexp_matches(upper(strip_accents(coalesce(f.aerolinea, ''))), r.operador)
+           AND f.pasajeros BETWEEN r.pax_min AND r.pax_max AND f.anio <= r.anio_hasta
+          WHERE f.aeronave_fuente = 'municipal' AND f.aeropuerto = getvariable('foco')
+        )
+        , c AS (SELECT inferida, real, count(*) AS vuelos FROM v GROUP BY inferida, real)
+        SELECT *, round(100.0 * vuelos / sum(vuelos) OVER (PARTITION BY inferida), 1) AS pct
+        FROM c ORDER BY inferida, vuelos DESC""")]
 
     # ── Lo que no se puede recuperar con lo que hay ────────────────────────────────────────
     out += ["## 3. Sin cruce posible con las fuentes actuales", "", _table(con, """

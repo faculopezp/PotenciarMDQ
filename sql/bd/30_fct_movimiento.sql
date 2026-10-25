@@ -1,26 +1,32 @@
 -- Hecho principal: 1 fila = 1 aterrizaje o despegue, enriquecido con calendario, aerolínea,
 -- aeronave, distancia y métricas estimadas. Ver docs/07_bd_y_metricas.md.
 CREATE OR REPLACE TABLE fct_movimiento AS
--- Operador por matrícula (desde 2026 ANAC informa matrícula): si un movimiento no trae operador
--- pero su matrícula vuela con un mismo operador en >= 80 % de los vuelos que sí lo traen, se usa ese.
-WITH mo AS (
-  SELECT matricula, aerolinea FROM (
-    SELECT matricula, aerolinea, n, n / sum(n) OVER (PARTITION BY matricula) AS share
-    FROM (SELECT matricula, aerolinea, count(*) AS n FROM stg_movimiento
-          WHERE matricula IS NOT NULL AND aerolinea IS NOT NULL GROUP BY matricula, aerolinea)
-  ) QUALIFY row_number() OVER (PARTITION BY matricula ORDER BY n DESC) = 1 AND share >= 0.8
-),
-s AS (
+-- Datos recuperados con cruces exactos (sql/bd/25_recuperacion.sql): operador por matrícula
+-- (unánime) o por el otro extremo del mismo vuelo; aeronave del portal municipal (2015–2019).
+WITH s AS (
   SELECT
-    s.* EXCLUDE (aeropuerto, aerolinea),
-    coalesce(s.aerolinea, mo.aerolinea)            AS aerolinea,
+    s.* EXCLUDE (aeropuerto, aerolinea, aeronave),
+    coalesce(s.aerolinea, mo.aerolinea, op.aerolinea) AS aerolinea,
     s.aerolinea                                    AS aerolinea_original,
-    s.aerolinea IS NULL AND mo.aerolinea IS NOT NULL AS operador_inferido,
+    CASE WHEN s.aerolinea IS NOT NULL THEN 'anac'
+         WHEN mo.aerolinea IS NOT NULL THEN 'matricula'
+         WHEN op.aerolinea IS NOT NULL THEN 'otro_extremo' END AS operador_fuente,
+    coalesce(s.aeronave, am.aeronave)              AS aeronave,
+    CASE WHEN s.aeronave IS NOT NULL THEN 'anac'
+         WHEN am.aeronave IS NOT NULL THEN 'municipal' END AS aeronave_fuente,
     s.aeropuerto                                   AS aeropuerto_original,
     coalesce(c.a, s.aeropuerto)                    AS aeropuerto,
     CAST(s.fecha + s.hora_utc AS TIMESTAMP)        AS ts_utc
   FROM stg_movimiento s
-  LEFT JOIN mo ON mo.matricula = s.matricula
+  LEFT JOIN ref_operador_matricula mo ON s.aerolinea IS NULL AND mo.matricula = s.matricula
+  LEFT JOIN ref_operador_par op
+    ON s.aerolinea IS NULL AND op.matricula = s.matricula AND op.fecha = s.fecha
+   AND op.hora_utc = s.hora_utc AND op.aeropuerto = s.aeropuerto
+   AND op.tipo_movimiento = s.tipo_movimiento AND op.origen_destino = s.origen_destino
+  LEFT JOIN ref_aeronave_municipal am
+    ON s.aeronave IS NULL AND am.fecha = s.fecha AND am.hora_utc = s.hora_utc
+   AND am.aeropuerto = s.aeropuerto AND am.tipo_movimiento = s.tipo_movimiento
+   AND am.origen_destino = s.origen_destino AND am.aerolinea = s.aerolinea
   LEFT JOIN correcciones c
     ON s.aeropuerto = c.de AND list_contains(c.clases, s.clase_vuelo)
 ),
@@ -124,7 +130,9 @@ SELECT
   -- operador y aeronave
   j.aerolinea,
   j.aerolinea_original,
-  j.operador_inferido,
+  j.operador_fuente,
+  j.operador_fuente IN ('matricula', 'otro_extremo') AS operador_inferido,
+  j.aeronave_fuente,
   coalesce(j.aerolinea_nombre, 'Sin dato')         AS aerolinea_nombre,
   coalesce(j.aerolinea_tipo, 'sin_dato')           AS aerolinea_tipo,
   j.aeronave,
