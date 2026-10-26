@@ -64,9 +64,9 @@ El anual solo trae rutas con al menos un viaje semanal: tiene que dar igual o me
 |---|---|---|
 | ciudad autonoma de buenos aires | Ciudad Autónoma De Buenos Aires · Ciudad Autonoma De Buenos Aires · Caba | 2 |
 | cordoba | Córdoba · Cordoba | 2 |
-| neuquen | Neuquen · Neuquén | 2 |
+| neuquen | Neuquén · Neuquen | 2 |
 | parana | Parana · Paraná | 2 |
-| san miguel de tucuman | San Miguel De Tucuman · San Miguel De Tucumán | 2 |
+| san miguel de tucuman | San Miguel De Tucumán · San Miguel De Tucuman | 2 |
 
 ## 5. Rutas con más pasajeros que asientos
 
@@ -132,10 +132,65 @@ Servicios que se toman como de Mar del Plata y meses con dato por año:
 
 | servicio | operador | jurisdiccion | desde | hasta | meses | pasajeros |
 |---|---|---|---|---|---|---|
-
+| P. Constitución-Mar del Plata-Miramar (Buenos Aires) | FERROBAIRES | Provincial | 2008 | 2011 | 48 | 1950344 |
+| P. Constitución-Mar del Plata (Buenos Aires) | SOFSE | Nacional | 2011 | 2025 | 99 | 4051738 |
+| P. Constitución-Mar del Plata (Buenos Aires) | FERROBAIRES | Nacional | 2012 | 2012 | 12 | 280629 |
+| P. Constitución-Mar del Plata (Buenos Aires) | FERROBAIRES | Provincial | 2013 | 2016 | 39 | 290424 |
+| P. Constitución-Mar del Plata (Buenos Aires) | SOFSE | Provincial | 2024 | 2025 | 12 | 626506 |
+| P. Constitución-Mar del Plata (Buenos Aires) | SOFSA | Nacional | 2025 | 2026 | 18 | 767780 |
 
 Meses duplicados (mismo servicio, año y mes más de una vez):
 
 | anio | mes | servicio | filas |
 |---|---|---|---|
+| 2012 | 1 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2012 | 2 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2012 | 3 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2012 | 4 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2012 | 5 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2012 | 6 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2012 | 7 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2012 | 8 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2012 | 9 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2012 | 10 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2014 | 12 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2015 | 1 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2015 | 2 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2015 | 3 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2015 | 4 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2015 | 5 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2015 | 6 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2015 | 7 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2015 | 8 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
+| 2015 | 9 | P. Constitución-Bahía Blanca (Buenos Aires) | 2 |
 
+## 8. EVyTH: viajes de residentes con destino Mar del Plata
+
+Casos encuestados (sin expandir) por año y tipo de visitante, y medio informado:
+
+| anio | trimestres | casos_turistas | casos_excursionistas | turistas_expandidos |
+|---|---|---|---|---|
+| 2012 | 4 | 1301 | 113 | 1893178.0 |
+| 2013 | 4 | 1202 | 63 | 1866850.0 |
+| 2014 | 4 | 1134 | 34 | 1777323.0 |
+| 2015 | 4 | 1126 | 172 | 1539510.0 |
+| 2016 | 4 | 1160 | 59 | 2051264.0 |
+| 2017 | 4 | 1255 | 23 | 1971392.0 |
+| 2018 | 4 | 1249 | 40 | 1814071.0 |
+| 2019 | 4 | 1070 | 37 | 1668083.0 |
+| 2020 | 4 | 434 | 41 | 708141.0 |
+| 2021 | 4 | 502 | 15 | 490640.0 |
+| 2022 | 4 | 836 | 41 | 1347418.0 |
+| 2023 | 4 | 938 | 68 | 1372083.0 |
+| 2024 | 2 | 685 | 32 | 1148346.0 |
+
+| medio | medio_detalle | casos | expandidos |
+|---|---|---|---|
+| Auto | Automóvil o similar (propio) | 8798 | 13486785.0 |
+| Ómnibus | Omnibus | 3966 | 6317377.0 |
+| Tren | Tren | 355 | 971879.0 |
+| Avión | Avión | 467 | 400144.0 |
+| Otros | Otro (auto alquilado, motocicleta, bicicleta, a pie, a "dedo", etc.) | 32 | 80911.0 |
+| Otros | Ns./ Nr. | 5 | 4906.0 |
+| Otros | Embarcación | 5 | 3370.0 |
+| Otros | Taxi o remís | 2 | 358.0 |

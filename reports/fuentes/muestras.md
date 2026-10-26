@@ -301,6 +301,7 @@ Archivos descargados:
 - `cnrt_ferroviario/20261026_pax_ldregionales_tur_sep_2026.xlsx` — 409,630 bytes
 
 ### `cnrt_ferroviario/20261026_pax_ldregionales_tur_sep_2026.xlsx` (xlsx) — hojas: OBSERVACIONES, DASHBOARD, Hoja2, Hoja3, Tabla Dinámica, DATOS, DASHBOARD (1994-2007anual), DATOS (1994-2007anuales), Cambios en los Servicios
+Tipos de la fila 2: NoneType, NoneType, str, NoneType, NoneType, NoneType, NoneType
 #### hoja `OBSERVACIONES` — 8 filas, 0 del foco
 ```
  |  | OBSERVACIONES SOBRE LA INFORMACIÓN ESTADÍSTICA PRESENTADA
@@ -314,6 +315,7 @@ Archivos descargados:
 ... (filas del foco)
 ```
 
+Tipos de la fila 2: NoneType, str, NoneType, NoneType, NoneType, NoneType, NoneType, NoneType, NoneType, NoneType
 #### hoja `DASHBOARD` — 41 filas, 0 del foco
 ```
  | RED FERROVIARIA DE PASAJEROS DE LARGA DISTANCIA, REGIONALES Y TURÍSTICOS
@@ -331,6 +333,7 @@ Archivos descargados:
 ... (filas del foco)
 ```
 
+Tipos de la fila 2: str, str, NoneType, NoneType, NoneType
 #### hoja `Hoja2` — 5 filas, 0 del foco
 ```
 Tipo de Servicio | Turístico
@@ -341,6 +344,7 @@ Pasajeros Regionales | 122274 | 78572 | -0.35741040613703645 | 0.642589593862963
 ... (filas del foco)
 ```
 
+Tipos de la fila 2: NoneType, NoneType, NoneType, NoneType, NoneType
 #### hoja `Hoja3` — 4 filas, 0 del foco
 ```
  | Tipo de Servicio | 2025 | 2026 | Var. %
@@ -350,6 +354,7 @@ Pasajeros Regionales | 122274 | 78572 | -0.35741040613703645 | 0.642589593862963
 ... (filas del foco)
 ```
 
+Tipos de la fila 2: str, str, NoneType, str, NoneType, NoneType, NoneType, NoneType, NoneType, NoneType
 #### hoja `Tabla Dinámica` — 31 filas, 1 del foco
 ```
 Año | 2026
@@ -368,6 +373,7 @@ Belgrano | Los Amores - Charadai - Cacuí | 1638 | 1020 | 1636 | 1712 | 1682 | 2
  | P. Constitución-Mar del Plata (Buenos Aires) | 89948 | 79087 | 59372 | 43320 | 37426 | 34708 | 41814 | 39844 | 39233 | 464752
 ```
 
+Tipos de la fila 2: int, str, str, str, str, str, str, int, NoneType, NoneType
 #### hoja `DATOS` — 5653 filas, 267 del foco
 ```
 Año | Mes | Línea | Operador | Tipo de Servicio | Jurisdicción | Servicio | PAX |  |  |  | PAX | Larga Distancia | Regional | Turístico
@@ -445,6 +451,7 @@ Año | Mes | Línea | Operador | Tipo de Servicio | Jurisdicción | Servicio | P
 2012 | Junio | Roca | SOFSE | Larga Distancia | Nacional | P. Constitución-Mar del Plata (Buenos Aires) | 1261
 ```
 
+Tipos de la fila 2: NoneType, str, NoneType, NoneType, NoneType, NoneType, NoneType, NoneType, NoneType, NoneType
 #### hoja `DASHBOARD (1994-2007anual)` — 29 filas, 0 del foco
 ```
  | RED FERROVIARIA DE PASAJEROS DE LARGA DISTANCIA, REGIONALES Y TURÍSTICOS
@@ -462,6 +469,7 @@ Año | Mes | Línea | Operador | Tipo de Servicio | Jurisdicción | Servicio | P
 ... (filas del foco)
 ```
 
+Tipos de la fila 2: int, str, str, str, str, str, int, NoneType, NoneType, NoneType
 #### hoja `DATOS (1994-2007anuales)` — 86 filas, 0 del foco
 ```
 Año | Línea | Operador | Tipo de Servicio | Jurisdicción | Servicio | PAX
@@ -479,6 +487,7 @@ Año | Línea | Operador | Tipo de Servicio | Jurisdicción | Servicio | PAX
 ... (filas del foco)
 ```
 
+Tipos de la fila 2: NoneType, str
 #### hoja `Cambios en los Servicios` — 80 filas, 4 del foco
 ```
  | Detalle de los Servicios
@@ -659,8 +668,8 @@ Cafayate                                           | 2,037
 Sierras                                            | 2,018
 Campo Quijano                                      | 2,010
 Tolhuin                                            | 1,960
-Villa Sanagasta                                    | 1,958
 San Clemente del Tuyú                             | 1,958
+Villa Sanagasta                                    | 1,958
 ```
 
 #### `cantidad_destinos` (top 60)
