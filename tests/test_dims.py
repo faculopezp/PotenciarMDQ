@@ -20,6 +20,8 @@ CASOS_AERONAVE = {
     # tipos de las series estatales (config/estatales.yaml)
     "EMB-ERJ-140LR": ("Embraer ERJ145", "jet_regional"),
     "EUR-AS-365-N2": ("Airbus Helicopters", "helicoptero"),
+    "BOM-CL-600-2B19": ("Bombardier CRJ", "jet_regional"),     # CRJ200, no Challenger
+    "BOM-CL-600-2B16": ("Bombardier Challenger", "jet_ejecutivo"),
 }
 
 

@@ -55,8 +55,8 @@ categorias:
     familia_regex: {'737': Boeing 737, 'A3(19|20|21)|A2[01]N': Airbus A320, '757': Boeing 757, 'MD-?8\d|MD-?9\d': McDonnell Douglas MD-80}
     patron: '(737|A3(19|20|21)|A2[01]N|757|MD-?8\d|MD-?9\d)'
   - categoria: jet_regional
-    familia_regex: {'ERJ ?-?19|(?<![A-Z])E-?19|EMB-?19': Embraer E190, 'ERJ ?-?17|(?<![A-Z])E-?17|EMB-?17': Embraer E170/175, '14[05]|135(?!BJ)': Embraer ERJ145, 'CRJ': Bombardier CRJ, 'FOKKER|F-?28|F-?100': Fokker F28/F100}
-    patron: '(ERJ ?-?1[79]|EMB-?1[79]\d|(?<![A-Z])E-?1[79][05](?!\d)|EMB-14[05]|ERJ-?14[05]|CRJ|FOKKER|F-?28\b|F-?100\b)'
+    familia_regex: {'ERJ ?-?19|(?<![A-Z])E-?19|EMB-?19': Embraer E190, 'ERJ ?-?17|(?<![A-Z])E-?17|EMB-?17': Embraer E170/175, '14[05]|135(?!BJ)': Embraer ERJ145, 'CRJ|CL-?600-?2(B19|C1\d|D2\d|E25)': Bombardier CRJ, 'FOKKER|F-?28|F-?100': Fokker F28/F100}
+    patron: '(ERJ ?-?1[79]|EMB-?1[79]\d|(?<![A-Z])E-?1[79][05](?!\d)|EMB-14[05]|ERJ-?14[05]|CRJ|CL-?600-?2(B19|C1\d|D2\d|E25)|FOKKER|F-?28\b|F-?100\b)'
   - categoria: turbohelice_regional
     familia_regex: {'ATR': ATR 42/72, '1900': Beech 1900, 'SA-?22[67]': Fairchild Metro, '^DOR|228': Dornier 228, 'DHC-?8|DASH': De Havilland Dash 8, 'SAAB|SF-?340': Saab 340}
     patron: '(ATR|1900|SA-?22[67]|^DOR-?228|DHC-?8|DASH|SAAB|SF-?340|JETSTREAM|J-?41)'
@@ -114,7 +114,8 @@ modelos:
   - {patron: 'SA-?227', modelo: Fairchild Metro III/23 (SA227), icao: SW4}
   - {patron: 'SA-?226', modelo: Fairchild Metro II (SA226), icao: SW3}
   - {patron: 'DOR-?228', modelo: Dornier 228, icao: D228}
-  - {patron: 'CRJ ?-?200|CRJ2', modelo: Bombardier CRJ200, icao: CRJ2}
+  # CL-600-2B19 es la designación de certificado del CRJ100/200 (no un Challenger).
+  - {patron: 'CRJ ?-?200|CRJ2|CL-?600-?2B19', modelo: Bombardier CRJ200, icao: CRJ2}
   # turbohélices ejecutivos
   - {patron: 'B-?200 ?-?GT|B200GT', modelo: Beechcraft King Air B200GT, icao: BE20}
   - {patron: 'B-?300|B-?350', modelo: Beechcraft King Air 350 (B300), icao: B350}
