@@ -5,7 +5,7 @@
 | source_file | filas | pct_fecha_null | pct_hora_null | pct_pax_null | pct_aeronave_null | pct_con_matricula | pct_provisorio | desde | hasta |
 |---|---|---|---|---|---|---|---|---|---|
 | 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580697 | 0.0 | 0.0 | 0.0 | 98.78 | 0.0 | 0.0 | 2019-01-01 | 2019-12-31 |
-| 20261024_202012-informe-ministerio-actualizado-dic-final.csv | 212726 | 0.0 | 0.0 | 0.0 | 85.28 | 0.0 | 0.0 | 2019-12-31 | 2020-12-31 |
+| 20261024_202012-informe-ministerio-actualizado-dic-final.csv | 212726 | 0.0 | 0.0 | 0.0 | 85.11 | 0.0 | 0.0 | 2019-12-31 | 2020-12-31 |
 | 20261024_202112-informe-ministerio-actualizado-dic-final.csv | 329781 | 0.0 | 0.0 | 0.0 | 14.04 | 0.0 | 0.0 | 2020-12-31 | 2021-12-31 |
 | 20261024_202212-informe-ministerio-actualizado-dic-final.csv | 477903 | 0.0 | 0.0 | 0.0 | 15.27 | 0.0 | 0.0 | 2021-12-31 | 2022-12-31 |
 | 20261024_202312-informe-ministerio-actualizado-dic.csv | 557152 | 0.0 | 0.0 | 0.0 | 15.62 | 0.0 | 0.0 | 2022-12-31 | 2023-12-31 |
@@ -61,7 +61,7 @@
 
 | pct_aeronave_otro | pct_aerolinea_sin_regla | pct_sin_distancia | pct_sin_asientos |
 |---|---|---|---|
-| 0.13 | 7.63 | 0.9 | 43.09 |
+| 0.13 | 7.63 | 0.9 | 43.08 |
 
 ## Aeronaves sin clasificar (top 25 → ampliar config/aeronaves.yaml)
 
@@ -86,8 +86,8 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| I.A-1124 | 165 |
 | AGW-AW 109SP | 165 |
+| I.A-1124 | 165 |
 | CE-T-303 | 153 |
 | BE-M-35 | 151 |
 | BE-D-95-A | 144 |
@@ -165,7 +165,7 @@
 
 | tramos | despegues_cabotaje | pct_emparejado |
 |---|---|---|
-| 775776 | 915317 | 84.8 |
+| 775410 | 915317 | 84.7 |
 
 ## Rotaciones: método por matrícula vs por modelo
 
@@ -192,9 +192,9 @@
 | MDP | matricula | escala_larga | 281 | 234.0 |
 | MDP | matricula | pernocte | 127 | 1148.0 |
 | MDP | matricula | rotacion | 1457 | 51.0 |
-| MDP | modelo | escala_larga | 471 | 218.0 |
-| MDP | modelo | pernocte | 472 | 549.0 |
-| MDP | modelo | rotacion | 9301 | 50.0 |
+| MDP | modelo | escala_larga | 480 | 217.5 |
+| MDP | modelo | pernocte | 508 | 552.0 |
+| MDP | modelo | rotacion | 9371 | 50.0 |
 | NEU | matricula | escala_larga | 296 | 210.0 |
 | NEU | matricula | pernocte | 774 | 992.0 |
 | NEU | matricula | rotacion | 3696 | 53.0 |
@@ -218,8 +218,8 @@
 | 2019 | oficial | 669 | 592 | 0 | 8 | 584 |
 | 2019 | instruccion | 548 | 6 | 0 | 0 | 6 |
 | 2019 | trabajo_aereo | 50 | 0 | 0 | 0 | 0 |
-| 2019 | charter_linea | 36 | 21 | 0 | 5 | 16 |
-| 2020 | linea_regular | 1351 | 1228 | 244 | 962 | 22 |
+| 2019 | charter_linea | 36 | 20 | 0 | 4 | 16 |
+| 2020 | linea_regular | 1351 | 852 | 230 | 602 | 20 |
 | 2020 | privado | 499 | 306 | 0 | 0 | 306 |
 | 2020 | oficial | 411 | 397 | 0 | 2 | 395 |
 | 2020 | instruccion | 382 | 223 | 0 | 0 | 223 |
@@ -280,8 +280,15 @@
 | 2022-04-18 | LJ-60 | Aerolíneas Argentinas | 160 | 7.0 | 22.857 |
 | 2022-01-29 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 183 | 96.0 | 1.906 |
 | 2021-12-30 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 181 | 96.0 | 1.885 |
+| 2020-01-18 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 172 | 96.0 | 1.792 |
+| 2020-01-22 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 172 | 96.0 | 1.792 |
+| 2020-01-04 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 171 | 96.0 | 1.781 |
+| 2020-01-19 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 166 | 96.0 | 1.729 |
+| 2020-01-11 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 161 | 96.0 | 1.677 |
 | 2022-11-06 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 156 | 96.0 | 1.625 |
+| 2020-01-26 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 152 | 96.0 | 1.583 |
 | 2023-10-01 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 143 | 96.0 | 1.49 |
+| 2020-01-05 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 134 | 96.0 | 1.396 |
 | 2022-12-28 | BO-737-76N | Aerolíneas Argentinas | 172 | 129.0 | 1.333 |
 | 2023-10-01 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 125 | 96.0 | 1.302 |
 | 2022-10-04 | BO-737-76N | Aerolíneas Argentinas | 162 | 129.0 | 1.256 |
