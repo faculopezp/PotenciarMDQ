@@ -9,7 +9,7 @@ import * as Inputs from "@observablehq/inputs";
 import {html} from "htl";
 import {TINTA, TINTA_2, ACENTO, CAT, OTRO, SEQ, DIV, SEGMENTOS, SEG_NOMBRE, SEG_COLOR, segColor,
   entero, pct, pct1, variacion, decimal1, compacto, MESES, DIAS, datos, ultimoAnioCompleto,
-  veranosCompletos, topN, fechaLarga, ALTO, ejeAnios, fechaEje} from "./components/util.js";
+  veranosCompletos, topN, fechaLarga, ALTO, ejeAnios, fechaEje, notaCobertura} from "./components/util.js";
 ```
 
 ```js
@@ -32,6 +32,7 @@ const segMensual = datos(FileAttachment("data/mdq_segmentos_mensual.json"));
 const segAnual = datos(FileAttachment("data/mdq_segmentos_anual.json"));
 const avionTipico = datos(FileAttachment("data/mdq_avion_tipico.json"));
 const aeronavesM = datos(FileAttachment("data/mdq_aeronaves.json"));
+const cob = datos(FileAttachment("data/mdq_cobertura.json"));
 const historiaSeg = datos(FileAttachment("data/mdq_historia_segmentos.json"));
 const ranking = datos(FileAttachment("data/ranking_nacional.json"));
 const red = datos(FileAttachment("data/red_aeropuertos.json"));
@@ -594,6 +595,8 @@ Plot.plot({
 })
 ```
 
+<p class="cobertura">${notaCobertura(cob, {alcance: "linea", campo: "pct_operador", que: "aerolínea conocida", sobre: "movimientos de línea"})}</p>
+
 <h2 id="09" data-idx="09 — Oferta">Asientos y ocupación</h2>
 
 Vuelos de línea: pasajeros transportados y asientos ofrecidos (estimados) por mes. La distancia entre ambas líneas son asientos que volaron vacíos.
@@ -616,6 +619,8 @@ Plot.plot({
   ]
 })
 ```
+
+<p class="cobertura">${notaCobertura(cob, {alcance: "linea", campo: "pct_asientos", que: "asientos conocidos (del vuelo exacto, de la cabina publicada o estimados)", sobre: "movimientos de línea"})} Los meses con menos cobertura subestiman la oferta.</p>
 
 
 <h2 id="10" data-idx="10 — Flota">En qué aviones</h2>
@@ -647,6 +652,8 @@ Plot.plot({
 })
 ```
 
+<p class="cobertura">${notaCobertura(cob, {alcance: "linea", campo: "pct_aeronave_con_inferida", que: "avión conocido o deducido", sobre: "movimientos de línea"})} Lo deducido (por pasajeros o por los asientos del vuelo) se explica en <a href="./metodologia">Metodología</a>.</p>
+
 ### Modelo por modelo
 
 <p class="intro-ancha">Desde 2021, modelo por modelo: el E190 hace la base del año y los Boeing 737-700, 737-800 y 737 MAX 8 suman capacidad cuando la demanda sube.</p>
@@ -670,6 +677,8 @@ Plot.plot({
   ]
 })
 ```
+
+<p class="cobertura">${notaCobertura(cob, {alcance: "linea", campo: "pct_aeronave", que: "modelo informado o recuperado", sobre: "movimientos de línea", desde: 2021})}</p>
 
 <h2 id="11" data-idx="11 — Toda la actividad">Todo lo que vuela</h2>
 
@@ -739,6 +748,8 @@ html`<div class="fichas">${fichas.map((f) => html`<div class="ficha">
   <dl>${filas(f)}</dl></div>`)}</div>`
 ```
 
+<p class="cobertura">${notaCobertura(cob, {alcance: "resto", campo: "pct_aeronave", que: "avión conocido", sobre: "movimientos fuera de línea de", desde: ref.anio, hasta: ref.anio})} El resto no entra en el ranking.</p>
+
 ### Desde 2015
 
 Cómo cambió la mezcla de actividades en la pista, año por año.
@@ -767,7 +778,7 @@ Plot.plot({
 <div class="leyenda-grid">
   <p><b>Cómo se agrupa.</b> Cada vuelo entra en el segmento que declara su operador a la ANAC: línea regular, no regular, privado, oficial o escuela. Los no regulares en aviones de línea son <i>charter</i>; el resto, <i>taxi aéreo</i>.</p>
   <p><b>Tres ajustes.</b> Un vuelo privado en jet o turbohélice ejecutivo se cuenta como <i>taxi aéreo</i> (casi siempre es un operador de taxi posicionando el avión). Un taxi aéreo declarado en un avión a pistón de menos de 6 plazas se cuenta como <i>privado</i>. Un vuelo de una escuela de vuelo (CIAC, aeroclub, academia) declarado como privado o no regular se cuenta como <i>escuela</i>.</p>
-  <p><b>El límite.</b> 97 % de los vuelos privados y 80 % de los no regulares no informan operador, así que la frontera entre privado, taxi y escuela depende de lo que declara cada piloto.</p>
+  <p><b>El límite.</b> ${(() => { const c = cob.find((d) => d.anio === ref.anio && d.alcance === "resto"); return c ? `En ${ref.anio}, fuera de la línea, la ANAC informa el operador en el ${pct(c.pct_operador_anac)} de los movimientos; con los cruces de matrícula, Afectación y el otro extremo del vuelo llega al ${pct(c.pct_operador)}. La frontera entre privado, taxi y escuela depende en parte de lo que declara cada piloto.` : ""; })()}</p>
 </div>
 
 <h2 id="12" data-idx="12 — Pronóstico">Lo que viene</h2>

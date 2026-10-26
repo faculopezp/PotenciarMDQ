@@ -45,6 +45,7 @@ MARTS_WEB = {
     "mart_mdq_turismo": "mdq_turismo",
     "mart_mdq_findes_largos": "mdq_findes_largos",
     "mart_mdq_historia_segmentos": "mdq_historia_segmentos",
+    "mart_mdq_cobertura": "mdq_cobertura",
 }
 COLUMNAR = {"mart_mdq_explorador": "mdq_explorador"}  # tablas grandes: {col: [valores]}
 

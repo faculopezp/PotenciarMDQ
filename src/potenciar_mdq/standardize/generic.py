@@ -201,6 +201,31 @@ def build_opensky(raw_dir: Path = RAW / "opensky_aeronaves", out: Path = PROCESS
     return dest
 
 
+def build_tar1090(raw_dir: Path = RAW / "tar1090_db", out: Path = PROCESSED) -> Path:
+    """tar1090-db aircraft.csv.gz (hex;matrícula;tipo;flags;descripción) -> tar1090.parquet.
+
+    Solo el bloque de direcciones de Argentina (E00000–E3FFFF) y matrículas LV-/LQ-. `ident` es la
+    matrícula sin guiones (T-99 = T99), como se compara con ANAC.
+    """
+    files = sorted(p for p in raw_dir.rglob("*.csv.gz") if p.is_file())
+    if not files:
+        raise FileNotFoundError(f"No hay tar1090-db en {raw_dir}")
+    dest = out / "tar1090.parquet"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    duckdb.connect().execute(f"""
+        COPY (
+          SELECT upper(column0) AS hex, upper(trim(column1)) AS matricula,
+                 upper(regexp_replace(trim(column1), '[- ]', '', 'g')) AS ident,
+                 upper(trim(column2)) AS tipo_icao, column3 AS flags, trim(column4) AS descripcion
+          FROM read_csv({_q(str(files[-1]))}, delim=';', header=false, all_varchar=true,
+                        ignore_errors=true, null_padding=true)
+          WHERE coalesce(trim(column1), '') <> '' AND coalesce(trim(column2), '') <> ''
+            AND (upper(column0) BETWEEN 'E00000' AND 'E3FFFF'
+                 OR regexp_matches(upper(trim(column1)), '^L[VQ]-'))
+        ) TO {_q(str(dest))} (FORMAT parquet)""")
+    return dest
+
+
 def build_madhel(raw_dir: Path = RAW / "madhel_api", out: Path = PROCESSED) -> Path:
     """MADHEL /api/v2/airports/ (JSON) -> processed/madhel.parquet, columnas tal cual vengan."""
     files = sorted(p for p in raw_dir.rglob("*") if p.is_file())

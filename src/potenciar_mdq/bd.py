@@ -95,6 +95,13 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
                     "archivo VARCHAR)")
 
     # OpenSky (opcional): matrícula -> tipo ICAO, para validar modelos (reports/qa/muestras.md).
+    tdb = processed / "tar1090.parquet"
+    if tdb.exists():
+        con.execute("CREATE TABLE ref_tar1090 AS SELECT * FROM read_parquet(?)", [str(tdb)])
+    else:
+        log.warning("Sin tar1090-db: no se completa el tipo por matrícula")
+        con.execute("CREATE TABLE ref_tar1090 (hex VARCHAR, matricula VARCHAR, ident VARCHAR, "
+                    "tipo_icao VARCHAR, flags VARCHAR, descripcion VARCHAR)")
     osky = processed / "opensky.parquet"
     if osky.exists():
         con.execute("CREATE TABLE ref_opensky AS SELECT * FROM read_parquet(?)", [str(osky)])

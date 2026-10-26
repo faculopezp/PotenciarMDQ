@@ -19,12 +19,13 @@ WITH s AS (
          WHEN op.aerolinea IS NOT NULL THEN 'otro_extremo'
          WHEN oe.aerolinea IS NOT NULL THEN 'prefijo_estatal'
          WHEN vp.aerolinea_par IS NOT NULL THEN 'otro_extremo_sin_matricula' END AS operador_fuente,
-    coalesce(s.aeronave, pv.aeronave_previa, am.aeronave, ae.aeronave, vp.aeronave_par,
-             pa.aeronave) AS aeronave,
+    coalesce(s.aeronave, pv.aeronave_previa, am.aeronave, ae.aeronave, tb.aeronave,
+             vp.aeronave_par, pa.aeronave) AS aeronave,
     CASE WHEN s.aeronave IS NOT NULL THEN 'anac'
          WHEN pv.aeronave_previa IS NOT NULL THEN 'anac_version_anterior'
          WHEN am.aeronave IS NOT NULL THEN 'municipal'
          WHEN ae.aeronave IS NOT NULL THEN 'serie_estatal'
+         WHEN tb.aeronave IS NOT NULL THEN 'tar1090'
          WHEN vp.aeronave_par IS NOT NULL THEN 'otro_extremo_sin_matricula'
          WHEN pa.aeronave IS NOT NULL THEN 'asientos_yvera' END AS aeronave_fuente,
     s.aeropuerto                                   AS aeropuerto_original,
@@ -59,6 +60,7 @@ WITH s AS (
    AND pa.aeropuerto = s.aeropuerto AND pa.tipo_movimiento = s.tipo_movimiento
    AND pa.origen_destino = s.origen_destino AND pa.aerolinea IS NOT DISTINCT FROM s.aerolinea
    AND pa.matricula IS NOT DISTINCT FROM s.matricula AND pa.pasajeros = s.pasajeros
+  LEFT JOIN ref_aeronave_tar1090 tb ON s.aeronave IS NULL AND tb.matricula = s.matricula
   LEFT JOIN ref_aeronave_serie ae
     ON s.aeronave IS NULL AND ae.matricula = s.matricula AND s.fecha >= ae.desde
   LEFT JOIN correcciones c

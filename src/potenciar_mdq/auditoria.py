@@ -103,6 +103,42 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
             FROM fct_movimiento f LEFT JOIN ref_opensky o ON o.registration = f.matricula
             WHERE f.aeronave IS NULL AND f.matricula IS NOT NULL""")]
 
+    if _existe(con, "ref_tar1090"):
+        out += ["Tipo de aeronave en tar1090-db (base comunitaria de transpondedores) contra el "
+                "tipo que informa ANAC para la misma matrícula (código OACI):", "", _table(con, """
+            WITH t AS (
+              SELECT ident, any_value(tipo_icao) AS tipo_icao FROM ref_tar1090
+              GROUP BY ident HAVING count(DISTINCT tipo_icao) = 1
+            ),
+            f AS (
+              SELECT DISTINCT upper(regexp_replace(f.matricula, '[- ]', '', 'g')) AS ident,
+                     d.icao_tipo
+              FROM fct_movimiento f JOIN dim_aeronave d ON d.aeronave = f.aeronave
+              WHERE f.aeronave_fuente = 'anac' AND f.matricula IS NOT NULL
+                AND d.icao_tipo IS NOT NULL AND d.icao_tipo <> ''
+            )
+            , fam AS (SELECT icao_tipo, any_value(familia) AS familia FROM dim_aeronave
+                      WHERE icao_tipo IS NOT NULL AND icao_tipo <> '' GROUP BY 1)
+            SELECT count(*) AS matriculas_comparables,
+                   count(*) FILTER (f.icao_tipo = t.tipo_icao) AS mismo_tipo,
+                   round(100.0 * count(*) FILTER (f.icao_tipo = t.tipo_icao) / count(*), 1)
+                     AS pct_tipo,
+                   count(*) FILTER (fa.familia = fb.familia OR f.icao_tipo = t.tipo_icao)
+                     AS misma_familia,
+                   count(*) FILTER (fb.familia IS NULL AND f.icao_tipo <> t.tipo_icao)
+                     AS tipo_desconocido_en_la_base
+            FROM f JOIN t USING (ident)
+            LEFT JOIN fam fa ON fa.icao_tipo = f.icao_tipo
+            LEFT JOIN fam fb ON fb.icao_tipo = t.tipo_icao"""),
+                "(Las diferencias de tipo son variantes de la misma familia: CJ1/CJ M2, Learjet "
+                "45/40/75, 182/182RG; tar1090-db solo se aplica cuando su tipo ya existe en la base.)",
+                "",
+                "Completado por tar1090-db (movimientos sin aeronave en ANAC):", "", _table(con, """
+            SELECT CASE WHEN aeropuerto = getvariable('foco') THEN 'MDQ' ELSE 'resto del país' END
+                     AS ambito, aeronave_modelo, count(*) AS movimientos
+            FROM fct_movimiento WHERE aeronave_fuente = 'tar1090'
+            GROUP BY ALL ORDER BY 1, 3 DESC LIMIT 20""")]
+
     # ── C: el otro extremo del mismo vuelo ──────────────────────────────────────────────────
     con.execute("""
         CREATE TEMP TABLE pares AS
@@ -345,7 +381,8 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
           count(*) FILTER (aeronave_fuente = 'serie_estatal') AS aeronave_por_serie_estatal,
           count(*) FILTER (aeronave_fuente = 'otro_extremo_sin_matricula')
             AS aeronave_otro_extremo_sin_matricula,
-          count(*) FILTER (aeronave_fuente = 'asientos_yvera') AS aeronave_por_asientos_yvera
+          count(*) FILTER (aeronave_fuente = 'asientos_yvera') AS aeronave_por_asientos_yvera,
+          count(*) FILTER (aeronave_fuente = 'tar1090') AS aeronave_por_tar1090
         FROM fct_movimiento GROUP BY 1 ORDER BY 1"""),
             "Privado en jet o turbohélice ejecutivo analizado como taxi aéreo. Evidencia en el foco: "
             "cuántos tienen operador o matrícula que también vuela como no regular.", "",

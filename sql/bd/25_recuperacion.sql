@@ -360,3 +360,27 @@ CREATE OR REPLACE TABLE ref_aeronave_por_asientos AS
 SELECT * FROM ref_aeronave_por_asientos
 QUALIFY count(*) OVER (PARTITION BY fecha, hora_utc, aeropuerto, tipo_movimiento, origen_destino,
                        aerolinea, matricula, pasajeros) = 1;
+
+-- 11. Aeronave por matrícula en tar1090-db (base comunitaria de transpondedores, ver
+--     config/sources.yaml): tipo OACI de la matrícula -> denominación ANAC con ese tipo (la más
+--     usada). Solo matrículas con un único tipo en tar1090-db y tipos que la base ya conoce
+--     (dim_aeronave.icao_tipo). Validación contra las matrículas que ANAC sí informa con aeronave
+--     en reports/qa/auditoria.md, sección 2B.
+CREATE OR REPLACE TABLE ref_aeronave_tar1090 AS
+WITH t AS (
+  SELECT ident, any_value(tipo_icao) AS tipo_icao FROM ref_tar1090
+  GROUP BY ident HAVING count(DISTINCT tipo_icao) = 1
+),
+uso AS (  -- denominación ANAC más usada para cada tipo OACI
+  SELECT d.icao_tipo, d.aeronave, count(*) AS n
+  FROM stg_movimiento s JOIN dim_aeronave d ON d.aeronave = s.aeronave
+  WHERE d.icao_tipo IS NOT NULL AND d.icao_tipo <> ''
+  GROUP BY 1, 2
+  QUALIFY row_number() OVER (PARTITION BY d.icao_tipo ORDER BY count(*) DESC) = 1
+),
+m AS (
+  SELECT DISTINCT matricula, upper(regexp_replace(matricula, '[- ]', '', 'g')) AS ident
+  FROM stg_movimiento WHERE matricula IS NOT NULL
+)
+SELECT m.matricula, t.tipo_icao, u.aeronave
+FROM m JOIN t USING (ident) JOIN uso u ON u.icao_tipo = t.tipo_icao;

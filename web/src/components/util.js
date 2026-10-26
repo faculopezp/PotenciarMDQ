@@ -143,3 +143,17 @@ export function modelosCortos(modelos, familia) {
     return resto.length && primera.startsWith(marca) ? resto.join(" ") : m;
   }).join(" · ");
 }
+
+// Cobertura de un dato (mart_mdq_cobertura) en un rango de años, ponderada por movimientos:
+// "Avión conocido en el 96 % de los movimientos de línea 2019–2026 (2020: 31 %)".
+export function notaCobertura(cob, {alcance, campo, que, sobre, desde = 0, hasta = 9999}) {
+  const f = cob.filter((d) => d.alcance === alcance && d.anio >= desde && d.anio <= hasta && d.movimientos);
+  if (!f.length) return "";
+  const total = d3.sum(f, (d) => d.movimientos);
+  const valor = d3.sum(f, (d) => d[campo] * d.movimientos) / total;
+  const peor = d3.least(f, (d) => d[campo]);
+  const a0 = d3.min(f, (d) => d.anio), a1 = d3.max(f, (d) => d.anio);
+  const rango = a0 === a1 ? `${a0}` : `${a0}–${a1}`;
+  const minimo = f.length > 1 && peor[campo] < valor - 0.05 ? ` (el año más bajo, ${peor.anio}: ${pct(peor[campo])})` : "";
+  return `Cobertura: ${que} en el ${pct(valor)} de los ${sobre} ${rango}${minimo}.`;
+}

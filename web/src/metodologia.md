@@ -18,6 +18,13 @@ title: Metodología y fuentes
 | Coordenadas y nombres de aeropuertos | OurAirports (dominio público) | — |
 | Feriados nacionales | Calendario oficial (paquete `holidays`) | — |
 | Hitos históricos | Notas de prensa y fuentes secundarias, marcadas como tales | — |
+| Avión de 2019 | Versión anterior del mismo dataset de la ANAC (exportada en 2025), que todavía traía el avión | 2019 |
+| Asientos y vuelos por día y ruta | Yvera, Ministerio de Turismo — "Conectividad aérea", base agregada de frecuencias (fuente SIAC/ANAC) | 2017 → hoy |
+| Empresa que explota cada matrícula | ANAC — consulta pública "Afectación de Aeronaves" (extracción manual, se repite cada 1–2 meses) | vigente a la fecha de extracción |
+| Empresas certificadas | ANAC — listados de transporte aerocomercial (Partes 121/135) y trabajo aéreo (CETA) | 2024 |
+| Tipo de avión por matrícula | tar1090-db, base comunitaria de transpondedores (Mictronics / wiedehopf) | actual |
+| Cabinas por aerolínea y modelo | Comunicados y prensa especializada, con fuente por fila (`config/cabinas.yaml`) | — |
+| Aeronaves del Estado | Formato de identificación de cada fuerza e identificaciones públicas por serie (`config/estatales.yaml`) | — |
 
 Los datos se descargan y procesan automáticamente una vez por mes. El código es abierto.
 
@@ -34,8 +41,8 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **Operadores:** variantes del mismo nombre (`LADE` / `L.A.D.E.`, `S.A.` / `SA`) se unifican.
 - **Taxi aéreo a pistón:** cuenta como taxi solo con 6 plazas o más (piloto + 5 pasajeros); si no, se analiza como privado.
 - **Privado en jet o turbohélice ejecutivo:** se analiza como taxi aéreo. En MDQ, casi todos los que traen operador o matrícula son de empresas o aviones que también vuelan como taxi: son tramos de posicionamiento declarados como privados.
-- **Modelo de avión faltante:** la ANAC no informa el modelo en 2019 y en parte de 2020, y en ~20 % de los movimientos posteriores (sobre todo vuelos oficiales y militares). Primero se recupera con cruces exactos: en 2019, el avión sale de una versión anterior del mismo dataset de la ANAC, que sí lo traía (mismo día, hora UTC, movimiento, origen/destino y pasajeros, coincidencia 1 a 1; en 2023–2024 esas claves dan el mismo avión en 11.015 de 11.016 vuelos), y si no, del registro municipal del mismo vuelo. Lo que queda, en vuelos de Aerolíneas, se infiere por pasajeros: hasta 96 → E190 (acierta 93–98 %), más de 128 → 737-800/MAX 8 (95 %); entre 97 y 128 no se asigna (30 % eran E190). Avian 2019 → ATR 72-600; Flyest → CRJ200. Lo inferido se marca como tal.
-- **Operador recuperado:** si un vuelo no trae operador, se toma de otros vuelos del mismo avión (matrícula, desde 2026) cuando todos coinciden, o del registro del otro extremo del mismo vuelo (aeropuertos cruzados, horario compatible y un solo candidato; coincide en el 99 % de los vuelos que traen el dato). En aeronaves del Estado, la identificación dice la fuerza (T-, TC- Fuerza Aérea; AE- Ejército; 2-H- Armada; PA- Prefectura; GN- Gendarmería; PF- Policía Federal) y, cuando hay identificación pública, el modelo (ej. T-99 Boeing 737-700, PA-40 Dauphin). Auditoría completa en `reports/qa/auditoria.md`.
+- **Modelo de avión faltante:** la ANAC no informa el modelo en 2019 y en parte de 2020, y en ~20 % de los movimientos posteriores (sobre todo vuelos oficiales y militares). Primero se recupera con cruces exactos: en 2019, el avión sale de una versión anterior del mismo dataset de la ANAC, que sí lo traía (mismo día, hora UTC, movimiento y origen/destino, coincidencia 1 a 1; los pasajeros no sirven de clave porque la ANAC los corrigió entre versiones; en 2023–2024 esas claves dan el mismo avión en 11.015 de 11.016 vuelos), y si no, del registro municipal del mismo vuelo. Lo que queda, en vuelos de Aerolíneas, se infiere por pasajeros: hasta 96 → E190 (acierta 93–98 %), más de 128 → 737-800/MAX 8 (95 %); entre 97 y 128 no se asigna (30 % eran E190). Avian 2019 → ATR 72-600; Flyest → CRJ200. En 2020, además, el avión sale de los asientos del vuelo exacto según Yvera: para cada aerolínea, la cantidad de asientos que en los años con dato corresponde siempre al mismo avión (96 → E190 en 2.187 de 2.187 vuelos); si ese día hubo varios vuelos, solo cuando la única combinación posible es que todos sean el mismo avión. En 2026, tar1090-db completa el tipo por matrícula (misma familia que la ANAC en prácticamente todos los casos comparables). Lo inferido se marca como tal.
+- **Operador recuperado:** si un vuelo no trae operador, se toma de la consulta de Afectación de la ANAC (matrícula → empresa, desde la fecha de afectación; coincide con el operador informado en el 99,9 % de los casos), de otros vuelos del mismo avión (matrícula, desde 2026) cuando todos coinciden, o del registro del otro extremo del mismo vuelo (aeropuertos cruzados, horario compatible y un solo candidato; coincide en el 99 % de los vuelos que traen el dato). En aeronaves del Estado, la identificación dice la fuerza (T-, TC- Fuerza Aérea; AE- Ejército; 2-H- Armada; PA- Prefectura; GN- Gendarmería; PF- Policía Federal) y, cuando hay identificación pública, el modelo (ej. T-99 Boeing 737-700, PA-40 Dauphin). Auditoría completa en `reports/qa/auditoria.md`.
 - **Serie larga:** hasta 2018 se usan los datos municipales y desde 2019 los de la ANAC. En 2019, año que cubren ambas fuentes, difieren menos de 4 % por mes. Desde 2021 el Municipio publica pasajeros de un solo sentido, por eso no se usa.
 - **Datos provisorios:** la ANAC marca como provisorios los últimos meses; pueden cambiar.
 - **Hora local:** hora UTC − 3.
@@ -49,7 +56,7 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **01 · Serie larga:** las barras claras (2001–2018) son datos del Municipio y las oscuras (2019+), de la ANAC. Movimientos comerciales = vuelos regulares y no regulares.
 - **04 · Todo lo que vuela, "Desde 2015":** 2015–2018 sale de una muestra municipal de vuelos (≈ 52 % de los movimientos, sin vuelos oficiales ni escuelas); por eso la composición se muestra en porcentaje.
 - **04 · Avión típico:** familia con más movimientos de cada segmento. "Lleva hasta (habitual)" = percentil 95 de pasajeros de esa familia en ese segmento en todo el país. El **avión básico** del taxi aéreo es el turbohélice más frecuente entre los que llevan 5 o más pasajeros.
-- **05 · Asientos:** la ANAC no publica asientos. Se usa la configuración de cabina publicada de cada aerolínea y modelo (E190 de Aerolíneas 96, 737-800 de Flybondi 189, 737 MAX 8 170, ATR 72 de Avian 72…); donde las fuentes no coinciden, la capacidad típica observada (p95 de pasajeros). Ambas dan lo mismo donde se pueden comparar.
+- **05 · Asientos:** la ANAC no publica asientos. Primero, los asientos del vuelo exacto según Yvera (cuando ese día hubo un solo vuelo en la ruta y coinciden los pasajeros); si no, la configuración de cabina publicada de cada aerolínea y modelo (E190 de Aerolíneas 96, 737-800 de Flybondi 189, 737 MAX 8 170, ATR 72 de Avian 72…); donde las fuentes no coinciden, la capacidad típica observada (p95 de pasajeros). Ambas dan lo mismo donde se pueden comparar.
 - **06 · A dónde se vuela:** el mapa recorta el cono sur; los destinos fuera del recorte se dibujan como flechas hacia el borde y se detallan en "Destinos lejanos". Ubicación de cada código: lista oficial de aeródromos y helipuertos de la ANAC, OurAirports y MADHEL. Los vuelos a lugares aptos denunciados no se cuentan como exterior.
 - **08 · Flota:** en 2019–2020 el avión se infiere por operador y pasajeros (ver "Modelo de avión faltante"); el resto queda como "Sin dato".
 - **Toda la aviación · Operadores:** "Sin dato" = la ANAC no informa el operador (frecuente en vuelos oficiales y militares).
@@ -63,7 +70,7 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 
 | Métrica | Cómo se calcula | Por qué es una estimación |
 |---|---|---|
-| Asientos ofrecidos | Cabina publicada por aerolínea y modelo (`config/cabinas.yaml`); si no hay, percentil 95 de los pasajeros observados en ese modelo (y aerolínea) en todo el país | ANAC no publica asientos |
+| Asientos ofrecidos | Asientos del vuelo exacto según Yvera; si no, cabina publicada por aerolínea y modelo (`config/cabinas.yaml`); si no hay, percentil 95 de los pasajeros observados en ese modelo (y aerolínea) en todo el país | ANAC no publica asientos |
 | Ocupación (load factor) | Pasajeros ÷ asientos estimados | Hereda la estimación de asientos; tiende a sobrestimar unos puntos |
 | Duración de vuelo | Se une el despegue en el origen con el aterrizaje en destino del mismo avión | ANAC no publica número de vuelo; se empareja por aerolínea y modelo (y matrícula desde 2026) |
 | Tiempo en tierra (turnaround) | Aterrizaje → siguiente despegue del mismo avión en MDQ | Igual que arriba; validado contra matrícula en 2026 (medianas 51 vs 52 min) |
@@ -78,9 +85,28 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 <div class="met-grid">
 <div>
 
+## Qué tan completo es cada dato
+
+Parte de los movimientos de cada año con el dato disponible, ya sea informado por la ANAC, recuperado con cruces exactos o deducido (Mar del Plata). Al pie de cada gráfico se indica la cobertura que le corresponde.
+
+```js
+const cob = datos(FileAttachment("data/mdq_cobertura.json"));
+```
+
+```js
+html`<table class="editorial"><thead><tr><th>Año</th><th>Movimientos</th><th>Operador (ANAC)</th><th>Operador (con recuperación)</th><th>Avión de línea</th><th>Avión fuera de línea</th><th>Asientos de línea</th></tr></thead><tbody>
+${cob.filter((d) => d.alcance === "todos").map((t) => {
+  const l = cob.find((d) => d.anio === t.anio && d.alcance === "linea") ?? {};
+  const r = cob.find((d) => d.anio === t.anio && d.alcance === "resto") ?? {};
+  return html`<tr><td>${t.anio}</td><td>${entero(t.movimientos)}</td><td>${pct(t.pct_operador_anac)}</td><td>${pct(t.pct_operador)}</td><td>${pct(l.pct_aeronave_con_inferida ?? 0)}</td><td>${pct(r.pct_aeronave_con_inferida ?? 0)}</td><td>${pct(l.pct_asientos ?? 0)}</td></tr>`;
+})}
+</tbody></table>`
+```
+
 ## Lo que no se puede medir con estos datos
 
 - Puntualidad y cancelaciones (no hay horarios programados).
+- Operador y avión de privados, escuelas y vuelos oficiales 2019–2025: la ANAC publica la matrícula recién desde 2026 y sin matrícula no hay cruce posible.
 - Tarifas.
 - Origen de los turistas (los pasajeros no tienen nacionalidad ni residencia en este dataset).
 
@@ -120,7 +146,8 @@ const archivos = [
   ["Orígenes y destinos (toda la aviación)", FileAttachment("data/mdq_destinos.json")],
   ["Vuelos a destinos lejanos", FileAttachment("data/mdq_vuelos_exoticos.json")],
   ["Flota por modelo", FileAttachment("data/mdq_aeronaves.json")],
-  ["Segmentos por año", FileAttachment("data/mdq_segmentos_anual.json")]
+  ["Segmentos por año", FileAttachment("data/mdq_segmentos_anual.json")],
+  ["Cobertura de cada dato", FileAttachment("data/mdq_cobertura.json")]
 ];
 ```
 
@@ -136,5 +163,5 @@ html`<ul>${archivos.map(([n, f]) => html`<li><a href=${f.href} download=${f.name
 
 ```js
 import {html} from "htl";
-import {ACENTO, TINTA, OTRO, SIN_DATO, SEGMENTOS, SEG_COLOR, PERFILES} from "./components/util.js";
+import {ACENTO, TINTA, OTRO, SIN_DATO, SEGMENTOS, SEG_COLOR, PERFILES, datos, entero, pct} from "./components/util.js";
 ```

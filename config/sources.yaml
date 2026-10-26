@@ -65,6 +65,15 @@ sources:
     url: https://opensky-network.org/datasets/metadata/aircraftDatabase.csv
     enabled: true
     verified: false
+  # tar1090-db (base comunitaria Mictronics/wiedehopf, actualización semanal): código de
+  # transpondedor -> matrícula, tipo OACI y marca militar. Completa el tipo de aeronave de las
+  # matrículas que ANAC informa sin aeronave (2026+) y aeronaves del Estado. Sin licencia declarada:
+  # se usa como insumo con atribución, no se redistribuye el archivo crudo.
+  tar1090_db:
+    kind: static_file
+    url: https://raw.githubusercontent.com/wiedehopf/tar1090-db/csv/aircraft.csv.gz
+    enabled: true
+    verified: false
   # MADHEL (Manual de Aeródromos y Helipuertos, ANAC/AIS). Sin API documentada: el probe escanea
   # la página y sus .js para encontrar el endpoint de datos (ver reports/probe.md). Objetivo:
   # resolver los códigos numéricos del CSV de movimientos (ej. 2278, 3073, 2574).
