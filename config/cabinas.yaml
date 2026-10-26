@@ -1,0 +1,35 @@
+# Asientos publicados por operador y modelo (configuración de cabina), para los que operaron en
+# MDQ. Reemplazan a la estimación por percentil 95 de pasajeros (sql/bd/20_dim_capacidad.sql) en
+# load factor y ASK. Solo configuraciones en las que las fuentes coinciden.
+# operador: regex sobre el nombre normalizado (dim_aerolinea, mayúsculas sin acentos).
+# modelo: modelo estandarizado (config/aeronaves.yaml → modelos). Verificado 2026-10-25.
+#
+# Sin cargar (fuentes contradictorias o una sola aeronave): quedan con el p95.
+# - Aerolíneas 737-800: 170 (8 + 162, LV-GVA 2019) contra 186–189 tras la reconfiguración de 2018.
+# - Aerolíneas 737-700: 128 (8 + 120) o 137 según la unidad.
+# - Andes 737-800: 162 en el LV-KFW; sin dato del resto de la flota.
+# - LADE / FAA Fokker F28: 62 o 65 según la nota.
+cabinas:
+  - {operador: 'AEROLINEAS ARGENTINAS', modelo: Embraer E190, asientos: 96, clases: '8 + 88',
+     fuentes: ['https://aviacionline.com/?p=109258', 'https://www.btnews.co.uk/article/2324']}
+  - {operador: 'AEROLINEAS ARGENTINAS', modelo: Boeing 737 MAX 8, asientos: 170, clases: '8 + 162',
+     fuentes: ['https://seatmaps.com/airlines/ar-aerolineas-arg/boeing-737-max-8/',
+               'https://infonegocios.info/y-ademas/llego-el-segundo-boeing-737-max-8-de-aerolineas-argentinas-mas-alcance-menos-consumo']}
+  - {operador: 'FLYBONDI', modelo: Boeing 737-800, asientos: 189, clases: 'clase única',
+     fuentes: ['https://www.ch-aviation.com/news/54251-argentine-ulcc-start-up-flybondi-selects-the-b737-800',
+               'https://www.aviacionline.com/flybondi-incorporates-a-sixth-boeing-737']}
+  - {operador: 'NORWEGIAN', modelo: Boeing 737-800, asientos: 189, clases: 'clase única',
+     fuentes: ['https://centreforaviation.com/news/norwegian-air-argentina-incorporates-its-first-aircraft-757404',
+               'https://airlinegeeks.com/?p=27426']}
+  - {operador: '^AVIAN \(', modelo: ATR 72, asientos: 72, clases: 'clase única',
+     fuentes: ['https://www.atr-aircraft.com/presspost/synergy-aerospace-purchases-12-firm-atr-72-600s-for-its-new-argentinian-subsidiary-avian-lineas-aereas/']}
+  - {operador: 'FLYEST', modelo: Bombardier CRJ200, asientos: 50, clases: 'clase única',
+     fuentes: ['https://www.airlinepilotforums.com/2500130-post1.html']}
+  - {operador: 'AMERICAN JET', modelo: Embraer ERJ-145, asientos: 50, clases: 'clase única',
+     fuentes: ['https://www.ch-aviation.com/news/145963-argentinas-american-jet-eyes-scheduled-ops-new-fleet']}
+  - {operador: 'ANDES', modelo: Boeing 737-700, asientos: 142, clases: 'clase única',
+     fuentes: ['https://www.aviacionline.com/andes-lineas-aereas-receives-boeing-737-700-lv-arr-expanding-charter-fleet']}
+  - {operador: 'LADE|FUERZA AEREA ARGENTINA', modelo: Embraer ERJ-140, asientos: 44, clases: 'clase única',
+     fuentes: ['https://www.airdatanews.com/argentine-air-force-takes-delivery-of-its-first-embraer-erj-140/']}
+  - {operador: 'LADE', modelo: Saab 340, asientos: 34, clases: 'clase única',
+     fuentes: ['https://aviacionline.com/argentina-lade-presento-sus-destinos-para-el-verano-2025']}

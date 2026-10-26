@@ -1,4 +1,4 @@
-# Auditoría de datos faltantes (2026-10-25)
+# Auditoría de datos faltantes (2026-10-26)
 
 Reporte vivo: `reports/qa/auditoria.md` (se regenera en cada corrida del CI).
 
@@ -22,6 +22,22 @@ Pasajeros, hora y origen/destino: completos. Matrícula: solo desde 2026.
 | Operador por el otro extremo del mismo vuelo (matrícula, un solo candidato) | 22 | 526 |
 | Aeronave 2019 del portal municipal (1 a 1 por día, hora, movimiento, origen/destino, aerolínea) | 1.356 | — |
 
+Agregados el 2026-10-26 (cifras de MDQ con el espejo ANAC 2023–2026; el CI recalcula con 2019–2026
+en `reports/qa/auditoria.md`):
+
+| Recuperación | MDQ | Validación |
+|---|---|---|
+| Operador por el otro extremo del vuelo **sin matrícula** (aeropuertos cruzados, movimiento opuesto, 10 min–10 h, avión/operador compatibles, candidato único de cada lado) | 380 | 99,2 % de coincidencia en operador, 98,0 % en avión (escondiendo el dato en vuelos que lo traen) |
+| Operador de aeronaves del Estado por prefijo (`config/estatales.yaml`: FAA, Ejército, Armada, Gendarmería, Prefectura, PFA) | 238 | FAA 99 %, Ejército 99 %, Gendarmería 91 %; Prefectura 78 % y Armada 0 % porque ANAC carga "Fuerza Aérea" en aviones que fuentes públicas identifican de esas fuerzas |
+| Modelo de aeronaves del Estado por serie con identificación pública (T-94/T-95 ERJ-140, T-99 737-700, TC-53 F28, PA-40/41/43 Dauphin) | 414 | Fuente por serie en `config/estatales.yaml` |
+| Asientos publicados por aerolínea y modelo (`config/cabinas.yaml`) | 8.567 de línea | Coinciden con el p95 observado: E190 96 = 96, 737-800 Flybondi 189 = 189, MAX 8 170 vs 172, ERJ-145 50 = 50, 737-700 Andes 142 = 142 |
+
+Lugares aptos denunciados: quedan como LAD (sin coordenadas, fuera del mapa).
+
+Reclasificación: todo vuelo **privado en jet o turbohélice ejecutivo** se analiza como taxi aéreo
+(`segmento_reclasificado`). En MDQ, de los que traen operador o matrícula, 282 de 286 (2023–2026) son
+de operadores o aviones que también vuelan como no regular (posicionamientos).
+
 Descartados por no aportar: aeronave por matrícula (0: los aviones sin modelo nunca lo informan),
 OpenSky (1: son matrículas no civiles), pasajeros por el otro extremo (0: nunca faltan).
 
@@ -31,12 +47,14 @@ OpenSky (1: son matrículas no civiles), pasajeros por el otro extremo (0: nunca
 - 97–128 → 737: 70 % (30 % eran E190). **Regla eliminada.**
 - > 128 → 737-800/MAX 8: 95 % en 2021+. Se mantiene.
 
+Nota: ~4 % de los vuelos con cabina publicada informan más pasajeros que asientos (E190: 11.128 de
+283.168). Es un error de carga de ANAC (o incluye infantes); el load factor de esos vuelos supera 100 %.
+
 ## Lo que no se recupera con las fuentes actuales y qué haría falta
 
-| Faltante (MDQ) | Movimientos | Qué haría falta |
-|---|---|---|
-| Aeronave sin matrícula, 2019–2025 | ~15.700 | Matrícula de cada movimiento antes de 2026 (pedido de acceso a la información a ANAC, Ley 27.275) |
-| Operador sin matrícula, 2019–2025 | ~20.500 | Ídem |
-| Aeronave y operador de vuelos oficiales con matrícula no civil (PA-, 2-H-, etc.) | ~600 en 2026 | Registro de aeronaves públicas (Fuerzas / Prefectura); ANAC no las publica |
-| Lugares aptos denunciados (código numérico) | 266 | Registro de LAD con coordenadas (pedido a ANAC) |
-| Asientos ofrecidos | todo | Configuración de cabina por matrícula (registro ANAC o aerolíneas) |
+| Faltante | Qué haría falta |
+|---|---|
+| Aeronave y operador sin matrícula, 2019–2025 (sobre todo privados, escuelas y oficiales) | Matrícula de cada movimiento antes de 2026 (pedido de acceso a la información a ANAC, Ley 27.275) |
+| Modelo de aeronaves del Estado sin identificación pública (PA-22, PG-380, 1-G-50, TC-64/66…) | Registro de aeronaves de las Fuerzas / Prefectura, o fuentes por serie |
+| Asientos de Aerolíneas 737-800 y 737-700, Andes 737-800, F28 | Fuente que resuelva la contradicción (170 vs 186–189; 128 vs 137; 62 vs 65); mientras tanto, p95 |
+| Lugares aptos denunciados | Se dejan como LAD |

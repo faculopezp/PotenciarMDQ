@@ -176,13 +176,122 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
             FROM cruce WHERE c_anac = 1 AND c_mun = 1 AND aeronave IS NULL AND av_mun IS NOT NULL
             GROUP BY ALL ORDER BY 3 DESC LIMIT 15""")]
 
+    # ── E: el otro extremo sin matrícula, validado contra vuelos que traen el dato ──────────
+    # Se toman vuelos del foco con operador y avión informados, se "esconde" uno de los dos y se
+    # busca el otro extremo con las mismas reglas (sql/bd/25, punto 5; acá solo se exige candidato
+    # único del lado del foco, más laxo que en la base).
+    con.execute("""
+        CREATE TEMP TABLE val_par AS
+        WITH m AS (
+          SELECT f.movimiento_id, f.aeropuerto, f.origen_destino, f.tipo_movimiento, f.ts_utc,
+                 f.fecha, f.aerolinea_original AS op, f.matricula, f.segmento,
+                 CASE WHEN f.aeronave_fuente = 'anac' THEN f.aeronave END AS av,
+                 coalesce(al.aerolinea_clave, f.aerolinea_original) AS clave
+          FROM fct_movimiento f LEFT JOIN dim_aerolinea al ON al.aerolinea = f.aerolinea_original
+          WHERE f.ts_utc IS NOT NULL AND f.origen_destino IS NOT NULL
+            AND f.aeropuerto <> f.origen_destino
+        ),
+        x AS (SELECT * FROM m WHERE aeropuerto = getvariable('foco') AND op IS NOT NULL
+                AND av IS NOT NULL AND segmento <> 'linea_regular'),
+        d AS (SELECT unnest([-1, 0, 1]) AS o),
+        base AS (
+          SELECT x.movimiento_id, x.op, x.av, x.clave, x.matricula, y.op AS op_y, y.av AS av_y,
+                 y.clave AS clave_y, y.matricula AS mat_y, x.tipo_movimiento, x.ts_utc, y.ts_utc AS ts_y
+          FROM x CROSS JOIN d
+          JOIN m y ON y.fecha = x.fecha + d.o AND y.aeropuerto = x.origen_destino
+                  AND y.origen_destino = x.aeropuerto AND y.tipo_movimiento <> x.tipo_movimiento
+          WHERE (x.tipo_movimiento = 'aterrizaje' AND y.ts_utc BETWEEN x.ts_utc - INTERVAL 10 HOUR AND x.ts_utc - INTERVAL 10 MINUTE)
+             OR (x.tipo_movimiento = 'despegue' AND y.ts_utc BETWEEN x.ts_utc + INTERVAL 10 MINUTE AND x.ts_utc + INTERVAL 10 HOUR)
+        ),
+        -- sin operador: se compara solo el avión; sin avión: solo el operador
+        sin_op AS (
+          SELECT 'operador' AS dato, movimiento_id, clave AS real, clave_y AS recuperado
+          FROM base WHERE (av_y IS NULL OR av_y = av)
+            AND (matricula IS NULL OR mat_y IS NULL OR matricula = mat_y)
+          QUALIFY count(*) OVER (PARTITION BY movimiento_id) = 1
+        ),
+        sin_av AS (
+          SELECT 'aeronave' AS dato, movimiento_id, av AS real, av_y AS recuperado
+          FROM base WHERE (op_y IS NULL OR clave_y = clave)
+            AND (matricula IS NULL OR mat_y IS NULL OR matricula = mat_y)
+          QUALIFY count(*) OVER (PARTITION BY movimiento_id) = 1
+        )
+        SELECT * FROM sin_op UNION ALL SELECT * FROM sin_av""")
+    out += ["## 2E. El otro extremo del mismo vuelo sin matrícula (2019–2025)", "",
+            "Validación en el foco (vuelos no regulares con operador y avión informados; se esconde "
+            "uno y se recupera del otro extremo):", "", _table(con, """
+        SELECT dato, count(*) FILTER (recuperado IS NOT NULL) AS recuperados,
+               count(*) FILTER (recuperado = real) AS coinciden,
+               round(100.0 * count(*) FILTER (recuperado = real)
+                     / nullif(count(*) FILTER (recuperado IS NOT NULL), 0), 1) AS pct_coinciden
+        FROM val_par GROUP BY 1 ORDER BY 1""")]
+
+    # ── F: aeronaves del Estado (config/estatales.yaml) ────────────────────────────────────
+    out += ["## 2F. Aeronaves del Estado: operador por prefijo de la identificación (2026)", "",
+            "Contrastación con los vuelos que traen operador en ANAC. Los desacuerdos son casi todos "
+            "ANAC cargando \"Fuerza Aérea\" en aeronaves de otra fuerza (ej. 1-G-49 Huron de la "
+            "Armada, PA-40 Dauphin de Prefectura, identificados en fuentes públicas).", "",
+            _table(con, """
+        WITH m AS (
+          SELECT f.*, upper(regexp_replace(matricula, '[- ]', '', 'g')) AS ident
+          FROM fct_movimiento f
+          WHERE matricula IS NOT NULL AND clase_vuelo <> 'vuelo_oficial_extranjero'
+        ),
+        r AS (
+          SELECT m.*, p.operador AS regla, p.valida, p.patron
+          FROM m JOIN ref_prefijo_estatal p ON regexp_matches(m.ident, p.patron)
+          QUALIFY row_number() OVER (PARTITION BY m.movimiento_id ORDER BY p.orden) = 1
+        )
+        SELECT patron, regla, count(*) AS movimientos,
+          count(aerolinea_original) AS con_operador_anac,
+          count(*) FILTER (regexp_matches(upper(strip_accents(aerolinea_original)), valida))
+            AS coinciden,
+          count(*) FILTER (aerolinea_original IS NULL) AS completados,
+          count(*) FILTER (aerolinea_original IS NULL AND aeropuerto = getvariable('foco'))
+            AS completados_foco
+        FROM r GROUP BY ALL ORDER BY 3 DESC"""),
+            "Modelo por serie con identificación pública (config/estatales.yaml → series):", "",
+            _table(con, """
+        SELECT upper(regexp_replace(matricula, '[- ]', '', 'g')) AS serie, aeronave_modelo,
+               count(*) AS movimientos,
+               count(*) FILTER (aeropuerto = getvariable('foco')) AS en_foco
+        FROM fct_movimiento WHERE aeronave_fuente = 'serie_estatal'
+        GROUP BY ALL ORDER BY 3 DESC""")]
+
     # ── Lo aplicado en la base y validación de la inferencia ───────────────────────────────
     out += ["## 4. Aplicado en la base (fct_movimiento)", "", _table(con, """
         SELECT CASE WHEN aeropuerto = getvariable('foco') THEN 'MDQ' ELSE 'resto del país' END AS ambito,
           count(*) FILTER (operador_fuente = 'matricula') AS operador_por_matricula,
           count(*) FILTER (operador_fuente = 'otro_extremo') AS operador_por_otro_extremo,
-          count(*) FILTER (aeronave_fuente = 'municipal') AS aeronave_del_municipio
+          count(*) FILTER (operador_fuente = 'prefijo_estatal') AS operador_por_prefijo_estatal,
+          count(*) FILTER (operador_fuente = 'otro_extremo_sin_matricula')
+            AS operador_otro_extremo_sin_matricula,
+          count(*) FILTER (aeronave_fuente = 'municipal') AS aeronave_del_municipio,
+          count(*) FILTER (aeronave_fuente = 'serie_estatal') AS aeronave_por_serie_estatal,
+          count(*) FILTER (aeronave_fuente = 'otro_extremo_sin_matricula')
+            AS aeronave_otro_extremo_sin_matricula
         FROM fct_movimiento GROUP BY 1 ORDER BY 1"""),
+            "Privado en jet o turbohélice ejecutivo analizado como taxi aéreo. Evidencia en el foco: "
+            "cuántos tienen operador o matrícula que también vuela como no regular.", "",
+            _table(con, """
+        SELECT anio, count(*) AS pasan_a_taxi,
+          count(*) FILTER (aerolinea IS NOT NULL OR matricula IS NOT NULL) AS con_operador_o_matricula,
+          count(*) FILTER (aerolinea IN (SELECT aerolinea FROM ref_taxi_operador)
+                           OR matricula IN (SELECT matricula FROM ref_taxi_matricula))
+            AS que_tambien_hacen_taxi
+        FROM fct_movimiento
+        WHERE aeropuerto = getvariable('foco') AND clase_vuelo LIKE 'vuelo_privado%'
+          AND aeronave_categoria IN ('jet_ejecutivo', 'turbohelice_ejecutivo')
+        GROUP BY 1 ORDER BY 1"""),
+            "Asientos: cabina publicada (config/cabinas.yaml) contra el p95 de pasajeros observados:",
+            "", _table(con, """
+        SELECT f.aerolinea_nombre, f.aeronave_modelo, any_value(f.asientos_estimados) AS publicados,
+               any_value(d.capacidad) AS p95_observado, count(*) AS movimientos_pais,
+               count(*) FILTER (f.pasajeros > f.asientos_estimados) AS con_mas_pax_que_asientos
+        FROM fct_movimiento f
+        LEFT JOIN dim_capacidad d ON d.metodo = 'aerolinea_aeronave' AND d.aerolinea = f.aerolinea
+                                 AND d.aeronave = f.aeronave
+        WHERE f.fuente_asientos = 'cabina_publicada' GROUP BY ALL ORDER BY 5 DESC"""),
             "Validación: qué habría dicho la inferencia por pasajeros en los vuelos cuyo avión se "
             "recuperó del portal municipal (ANAC 2019, foco):", "", _table(con, """
         WITH v AS (
@@ -210,7 +319,21 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
           AND regexp_matches(origen_destino, '^[0-9]+$')
         UNION ALL
         SELECT 'Pasajeros sin dato', count(*)
-        FROM fct_movimiento WHERE aeropuerto = getvariable('foco') AND pasajeros IS NULL""")]
+        FROM fct_movimiento WHERE aeropuerto = getvariable('foco') AND pasajeros IS NULL"""),
+            "Muestra (foco, 2 por segmento): operador sin dato y sin matrícula:", "", _table(con, """
+        SELECT segmento, fecha, hora_utc, tipo_movimiento, origen_destino, clase_vuelo,
+               aeronave_modelo, pasajeros
+        FROM fct_movimiento
+        WHERE aeropuerto = getvariable('foco') AND aerolinea IS NULL AND matricula IS NULL
+        QUALIFY row_number() OVER (PARTITION BY segmento ORDER BY hash(movimiento_id)) <= 2
+        ORDER BY segmento, fecha"""),
+            "Muestra (foco, 2 por segmento): aeronave sin dato y sin matrícula:", "", _table(con, """
+        SELECT segmento, fecha, hora_utc, tipo_movimiento, origen_destino, clase_vuelo,
+               aerolinea_nombre, pasajeros
+        FROM fct_movimiento
+        WHERE aeropuerto = getvariable('foco') AND aeronave IS NULL AND matricula IS NULL
+        QUALIFY row_number() OVER (PARTITION BY segmento ORDER BY hash(movimiento_id)) <= 2
+        ORDER BY segmento, fecha""")]
 
     con.close()
     out_dir.mkdir(parents=True, exist_ok=True)

@@ -101,6 +101,8 @@ def build_dim_aeronave(con: duckdb.DuckDBPyConnection) -> None:
     names = [r[0] for r in con.execute(
         "SELECT DISTINCT aeronave FROM stg_movimiento WHERE aeronave IS NOT NULL" + extra
     ).fetchall()]
+    # Tipos que solo aparecen por recuperación (serie de matrícula estatal).
+    names += sorted({s["aeronave"] for s in load_yaml("estatales.yaml")["series"]} - set(names))
     rows = []
     for n in names:
         fabricante, familia, categoria = classify_aeronave(n, cfg)
@@ -131,6 +133,28 @@ def build_dim_aeronave(con: duckdb.DuckDBPyConnection) -> None:
         )
 
 
+def build_refs_recuperacion(con: duckdb.DuckDBPyConnection) -> None:
+    """Tablas de config para la recuperación (sql/bd/25) y la capacidad (sql/bd/30):
+    matrículas estatales (config/estatales.yaml) y cabinas publicadas (config/cabinas.yaml)."""
+    est = load_yaml("estatales.yaml")
+    con.execute("CREATE OR REPLACE TABLE ref_prefijo_estatal "
+                "(orden INT, patron VARCHAR, operador VARCHAR, valida VARCHAR, base VARCHAR)")
+    con.executemany("INSERT INTO ref_prefijo_estatal VALUES (?, ?, ?, ?, ?)",
+                    [(i, p["patron"], p["operador"], p["valida"], p["base"])
+                     for i, p in enumerate(est["prefijos"])])
+    con.execute("CREATE OR REPLACE TABLE ref_serie_estatal "
+                "(matricula VARCHAR, aeronave VARCHAR, desde DATE, fuente VARCHAR)")
+    con.executemany("INSERT INTO ref_serie_estatal VALUES (?, ?, ?, ?)",
+                    [(s["matricula"], s["aeronave"], s["desde"], s["fuente"])
+                     for s in est["series"]])
+    con.execute("CREATE OR REPLACE TABLE ref_cabina "
+                "(orden INT, operador VARCHAR, modelo VARCHAR, asientos INT, clases VARCHAR, "
+                "fuentes VARCHAR[])")
+    con.executemany("INSERT INTO ref_cabina VALUES (?, ?, ?, ?, ?, ?)",
+                    [(i, c["operador"], c["modelo"], c["asientos"], c.get("clases"), c["fuentes"])
+                     for i, c in enumerate(load_yaml("cabinas.yaml")["cabinas"])])
+
+
 def _existe(con: duckdb.DuckDBPyConnection, tabla: str) -> bool:
     return bool(con.execute(
         "SELECT count(*) FROM information_schema.tables WHERE table_name = ?", [tabla]
@@ -145,6 +169,10 @@ def build_dim_aerolinea(con: duckdb.DuckDBPyConnection) -> None:
         "SELECT aerolinea, count(*) FROM (SELECT aerolinea FROM stg_movimiento "
         f"WHERE aerolinea IS NOT NULL{extra}) GROUP BY 1"
     ).fetchall()
+    # Operadores que solo aparecen por recuperación (prefijo de matrícula estatal).
+    vistos = {n for n, _ in conteo}
+    estatales = {p["operador"] for p in load_yaml("estatales.yaml")["prefijos"]}
+    conteo += [(n, 0) for n in sorted(estatales - vistos)]
     # Variantes del mismo operador (misma clave): todas toman el nombre y tipo de la más frecuente.
     grupos: dict[str, list[tuple[int, str]]] = {}
     for n, c in conteo:

@@ -1,19 +1,25 @@
 -- Hecho principal: 1 fila = 1 aterrizaje o despegue, enriquecido con calendario, aerolínea,
 -- aeronave, distancia y métricas estimadas. Ver docs/07_bd_y_metricas.md.
 CREATE OR REPLACE TABLE fct_movimiento AS
--- Datos recuperados con cruces exactos (sql/bd/25_recuperacion.sql): operador por matrícula
--- (unánime) o por el otro extremo del mismo vuelo; aeronave del portal municipal (2015–2019).
+-- Datos recuperados (sql/bd/25_recuperacion.sql), en orden de prioridad: operador por matrícula
+-- (unánime), por el otro extremo del mismo vuelo con matrícula, por prefijo de aeronave del Estado
+-- o por el otro extremo sin matrícula; aeronave del portal municipal (2015–2019), por serie
+-- estatal o por el otro extremo sin matrícula.
 WITH s AS (
   SELECT
     s.* EXCLUDE (aeropuerto, aerolinea, aeronave),
-    coalesce(s.aerolinea, mo.aerolinea, op.aerolinea) AS aerolinea,
+    coalesce(s.aerolinea, mo.aerolinea, op.aerolinea, oe.aerolinea, vp.aerolinea_par) AS aerolinea,
     s.aerolinea                                    AS aerolinea_original,
     CASE WHEN s.aerolinea IS NOT NULL THEN 'anac'
          WHEN mo.aerolinea IS NOT NULL THEN 'matricula'
-         WHEN op.aerolinea IS NOT NULL THEN 'otro_extremo' END AS operador_fuente,
-    coalesce(s.aeronave, am.aeronave)              AS aeronave,
+         WHEN op.aerolinea IS NOT NULL THEN 'otro_extremo'
+         WHEN oe.aerolinea IS NOT NULL THEN 'prefijo_estatal'
+         WHEN vp.aerolinea_par IS NOT NULL THEN 'otro_extremo_sin_matricula' END AS operador_fuente,
+    coalesce(s.aeronave, am.aeronave, ae.aeronave, vp.aeronave_par) AS aeronave,
     CASE WHEN s.aeronave IS NOT NULL THEN 'anac'
-         WHEN am.aeronave IS NOT NULL THEN 'municipal' END AS aeronave_fuente,
+         WHEN am.aeronave IS NOT NULL THEN 'municipal'
+         WHEN ae.aeronave IS NOT NULL THEN 'serie_estatal'
+         WHEN vp.aeronave_par IS NOT NULL THEN 'otro_extremo_sin_matricula' END AS aeronave_fuente,
     s.aeropuerto                                   AS aeropuerto_original,
     coalesce(c.a, s.aeropuerto)                    AS aeropuerto,
     CAST(s.fecha + s.hora_utc AS TIMESTAMP)        AS ts_utc
@@ -23,10 +29,20 @@ WITH s AS (
     ON s.aerolinea IS NULL AND op.matricula = s.matricula AND op.fecha = s.fecha
    AND op.hora_utc = s.hora_utc AND op.aeropuerto = s.aeropuerto
    AND op.tipo_movimiento = s.tipo_movimiento AND op.origen_destino = s.origen_destino
+  LEFT JOIN ref_operador_estatal oe
+    ON s.aerolinea IS NULL AND oe.matricula = s.matricula
+   AND s.clase_vuelo <> 'vuelo_oficial_extranjero'
+  LEFT JOIN ref_vuelo_par vp
+    ON vp.fecha = s.fecha AND vp.hora_utc = s.hora_utc AND vp.aeropuerto = s.aeropuerto
+   AND vp.tipo_movimiento = s.tipo_movimiento AND vp.origen_destino = s.origen_destino
+   AND vp.aerolinea IS NOT DISTINCT FROM s.aerolinea AND vp.aeronave IS NOT DISTINCT FROM s.aeronave
+   AND vp.matricula IS NOT DISTINCT FROM s.matricula
   LEFT JOIN ref_aeronave_municipal am
     ON s.aeronave IS NULL AND am.fecha = s.fecha AND am.hora_utc = s.hora_utc
    AND am.aeropuerto = s.aeropuerto AND am.tipo_movimiento = s.tipo_movimiento
    AND am.origen_destino = s.origen_destino AND am.aerolinea = s.aerolinea
+  LEFT JOIN ref_aeronave_serie ae
+    ON s.aeronave IS NULL AND ae.matricula = s.matricula AND s.fecha >= ae.desde
   LEFT JOIN correcciones c
     ON s.aeropuerto = c.de AND list_contains(c.clases, s.clase_vuelo)
 ),
@@ -46,8 +62,10 @@ j AS (
     an.categoria = 'aviacion_general_piston'
       OR list_contains(getvariable('taxi_modelos_piston'), an.modelo)  AS es_piston,
     round(haversine_km(a1.lat, a1.lon, a2.lat, a2.lon))                AS distancia_km,
-    coalesce(ca.capacidad, cn.capacidad)                               AS capacidad,
-    CASE WHEN ca.capacidad IS NOT NULL THEN 'p95_aerolinea_aeronave'
+    -- Asientos publicados (config/cabinas.yaml) y, si no hay, el p95 de pasajeros observados.
+    coalesce(cb.asientos, ca.capacidad, cn.capacidad)                  AS capacidad,
+    CASE WHEN cb.asientos IS NOT NULL THEN 'cabina_publicada'
+         WHEN ca.capacidad IS NOT NULL THEN 'p95_aerolinea_aeronave'
          WHEN cn.capacidad IS NOT NULL THEN 'p95_aeronave' END         AS fuente_capacidad,
     -- Segmento de actividad (ver config/mdq.yaml → segmentos)
     CASE
@@ -66,6 +84,12 @@ j AS (
             OR list_contains(getvariable('taxi_modelos_piston'), an.modelo))
        AND coalesce(an.plazas, 0) < getvariable('taxi_min_plazas') THEN 'privado'
       WHEN e.clase_vuelo = 'no_regular' THEN 'taxi_aereo'
+      -- "Privado" en jet o turbohélice ejecutivo: se analiza como taxi aéreo (en el foco, el operador
+      -- o la matrícula, cuando se conocen, también vuelan como no regular: posicionamientos).
+      -- segmento_reclasificado = true. Ver reports/qa/auditoria.md, sección 4.
+      WHEN e.clase_vuelo LIKE 'vuelo_privado%'
+       AND an.categoria IN ('jet_ejecutivo', 'turbohelice_ejecutivo')
+        THEN 'taxi_aereo'
       WHEN e.clase_vuelo LIKE 'vuelo_privado%' THEN 'privado'
       WHEN e.clase_vuelo LIKE 'vuelo_oficial%' THEN 'oficial'
       WHEN e.clase_vuelo IN ('vuelo_escuela', 'vuelo_de_adiestramiento') THEN 'instruccion'
@@ -83,6 +107,9 @@ j AS (
   LEFT JOIN dim_capacidad ca ON ca.metodo = 'aerolinea_aeronave'
                             AND ca.aerolinea = e.aerolinea AND ca.aeronave = e.aeronave
   LEFT JOIN dim_capacidad cn ON cn.metodo = 'aeronave' AND cn.aeronave = e.aeronave
+  LEFT JOIN ref_cabina cb
+    ON cb.modelo = an.modelo
+   AND regexp_matches(upper(strip_accents(coalesce(al.aerolinea_nombre, ''))), cb.operador)
   -- Inferencia de familia para vuelos de línea sin aeronave (reglas disjuntas por operador)
   LEFT JOIN ref_inferencia_aeronave r
     ON e.aeronave IS NULL AND e.clase_vuelo IN ('regular', 'no_regular')
@@ -116,6 +143,7 @@ SELECT
   j.segmento,
   (j.clase_vuelo = 'no_regular' AND coalesce(j.es_piston, false) AND j.segmento = 'privado')
     OR (j.segmento = 'instruccion' AND j.clase_vuelo NOT IN ('vuelo_escuela', 'vuelo_de_adiestramiento'))
+    OR (j.segmento = 'taxi_aereo' AND j.clase_vuelo LIKE 'vuelo_privado%')
                                                    AS segmento_reclasificado,
   j.segmento IN ('linea_regular', 'charter_linea') AS es_linea,
   j.clasificacion_vuelo,
@@ -131,7 +159,7 @@ SELECT
   j.aerolinea,
   j.aerolinea_original,
   j.operador_fuente,
-  j.operador_fuente IN ('matricula', 'otro_extremo') AS operador_inferido,
+  coalesce(j.operador_fuente <> 'anac', false) AS operador_inferido,
   j.aeronave_fuente,
   coalesce(j.aerolinea_nombre, 'Sin dato')         AS aerolinea_nombre,
   coalesce(j.aerolinea_tipo, 'sin_dato')           AS aerolinea_tipo,

@@ -33,8 +33,9 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **Modelo de avión:** las denominaciones de la ANAC se estandarizan a un modelo con designador ICAO (ej. `BO-737-800`, `BO-B737-800` y `BO-737-8SH` son el Boeing 737-800). Validado contra OpenSky por matrícula (95 % de coincidencia).
 - **Operadores:** variantes del mismo nombre (`LADE` / `L.A.D.E.`, `S.A.` / `SA`) se unifican.
 - **Taxi aéreo a pistón:** cuenta como taxi solo con 6 plazas o más (piloto + 5 pasajeros); si no, se analiza como privado.
+- **Privado en jet o turbohélice ejecutivo:** se analiza como taxi aéreo. En MDQ, casi todos los que traen operador o matrícula son de empresas o aviones que también vuelan como taxi: son tramos de posicionamiento declarados como privados.
 - **Modelo de avión faltante:** la ANAC no informa el modelo en 2019 y en parte de 2020, y en ~20 % de los movimientos posteriores (sobre todo vuelos oficiales y militares). Primero se recupera con cruces exactos: en 2019, 1.356 vuelos de MDQ toman el avión del registro municipal del mismo vuelo (mismo día, hora, movimiento, origen/destino y aerolínea, coincidencia 1 a 1). Lo que queda, en vuelos de Aerolíneas, se infiere por pasajeros: hasta 96 → E190 (acierta 93–98 %), más de 128 → 737-800/MAX 8 (95 %); entre 97 y 128 no se asigna (30 % eran E190). Avian 2019 → ATR 72-600; Flyest → CRJ200. Lo inferido se marca como tal.
-- **Operador recuperado:** si un vuelo no trae operador, se toma de otros vuelos del mismo avión (matrícula, desde 2026) cuando todos coinciden, o del registro del otro extremo del mismo vuelo. Auditoría completa en `reports/qa/auditoria.md`.
+- **Operador recuperado:** si un vuelo no trae operador, se toma de otros vuelos del mismo avión (matrícula, desde 2026) cuando todos coinciden, o del registro del otro extremo del mismo vuelo (aeropuertos cruzados, horario compatible y un solo candidato; coincide en el 99 % de los vuelos que traen el dato). En aeronaves del Estado, la identificación dice la fuerza (T-, TC- Fuerza Aérea; AE- Ejército; 2-H- Armada; PA- Prefectura; GN- Gendarmería; PF- Policía Federal) y, cuando hay identificación pública, el modelo (ej. T-99 Boeing 737-700, PA-40 Dauphin). Auditoría completa en `reports/qa/auditoria.md`.
 - **Serie larga:** hasta 2018 se usan los datos municipales y desde 2019 los de la ANAC. En 2019, año que cubren ambas fuentes, difieren menos de 4 % por mes. Desde 2021 el Municipio publica pasajeros de un solo sentido, por eso no se usa.
 - **Datos provisorios:** la ANAC marca como provisorios los últimos meses; pueden cambiar.
 - **Hora local:** hora UTC − 3.
@@ -48,7 +49,7 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **01 · Serie larga:** las barras claras (2001–2018) son datos del Municipio y las oscuras (2019+), de la ANAC. Movimientos comerciales = vuelos regulares y no regulares.
 - **04 · Todo lo que vuela, "Desde 2015":** 2015–2018 sale de una muestra municipal de vuelos (≈ 52 % de los movimientos, sin vuelos oficiales ni escuelas); por eso la composición se muestra en porcentaje.
 - **04 · Avión típico:** familia con más movimientos de cada segmento. "Lleva hasta (habitual)" = percentil 95 de pasajeros de esa familia en ese segmento en todo el país. El **avión básico** del taxi aéreo es el turbohélice más frecuente entre los que llevan 5 o más pasajeros.
-- **05 · Asientos:** la ANAC no publica asientos; se estiman con la capacidad típica observada de cada avión (ver tabla de métricas).
+- **05 · Asientos:** la ANAC no publica asientos. Se usa la configuración de cabina publicada de cada aerolínea y modelo (E190 de Aerolíneas 96, 737-800 de Flybondi 189, 737 MAX 8 170, ATR 72 de Avian 72…); donde las fuentes no coinciden, la capacidad típica observada (p95 de pasajeros). Ambas dan lo mismo donde se pueden comparar.
 - **06 · A dónde se vuela:** el mapa recorta el cono sur; los destinos fuera del recorte se dibujan como flechas hacia el borde y se detallan en "Destinos lejanos". Ubicación de cada código: lista oficial de aeródromos y helipuertos de la ANAC, OurAirports y MADHEL. Los vuelos a lugares aptos denunciados no se cuentan como exterior.
 - **08 · Flota:** en 2019–2020 el avión se infiere por operador y pasajeros (ver "Modelo de avión faltante"); el resto queda como "Sin dato".
 - **Toda la aviación · Operadores:** "Sin dato" = la ANAC no informa el operador (frecuente en vuelos oficiales y militares).
@@ -62,7 +63,7 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 
 | Métrica | Cómo se calcula | Por qué es una estimación |
 |---|---|---|
-| Asientos ofrecidos | Capacidad típica de cada avión = percentil 95 de los pasajeros observados en ese modelo (y aerolínea) en todo el país | ANAC no publica asientos |
+| Asientos ofrecidos | Cabina publicada por aerolínea y modelo (`config/cabinas.yaml`); si no hay, percentil 95 de los pasajeros observados en ese modelo (y aerolínea) en todo el país | ANAC no publica asientos |
 | Ocupación (load factor) | Pasajeros ÷ asientos estimados | Hereda la estimación de asientos; tiende a sobrestimar unos puntos |
 | Duración de vuelo | Se une el despegue en el origen con el aterrizaje en destino del mismo avión | ANAC no publica número de vuelo; se empareja por aerolínea y modelo (y matrícula desde 2026) |
 | Tiempo en tierra (turnaround) | Aterrizaje → siguiente despegue del mismo avión en MDQ | Igual que arriba; validado contra matrícula en 2026 (medianas 51 vs 52 min) |

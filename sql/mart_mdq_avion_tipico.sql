@@ -32,6 +32,20 @@ destinos AS (
   ) WHERE r <= 3
   GROUP BY anio, segmento, aeronave_familia
 ),
+-- Modelos estandarizados más frecuentes de cada familia (hasta 2), para mostrar en lugar del tipo.
+modelos AS (
+  SELECT anio, segmento, aeronave_familia,
+         string_agg(aeronave_modelo, ' · ' ORDER BY n DESC) AS modelos_principales
+  FROM (
+    SELECT *, row_number() OVER (PARTITION BY anio, segmento, aeronave_familia ORDER BY n DESC) AS r
+    FROM (
+      SELECT anio, segmento, aeronave_familia, aeronave_modelo, count(*) AS n
+      FROM b WHERE aeronave_modelo IS NOT NULL
+      GROUP BY anio, segmento, aeronave_familia, aeronave_modelo
+    )
+  ) WHERE r <= 2
+  GROUP BY anio, segmento, aeronave_familia
+),
 cap AS (
   SELECT segmento, aeronave_familia, round(quantile_cont(pasajeros, 0.95)) AS capacidad_observada_p95,
          count(*) AS n_pais
@@ -58,12 +72,14 @@ SELECT
   c.capacidad_observada_p95,
   r.tiempo_en_tierra_mediano_min,
   d.duracion_vuelo_mediana_min,
-  ds.principales_origenes_destinos
+  ds.principales_origenes_destinos,
+  mo.modelos_principales
 FROM fam f
 LEFT JOIN cap c USING (segmento, aeronave_familia)
 LEFT JOIN rot r USING (anio, segmento, aeronave_familia)
 LEFT JOIN dur d USING (anio, aeronave_familia)
 LEFT JOIN destinos ds USING (anio, segmento, aeronave_familia)
+LEFT JOIN modelos mo USING (anio, segmento, aeronave_familia)
 LEFT JOIN dim_perfil_familia p USING (aeronave_familia)
 QUALIFY ranking <= 3 OR ranking_por_pasajeros <= 3
      OR (p.perfil = 'turbohelice' AND ranking_en_perfil = 1)

@@ -1,0 +1,46 @@
+# Aeronaves del Estado (militares y de seguridad). ANAC informa su identificación (ej. T99, PA43,
+# 1G50) pero muchas veces sin operador ni modelo. Solo se usa desde 2026, cuando ANAC empezó a
+# publicar la matrícula. Lo que trae ANAC tiene prioridad: esto solo completa vacíos.
+#
+# prefijos: identificación sin guiones (mayúsculas) -> operador. El número tiene que seguir
+#   inmediatamente al prefijo: las matrículas civiles llevan letras (LV-ABC, CC-BAE, A6-ALN) y no
+#   coinciden. Tabla provista por el usuario (formato de cada fuerza), contrastada con los vuelos
+#   2026 que sí traen operador en ANAC (reports/qa/auditoria.md, sección 2F). `valida`: regex del
+#   operador ANAC que cuenta como coincidencia en esa contrastación (LADE la opera la FAA).
+#   No se usa LQ- (aeronave del Estado nacional o provincial, no identifica la fuerza).
+prefijos:
+  - {patron: '^(C|M|A|T|H|E|ET|F|VR|V|TC)[0-9]+$', operador: FUERZA AEREA ARGENTINA,
+     valida: 'FUERZA AEREA ARGENTINA|^FUAER|^LADE', base: formato FAA (letra de función + número)}
+  # PG: no figura en la tabla de formatos; 164 de 165 vuelos con operador en ANAC son de la FAA.
+  - {patron: '^PG[0-9]+$', operador: FUERZA AEREA ARGENTINA,
+     valida: 'FUERZA AEREA ARGENTINA|^FUAER', base: datos ANAC 2026 (99 % FAA)}
+  - {patron: '^AE[0-9]+$', operador: EJERCITO ARGENTINO, valida: 'EJERCITO ARG',
+     base: formato Ejército (AE-)}
+  - {patron: '^[0-9][A-Z][0-9]+$', operador: ARMADA ARGENTINA, valida: 'ARMADA ARG',
+     base: formato Armada (escuadrilla - letra - número, ej. 2-H-243, 1-G-49)}
+  - {patron: '^GN[0-9]+$', operador: GENDARMERIA NACIONAL ARGENTINA, valida: 'GENDARM',
+     base: formato Gendarmería (GN-)}
+  - {patron: '^PA[0-9]+$', operador: PREFECTURA NAVAL ARGENTINA, valida: 'PREFECTURA',
+     base: formato Prefectura (PA-)}
+  - {patron: '^PF[0-9]+$', operador: POLICIA FEDERAL ARGENTINA, valida: 'POLICIA FEDERAL|AVIACION POLICIAL',
+     base: formato PFA (PF-)}
+
+# series: identificación -> modelo, solo con identificación pública reciente (las series se
+#   reutilizan: PA-22 fue un Bell 47 en los 70 y T-95 un Boeing 707). `desde`: fecha a partir de la
+#   cual vale. `aeronave`: denominación ANAC del tipo (la clasifica config/aeronaves.yaml).
+#   Sin identificar (fuentes contradictorias o inexistentes): PA-22, PG-380, 1-G-50, TC-64/66.
+series:
+  - {matricula: T99, aeronave: BO-B-737-700, desde: 2021-04-01,
+     fuente: 'https://www.aviacionline.com/argentine-air-force-t-99-to-operate-flights-for-flybondi'}
+  - {matricula: T94, aeronave: EMB-ERJ-140LR, desde: 2024-01-01,
+     fuente: 'https://rest.hcdn.gob.ar/web/proyectos/292061/adjuntos/105827'}
+  - {matricula: T95, aeronave: EMB-ERJ-140LR, desde: 2024-02-01,
+     fuente: 'https://www.airdatanews.com/argentine-air-force-takes-delivery-of-its-first-embraer-erj-140/'}
+  - {matricula: TC53, aeronave: FO-F-28-MK-1000, desde: 1975-01-01,
+     fuente: 'https://aviacionline.com/pendiente-se-cumplen-50-anos-de-la-entrada-al-servicio-del-fokker-f28-de-la-fuerza-aerea-argentina'}
+  - {matricula: PA40, aeronave: EUR-AS-365-N2, desde: 2021-11-07,
+     fuente: 'https://www.scramble.nl/military-news/pa-40-returns-to-service'}
+  - {matricula: PA41, aeronave: EUR-AS-365-N2, desde: 2020-01-01,
+     fuente: 'https://www.helis.com/database/modelorg/Prefectura-Naval-Dauphin/'}
+  - {matricula: PA43, aeronave: EUR-AS-365-N2, desde: 2020-12-01,
+     fuente: 'https://www.helis.com/database/modelorg/Prefectura-Naval-Dauphin/'}

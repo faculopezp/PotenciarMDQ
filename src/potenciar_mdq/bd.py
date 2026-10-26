@@ -149,6 +149,7 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
     dims.build_dim_fecha(con, date(lo.year, 1, 1), date(hi.year, 12, 31))
     dims.build_dim_aerolinea(con)
     dims.build_dim_aeronave(con)
+    dims.build_refs_recuperacion(con)
 
     for sql_file in sorted((SQL / "bd").glob("*.sql")):
         log.info("bd: %s", sql_file.name)

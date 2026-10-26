@@ -766,7 +766,7 @@ Plot.plot({
 
 <div class="leyenda-grid">
   <p><b>Cómo se agrupa.</b> Cada vuelo entra en el segmento que declara su operador a la ANAC: línea regular, no regular, privado, oficial o escuela. Los no regulares en aviones de línea son <i>charter</i>; el resto, <i>taxi aéreo</i>.</p>
-  <p><b>Dos ajustes.</b> Un taxi aéreo declarado en un avión a pistón de menos de 6 plazas se cuenta como <i>privado</i>. Un vuelo de una escuela de vuelo (CIAC, aeroclub, academia) declarado como privado o no regular se cuenta como <i>escuela</i>.</p>
+  <p><b>Tres ajustes.</b> Un vuelo privado en jet o turbohélice ejecutivo se cuenta como <i>taxi aéreo</i> (casi siempre es un operador de taxi posicionando el avión). Un taxi aéreo declarado en un avión a pistón de menos de 6 plazas se cuenta como <i>privado</i>. Un vuelo de una escuela de vuelo (CIAC, aeroclub, academia) declarado como privado o no regular se cuenta como <i>escuela</i>.</p>
   <p><b>El límite.</b> 97 % de los vuelos privados y 80 % de los no regulares no informan operador, así que la frontera entre privado, taxi y escuela depende de lo que declara cada piloto.</p>
 </div>
 

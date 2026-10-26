@@ -8,7 +8,7 @@ import * as d3 from "d3";
 import * as Inputs from "@observablehq/inputs";
 import {html} from "htl";
 import {TINTA, TINTA_2, ACENTO, OTRO, SEQ, SEGMENTOS, SEG_NOMBRE, SEG_COLOR, segColor, entero, pct, decimal1,
-  MESES, DIAS, CATEGORIAS, PERFILES, PERFIL_NOMBRE, perfilColor, datos, columnas, ALTO, ejeAnios, fechaEje} from "./components/util.js";
+  MESES, DIAS, PERFILES, PERFIL_NOMBRE, perfilColor, datos, columnas, ALTO, ejeAnios, fechaEje, modelosCortos} from "./components/util.js";
 ```
 
 ```js
@@ -127,8 +127,8 @@ const tipicos = avionTipico.filter((d) => d.anio === anioSel && d.segmento === s
 ```
 
 ```js
-tipicos.length ? html`<table class="editorial"><thead><tr><th>Familia</th><th>Tipo</th><th>Perfil</th><th>Movimientos</th><th>% del segmento</th><th>Pasajeros</th><th>Pax prom.</th><th>Lleva hasta</th><th>En tierra</th><th>Vuelo</th><th>Hora</th><th>Orígenes/destinos</th></tr></thead><tbody>
-${tipicos.map((d) => html`<tr class=${d.perfil === "turbohelice" && d.ranking_en_perfil === 1 ? "foco" : ""}><td>${d.aeronave_familia}</td><td>${CATEGORIAS[d.aeronave_categoria] ?? d.aeronave_categoria}</td><td>${PERFIL_NOMBRE[d.perfil] ?? "—"}</td><td>${entero(d.movimientos)}</td><td>${pct(d.share_en_segmento)}</td><td>${entero(d.pasajeros)}</td><td>${decimal1(d.pax_promedio)}</td><td>${d.capacidad_observada_p95 ?? "—"}</td><td>${d.tiempo_en_tierra_mediano_min != null ? `${Math.round(d.tiempo_en_tierra_mediano_min)} min` : "—"}</td><td>${d.duracion_vuelo_mediana_min != null ? `${Math.round(d.duracion_vuelo_mediana_min)} min` : "—"}</td><td>${d.hora_mas_frecuente}h</td><td>${d.principales_origenes_destinos ?? "—"}</td></tr>`)}
+tipicos.length ? html`<table class="editorial"><thead><tr><th>Familia</th><th>Modelos más frecuentes</th><th>Perfil</th><th>Movimientos</th><th>% del segmento</th><th>Pasajeros</th><th>Pax prom.</th><th>Lleva hasta</th><th>En tierra</th><th>Vuelo</th><th>Hora</th><th>Orígenes/destinos</th></tr></thead><tbody>
+${tipicos.map((d) => html`<tr class=${d.perfil === "turbohelice" && d.ranking_en_perfil === 1 ? "foco" : ""}><td>${d.aeronave_familia}</td><td>${modelosCortos(d.modelos_principales, d.aeronave_familia)}</td><td>${PERFIL_NOMBRE[d.perfil] ?? "—"}</td><td>${entero(d.movimientos)}</td><td>${pct(d.share_en_segmento)}</td><td>${entero(d.pasajeros)}</td><td>${decimal1(d.pax_promedio)}</td><td>${d.capacidad_observada_p95 ?? "—"}</td><td>${d.tiempo_en_tierra_mediano_min != null ? `${Math.round(d.tiempo_en_tierra_mediano_min)} min` : "—"}</td><td>${d.duracion_vuelo_mediana_min != null ? `${Math.round(d.duracion_vuelo_mediana_min)} min` : "—"}</td><td>${d.hora_mas_frecuente}h</td><td>${d.principales_origenes_destinos ?? "—"}</td></tr>`)}
 </tbody></table>` : html`<p class="muted">Sin datos de aeronave para este segmento.</p>`
 ```
 

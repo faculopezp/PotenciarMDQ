@@ -132,3 +132,13 @@ export const ALTO = {serie: 380, medio: 300};
 export const ejeAnios = {label: null, tickFormat: "d", tickRotate: -45};
 // Ejes de fecha en castellano: "ene / 2024" en enero, el mes abreviado el resto del año.
 export const fechaEje = (d) => (d.getUTCMonth() === 0 ? `${MESES[0]}\n${d.getUTCFullYear()}` : MESES[d.getUTCMonth()]);
+
+// "Cessna 150 · Cessna 182" bajo la familia "Cessna" -> "150 · 182": saca el fabricante repetido.
+export function modelosCortos(modelos, familia) {
+  if (!modelos) return "—";
+  const marca = familia.split(" ")[0];
+  return modelos.split(" · ").map((m) => {
+    const [primera, ...resto] = m.split(" ");
+    return resto.length && primera.startsWith(marca) ? resto.join(" ") : m;
+  }).join(" · ");
+}

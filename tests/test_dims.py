@@ -13,10 +13,13 @@ CASOS_AERONAVE = {
     "BE-1900D": ("Beech 1900", "turbohelice_regional"),
     "LJ-60": ("Learjet", "jet_ejecutivo"),
     "BE-C-90-A": ("Beech King Air", "turbohelice_ejecutivo"),
-    "CE-C-152": ("Cessna (pistón)", "aviacion_general_piston"),
+    "CE-C-152": ("Cessna", "aviacion_general_piston"),
     "CIR-SR-22": ("Cirrus", "aviacion_general_piston"),
     "AIR-AT-802": ("Air Tractor", "agricola"),
     "RO-R44": ("Robinson", "helicoptero"),
+    # tipos de las series estatales (config/estatales.yaml)
+    "EMB-ERJ-140LR": ("Embraer ERJ145", "jet_regional"),
+    "EUR-AS-365-N2": ("Airbus Helicopters", "helicoptero"),
 }
 
 
@@ -54,7 +57,7 @@ def test_perfil_aeronave_basico_taxi():
     filas = (
         [("Beech King Air", "turbohelice_ejecutivo", False, 7)] * 40      # 5+ pax: básico
         + [("Daher TBM", "turbohelice_ejecutivo", False, 3)] * 40         # < 5 pax
-        + [("Cessna (pistón)", "aviacion_general_piston", False, 3)] * 40
+        + [("Cessna", "aviacion_general_piston", False, 3)] * 40
         + [("Learjet", "jet_ejecutivo", False, 6)] * 40
         + [("Boeing 737", "jet_fuselaje_angosto", True, 150)] * 40
     )
@@ -66,7 +69,7 @@ def test_perfil_aeronave_basico_taxi():
     assert perfil == {
         "Beech King Air": "turbohelice",
         "Daher TBM": "turbohelice",
-        "Cessna (pistón)": "piston",
+        "Cessna": "piston",
         "Learjet": "jet_ejecutivo",
         "Boeing 737": "avion_de_linea",
     }
@@ -141,3 +144,22 @@ def test_clave_operador_agrupa_variantes(a, b):
     from potenciar_mdq.dims import clave_operador
 
     assert clave_operador(a) == clave_operador(b)
+
+
+@pytest.mark.parametrize(
+    "ident,operador",
+    [("T99", "FUERZA AEREA ARGENTINA"), ("TC53", "FUERZA AEREA ARGENTINA"),
+     ("PG380", "FUERZA AEREA ARGENTINA"), ("AE471", "EJERCITO ARGENTINO"),
+     ("1G50", "ARMADA ARGENTINA"), ("2H243", "ARMADA ARGENTINA"),
+     ("GN919", "GENDARMERIA NACIONAL ARGENTINA"), ("PA43", "PREFECTURA NAVAL ARGENTINA"),
+     ("PF19", "POLICIA FEDERAL ARGENTINA"),
+     # civiles y estatales sin fuerza: no coinciden
+     ("LVABC", None), ("LQBEN", None), ("CCBAE", None), ("A6ALN", None), ("N12345", None),
+     ("PRABC", None), ("FAU541", None)],
+)
+def test_prefijos_estatales(ident, operador):
+    import re
+
+    reglas = load_yaml("estatales.yaml")["prefijos"]
+    hallado = next((r["operador"] for r in reglas if re.search(r["patron"], ident)), None)
+    assert hallado == operador

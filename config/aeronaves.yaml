@@ -54,8 +54,8 @@ categorias:
     familia_regex: {'737': Boeing 737, 'A3(19|20|21)|A2[01]N': Airbus A320, '757': Boeing 757, 'MD-?8\d|MD-?9\d': McDonnell Douglas MD-80}
     patron: '(737|A3(19|20|21)|A2[01]N|757|MD-?8\d|MD-?9\d)'
   - categoria: jet_regional
-    familia_regex: {'ERJ ?-?19|(?<![A-Z])E-?19|EMB-?19': Embraer E190, 'ERJ ?-?17|(?<![A-Z])E-?17|EMB-?17': Embraer E170/175, '145|135(?!BJ)': Embraer ERJ145, 'CRJ': Bombardier CRJ, 'FOKKER|F-?28|F-?100': Fokker F28/F100}
-    patron: '(ERJ ?-?1[79]|EMB-?1[79]\d|(?<![A-Z])E-?1[79][05](?!\d)|EMB-145|ERJ-?145|CRJ|FOKKER|F-?28\b|F-?100\b)'
+    familia_regex: {'ERJ ?-?19|(?<![A-Z])E-?19|EMB-?19': Embraer E190, 'ERJ ?-?17|(?<![A-Z])E-?17|EMB-?17': Embraer E170/175, '14[05]|135(?!BJ)': Embraer ERJ145, 'CRJ': Bombardier CRJ, 'FOKKER|F-?28|F-?100': Fokker F28/F100}
+    patron: '(ERJ ?-?1[79]|EMB-?1[79]\d|(?<![A-Z])E-?1[79][05](?!\d)|EMB-14[05]|ERJ-?14[05]|CRJ|FOKKER|F-?28\b|F-?100\b)'
   - categoria: turbohelice_regional
     familia_regex: {'ATR': ATR 42/72, '1900': Beech 1900, 'SA-?22[67]': Fairchild Metro, '^DOR|228': Dornier 228, 'DHC-?8|DASH': De Havilland Dash 8, 'SAAB|SF-?340': Saab 340}
     patron: '(ATR|1900|SA-?22[67]|^DOR-?228|DHC-?8|DASH|SAAB|SF-?340|JETSTREAM|J-?41)'
@@ -72,7 +72,7 @@ categorias:
     familia_regex: {'AT-?\d{3}|^AIR-': Air Tractor, 'PAWNEE|PA-?25': Piper Pawnee, 'EMB-?20[12]|IPANEMA': Embraer Ipanema}
     patron: '(^AIR-AT|AT-?80\d|AT-?50\d|PAWNEE|PA-?25|EMB-?20[12]|IPANEMA)'
   - categoria: aviacion_general_piston
-    familia_regex: {'^GU-(AA|GA)|^GR-AA': Grumman American, '^CE|^TXI': Cessna (pistón), '^PIPER': Piper, 'BOYERO': El Boyero, '^PRP': Ultraliviano, '^PIP': Pipistrel, '^PA': Piper, '^TEA': Tecnam, '^CI[RT]': Cirrus, '^VA-': Van's RV, 'BN-?2': BN-2 Islander, '^TXA': Cessna/Beech (pistón), '^BRT': Bristell, '^AB-': Aero Boero, '^GR-': Grob, '^MO-': Mooney, '^BE': Beechcraft (pistón)}
+    familia_regex: {'^GU-(AA|GA)|^GR-AA': Grumman American, '^CE|^TXI': Cessna, '^PIPER': Piper, 'BOYERO': El Boyero, '^PRP': Ultraliviano, '^PIP': Pipistrel, '^PA': Piper, '^TEA': Tecnam, '^CI[RT]': Cirrus, '^VA-': Van's RV, 'BN-?2': BN-2 Islander, '^TXA': Cessna/Beech, '^BRT': Bristell, '^AB-': Aero Boero, '^GR-': Grob, '^MO-': Mooney, '^BE': Beechcraft}
     patron: '(^GU-(AA|GA)|^GR-AA|^CESSNA C-?[12]\d\d|^PIPER|^CI[RT]-?SR|^CE-?4[01]\d|^TXA-?([A-Z]-?)?(G?36|G?58|206|1\d\d)|^VA-|^TA-|^AET-|^EVE-|LSA|BN-?2|B55|^BE-?95|^BE-?[A-Z]-?33|^(BE|HAB)-?G-?58|^CE-?([A-Z]{1,2}-?)?1\d\d|^CE-?([A-Z]{1,2}-?)?2[0-1]\d|^CE-?3\d\d|^TXI-?1\d\d|BOYERO|^PRP-|^PA-|^PAA-|^PI-|^PIP-|^TEA-|^CIR-|^BRT-|^AB-|^GR-|^MO-|^BE-?(A-?)?(36|33|35|55|58|76|23|24)|BONANZA|BARON)'
 
 default:
@@ -100,6 +100,7 @@ modelos:
   - {patron: 'A320', modelo: Airbus A320-200, icao: A320}
   - {patron: 'A330-?2', modelo: Airbus A330-200, icao: A332}
   - {patron: 'ERJ ?-?190|(?<![A-Z])E-?190(?!\d)|EMB-?190', modelo: Embraer E190, icao: E190}
+  - {patron: '(EMB|ERJ)-?(EMB-)?140', modelo: Embraer ERJ-140, icao: E135}
   - {patron: '(EMB|ERJ)-?(EMB-)?145', modelo: Embraer ERJ-145, icao: E145}
   - {patron: 'EMB-?500|PHENOM 100', modelo: Embraer Phenom 100, icao: E50P}
   - {patron: '135BJ|LEGACY', modelo: Embraer Legacy 600, icao: E35L}
@@ -271,6 +272,7 @@ modelos:
   - {patron: '^(BEL|EL)-?206', modelo: Bell 206, icao: B06}
   - {patron: 'AS-?350|AS350', modelo: Airbus H125/AS350, icao: AS50}
   - {patron: 'AS-?355', modelo: Airbus AS355, icao: AS55}
+  - {patron: '[AS]S-?[35]65', modelo: Airbus AS365 Dauphin, icao: AS65}
   - {patron: 'EC-?135|EC135', modelo: Airbus H135/EC135, icao: EC35}
   - {patron: 'EC[ -]?1?30', modelo: Airbus H130/EC130, icao: EC30}
   - {patron: 'EC[ -]?155', modelo: Airbus EC155, icao: EC55}

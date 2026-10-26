@@ -13,6 +13,12 @@ aerolineas:
   - {patron: 'AVIANCA', nombre: Avianca, tipo: extranjera}   # Avianca (Colombia): no es Avian Argentina
   - {patron: '^LADE', nombre: LADE, tipo: estatal}
   - {patron: 'FUERZA AEREA ARGENTINA', nombre: Fuerza Aérea Argentina, tipo: estatal}
+  # Anclados: las escuelas de cada fuerza (ej. "GENDARMERIA NACIONAL CENCAPAVI") quedan aparte.
+  - {patron: '^EJERCITO ARGENTINO', nombre: Ejército Argentino, tipo: estatal}
+  - {patron: '^ARMADA ARGENTINA', nombre: Armada Argentina, tipo: estatal}
+  - {patron: '^GENDARMERIA NACIONAL ARGENTINA$', nombre: Gendarmería Nacional, tipo: estatal}
+  - {patron: '^PREFECTURA NAVAL ARGENTINA$', nombre: Prefectura Naval Argentina, tipo: estatal}
+  - {patron: '^POLICIA FEDERAL ARGENTINA$', nombre: Policía Federal Argentina, tipo: estatal}
   - {patron: '^BAIRES FLY', nombre: Baires Fly, tipo: taxi_aereo}
   - {patron: '^AEROVIDA', nombre: Aerovida, tipo: taxi_aereo}
   - {patron: 'LATAM AIRLINES ARGENTINA|LAN ARGENTINA', nombre: LATAM Argentina, tipo: regional}
