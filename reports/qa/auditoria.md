@@ -22,7 +22,7 @@ Foco (MDQ):
 | anio | movimientos | pct_sin_operador | pct_sin_aeronave | pct_sin_matricula | pct_sin_pasajeros | pct_sin_hora | pct_sin_od | pct_od_lad |
 |---|---|---|---|---|---|---|---|---|
 | 2019 | 8388 | 32.1 | 15.5 | 100.0 | 0.0 | 0.0 | 0.0 | 0.2 |
-| 2020 | 3022 | 50.6 | 82.4 | 100.0 | 0.0 | 0.0 | 0.0 | 0.2 |
+| 2020 | 3022 | 50.6 | 81.1 | 100.0 | 0.0 | 0.0 | 0.0 | 0.2 |
 | 2021 | 3957 | 66.0 | 15.8 | 100.0 | 0.0 | 0.0 | 0.0 | 0.9 |
 | 2022 | 6387 | 49.9 | 15.1 | 100.0 | 0.0 | 0.0 | 0.0 | 0.4 |
 | 2023 | 7571 | 47.2 | 19.2 | 100.0 | 0.0 | 0.0 | 0.0 | 0.4 |
@@ -73,8 +73,8 @@ Qué se recupera (foco, top 12):
 | SAETA | 14 |
 | CEAP - AERO CHANNEL S.R.L- CIAC TIPO II | 13 |
 | PRESIDENCIA DE LA NACION | 10 |
-| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
 | TWR SRL | 10 |
+| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
 | FLIGHT CENTER- TWR S.R.L-CIAC TIPO III | 9 |
 
 ## 2B. Aeronave por matrícula
@@ -186,11 +186,11 @@ Desacuerdos más frecuentes (operador ANAC ≠ empresa afectada):
 | HANGAR UNO S.A- CIAC TIPO II | HANGAR UNO S.A. | 6 |
 | JUST FLIGHT S.A. "ROYAL CLASS" | PRIVATE AVIATION CONSULTING S.A. | 3 |
 | SERV. Y EMPRENDIMIENTOS AERONÁUTICOS S.A | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
-| SERV AEREOS SUDAMERICANOS S.A. | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
 | SEA CO AVIATION | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
+| SERV AEREOS SUDAMERICANOS S.A. | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
 | CICA | AEROTEC ARGENTINA S.A. | 2 |
-| DELTA PLANE S.R L. | RAPALLINI S.A. | 1 |
-| VIP AIR S.R.L. | AEROTEC ARGENTINA S.A. | 1 |
+| SAPSA | SERV. AER. PATAGONICOS S.A. | 1 |
+| BAIRES FLY SA | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 1 |
 
 ## 2F. Aeronaves del Estado: operador por prefijo de la identificación (2026)
 
@@ -225,10 +225,10 @@ Modelo por serie con identificación pública (config/estatales.yaml → series)
 
 ## 4. Aplicado en la base (fct_movimiento)
 
-| ambito | operador_por_matricula | operador_por_otro_extremo | operador_por_prefijo_estatal | operador_otro_extremo_sin_matricula | operador_anac_version_anterior | operador_afectacion_anac | aeronave_anac_version_anterior | aeronave_del_municipio | aeronave_por_serie_estatal | aeronave_otro_extremo_sin_matricula |
-|---|---|---|---|---|---|---|---|---|---|---|
-| MDQ | 383 | 22 | 319 | 643 | 0 | 185 | 7079 | 9 | 516 | 6 |
-| resto del país | 17074 | 456 | 6387 | 11571 | 0 | 14571 | 0 | 0 | 2286 | 245 |
+| ambito | operador_por_matricula | operador_por_otro_extremo | operador_por_prefijo_estatal | operador_otro_extremo_sin_matricula | operador_anac_version_anterior | operador_afectacion_anac | aeronave_anac_version_anterior | aeronave_del_municipio | aeronave_por_serie_estatal | aeronave_otro_extremo_sin_matricula | aeronave_por_asientos_yvera |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| MDQ | 383 | 22 | 319 | 643 | 0 | 185 | 7079 | 9 | 516 | 6 | 37 |
+| resto del país | 17074 | 456 | 6387 | 11571 | 0 | 14571 | 0 | 0 | 2286 | 245 | 0 |
 
 Privado en jet o turbohélice ejecutivo analizado como taxi aéreo. Evidencia en el foco: cuántos tienen operador o matrícula que también vuela como no regular.
 
@@ -249,7 +249,7 @@ Asientos: cabina publicada (config/cabinas.yaml) contra el p95 de pasajeros obse
 |---|---|---|---|---|---|
 | Aerolíneas Argentinas | Boeing 737-800 | 170.0 | 171.0 | 409696 | 30310 |
 | Aerolíneas Argentinas | Embraer E190 | 96.0 | 97.0 | 382270 | 20150 |
-| Flybondi | Boeing 737-800 | 189.0 | 190.0 | 172854 | 9439 |
+| Flybondi | Boeing 737-800 | 189.0 | 191.0 | 172854 | 9439 |
 | Aerolíneas Argentinas | Boeing 737 MAX 8 | 170.0 | 173.0 | 117103 | 9546 |
 | American Jet | Embraer ERJ-145 | 50.0 | 50.0 | 5546 | 125 |
 | Andes Líneas Aéreas | Boeing 737-700 | 142.0 | 142.0 | 1404 | 0 |
@@ -259,12 +259,12 @@ Asientos: cabina publicada (config/cabinas.yaml) contra el p95 de pasajeros obse
 | Flyest S.A. Líneas Aéreas | Bombardier CRJ200 | 50.0 |  | 11 | 0 |
 | Norwegian Argentina | Boeing 737-800 | 189.0 |  | 7 | 0 |
 | JetSMART | Embraer ERJ-145 | 50.0 |  | 3 | 3 |
-| Andes Líneas Aéreas | Embraer ERJ-145 | 50.0 |  | 2 | 1 |
 | Aerolíneas Argentinas | Embraer ERJ-145 | 50.0 |  | 2 | 2 |
-| Sky Airline | Embraer ERJ-145 | 50.0 |  | 1 | 1 |
-| Bocca Jorge Luis Roque | Bombardier CRJ200 | 50.0 |  | 1 | 0 |
-| Flying America | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
+| Andes Líneas Aéreas | Embraer ERJ-145 | 50.0 |  | 2 | 1 |
 | Aerovias De Mexico - Aeromexico | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
+| Flying America | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
+| Bocca Jorge Luis Roque | Bombardier CRJ200 | 50.0 |  | 1 | 0 |
+| Sky Airline | Embraer ERJ-145 | 50.0 |  | 1 | 1 |
 
 Validación: qué habría dicho la inferencia por pasajeros en los vuelos 2019 del foco cuyo avión se recuperó (ANAC versión anterior o portal municipal):
 
@@ -298,28 +298,47 @@ Asientos del vuelo exacto (Yvera, 1 a 1) contra la cabina publicada / p95 que se
 | aerolinea_nombre | aeronave_modelo | vuelos | asientos_yvera | cabina_config | coinciden_con_cabina |
 |---|---|---|---|---|---|
 | Aerolíneas Argentinas | Embraer E190 | 2731 | 96.0 | 96.0 | 2728 |
-| Aerolíneas Argentinas |  | 292 | 101.4 |  | 0 |
+| Aerolíneas Argentinas |  | 268 | 96.0 |  | 0 |
 | Aerolíneas Argentinas | Boeing 737-800 | 175 | 170.0 | 170.0 | 175 |
-| Aerolíneas Argentinas | Boeing 737-700 | 87 | 130.7 |  | 0 |
+| Aerolíneas Argentinas | Boeing 737-700 | 92 | 130.7 |  | 0 |
 | Avian (Avianca Argentina) | ATR 72 | 78 | 72.0 | 72.0 | 78 |
 | Aerolíneas Argentinas | Boeing 737 MAX 8 | 39 | 171.5 | 170.0 | 36 |
 | LADE |  | 37 | 33.1 |  | 0 |
 | Andes Líneas Aéreas | Boeing 737-800 | 29 | 176.0 |  | 0 |
+| Aerolíneas Argentinas | Boeing 737 | 19 | 170.0 |  | 0 |
 | Flybondi | Boeing 737-800 | 19 | 189.0 | 189.0 | 19 |
 | LADE | Embraer ERJ-140 | 9 | 31.8 | 44.0 | 4 |
 | LADE | Boeing 737-700 | 5 | 99.0 |  | 0 |
 | Flyest S.A. Líneas Aéreas |  | 3 | 50.0 |  | 0 |
 | Aerolíneas Argentinas | Lockheed L-18 Lodestar | 2 | 89.5 |  | 0 |
 | Flyest S.A. Líneas Aéreas | Bombardier CRJ200 | 2 | 50.0 | 50.0 | 2 |
+| Sin dato | Embraer Phenom 100 | 1 | 33.0 |  | 0 |
 | Aerolíneas Argentinas | Cessna 150 | 1 | 92.0 |  | 0 |
 | Just Flight S.A. "Royal Class" | Cessna Citation CJ1/M2 (525) | 1 | 30.0 |  | 0 |
-| Sin dato | Embraer Phenom 100 | 1 | 33.0 |  | 0 |
+
+Aeronave por asientos: reglas aprendidas (operador + asientos → modelo o familia, >= 98 % de al menos 20 vuelos con aeronave informada):
+
+| operador | asientos | nivel | valor | vuelos_que_cumplen | vuelos_con_esos_asientos | pct |
+|---|---|---|---|---|---|---|
+| AEROLINEAS ARGENTINAS | 96 | modelo | Embraer E190 | 2183 | 2183 | 100.0 |
+| AEROLINEAS ARGENTINAS | 170 | familia | Boeing 737 | 173 | 173 | 100.0 |
+| AEROLINEAS ARGENTINAS | 128 | modelo | Boeing 737-700 | 46 | 46 | 100.0 |
+| FB LINEAS AEREAS FLYBONDI | 189 | modelo | Boeing 737-800 | 28 | 28 | 100.0 |
+| ANDES LINEAS AEREAS | 189 | modelo | Boeing 737-800 | 26 | 26 | 100.0 |
+| AEROLINEAS ARGENTINAS | 137 | modelo | Boeing 737-700 | 22 | 22 | 100.0 |
+
+Aplicadas en el foco (vuelos sin aeronave):
+
+| anio | aeronave_familia | aeronave_modelo | movimientos |
+|---|---|---|---|
+| 2020 | Boeing 737 | Boeing 737 | 31 |
+| 2020 | Boeing 737 | Boeing 737-700 | 6 |
 
 ## 3. Sin cruce posible con las fuentes actuales
 
 | caso | movimientos_foco |
 |---|---|
-| Aeronave sin matrícula (2019–2025) | 9988 |
+| Aeronave sin matrícula (2019–2025) | 9951 |
 | Operador sin matrícula (2019–2025) | 20536 |
 | Origen/destino en lugar apto denunciado (sin coordenadas) | 266 |
 | Pasajeros sin dato | 0 |

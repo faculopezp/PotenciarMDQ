@@ -5,7 +5,7 @@
 | source_file | filas | pct_fecha_null | pct_hora_null | pct_pax_null | pct_aeronave_null | pct_con_matricula | pct_provisorio | desde | hasta |
 |---|---|---|---|---|---|---|---|---|---|
 | 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580697 | 0.0 | 0.0 | 0.0 | 98.78 | 0.0 | 0.0 | 2019-01-01 | 2019-12-31 |
-| 20261024_202012-informe-ministerio-actualizado-dic-final.csv | 212726 | 0.0 | 0.0 | 0.0 | 85.3 | 0.0 | 0.0 | 2019-12-31 | 2020-12-31 |
+| 20261024_202012-informe-ministerio-actualizado-dic-final.csv | 212726 | 0.0 | 0.0 | 0.0 | 85.28 | 0.0 | 0.0 | 2019-12-31 | 2020-12-31 |
 | 20261024_202112-informe-ministerio-actualizado-dic-final.csv | 329781 | 0.0 | 0.0 | 0.0 | 14.04 | 0.0 | 0.0 | 2020-12-31 | 2021-12-31 |
 | 20261024_202212-informe-ministerio-actualizado-dic-final.csv | 477903 | 0.0 | 0.0 | 0.0 | 15.27 | 0.0 | 0.0 | 2021-12-31 | 2022-12-31 |
 | 20261024_202312-informe-ministerio-actualizado-dic.csv | 557152 | 0.0 | 0.0 | 0.0 | 15.62 | 0.0 | 0.0 | 2022-12-31 | 2023-12-31 |
@@ -165,7 +165,7 @@
 
 | tramos | despegues_cabotaje | pct_emparejado |
 |---|---|---|
-| 775813 | 915317 | 84.8 |
+| 775776 | 915317 | 84.8 |
 
 ## Rotaciones: método por matrícula vs por modelo
 
@@ -193,8 +193,8 @@
 | MDP | matricula | pernocte | 127 | 1148.0 |
 | MDP | matricula | rotacion | 1457 | 51.0 |
 | MDP | modelo | escala_larga | 471 | 218.0 |
-| MDP | modelo | pernocte | 467 | 549.0 |
-| MDP | modelo | rotacion | 9300 | 50.0 |
+| MDP | modelo | pernocte | 472 | 549.0 |
+| MDP | modelo | rotacion | 9301 | 50.0 |
 | NEU | matricula | escala_larga | 296 | 210.0 |
 | NEU | matricula | pernocte | 774 | 992.0 |
 | NEU | matricula | rotacion | 3696 | 53.0 |
@@ -219,7 +219,7 @@
 | 2019 | instruccion | 548 | 6 | 0 | 0 | 6 |
 | 2019 | trabajo_aereo | 50 | 0 | 0 | 0 | 0 |
 | 2019 | charter_linea | 36 | 21 | 0 | 5 | 16 |
-| 2020 | linea_regular | 1351 | 1265 | 275 | 968 | 22 |
+| 2020 | linea_regular | 1351 | 1228 | 244 | 962 | 22 |
 | 2020 | privado | 499 | 306 | 0 | 0 | 306 |
 | 2020 | oficial | 411 | 397 | 0 | 2 | 395 |
 | 2020 | instruccion | 382 | 223 | 0 | 0 | 223 |
