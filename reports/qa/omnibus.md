@@ -66,7 +66,7 @@ El anual solo trae rutas con al menos un viaje semanal: tiene que dar igual o me
 | cordoba | Córdoba · Cordoba | 2 |
 | neuquen | Neuquén · Neuquen | 2 |
 | parana | Parana · Paraná | 2 |
-| san miguel de tucuman | San Miguel De Tucumán · San Miguel De Tucuman | 2 |
+| san miguel de tucuman | San Miguel De Tucuman · San Miguel De Tucumán | 2 |
 
 ## 5. Rutas con más pasajeros que asientos
 
@@ -139,30 +139,20 @@ Servicios que se toman como de Mar del Plata y meses con dato por año:
 | P. Constitución-Mar del Plata (Buenos Aires) | SOFSE | Provincial | 2024 | 2025 | 12 | 626506 |
 | P. Constitución-Mar del Plata (Buenos Aires) | SOFSA | Nacional | 2025 | 2026 | 18 | 767780 |
 
-Meses duplicados (mismo servicio, año y mes más de una vez):
+Meses repetidos (mismo servicio, operador, año y mes más de una vez; dos operadores en el mismo mes no es repetición: se suman):
 
-| anio | mes | servicio | filas |
-|---|---|---|---|
-| 2012 | 1 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2012 | 2 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2012 | 3 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2012 | 4 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2012 | 5 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2012 | 6 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2012 | 7 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2012 | 8 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2012 | 9 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2012 | 10 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2014 | 12 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2015 | 1 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2015 | 2 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2015 | 3 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2015 | 4 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2015 | 5 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2015 | 6 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2015 | 7 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2015 | 8 | P. Constitución-Mar del Plata (Buenos Aires) | 2 |
-| 2015 | 9 | P. Constitución-Bahía Blanca (Buenos Aires) | 2 |
+| anio | mes | servicio | operador | filas |
+|---|---|---|---|---|
+
+
+Meses del foco con más de un operador:
+
+| anio | operadores | meses |
+|---|---|---|
+| 2011 | SOFSE · FERROBAIRES | 6 |
+| 2012 | SOFSE · FERROBAIRES | 10 |
+| 2014 | FERROBAIRES · SOFSE | 1 |
+| 2015 | SOFSE · FERROBAIRES | 8 |
 
 ## 8. EVyTH: viajes de residentes con destino Mar del Plata
 
