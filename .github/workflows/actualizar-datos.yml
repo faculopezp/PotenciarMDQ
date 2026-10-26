@@ -58,5 +58,10 @@ jobs:
             echo "Sin cambios en los datos."
           else
             git commit -m "datos: actualización automática $(date -u +%Y-%m-%d)"
-            git push
+            # Si llegó un commit a main durante la corrida, rebasar antes de subir (los datos
+            # generados no se tocan a mano, así que no hay conflictos esperables).
+            for i in 1 2 3; do
+              git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break
+              sleep 5
+            done
           fi
