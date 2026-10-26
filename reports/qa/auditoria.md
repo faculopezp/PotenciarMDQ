@@ -185,12 +185,12 @@ Desacuerdos más frecuentes (operador ANAC ≠ empresa afectada):
 | DIGITAL AIR TAXI S.A. | FEELING AIR S.A. | 26 |
 | HANGAR UNO S.A- CIAC TIPO II | HANGAR UNO S.A. | 6 |
 | JUST FLIGHT S.A. "ROYAL CLASS" | PRIVATE AVIATION CONSULTING S.A. | 3 |
-| SEA CO AVIATION | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
 | SERV. Y EMPRENDIMIENTOS AERONÁUTICOS S.A | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
 | SERV AEREOS SUDAMERICANOS S.A. | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
+| SEA CO AVIATION | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
 | CICA | AEROTEC ARGENTINA S.A. | 2 |
-| POLAR AEREA- JORGE POTENZA-CIAC TIPO III | AEROTEC ARGENTINA S.A. | 1 |
-| JUST FLIGHT S.A. "ROYAL CLASS" | DIRECCION AERON. DE AVIACION CIVIL SALTA | 1 |
+| DELTA PLANE S.R L. | RAPALLINI S.A. | 1 |
+| VIP AIR S.R.L. | AEROTEC ARGENTINA S.A. | 1 |
 
 ## 2F. Aeronaves del Estado: operador por prefijo de la identificación (2026)
 
@@ -256,11 +256,13 @@ Asientos: cabina publicada (config/cabinas.yaml) contra el p95 de pasajeros obse
 | Avian (Avianca Argentina) | ATR 72 | 72.0 |  | 599 | 16 |
 | LADE | Embraer ERJ-140 | 44.0 |  | 230 | 0 |
 | Fuerza Aérea Argentina | Embraer ERJ-140 | 44.0 |  | 28 | 0 |
+| Flyest S.A. Líneas Aéreas | Bombardier CRJ200 | 50.0 |  | 11 | 0 |
 | Norwegian Argentina | Boeing 737-800 | 189.0 |  | 7 | 0 |
 | JetSMART | Embraer ERJ-145 | 50.0 |  | 3 | 3 |
 | Andes Líneas Aéreas | Embraer ERJ-145 | 50.0 |  | 2 | 1 |
 | Aerolíneas Argentinas | Embraer ERJ-145 | 50.0 |  | 2 | 2 |
 | Sky Airline | Embraer ERJ-145 | 50.0 |  | 1 | 1 |
+| Bocca Jorge Luis Roque | Bombardier CRJ200 | 50.0 |  | 1 | 0 |
 | Flying America | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
 | Aerovias De Mexico - Aeromexico | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
 
@@ -270,7 +272,7 @@ Validación: qué habría dicho la inferencia por pasajeros en los vuelos 2019 d
 |---|---|---|---|
 | ATR 42/72 | ATR 42/72 | 661 | 100.0 |
 | Boeing 737 | Boeing 737 | 138 | 100.0 |
-| Bombardier CRJ | Bombardier Challenger | 13 | 100.0 |
+| Bombardier CRJ | Bombardier CRJ | 13 | 100.0 |
 | Embraer E190 | Embraer E190 | 4083 | 98.2 |
 | Embraer E190 | Boeing 737 | 76 | 1.8 |
 
@@ -282,7 +284,7 @@ Mismo origen (SIAC/ANAC): coincidir prueba consistencia de procesamiento, no exa
 |---|---|---|---|---|---|---|
 | 2017 | 3709 |  | 277561 |  | 350401 |  |
 | 2018 | 6785 |  | 454287 |  | 596926 |  |
-| 2019 | 5418 | 6323 | 382751 | 376692 | 513318 | 515179.0 |
+| 2019 | 5418 | 6323 | 382751 | 376692 | 513318 | 515729.0 |
 | 2020 | 1373 | 1767 | 110516 | 110828 | 140923 | 41278.0 |
 | 2021 | 1168 | 1858 | 85114 | 85191 | 114222 | 115711.0 |
 | 2022 | 2901 | 3702 | 275655 | 269660 | 352247 | 352389.0 |
@@ -308,7 +310,7 @@ Asientos del vuelo exacto (Yvera, 1 a 1) contra la cabina publicada / p95 que se
 | LADE | Boeing 737-700 | 5 | 99.0 |  | 0 |
 | Flyest S.A. Líneas Aéreas |  | 3 | 50.0 |  | 0 |
 | Aerolíneas Argentinas | Lockheed L-18 Lodestar | 2 | 89.5 |  | 0 |
-| Flyest S.A. Líneas Aéreas | Bombardier Challenger | 2 | 50.0 |  | 0 |
+| Flyest S.A. Líneas Aéreas | Bombardier CRJ200 | 2 | 50.0 | 50.0 | 2 |
 | Aerolíneas Argentinas | Cessna 150 | 1 | 92.0 |  | 0 |
 | Just Flight S.A. "Royal Class" | Cessna Citation CJ1/M2 (525) | 1 | 30.0 |  | 0 |
 | Sin dato | Embraer Phenom 100 | 1 | 33.0 |  | 0 |
