@@ -2,17 +2,18 @@
 -- aeronave, distancia y métricas estimadas. Ver docs/07_bd_y_metricas.md.
 CREATE OR REPLACE TABLE fct_movimiento AS
 -- Datos recuperados (sql/bd/25_recuperacion.sql), en orden de prioridad: ANAC 2019 versión
--- anterior (mismo registro); operador por matrícula (unánime), por el otro extremo del mismo vuelo
+-- anterior (mismo registro); operador por Afectación ANAC, por matrícula (unánime), por el otro extremo del mismo vuelo
 -- con matrícula, por prefijo de aeronave del Estado o por el otro extremo sin matrícula; aeronave
 -- del portal municipal (2015–2019), por serie estatal o por el otro extremo sin matrícula.
 WITH s AS (
   SELECT
     s.* EXCLUDE (aeropuerto, aerolinea, aeronave),
-    coalesce(s.aerolinea, pv.aerolinea_previa, mo.aerolinea, op.aerolinea, oe.aerolinea,
+    coalesce(s.aerolinea, pv.aerolinea_previa, af.aerolinea, mo.aerolinea, op.aerolinea, oe.aerolinea,
              vp.aerolinea_par) AS aerolinea,
     s.aerolinea                                    AS aerolinea_original,
     CASE WHEN s.aerolinea IS NOT NULL THEN 'anac'
          WHEN pv.aerolinea_previa IS NOT NULL THEN 'anac_version_anterior'
+         WHEN af.aerolinea IS NOT NULL THEN 'afectacion_anac'
          WHEN mo.aerolinea IS NOT NULL THEN 'matricula'
          WHEN op.aerolinea IS NOT NULL THEN 'otro_extremo'
          WHEN oe.aerolinea IS NOT NULL THEN 'prefijo_estatal'
@@ -27,6 +28,9 @@ WITH s AS (
     coalesce(c.a, s.aeropuerto)                    AS aeropuerto,
     CAST(s.fecha + s.hora_utc AS TIMESTAMP)        AS ts_utc
   FROM stg_movimiento s
+  LEFT JOIN ref_operador_afectacion af
+    ON s.aerolinea IS NULL AND af.matricula = upper(s.matricula)
+   AND s.fecha BETWEEN af.desde AND af.hasta
   LEFT JOIN ref_operador_matricula mo ON s.aerolinea IS NULL AND mo.matricula = s.matricula
   LEFT JOIN ref_operador_par op
     ON s.aerolinea IS NULL AND op.matricula = s.matricula AND op.fecha = s.fecha
@@ -43,7 +47,6 @@ WITH s AS (
   LEFT JOIN ref_anac_previa_cruce pv
     ON pv.fecha = s.fecha AND pv.hora_utc = s.hora_utc AND pv.aeropuerto = s.aeropuerto
    AND pv.tipo_movimiento = s.tipo_movimiento AND pv.origen_destino = s.origen_destino
-   AND pv.pasajeros IS NOT DISTINCT FROM s.pasajeros
   LEFT JOIN ref_aeronave_municipal am
     ON s.aeronave IS NULL AND am.fecha = s.fecha AND am.hora_utc = s.hora_utc
    AND am.aeropuerto = s.aeropuerto AND am.tipo_movimiento = s.tipo_movimiento

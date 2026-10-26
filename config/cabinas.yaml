@@ -7,7 +7,6 @@
 # modelo: modelo estandarizado (config/aeronaves.yaml → modelos). Verificado 2026-10-25.
 #
 # Sin cargar (fuentes contradictorias o una sola aeronave): quedan con el p95.
-# - Aerolíneas 737-800: 170 (8 + 162, LV-GVA 2019) contra 186–189 tras la reconfiguración de 2018.
 # - Aerolíneas 737-700: 128 (8 + 120) o 137 según la unidad.
 # - Andes 737-800: 162 en el LV-KFW; sin dato del resto de la flota.
 # - LADE / FAA Fokker F28: 62 o 65 según la nota.
@@ -17,6 +16,10 @@ cabinas:
   - {operador: 'AEROLINEAS ARGENTINAS', modelo: Boeing 737 MAX 8, asientos: 170, clases: '8 + 162',
      fuentes: ['https://seatmaps.com/airlines/ar-aerolineas-arg/boeing-737-max-8/',
                'https://infonegocios.info/y-ademas/llego-el-segundo-boeing-737-max-8-de-aerolineas-argentinas-mas-alcance-menos-consumo']}
+  # 737-800: la prensa decía 170 o 186–189; Yvera (asientos por vuelo, SIAC) da 170 en 125 de 125
+  # vuelos de MDQ con avión conocido (reports/qa/auditoria.md, sección 5).
+  - {operador: 'AEROLINEAS ARGENTINAS', modelo: Boeing 737-800, asientos: 170, clases: '8 + 162',
+     fuentes: ['https://datos.yvera.gob.ar/dataset/conectividad-aerea']}
   - {operador: 'FLYBONDI', modelo: Boeing 737-800, asientos: 189, clases: 'clase única',
      fuentes: ['https://www.ch-aviation.com/news/54251-argentine-ulcc-start-up-flybondi-selects-the-b737-800',
                'https://www.aviacionline.com/flybondi-incorporates-a-sixth-boeing-737']}

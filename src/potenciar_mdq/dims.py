@@ -177,6 +177,11 @@ def build_dim_aerolinea(con: duckdb.DuckDBPyConnection) -> None:
     vistos = {n for n, _ in conteo}
     estatales = {p["operador"] for p in load_yaml("estatales.yaml")["prefijos"]}
     conteo += [(n, 0) for n in sorted(estatales - vistos)]
+    # Empresas que solo aparecen por la consulta de Afectación de ANAC.
+    if _existe(con, "ref_afectacion"):
+        vistos = {n for n, _ in conteo}
+        conteo += [(n, 0) for (n,) in con.execute(
+            "SELECT DISTINCT entidad FROM ref_afectacion ORDER BY 1").fetchall() if n not in vistos]
     # Variantes del mismo operador (misma clave): todas toman el nombre y tipo de la más frecuente.
     grupos: dict[str, list[tuple[int, str]]] = {}
     for n, c in conteo:

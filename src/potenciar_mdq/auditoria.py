@@ -270,6 +270,34 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                      / nullif(count(*) FILTER (recuperado IS NOT NULL), 0), 1) AS pct_coinciden
         FROM val_par GROUP BY 1 ORDER BY 1""")]
 
+    # ── G: consulta de Afectación de ANAC ───────────────────────────────────────────────────
+    if _existe(con, "ref_operador_afectacion"):
+        out += ["## 2G. Operador por la consulta de Afectación de ANAC", "",
+                "Validación: movimientos con operador informado por ANAC cuya matrícula figura "
+                "afectada (a una sola empresa, vuelo posterior a la afectación).", "", _table(con, """
+            SELECT CASE WHEN f.aeropuerto = getvariable('foco') THEN 'MDQ' ELSE 'resto del país' END
+                     AS ambito,
+                   count(*) AS movimientos,
+                   count(*) FILTER (al.aerolinea_clave = ae.aerolinea_clave) AS coinciden,
+                   round(100.0 * count(*) FILTER (al.aerolinea_clave = ae.aerolinea_clave)
+                         / count(*), 1) AS pct
+            FROM fct_movimiento f
+            JOIN ref_operador_afectacion a
+              ON a.matricula = upper(f.matricula) AND f.fecha BETWEEN a.desde AND a.hasta
+            JOIN dim_aerolinea al ON al.aerolinea = f.aerolinea_original
+            JOIN dim_aerolinea ae ON ae.aerolinea = a.aerolinea
+            GROUP BY 1 ORDER BY 1"""),
+                "Desacuerdos más frecuentes (operador ANAC ≠ empresa afectada):", "", _table(con, """
+            SELECT f.aerolinea_original AS operador_anac, a.aerolinea AS empresa_afectada,
+                   count(*) AS movimientos
+            FROM fct_movimiento f
+            JOIN ref_operador_afectacion a
+              ON a.matricula = upper(f.matricula) AND f.fecha BETWEEN a.desde AND a.hasta
+            JOIN dim_aerolinea al ON al.aerolinea = f.aerolinea_original
+            JOIN dim_aerolinea ae ON ae.aerolinea = a.aerolinea
+            WHERE al.aerolinea_clave <> ae.aerolinea_clave
+            GROUP BY ALL ORDER BY 3 DESC LIMIT 10""")]
+
     # ── F: aeronaves del Estado (config/estatales.yaml) ────────────────────────────────────
     out += ["## 2F. Aeronaves del Estado: operador por prefijo de la identificación (2026)", "",
             "Contrastación con los vuelos que traen operador en ANAC. Los desacuerdos son casi todos "
@@ -311,6 +339,7 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
           count(*) FILTER (operador_fuente = 'otro_extremo_sin_matricula')
             AS operador_otro_extremo_sin_matricula,
           count(*) FILTER (operador_fuente = 'anac_version_anterior') AS operador_anac_version_anterior,
+          count(*) FILTER (operador_fuente = 'afectacion_anac') AS operador_afectacion_anac,
           count(*) FILTER (aeronave_fuente = 'anac_version_anterior') AS aeronave_anac_version_anterior,
           count(*) FILTER (aeronave_fuente = 'municipal') AS aeronave_del_municipio,
           count(*) FILTER (aeronave_fuente = 'serie_estatal') AS aeronave_por_serie_estatal,

@@ -182,6 +182,26 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
             con.execute(f"INSERT INTO ref_certificado_anac SELECT \"{campo}\", ? "
                         "FROM read_csv(?, all_varchar = true)", [cert, str(ref / archivo)])
 
+    # Consulta pública de Afectación de Aeronaves de ANAC (matrícula -> empresa explotadora, con
+    # fecha de afectación); extracción manual, ver data/reference/anac_afectacion_*_log.txt.
+    con.execute("CREATE TABLE ref_afectacion (tipo_entidad VARCHAR, entidad VARCHAR, "
+                "matricula VARCHAR, marca VARCHAR, modelo VARCHAR, fecha_afectacion DATE, "
+                "extraccion DATE)")
+    afectaciones = sorted(ref.glob("anac_afectacion_????-??-??.csv"))
+    if afectaciones:
+        ultima = afectaciones[-1]
+        con.execute("""
+            INSERT INTO ref_afectacion
+            SELECT tipo_entidad, entidad, upper(trim(matricula)), marca, modelo,
+                   strptime(fecha_afectacion, '%d/%m/%Y')::DATE, ?::DATE
+            FROM read_csv(?, all_varchar = true)""", [ultima.stem[-10:], str(ultima)])
+        # Las entidades afectadas también son explotadores certificados.
+        con.execute("""
+            INSERT INTO ref_certificado_anac
+            SELECT DISTINCT entidad, CASE WHEN tipo_entidad LIKE '%TRABAJO%' THEN 'ceta'
+                                          ELSE '121_135' END
+            FROM ref_afectacion""")
+
     cfg = mdq()
     con.execute(
         "CREATE TABLE correcciones (de VARCHAR, a VARCHAR, clases VARCHAR[], motivo VARCHAR)"

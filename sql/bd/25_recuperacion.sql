@@ -156,20 +156,22 @@ SELECT DISTINCT matricula FROM stg_movimiento WHERE clase_vuelo = 'no_regular' A
 
 -- 7. ANAC 2019, versión anterior del dataset (data/reference/anac_2019_version_anterior.csv, solo
 --    el foco): trae la aeronave que la versión vigente dejó vacía. Mismo registro = misma fecha,
---    hora UTC, aeropuerto, movimiento, origen/destino y pasajeros, 1 a 1. Con 2023–2024 (presentes en
---    ambas versiones) las mismas claves cruzan el 94 % y la aeronave coincide en 11.015 de 11.016.
+--    hora UTC, aeropuerto, movimiento y origen/destino, 1 a 1. Los pasajeros NO son clave: ANAC
+--    los corrigió entre versiones (coinciden en 2.194 de 7.670 registros con la misma hora; ver
+--    reports/qa/auditoria.md). Con 2023–2024 (en ambas versiones) la aeronave coincide en 11.015
+--    de 11.016.
 CREATE OR REPLACE TABLE ref_anac_previa_cruce AS
 WITH s AS (
   SELECT fecha, hora_utc, aeropuerto, tipo_movimiento, origen_destino, aerolinea, aeronave,
          matricula, pasajeros,
-         count(*) OVER (PARTITION BY fecha, hora_utc, aeropuerto, tipo_movimiento, origen_destino,
-                        pasajeros) AS c_s
+         count(*) OVER (PARTITION BY fecha, hora_utc, aeropuerto, tipo_movimiento,
+                        origen_destino) AS c_s
   FROM stg_movimiento
   WHERE fecha BETWEEN (SELECT min(fecha) FROM ref_anac_previa) AND (SELECT max(fecha) FROM ref_anac_previa)
 ),
 p AS (
   SELECT *, count(*) OVER (PARTITION BY fecha, hora_utc, aeropuerto, tipo_movimiento,
-                           origen_destino, pasajeros) AS c_p
+                           origen_destino) AS c_p
   FROM ref_anac_previa
 )
 SELECT s.fecha, s.hora_utc, s.aeropuerto, s.tipo_movimiento, s.origen_destino, s.aerolinea,
@@ -179,7 +181,6 @@ SELECT s.fecha, s.hora_utc, s.aeropuerto, s.tipo_movimiento, s.origen_destino, s
 FROM s JOIN p
   ON p.fecha = s.fecha AND p.hora_utc = s.hora_utc AND p.aeropuerto = s.aeropuerto
  AND p.tipo_movimiento = s.tipo_movimiento AND p.origen_destino = s.origen_destino
- AND p.pasajeros IS NOT DISTINCT FROM s.pasajeros
 WHERE s.c_s = 1 AND p.c_p = 1
   AND ((s.aerolinea IS NULL AND p.aerolinea IS NOT NULL) OR (s.aeronave IS NULL AND p.aeronave IS NOT NULL));
 
@@ -223,3 +224,13 @@ k AS (
 SELECT fecha, hora_utc, aeropuerto, tipo_movimiento, origen_destino, aerolinea, aeronave,
        matricula, pasajeros, asientos
 FROM k WHERE c_s = 1 AND c_y = 1;
+
+-- 9. Operador por la consulta de Afectación de ANAC (matrícula -> empresa explotadora). Vale desde
+--    la fecha de afectación hasta la extracción (si se hubiera desafectado en el medio, la fecha
+--    sería posterior). Solo matrículas afectadas a una única empresa. Contra los movimientos 2026
+--    que traen operador coincide en el 99,9 % (reports/qa/auditoria.md, sección 2G).
+CREATE OR REPLACE TABLE ref_operador_afectacion AS
+SELECT matricula, any_value(entidad) AS aerolinea, max(fecha_afectacion) AS desde,
+       max(extraccion) AS hasta
+FROM ref_afectacion
+GROUP BY matricula HAVING count(DISTINCT entidad) = 1;

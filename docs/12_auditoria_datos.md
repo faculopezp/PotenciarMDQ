@@ -37,6 +37,24 @@ vigente deja vacía (99,8 %). Cruce 1 a 1 por fecha, hora UTC, movimiento, orige
 validado con 2023–2024 (presentes en ambas versiones): 94 % cruza y la aeronave coincide en 11.015 de
 11.016. Tiene prioridad sobre el portal municipal. Resultado en `reports/qa/auditoria.md` (2D y 4).
 
+**Consulta de Afectación de ANAC** (`data/reference/anac_afectacion_2026-10-25.csv`, extracción manual
+de 417 aeronaves de 144 empresas de transporte aerocomercial y trabajo aéreo; log en el mismo
+directorio): matrícula → empresa explotadora desde la fecha de afectación. Contra los movimientos
+2026 que traen operador coincide en el 99,9 % del país y en 1.750 de 1.750 en MDQ. Completa el
+operador de 2026 donde ANAC lo deja vacío.
+
+**Certificados ANAC** (`scripts/listados_anac.py` desde los PDF de `data/reference/anac_pdf/`):
+74 empresas 121/135 y 613 titulares de CETA → `aerolinea_certificado_anac`.
+
+**Yvera, base agregada de frecuencias** (la baja el CI): valida vuelos, pasajeros y asientos por
+año y da los asientos del vuelo exacto (un vuelo por día y ruta con los mismos pasajeros, 1 a 1).
+Confirmó E190 = 96 (2.340 de 2.342), resolvió el 737-800 de Aerolíneas = 170 y muestra tipos de
+aeronave mal cargados en ANAC (vuelos de Aerolíneas cargados como Lodestar o Cessna 150).
+
+**ANAC 2019 versión anterior:** los pasajeros no sirven de clave (ANAC los corrigió entre
+versiones: iguales en 2.194 de 7.670 registros con la misma hora); el cruce usa fecha, hora,
+movimiento y origen/destino, 1 a 1.
+
 Lugares aptos denunciados: quedan como LAD (sin coordenadas, fuera del mapa).
 
 Reclasificación: todo vuelo **privado en jet o turbohélice ejecutivo** se analiza como taxi aéreo
