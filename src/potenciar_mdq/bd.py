@@ -150,6 +150,38 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
                    nullif(nullif(trim("Aeronave"), 'N/A'), '0'), try_cast("Pasajeros" AS INT)
             FROM read_csv(?, all_varchar = true)""", [str(previa)])
 
+    # Yvera "Base agregada de frecuencias aéreas" (vuelos, pasajeros y asientos por día, ruta,
+    # aerolínea y clase; fuente SIAC/ANAC): solo las rutas del foco. Valida movimientos y da los
+    # asientos de cada vuelo (sql/bd/25_recuperacion.sql, punto 8).
+    oaci_foco = mdq()["foco"]["oaci"]
+    con.execute("CREATE TABLE ref_yvera_frecuencias (fecha DATE, clasificacion_vuelo VARCHAR, "
+                "clase_vuelo VARCHAR, aerolinea VARCHAR, origen_oaci VARCHAR, "
+                "destino_oaci VARCHAR, pasajeros INT, asientos INT, vuelos INT)")
+    for pq in sorted(processed.glob("yvera_*.parquet")):
+        cols = {r[0] for r in con.execute("DESCRIBE SELECT * FROM read_parquet(?)",
+                                          [str(pq)]).fetchall()}
+        if {"origen_oaci", "destino_oaci", "asientos", "vuelos", "aerolinea"} <= cols:
+            con.execute("""
+                INSERT INTO ref_yvera_frecuencias
+                SELECT CAST(indice_tiempo AS DATE), clasificacion_vuelo, clase_vuelo, aerolinea,
+                       origen_oaci, destino_oaci, TRY_CAST(pasajeros AS INT),
+                       TRY_CAST(asientos AS INT), TRY_CAST(vuelos AS INT)
+                FROM read_parquet(?) WHERE origen_oaci = ? OR destino_oaci = ?""",
+                [str(pq), oaci_foco, oaci_foco])
+            break
+    else:
+        log.warning("Sin la base agregada de Yvera: no se validan rutas ni asientos por vuelo")
+
+    # Certificados de ANAC (scripts/listados_anac.py): transporte aerocomercial (121/135) y
+    # trabajo aéreo (CETA). Marcan qué operadores son taxi aéreo / trabajo aéreo certificados.
+    ref = DATA / "reference"
+    con.execute("CREATE TABLE ref_certificado_anac (nombre VARCHAR, certificado VARCHAR)")
+    for archivo, campo, cert in (("anac_empresas_121_135.csv", "empresa", "121_135"),
+                                 ("anac_ceta.csv", "titular", "ceta")):
+        if (ref / archivo).exists():
+            con.execute(f"INSERT INTO ref_certificado_anac SELECT \"{campo}\", ? "
+                        "FROM read_csv(?, all_varchar = true)", [cert, str(ref / archivo)])
+
     cfg = mdq()
     con.execute(
         "CREATE TABLE correcciones (de VARCHAR, a VARCHAR, clases VARCHAR[], motivo VARCHAR)"

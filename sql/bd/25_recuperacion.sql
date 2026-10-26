@@ -182,3 +182,44 @@ FROM s JOIN p
  AND p.pasajeros IS NOT DISTINCT FROM s.pasajeros
 WHERE s.c_s = 1 AND p.c_p = 1
   AND ((s.aerolinea IS NULL AND p.aerolinea IS NOT NULL) OR (s.aeronave IS NULL AND p.aeronave IS NOT NULL));
+
+-- 8. Asientos de cada vuelo desde Yvera, "Base agregada de frecuencias aéreas" (vuelos, pasajeros
+--    y asientos por día, ruta y aerolínea; fuente SIAC/ANAC). Un movimiento del foco toma los
+--    asientos de la fila de Yvera con un solo vuelo, misma ruta y sentido (despegue = foco→destino,
+--    aterrizaje = origen→foco), mismo día (UTC o local) y mismos pasajeros, 1 a 1.
+CREATE OR REPLACE TABLE ref_asientos_vuelo AS
+WITH ap AS (
+  SELECT codigo, any_value(oaci) AS oaci FROM dim_aeropuerto WHERE oaci IS NOT NULL GROUP BY codigo
+),
+s AS (
+  SELECT st.fecha, st.hora_utc, st.aeropuerto, st.tipo_movimiento, st.origen_destino,
+         st.aerolinea, st.aeronave, st.matricula, st.pasajeros,
+         CAST(st.fecha + st.hora_utc + to_hours(getvariable('utc_offset')) AS DATE) AS fecha_local,
+         CASE WHEN st.tipo_movimiento = 'despegue' THEN a1.oaci ELSE a2.oaci END AS origen_oaci,
+         CASE WHEN st.tipo_movimiento = 'despegue' THEN a2.oaci ELSE a1.oaci END AS destino_oaci,
+         count(*) OVER (PARTITION BY st.fecha, st.hora_utc, st.aeropuerto, st.tipo_movimiento,
+                        st.origen_destino, st.aerolinea, st.aeronave, st.matricula, st.pasajeros)
+           AS repetidos
+  FROM stg_movimiento st
+  JOIN ap a1 ON a1.codigo = st.aeropuerto
+  JOIN ap a2 ON a2.codigo = st.origen_destino
+  WHERE st.aeropuerto = getvariable('foco') AND st.pasajeros IS NOT NULL
+    AND st.clase_vuelo IN ('regular', 'no_regular') AND st.hora_utc IS NOT NULL
+),
+y AS (
+  SELECT row_number() OVER () AS id_y, * FROM ref_yvera_frecuencias
+  WHERE vuelos = 1 AND asientos > 0
+),
+k AS (
+  SELECT s.*, y.id_y, y.asientos,
+         count(*) OVER (PARTITION BY s.fecha, s.hora_utc, s.aeropuerto, s.tipo_movimiento,
+                        s.origen_destino, s.aerolinea, s.aeronave, s.matricula, s.pasajeros) AS c_s,
+         count(*) OVER (PARTITION BY y.id_y) AS c_y
+  FROM s JOIN y
+    ON y.origen_oaci = s.origen_oaci AND y.destino_oaci = s.destino_oaci
+   AND y.pasajeros = s.pasajeros AND (y.fecha = s.fecha OR y.fecha = s.fecha_local)
+  WHERE s.repetidos = 1
+)
+SELECT fecha, hora_utc, aeropuerto, tipo_movimiento, origen_destino, aerolinea, aeronave,
+       matricula, pasajeros, asientos
+FROM k WHERE c_s = 1 AND c_y = 1;

@@ -64,14 +64,15 @@ e AS (
 j AS (
   SELECT
     e.*,
-    al.aerolinea_nombre, al.aerolinea_tipo,
+    al.aerolinea_nombre, al.aerolinea_tipo, al.certificado_anac,
     an.fabricante, an.familia, an.categoria, an.modelo, an.icao_tipo, an.plazas,
     an.categoria = 'aviacion_general_piston'
       OR list_contains(getvariable('taxi_modelos_piston'), an.modelo)  AS es_piston,
     round(haversine_km(a1.lat, a1.lon, a2.lat, a2.lon))                AS distancia_km,
     -- Asientos publicados (config/cabinas.yaml) y, si no hay, el p95 de pasajeros observados.
-    coalesce(cb.asientos, cg.asientos, ca.capacidad, cn.capacidad)     AS capacidad,
-    CASE WHEN cb.asientos IS NOT NULL THEN 'cabina_publicada'
+    coalesce(yv.asientos, cb.asientos, cg.asientos, ca.capacidad, cn.capacidad) AS capacidad,
+    CASE WHEN yv.asientos IS NOT NULL THEN 'yvera_vuelo'
+         WHEN cb.asientos IS NOT NULL THEN 'cabina_publicada'
          WHEN cg.asientos IS NOT NULL THEN 'cabina_estandar'
          WHEN ca.capacidad IS NOT NULL THEN 'p95_aerolinea_aeronave'
          WHEN cn.capacidad IS NOT NULL THEN 'p95_aeronave' END         AS fuente_capacidad,
@@ -119,6 +120,13 @@ j AS (
     ON cb.operador IS NOT NULL AND cb.modelo = an.modelo
    AND regexp_matches(upper(strip_accents(coalesce(al.aerolinea_nombre, ''))), cb.operador)
   LEFT JOIN ref_cabina cg ON cg.operador IS NULL AND cg.modelo = an.modelo
+  -- Asientos del vuelo exacto según Yvera (sql/bd/25, punto 8); claves de stg_movimiento.
+  LEFT JOIN ref_asientos_vuelo yv
+    ON yv.fecha = e.fecha AND yv.hora_utc = e.hora_utc AND yv.aeropuerto = e.aeropuerto_original
+   AND yv.tipo_movimiento = e.tipo_movimiento AND yv.origen_destino = e.origen_destino
+   AND yv.aerolinea IS NOT DISTINCT FROM e.aerolinea_original
+   AND yv.aeronave IS NOT DISTINCT FROM CASE WHEN e.aeronave_fuente = 'anac' THEN e.aeronave END
+   AND yv.matricula IS NOT DISTINCT FROM e.matricula AND yv.pasajeros = e.pasajeros
   -- Inferencia de familia para vuelos de línea sin aeronave (reglas disjuntas por operador)
   LEFT JOIN ref_inferencia_aeronave r
     ON e.aeronave IS NULL AND e.clase_vuelo IN ('regular', 'no_regular')
@@ -172,6 +180,7 @@ SELECT
   j.aeronave_fuente,
   coalesce(j.aerolinea_nombre, 'Sin dato')         AS aerolinea_nombre,
   coalesce(j.aerolinea_tipo, 'sin_dato')           AS aerolinea_tipo,
+  j.certificado_anac                               AS aerolinea_certificado_anac,
   j.aeronave,
   j.fabricante                                     AS aeronave_fabricante,
   coalesce(j.familia, 'Sin dato')                  AS aeronave_familia,

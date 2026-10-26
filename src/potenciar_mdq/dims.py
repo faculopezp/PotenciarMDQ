@@ -181,17 +181,25 @@ def build_dim_aerolinea(con: duckdb.DuckDBPyConnection) -> None:
     grupos: dict[str, list[tuple[int, str]]] = {}
     for n, c in conteo:
         grupos.setdefault(clave_operador(n), []).append((c, n))
+    # Certificado ANAC por clave de nombre (121/135 tiene prioridad sobre CETA).
+    certificados: dict[str, str] = {}
+    if _existe(con, "ref_certificado_anac"):
+        for nombre_cert, cert in con.execute(
+                "SELECT nombre, certificado FROM ref_certificado_anac "
+                "ORDER BY certificado = 'ceta'").fetchall():
+            certificados.setdefault(clave_operador(nombre_cert), cert)
     rows = []
     for clave, variantes in grupos.items():
         nombre, tipo = classify_aerolinea(max(variantes)[1], rules)
-        rows += [(n, nombre, tipo, clave, len(variantes)) for _, n in variantes]
+        rows += [(n, nombre, tipo, clave, len(variantes), certificados.get(clave))
+                 for _, n in variantes]
     con.execute(
         "CREATE OR REPLACE TABLE dim_aerolinea "
         "(aerolinea VARCHAR PRIMARY KEY, aerolinea_nombre VARCHAR, aerolinea_tipo VARCHAR, "
-        "aerolinea_clave VARCHAR, variantes_nombre INT)"
+        "aerolinea_clave VARCHAR, variantes_nombre INT, certificado_anac VARCHAR)"
     )
     if rows:
-        con.executemany("INSERT INTO dim_aerolinea VALUES (?, ?, ?, ?, ?)", rows)
+        con.executemany("INSERT INTO dim_aerolinea VALUES (?, ?, ?, ?, ?, ?)", rows)
 
 
 def build_dim_fecha(con: duckdb.DuckDBPyConnection, desde: date, hasta: date) -> None:

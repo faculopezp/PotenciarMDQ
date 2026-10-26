@@ -184,6 +184,42 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
             WHERE c.c_anac = 1 AND c.c_mun = 1 AND c.familia_previa IS NOT NULL
             GROUP BY ALL ORDER BY 3 DESC LIMIT 12""")]
 
+    # ── D bis: diagnóstico del cruce ANAC 2019 versión anterior ↔ vigente ──────────────────
+    if _existe(con, "ref_anac_previa"):
+        out += ["### ANAC 2019 versión anterior ↔ vigente: diagnóstico de claves", "",
+                "Para cada registro de la versión anterior, el de la vigente más cercano en hora "
+                "(mismo día, aeropuerto, movimiento y origen/destino): diferencia en minutos y si "
+                "coinciden los pasajeros.", "", _table(con, """
+            WITH v AS (
+              SELECT movimiento_id, fecha, hora_utc, aeropuerto_original AS aeropuerto,
+                     tipo_movimiento, origen_destino, pasajeros
+              FROM fct_movimiento WHERE anio = 2019
+                AND aeropuerto_original IN (SELECT DISTINCT aeropuerto FROM ref_anac_previa)
+            ),
+            k AS (
+              SELECT p.*, round(date_diff('minute', p.fecha + p.hora_utc, v.fecha + v.hora_utc))
+                       AS dif_min, v.pasajeros AS pax_vigente
+              FROM ref_anac_previa p JOIN v
+                ON v.fecha BETWEEN p.fecha - 1 AND p.fecha + 1 AND v.aeropuerto = p.aeropuerto
+               AND v.tipo_movimiento = p.tipo_movimiento AND v.origen_destino = p.origen_destino
+              QUALIFY row_number() OVER (PARTITION BY p.fecha, p.hora_utc, p.tipo_movimiento,
+                                         p.origen_destino, p.aeronave, p.pasajeros
+                                         ORDER BY abs(dif_min)) = 1
+            )
+            SELECT CASE WHEN dif_min = 0 THEN '0' WHEN abs(dif_min) <= 5 THEN '±5'
+                        WHEN dif_min BETWEEN 175 AND 185 THEN '+180'
+                        WHEN dif_min BETWEEN -185 AND -175 THEN '-180' ELSE 'otro' END AS dif_min,
+                   count(*) AS registros, count(*) FILTER (pasajeros = pax_vigente) AS pax_iguales,
+                   count(aeronave) AS con_aeronave
+            FROM k GROUP BY 1 ORDER BY 2 DESC"""),
+                "Registros de la versión anterior sin ningún candidato el mismo día: ", "",
+                _table(con, """
+            SELECT count(*) AS registros_version_anterior,
+                   (SELECT count(*) FROM fct_movimiento WHERE anio = 2019
+                      AND aeropuerto_original IN (SELECT DISTINCT aeropuerto FROM ref_anac_previa))
+                     AS registros_vigente
+            FROM ref_anac_previa""")]
+
     # ── E: el otro extremo sin matrícula, validado contra vuelos que traen el dato ──────────
     # Se toman vuelos del foco con operador y avión informados, se "esconde" uno de los dos y se
     # busca el otro extremo con las mismas reglas (sql/bd/25, punto 5; acá solo se exige candidato
@@ -316,6 +352,43 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
         , c AS (SELECT inferida, real, count(*) AS vuelos FROM v GROUP BY inferida, real)
         SELECT *, round(100.0 * vuelos / sum(vuelos) OVER (PARTITION BY inferida), 1) AS pct
         FROM c ORDER BY inferida, vuelos DESC""")]
+
+    # ── 5. Yvera (base agregada de frecuencias): validación y asientos por vuelo ──────────
+    if _existe(con, "ref_yvera_frecuencias"):
+        out += ["## 5. Yvera, base agregada de frecuencias (validación y asientos)", "",
+                "Mismo origen (SIAC/ANAC): coincidir prueba consistencia de procesamiento, no "
+                "exactitud de la carga. Vuelos y pasajeros por año contra los movimientos "
+                "regulares y no regulares del foco:", "", _table(con, """
+            WITH y AS (
+              SELECT year(fecha) AS anio, sum(vuelos) AS vuelos_yvera,
+                     sum(pasajeros) AS pasajeros_yvera, sum(asientos) AS asientos_yvera
+              FROM ref_yvera_frecuencias GROUP BY 1
+            ),
+            f AS (
+              SELECT anio, count(*) AS movimientos_anac, sum(pasajeros) AS pasajeros_anac,
+                     sum(asientos_estimados) AS asientos_estimados
+              FROM fct_movimiento WHERE aeropuerto = getvariable('foco')
+                AND clase_vuelo IN ('regular', 'no_regular') GROUP BY 1
+            )
+            SELECT anio, vuelos_yvera, movimientos_anac, pasajeros_yvera, pasajeros_anac,
+                   asientos_yvera, asientos_estimados
+            FROM y FULL JOIN f USING (anio) ORDER BY anio"""),
+                "Asientos del vuelo exacto (Yvera, 1 a 1) contra la cabina publicada / p95 que "
+                "se usaría sin Yvera:", "", _table(con, """
+            SELECT f.aerolinea_nombre, f.aeronave_modelo, count(*) AS vuelos,
+                   round(avg(r.asientos), 1) AS asientos_yvera,
+                   round(avg(coalesce(cb.asientos, cg.asientos)), 1) AS cabina_config,
+                   count(*) FILTER (r.asientos = coalesce(cb.asientos, cg.asientos))
+                     AS coinciden_con_cabina
+            FROM fct_movimiento f
+            JOIN ref_asientos_vuelo r
+              ON r.fecha = f.fecha AND r.hora_utc = f.hora_utc
+             AND r.aeropuerto = f.aeropuerto_original AND r.tipo_movimiento = f.tipo_movimiento
+             AND r.origen_destino = f.origen_destino AND r.pasajeros = f.pasajeros
+            LEFT JOIN ref_cabina cb ON cb.operador IS NOT NULL AND cb.modelo = f.aeronave_modelo
+             AND regexp_matches(upper(strip_accents(f.aerolinea_nombre)), cb.operador)
+            LEFT JOIN ref_cabina cg ON cg.operador IS NULL AND cg.modelo = f.aeronave_modelo
+            GROUP BY ALL ORDER BY 3 DESC LIMIT 20""")]
 
     # ── Lo que no se puede recuperar con lo que hay ────────────────────────────────────────
     out += ["## 3. Sin cruce posible con las fuentes actuales", "", _table(con, """
