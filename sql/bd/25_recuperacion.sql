@@ -235,14 +235,14 @@ SELECT matricula, any_value(entidad) AS aerolinea, max(fecha_afectacion) AS desd
 FROM ref_afectacion
 GROUP BY matricula HAVING count(DISTINCT entidad) = 1;
 
--- 10. Aeronave por asientos del vuelo exacto (Yvera, punto 8) para los vuelos sin aeronave (sobre
---     todo 2020). Regla aprendida de los vuelos con aeronave informada: para cada operador y
---     cantidad de asientos, el modelo que vuela; vale solo si explica >= 98 % de al menos 20 vuelos.
---     Si solo la familia llega (ej. 170 asientos = 737-800 o MAX 8), se asigna la familia sin
---     variante. Validación en reports/qa/auditoria.md, sección 5.
+-- 10. Aeronave por asientos (Yvera, punto 8) para los vuelos sin aeronave (sobre todo 2020).
+--     Regla aprendida de los vuelos con aeronave informada: para cada operador (nombre normalizado,
+--     así Austral = Aerolíneas) y cantidad de asientos del vuelo, el modelo que vuela; vale solo si
+--     explica >= 98 % de al menos 20 vuelos. Si solo la familia llega (170 asientos = 737-800 o
+--     MAX 8), se asigna la familia sin variante. Validación en reports/qa/auditoria.md, sección 5.
 CREATE OR REPLACE TABLE ref_modelo_por_asientos AS
 WITH c AS (
-  SELECT coalesce(al.aerolinea_clave, r.aerolinea) AS clave, r.asientos, d.familia, d.modelo,
+  SELECT coalesce(al.aerolinea_nombre, r.aerolinea) AS clave, r.asientos, d.familia, d.modelo,
          r.aeronave
   FROM ref_asientos_vuelo r
   JOIN dim_aeronave d ON d.aeronave = r.aeronave
@@ -275,11 +275,88 @@ SELECT f.clave, f.asientos, 'familia', f.familia, g.aeronave, f.n, f.total
 FROM f JOIN generico g USING (familia)
 WHERE NOT EXISTS (SELECT 1 FROM m WHERE m.clave = f.clave AND m.asientos = f.asientos);
 
+-- 10a. Un solo vuelo ese día y ruta: los asientos del vuelo exacto (ref_asientos_vuelo).
 CREATE OR REPLACE TABLE ref_aeronave_por_asientos AS
 SELECT r.fecha, r.hora_utc, r.aeropuerto, r.tipo_movimiento, r.origen_destino, r.aerolinea,
-       r.matricula, r.pasajeros, p.aeronave, p.nivel
+       r.matricula, r.pasajeros, p.aeronave, p.nivel, 'vuelo' AS metodo
 FROM ref_asientos_vuelo r
 LEFT JOIN dim_aerolinea al ON al.aerolinea = r.aerolinea
 JOIN ref_modelo_por_asientos p
-  ON p.clave = coalesce(al.aerolinea_clave, r.aerolinea) AND p.asientos = r.asientos
+  ON p.clave = coalesce(al.aerolinea_nombre, r.aerolinea) AND p.asientos = r.asientos
 WHERE r.aeronave IS NULL;
+
+-- 10b. Varios vuelos (2 a 8) el mismo día, ruta, sentido y operador: Yvera da el total de asientos.
+--      Se buscan todas las combinaciones de cabinas del operador (reglas de 10) que suman ese total
+--      con esa cantidad de vuelos; si la única es "todos el mismo avión" (ej. 3 vuelos, 288 asientos
+--      = 3 E190) y ANAC registra exactamente esa cantidad de movimientos sin otra aeronave, todos
+--      toman ese avión.
+INSERT INTO ref_aeronave_por_asientos
+WITH RECURSIVE
+cfg AS (
+  SELECT clave AS nombre, asientos AS s, aeronave, nivel,
+         row_number() OVER (PARTITION BY clave ORDER BY asientos) AS i
+  FROM ref_modelo_por_asientos
+),
+y AS (
+  SELECT row_number() OVER () AS id_y, yv.fecha, yv.origen_oaci, yv.destino_oaci, yv.vuelos,
+         yv.asientos, coalesce(al.aerolinea_nombre, yv.aerolinea) AS nombre
+  FROM ref_yvera_frecuencias yv LEFT JOIN dim_aerolinea al ON al.aerolinea = yv.aerolinea
+  WHERE yv.vuelos BETWEEN 2 AND 8 AND yv.asientos > 0
+),
+comb(id_y, k, n, suma, ultimo, primero, homogeneo) AS (
+  SELECT y.id_y, y.vuelos, 1, c.s, c.i, c.s, true
+  FROM y JOIN cfg c ON c.nombre = y.nombre
+  UNION ALL
+  SELECT comb.id_y, comb.k, comb.n + 1, comb.suma + c.s, c.i, comb.primero,
+         comb.homogeneo AND c.s = comb.primero
+  FROM comb JOIN y ON y.id_y = comb.id_y
+  JOIN cfg c ON c.nombre = y.nombre AND c.i >= comb.ultimo
+  WHERE comb.n < comb.k AND comb.suma + c.s <= y.asientos
+),
+unica AS (
+  SELECT comb.id_y, any_value(comb.primero) AS s
+  FROM comb JOIN y USING (id_y)
+  WHERE comb.n = comb.k AND comb.suma = y.asientos
+  GROUP BY comb.id_y HAVING count(*) = 1 AND bool_and(comb.homogeneo)
+),
+dia AS (
+  SELECT y.*, u.s, c.aeronave, c.nivel
+  FROM y JOIN unica u USING (id_y) JOIN cfg c ON c.nombre = y.nombre AND c.s = u.s
+),
+ap AS (
+  SELECT codigo, any_value(oaci) AS oaci FROM dim_aeropuerto WHERE oaci IS NOT NULL GROUP BY codigo
+),
+mov AS (
+  SELECT st.fecha, st.hora_utc, st.aeropuerto, st.tipo_movimiento, st.origen_destino,
+         st.aerolinea, st.matricula, st.pasajeros, st.aeronave AS aeronave_anac,
+         coalesce(al.aerolinea_nombre, st.aerolinea) AS nombre,
+         CASE WHEN st.tipo_movimiento = 'despegue' THEN a1.oaci ELSE a2.oaci END AS origen_oaci,
+         CASE WHEN st.tipo_movimiento = 'despegue' THEN a2.oaci ELSE a1.oaci END AS destino_oaci
+  FROM stg_movimiento st
+  JOIN ap a1 ON a1.codigo = st.aeropuerto
+  JOIN ap a2 ON a2.codigo = st.origen_destino
+  LEFT JOIN dim_aerolinea al ON al.aerolinea = st.aerolinea
+  WHERE st.aeropuerto = getvariable('foco') AND st.clase_vuelo IN ('regular', 'no_regular')
+),
+k AS (
+  SELECT m.*, d.aeronave, d.nivel, d.vuelos, d.id_y,
+         count(*) OVER (PARTITION BY d.id_y) AS movimientos_anac,
+         count(*) FILTER (WHERE m.aeronave_anac IS NOT NULL) OVER (PARTITION BY d.id_y) AS con_aeronave
+  FROM mov m JOIN dia d
+    ON d.fecha = m.fecha AND d.origen_oaci = m.origen_oaci AND d.destino_oaci = m.destino_oaci
+   AND d.nombre = m.nombre
+)
+SELECT fecha, hora_utc, aeropuerto, tipo_movimiento, origen_destino, aerolinea, matricula,
+       pasajeros, aeronave, nivel, 'dia'
+FROM k
+WHERE movimientos_anac = vuelos AND con_aeronave = 0
+  AND NOT EXISTS (SELECT 1 FROM ref_aeronave_por_asientos r
+                  WHERE r.fecha = k.fecha AND r.hora_utc = k.hora_utc
+                    AND r.tipo_movimiento = k.tipo_movimiento AND r.origen_destino = k.origen_destino
+                    AND r.pasajeros = k.pasajeros);
+
+-- Un movimiento con más de una aeronave candidata (dos filas de Yvera el mismo día) queda afuera.
+CREATE OR REPLACE TABLE ref_aeronave_por_asientos AS
+SELECT * FROM ref_aeronave_por_asientos
+QUALIFY count(*) OVER (PARTITION BY fecha, hora_utc, aeropuerto, tipo_movimiento, origen_destino,
+                       aerolinea, matricula, pasajeros) = 1;

@@ -425,10 +425,15 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                    total AS vuelos_con_esos_asientos, round(100.0 * n / total, 1) AS pct
             FROM ref_modelo_por_asientos ORDER BY total DESC LIMIT 20"""),
                 "Aplicadas en el foco (vuelos sin aeronave):", "", _table(con, """
-            SELECT anio, aeronave_familia, aeronave_modelo, count(*) AS movimientos
-            FROM fct_movimiento WHERE aeronave_fuente = 'asientos_yvera'
-              AND aeropuerto = getvariable('foco')
-            GROUP BY ALL ORDER BY anio, movimientos DESC""")]
+            SELECT f.anio, r.metodo, f.aeronave_familia, f.aeronave_modelo, count(*) AS movimientos
+            FROM fct_movimiento f
+            JOIN ref_aeronave_por_asientos r
+              ON r.fecha = f.fecha AND r.hora_utc = f.hora_utc
+             AND r.tipo_movimiento = f.tipo_movimiento AND r.origen_destino = f.origen_destino
+             AND r.pasajeros = f.pasajeros AND r.aeropuerto = f.aeropuerto_original
+            WHERE f.aeronave_fuente = 'asientos_yvera'
+              AND f.aeropuerto = getvariable('foco')
+            GROUP BY ALL ORDER BY 1, movimientos DESC""")]
 
     # ── Lo que no se puede recuperar con lo que hay ────────────────────────────────────────
     out += ["## 3. Sin cruce posible con las fuentes actuales", "", _table(con, """

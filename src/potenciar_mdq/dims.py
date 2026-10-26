@@ -169,6 +169,9 @@ def build_dim_aerolinea(con: duckdb.DuckDBPyConnection) -> None:
              if _existe(con, "mun_vuelos_hist") else "")
     if _existe(con, "ref_anac_previa"):
         extra += " UNION ALL SELECT aerolinea FROM ref_anac_previa WHERE aerolinea IS NOT NULL"
+    if _existe(con, "ref_yvera_frecuencias"):
+        extra += (" UNION ALL SELECT aerolinea FROM ref_yvera_frecuencias"
+                  " WHERE aerolinea IS NOT NULL")
     conteo = con.execute(
         "SELECT aerolinea, count(*) FROM (SELECT aerolinea FROM stg_movimiento "
         f"WHERE aerolinea IS NOT NULL{extra}) GROUP BY 1"
