@@ -40,7 +40,7 @@ def standardize() -> None:
     typer.echo(anac_movimientos.build())
     for step in (generic.build_yvera, generic.build_dim_aeropuerto, generic.build_anac_aeropuertos,
                  generic.build_opensky, generic.build_madhel, generic.build_tar1090,
-                 generic.build_clima,
+                 generic.build_clima, generic.build_terrestre,
                  municipal.build):
         try:
             typer.echo(step())
@@ -63,6 +63,10 @@ def qa() -> None:
         typer.echo(auditoria.run())
     except Exception as exc:  # noqa: BLE001 - la auditoría informa, no corta el pipeline
         typer.echo(f"skip auditoria: {type(exc).__name__}: {exc}")
+    try:
+        typer.echo(auditoria.run_omnibus())
+    except Exception as exc:  # noqa: BLE001
+        typer.echo(f"skip auditoria micros: {type(exc).__name__}: {exc}")
 
 
 @app.command()

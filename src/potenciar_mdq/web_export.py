@@ -46,6 +46,10 @@ MARTS_WEB = {
     "mart_mdq_findes_largos": "mdq_findes_largos",
     "mart_mdq_historia_segmentos": "mdq_historia_segmentos",
     "mart_mdq_cobertura": "mdq_cobertura",
+    "mart_bus_anual": "bus_anual",
+    "mart_bus_rutas": "bus_rutas",
+    "mart_bus_mensual": "bus_mensual",
+    "mart_bus_origen_provincia": "bus_origen_provincia",
 }
 COLUMNAR = {"mart_mdq_explorador": "mdq_explorador"}  # tablas grandes: {col: [valores]}
 

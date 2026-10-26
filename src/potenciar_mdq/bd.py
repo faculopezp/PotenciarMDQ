@@ -30,7 +30,28 @@ TABLAS = [
     "dim_clima",
     "fct_municipal_mensual",
     "fct_mdq_vuelos_hist",
+    "fct_bus_ruta_anual",
+    "fct_bus_turismo",
+    "fct_bus_nacional_diario",
+    "dim_bus_localidad",
 ]
+
+# Micros (Yvera "Conectividad terrestre interurbana"): recurso -> columnas, para crear la tabla
+# vacía si falta (sql/bd/80_omnibus.sql corre igual).
+BUS_STG = {
+    "magnitudes_por_ruta": "indice_tiempo INT, par_origen_destino VARCHAR, viajes INT, "
+                           "asientos INT, pasajeros INT",
+    "magnitudes_por_ruta_dut": "indice_tiempo INT, par_origen_destino VARCHAR, viajes INT, "
+                               "asientos INT, pasajeros INT",
+    "viajes_asientos_pasajeros": "indice_tiempo DATE, viajes INT, asientos INT, pasajeros INT",
+    "viajes_asientos_pasajeros_dut": "indice_tiempo DATE, viajes INT, asientos INT, "
+                                     "pasajeros INT",
+    "base_microdatos_dut": "indice_tiempo DATE, localidad_origen VARCHAR, "
+                           "provincia_origen VARCHAR, localidad_destino VARCHAR, "
+                           "provincia_destino VARCHAR, "
+                           "ruta_clasificacion VARCHAR, clase_modalidad VARCHAR, asientos INT, "
+                           "pasajeros INT",
+}
 
 OURAIRPORTS_COLS = (
     "ident VARCHAR, type VARCHAR, name VARCHAR, latitude_deg DOUBLE, longitude_deg DOUBLE, "
@@ -225,6 +246,15 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
     dims.build_dim_aeronave(con)
     dims.build_refs_recuperacion(con)
 
+    for nombre, cols in BUS_STG.items():
+        pq = processed / f"terrestre_{nombre}.parquet"
+        if pq.exists():
+            con.execute(f"CREATE TABLE stg_bus_{nombre} AS SELECT * FROM read_parquet(?)",
+                        [str(pq)])
+        else:
+            log.warning("Sin %s (Yvera terrestre): la sección de micros queda incompleta", pq.name)
+            con.execute(f"CREATE TABLE stg_bus_{nombre} ({cols})")
+
     for sql_file in sorted((SQL / "bd").glob("*.sql")):
         log.info("bd: %s", sql_file.name)
         con.execute(sql_file.read_text(encoding="utf-8"))
@@ -234,6 +264,7 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
     con.execute("DROP TABLE mun_vuelos_hist")
     con.execute("DROP TABLE ourairports")
     con.execute("DROP TABLE anac_aeropuertos")
+    con.execute("DROP TABLE stg_bus_base_microdatos_dut")  # ya está en fct_bus_turismo (foco)
 
     if export:
         export.mkdir(parents=True, exist_ok=True)

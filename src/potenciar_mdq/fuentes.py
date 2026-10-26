@@ -79,10 +79,11 @@ def _xlsx(path: Path, n: int = 12, n_foco: int = 60) -> list[str]:
     wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
     out = [f"### `{path.relative_to(RAW)}` (xlsx) — hojas: {', '.join(wb.sheetnames)}"]
     for ws in wb.worksheets:
-        filas = [["" if v is None else str(v) for v in fila] for fila in ws.iter_rows(values_only=True)]
+        filas = [["" if v is None else str(v) for v in fila]
+                 for fila in ws.iter_rows(values_only=True)]
         filas = [f for f in filas if any(f)]
         foco = [f for f in filas if any(k in " ".join(f).lower() for k in FOCO)]
-        out += [f"#### hoja `{ws.title}` — {len(filas)} filas con datos, {len(foco)} del foco", "```"]
+        out += [f"#### hoja `{ws.title}` — {len(filas)} filas, {len(foco)} del foco", "```"]
         out += [" | ".join(f).rstrip(" |") for f in filas[:n]]
         out += ["... (filas del foco)"] + [" | ".join(f).rstrip(" |") for f in foco[:n_foco]]
         out += ["```", ""]

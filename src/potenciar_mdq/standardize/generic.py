@@ -14,7 +14,7 @@ from pathlib import Path
 
 import duckdb
 
-from potenciar_mdq.settings import PROCESSED, RAW
+from potenciar_mdq.settings import INTERIM, PROCESSED, RAW
 from potenciar_mdq.standardize.anac_movimientos import _ident, _latest_per_resource, _q, ensure_utf8
 from potenciar_mdq.standardize.columns import slug
 
@@ -39,6 +39,32 @@ def build_yvera(raw_dir: Path = RAW / "yvera_conectividad") -> list[Path]:
         name = slug(p.stem.split("_", 1)[-1])  # quita el prefijo de fecha
         out.append(csv_to_parquet(p, PROCESSED / f"yvera_{name}.parquet"))
     return out
+
+
+def build_terrestre(raw_dir: Path = RAW / "yvera_terrestre", out: Path = PROCESSED) -> list[Path]:
+    """Yvera "Conectividad terrestre interurbana" (CNRT): cada CSV -> terrestre_<recurso>.parquet.
+
+    Los zip se abren y se convierte cada CSV de adentro (la base agregada de micros viene así).
+    """
+    import zipfile
+
+    files = [p for p in raw_dir.rglob("*") if p.suffix.lower() in (".csv", ".zip")]
+    escritos = []
+    for p in _latest_per_resource(files):
+        name = slug(p.stem.split("_", 1)[-1])
+        if p.suffix.lower() == ".csv":
+            escritos.append(csv_to_parquet(p, out / f"terrestre_{name}.parquet"))
+            continue
+        tmp = INTERIM / "terrestre" / name
+        with zipfile.ZipFile(p) as z:
+            miembros = [m for m in z.namelist() if m.lower().endswith(".csv")]
+            for m in miembros:
+                z.extract(m, tmp)
+                sub = name if len(miembros) == 1 else f"{name}_{slug(Path(m).stem)}"
+                escritos.append(csv_to_parquet(tmp / m, out / f"terrestre_{sub}.parquet"))
+    if not escritos:
+        raise FileNotFoundError(f"No hay CSV de conectividad terrestre en {raw_dir}")
+    return escritos
 
 
 def build_dim_aeropuerto(raw_dir: Path = RAW / "ourairports") -> Path:
