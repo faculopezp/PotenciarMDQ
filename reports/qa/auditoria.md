@@ -15,7 +15,7 @@ País:
 | 2023 | 557168 | 33.1 | 15.6 | 100.0 | 0.0 | 0.0 | 0.0 | 1.3 |
 | 2024 | 578592 | 36.5 | 17.0 | 100.0 | 0.0 | 0.0 | 0.0 | 1.6 |
 | 2025 | 597783 | 33.6 | 22.7 | 100.0 | 0.0 | 0.0 | 0.0 | 1.6 |
-| 2026 | 419199 | 31.9 | 26.2 | 0.0 | 0.0 | 0.0 | 0.0 | 1.6 |
+| 2026 | 419199 | 31.9 | 26.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.6 |
 
 Foco (MDQ):
 
@@ -28,7 +28,7 @@ Foco (MDQ):
 | 2023 | 7571 | 47.2 | 19.2 | 100.0 | 0.0 | 0.0 | 0.0 | 0.4 |
 | 2024 | 7530 | 48.3 | 25.2 | 100.0 | 0.0 | 0.0 | 0.0 | 0.3 |
 | 2025 | 6825 | 48.4 | 18.4 | 100.0 | 0.0 | 0.0 | 0.0 | 0.4 |
-| 2026 | 4455 | 47.3 | 6.7 | 0.0 | 0.0 | 0.0 | 0.0 | 2.2 |
+| 2026 | 4455 | 47.3 | 6.6 | 0.0 | 0.0 | 0.0 | 0.0 | 2.2 |
 
 Foco 2021+, por segmento:
 
@@ -36,7 +36,7 @@ Foco 2021+, por segmento:
 |---|---|---|---|---|
 | linea_regular | 15665 | 0.3 | 1.7 | 0.0 |
 | privado | 6587 | 92.0 | 7.4 | 0.0 |
-| oficial | 6265 | 85.7 | 82.7 | 0.0 |
+| oficial | 6265 | 85.7 | 82.6 | 0.0 |
 | taxi_aereo | 5055 | 88.4 | 6.3 | 0.0 |
 | instruccion | 2659 | 89.7 | 0.2 | 0.0 |
 | charter_linea | 475 | 18.5 | 49.9 | 0.0 |
@@ -73,22 +73,22 @@ Qué se recupera (foco, top 12):
 | SAETA | 14 |
 | CEAP - AERO CHANNEL S.R.L- CIAC TIPO II | 13 |
 | RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
-| TWR SRL | 10 |
 | PRESIDENCIA DE LA NACION | 10 |
+| TWR SRL | 10 |
 | FLIGHT CENTER- TWR S.R.L-CIAC TIPO III | 9 |
 
 ## 2B. Aeronave por matrícula
 
 | ambito | faltan_con_matricula | recuperables_unanime | matricula_con_algun_dato |
 |---|---|---|---|
-| MDQ | 299 | 0 | 0 |
-| resto del país | 109676 | 0 | 0 |
+| MDQ | 295 | 0 | 0 |
+| resto del país | 108681 | 0 | 0 |
 
 Foco, por segmento:
 
 | segmento | faltan_con_matricula | recuperables_unanime |
 |---|---|---|
-| oficial | 215 | 0 |
+| oficial | 211 | 0 |
 | privado | 41 | 0 |
 | taxi_aereo | 21 | 0 |
 | charter_linea | 12 | 0 |
@@ -110,14 +110,36 @@ Aeronave faltante con matrícula presente en OpenSky (registro externo):
 
 | faltan_con_matricula | con_tipo_en_opensky | en_foco |
 |---|---|---|
-| 109975 | 0 | 0 |
+| 108976 | 0 | 0 |
+
+Tipo de aeronave en tar1090-db (base comunitaria de transpondedores) contra el tipo que informa ANAC para la misma matrícula (código OACI):
+
+| matriculas_comparables | mismo_tipo | pct_tipo | misma_familia | tipo_desconocido_en_la_base |
+|---|---|---|---|---|
+| 546 | 507 | 92.9 | 518 | 26 |
+
+(Las diferencias de tipo son variantes de la misma familia: CJ1/CJ M2, Learjet 45/40/75, 182/182RG; tar1090-db solo se aplica cuando su tipo ya existe en la base.)
+
+Completado por tar1090-db (movimientos sin aeronave en ANAC):
+
+| ambito | aeronave_modelo | movimientos |
+|---|---|---|
+| MDQ | Bell 407 | 2 |
+| MDQ | Learjet 60 | 2 |
+| resto del país | Cessna 182 | 307 |
+| resto del país | Bell 407 | 297 |
+| resto del país | Cessna 208B Grand Caravan | 206 |
+| resto del país | Learjet 60 | 153 |
+| resto del país | Cessna Citation Bravo (550B) | 28 |
+| resto del país | De Havilland Canada DHC-6 Twin Otter | 4 |
+| resto del país | Boeing 737-800 | 1 |
 
 ## 2C. El otro extremo del mismo vuelo (por matrícula, un solo candidato)
 
 | ambito | movimientos_con_par_unico | operador_recuperable | aeronave_recuperable | pasajeros_recuperables | aeronave_distinta_en_cada_extremo |
 |---|---|---|---|---|---|
 | MDQ | 2646 | 38 | 0 | 0 | 0 |
-| resto del país | 195792 | 1154 | 0 | 0 | 0 |
+| resto del país | 195792 | 1154 | 0 | 0 | 2 |
 
 ## 2D. Portal municipal 2015–2019 ↔ ANAC 2019 (foco)
 
@@ -185,12 +207,12 @@ Desacuerdos más frecuentes (operador ANAC ≠ empresa afectada):
 | DIGITAL AIR TAXI S.A. | FEELING AIR S.A. | 26 |
 | HANGAR UNO S.A- CIAC TIPO II | HANGAR UNO S.A. | 6 |
 | JUST FLIGHT S.A. "ROYAL CLASS" | PRIVATE AVIATION CONSULTING S.A. | 3 |
-| SERV. Y EMPRENDIMIENTOS AERONÁUTICOS S.A | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
 | SEA CO AVIATION | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
 | SERV AEREOS SUDAMERICANOS S.A. | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
 | CICA | AEROTEC ARGENTINA S.A. | 2 |
-| SAPSA | SERV. AER. PATAGONICOS S.A. | 1 |
-| BAIRES FLY SA | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 1 |
+| SERV. Y EMPRENDIMIENTOS AERONÁUTICOS S.A | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
+| FLEXFLY S.A.S | CIELOS DE AMERICA | 1 |
+| POLAR AEREA- JORGE POTENZA-CIAC TIPO III | AEROTEC ARGENTINA S.A. | 1 |
 
 ## 2F. Aeronaves del Estado: operador por prefijo de la identificación (2026)
 
@@ -225,10 +247,10 @@ Modelo por serie con identificación pública (config/estatales.yaml → series)
 
 ## 4. Aplicado en la base (fct_movimiento)
 
-| ambito | operador_por_matricula | operador_por_otro_extremo | operador_por_prefijo_estatal | operador_otro_extremo_sin_matricula | operador_anac_version_anterior | operador_afectacion_anac | aeronave_anac_version_anterior | aeronave_del_municipio | aeronave_por_serie_estatal | aeronave_otro_extremo_sin_matricula | aeronave_por_asientos_yvera |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| MDQ | 383 | 22 | 319 | 643 | 0 | 185 | 7079 | 9 | 516 | 6 | 414 |
-| resto del país | 17074 | 456 | 6387 | 11571 | 0 | 14571 | 0 | 0 | 2286 | 245 | 0 |
+| ambito | operador_por_matricula | operador_por_otro_extremo | operador_por_prefijo_estatal | operador_otro_extremo_sin_matricula | operador_anac_version_anterior | operador_afectacion_anac | aeronave_anac_version_anterior | aeronave_del_municipio | aeronave_por_serie_estatal | aeronave_otro_extremo_sin_matricula | aeronave_por_asientos_yvera | aeronave_por_tar1090 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| MDQ | 383 | 22 | 319 | 643 | 0 | 185 | 7079 | 9 | 516 | 6 | 414 | 4 |
+| resto del país | 17074 | 456 | 6387 | 11571 | 0 | 14571 | 0 | 0 | 2286 | 244 | 0 | 996 |
 
 Privado en jet o turbohélice ejecutivo analizado como taxi aéreo. Evidencia en el foco: cuántos tienen operador o matrícula que también vuela como no regular.
 
@@ -259,8 +281,8 @@ Asientos: cabina publicada (config/cabinas.yaml) contra el p95 de pasajeros obse
 | Flyest S.A. Líneas Aéreas | Bombardier CRJ200 | 50.0 |  | 11 | 0 |
 | Norwegian Argentina | Boeing 737-800 | 189.0 |  | 7 | 0 |
 | JetSMART | Embraer ERJ-145 | 50.0 |  | 3 | 3 |
-| Andes Líneas Aéreas | Embraer ERJ-145 | 50.0 |  | 2 | 1 |
 | Aerolíneas Argentinas | Embraer ERJ-145 | 50.0 |  | 2 | 2 |
+| Andes Líneas Aéreas | Embraer ERJ-145 | 50.0 |  | 2 | 1 |
 | Aerovias De Mexico - Aeromexico | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
 | Sky Airline | Embraer ERJ-145 | 50.0 |  | 1 | 1 |
 | Flying America | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
@@ -309,11 +331,11 @@ Asientos del vuelo exacto (Yvera, 1 a 1) contra la cabina publicada / p95 que se
 | LADE | Embraer ERJ-140 | 9 | 31.8 | 44.0 | 4 |
 | LADE | Boeing 737-700 | 5 | 99.0 |  | 0 |
 | Flyest S.A. Líneas Aéreas |  | 3 | 50.0 |  | 0 |
-| Aerolíneas Argentinas | Lockheed L-18 Lodestar | 2 | 89.5 |  | 0 |
 | Flyest S.A. Líneas Aéreas | Bombardier CRJ200 | 2 | 50.0 | 50.0 | 2 |
-| Sin dato | Embraer Phenom 100 | 1 | 33.0 |  | 0 |
-| Just Flight S.A. "Royal Class" | Cessna Citation CJ1/M2 (525) | 1 | 30.0 |  | 0 |
+| Aerolíneas Argentinas | Lockheed L-18 Lodestar | 2 | 89.5 |  | 0 |
 | Aerolíneas Argentinas | Cessna 150 | 1 | 92.0 |  | 0 |
+| Just Flight S.A. "Royal Class" | Cessna Citation CJ1/M2 (525) | 1 | 30.0 |  | 0 |
+| Sin dato | Embraer Phenom 100 | 1 | 33.0 |  | 0 |
 
 Aeronave por asientos: reglas aprendidas (operador + asientos → modelo o familia, >= 98 % de al menos 20 vuelos con aeronave informada):
 

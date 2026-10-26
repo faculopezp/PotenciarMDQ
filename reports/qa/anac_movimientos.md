@@ -11,7 +11,7 @@
 | 20261024_202312-informe-ministerio-actualizado-dic.csv | 557152 | 0.0 | 0.0 | 0.0 | 15.62 | 0.0 | 0.0 | 2022-12-31 | 2023-12-31 |
 | 20261024_202412-informe-ministerio-actualizado-dic-final.csv | 578602 | 0.0 | 0.0 | 0.0 | 17.0 | 0.0 | 0.0 | 2023-12-31 | 2024-12-31 |
 | 20261024_202512-informe-ministerio-actualizado-dic-final.csv | 597784 | 0.0 | 0.0 | 0.0 | 22.72 | 0.0 | 0.0 | 2024-12-31 | 2025-12-31 |
-| 20261024_202609-informe-ministerio-vf-matricula.csv | 419262 | 0.0 | 0.0 | 0.0 | 26.23 | 100.0 | 21.99 | 2025-12-31 | 2026-09-30 |
+| 20261024_202609-informe-ministerio-vf-matricula.csv | 419262 | 0.0 | 0.0 | 0.0 | 25.99 | 100.0 | 21.99 | 2025-12-31 | 2026-09-30 |
 
 ## Valores fuera de vocabulario: `clasificacion_vuelo`
 
@@ -165,45 +165,45 @@
 
 | tramos | despegues_cabotaje | pct_emparejado |
 |---|---|---|
-| 775410 | 915317 | 84.7 |
+| 775409 | 915317 | 84.7 |
 
 ## Rotaciones: método por matrícula vs por modelo
 
 | aeropuerto | metodo_emparejamiento | tipo_rotacion | n | mediana_min |
 |---|---|---|---|---|
-| BAR | matricula | escala_larga | 196 | 164.5 |
+| BAR | matricula | escala_larga | 198 | 163.5 |
 | BAR | matricula | pernocte | 94 | 1040.5 |
-| BAR | matricula | rotacion | 4185 | 68.0 |
+| BAR | matricula | rotacion | 4192 | 68.0 |
 | BAR | modelo | escala_larga | 834 | 148.0 |
 | BAR | modelo | pernocte | 369 | 926.0 |
 | BAR | modelo | rotacion | 31325 | 64.0 |
-| BCA | matricula | escala_larga | 74 | 207.5 |
-| BCA | matricula | pernocte | 28 | 1139.0 |
-| BCA | matricula | rotacion | 1183 | 48.0 |
+| BCA | matricula | escala_larga | 75 | 213.0 |
+| BCA | matricula | pernocte | 31 | 1130.0 |
+| BCA | matricula | rotacion | 1200 | 48.0 |
 | BCA | modelo | escala_larga | 130 | 186.5 |
 | BCA | modelo | pernocte | 281 | 605.0 |
 | BCA | modelo | rotacion | 5117 | 52.0 |
-| DOZ | matricula | escala_larga | 138 | 200.0 |
-| DOZ | matricula | pernocte | 323 | 633.0 |
-| DOZ | matricula | rotacion | 3936 | 61.0 |
+| DOZ | matricula | escala_larga | 148 | 200.0 |
+| DOZ | matricula | pernocte | 338 | 638.5 |
+| DOZ | matricula | rotacion | 3965 | 61.0 |
 | DOZ | modelo | escala_larga | 558 | 190.0 |
 | DOZ | modelo | pernocte | 921 | 613.0 |
 | DOZ | modelo | rotacion | 26719 | 57.0 |
-| MDP | matricula | escala_larga | 281 | 234.0 |
+| MDP | matricula | escala_larga | 282 | 234.0 |
 | MDP | matricula | pernocte | 127 | 1148.0 |
-| MDP | matricula | rotacion | 1457 | 51.0 |
+| MDP | matricula | rotacion | 1458 | 51.0 |
 | MDP | modelo | escala_larga | 480 | 217.5 |
 | MDP | modelo | pernocte | 508 | 552.0 |
 | MDP | modelo | rotacion | 9371 | 50.0 |
-| NEU | matricula | escala_larga | 296 | 210.0 |
-| NEU | matricula | pernocte | 774 | 992.0 |
-| NEU | matricula | rotacion | 3696 | 53.0 |
+| NEU | matricula | escala_larga | 298 | 211.0 |
+| NEU | matricula | pernocte | 780 | 995.0 |
+| NEU | matricula | rotacion | 3713 | 53.0 |
 | NEU | modelo | escala_larga | 515 | 247.0 |
 | NEU | modelo | pernocte | 1250 | 1025.5 |
 | NEU | modelo | rotacion | 18578 | 53.0 |
 | SAL | matricula | escala_larga | 242 | 161.5 |
 | SAL | matricula | pernocte | 1125 | 1118.0 |
-| SAL | matricula | rotacion | 4119 | 56.0 |
+| SAL | matricula | rotacion | 4120 | 56.0 |
 | SAL | modelo | escala_larga | 546 | 149.0 |
 | SAL | modelo | pernocte | 2667 | 1103.0 |
 | SAL | modelo | rotacion | 22396 | 57.0 |
@@ -261,7 +261,7 @@
 | 2025 | charter_linea | 103 | 66 | 0 | 15 | 51 |
 | 2025 | trabajo_aereo | 2 | 0 | 0 | 0 | 0 |
 | 2026 | linea_regular | 1942 | 10 | 0 | 1 | 9 |
-| 2026 | oficial | 794 | 215 | 0 | 7 | 208 |
+| 2026 | oficial | 794 | 211 | 0 | 7 | 204 |
 | 2026 | privado | 792 | 41 | 0 | 0 | 41 |
 | 2026 | taxi_aereo | 540 | 21 | 0 | 0 | 21 |
 | 2026 | instruccion | 309 | 0 | 0 | 0 | 0 |

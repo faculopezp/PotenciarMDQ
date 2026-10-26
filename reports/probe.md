@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-26 02:48 UTC
+# Probe de fuentes — 2026-10-26 04:24 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -119,6 +119,9 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 
 ## `opensky_aeronaves` (static_file)
 - HTTP 200, content-type `text/csv; charset=utf-8`
+
+## `tar1090_db` (static_file)
+- HTTP 200, content-type `application/octet-stream`
 
 ## `madhel` (static_file)
 - HTTP 200, content-type `text/html`
