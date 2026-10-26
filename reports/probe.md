@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-26 04:24 UTC
+# Probe de fuentes — 2026-10-26 05:40 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -205,6 +205,146 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 
 ## `anac_movimientos_espejo` (static_files)
 - 4/4 URLs responden 200
+
+## `yvera_terrestre` (ckan_package)
+- OK `https://datos.yvera.gob.ar` dataset `conectividad-terrestre-interurbana`: 10 recursos
+  - `csv` Viajes, Asientos y Pasajeros diarios — `76847ea4-5e3b-4ae4-82d7-b85f87362577` — mod 2024-12-05T14:12:17.748123
+    > ﻿indice_tiempo,viajes,asientos,pasajeros
+    > 2019-01-01,489,22916,18781
+    > 2019-01-02,1602,72830,64622
+  - `csv` Rutas con más de cuatro frecuencias por mes — `0209bd91-dec6-41c6-9c39-192f1c9a35b1` — mod 2024-12-05T14:12:18.463036
+    > ﻿indice_tiempo,total_rutas
+    > 2019-01-01,1190
+    > 2019-02-01,1242
+  - `csv` Viajes, Asientos y Pasajeros anuales por ruta con al menos un viaje semanal — `0e8a61b7-8127-41a4-8e83-a37f50e24d1f` — mod 2024-12-05T14:12:19.082226
+    > ﻿indice_tiempo,par_origen_destino,viajes,asientos,pasajeros
+    > 2019,9 De Julio-Ciudad Autónoma De Buenos Aires,400,10900,8347
+    > 2019,Aguas Blancas-La Plata,56,3171,2364
+  - `csv` Base agregada de viajes interurbanos de micros de media y larga distancia — `7681f929-c189-4506-ae76-c21ec31425f4` — mod 2024-12-05T14:12:21.125852
+    > (archivo zip/xlsx)
+  - `pdf` Ficha Técnica: Conectividad Terrestre Interurbana — `a5b850c6-8865-4945-848e-44e8fc43388c` — mod 2023-11-28T16:47:03.420954
+  - `csv` Novedades — `572d9fba-0af0-4081-ba92-7fbdd7ebd3c0` — mod 2024-01-17T19:34:10.218407
+    > Fecha,Dataset,Recurso,Comentarios
+    > "17/01/2024, Conectividad Terrestre Interurbana,Todos los recursos,""A partir de la mejora en el procesamiento de los datos, se produjeron ajustes en la lista de or�genes y destinos de la serie, as� como en la cantidad de viajes, pasajeros y asientos."""
+  - `csv` Viajes, Asientos y Pasajeros diarios - DUT — `a2f26d1a-d82d-40b7-8fe7-b92b998b0d09` — mod 2024-12-05T14:12:21.894104
+    > ﻿indice_tiempo,viajes,asientos,pasajeros
+    > 2019-04-01,169,5195,3469
+    > 2019-04-02,156,5499,4200
+  - `csv` Rutas con más de cuatro frecuencias por mes - DUT — `b24cadce-6eca-4fbb-b0c2-1d84e38712c8` — mod 2024-12-05T14:12:22.557901
+    > ﻿indice_tiempo,total_rutas
+    > 2019-04-01,608
+    > 2019-05-01,793
+  - `csv` Viajes, Asientos y Pasajeros anuales por ruta con al menos un viaje semanal - DUT — `988297c3-8d12-4006-b2c4-4fffffa41f3f` — mod 2024-12-05T14:12:23.054563
+    > ﻿indice_tiempo,par_origen_destino,viajes,asientos,pasajeros
+    > 2019,25 De Mayo - Ciudad Autonoma De Buenos Aires,492,9555,8866
+    > 2019,9 De Julio - Ciudad Autonoma De Buenos Aires,1055,27088,20136
+  - `csv` Base agregada de servicios de turismo nacional (DUT) — `54138dc7-0cda-449c-9bcd-222fa61359de` — mod 2024-12-05T14:12:32.969845
+    > ﻿indice_tiempo,localidad_origen,provincia_origen,pais_origen,localidad_destino,provincia_destino,pais_destino,par_origen_destino,ruta_clasificacion,clase_modalidad,asientos,pasajeros
+    > 2019-04-05,Merlo,Buenos Aires,Argentina,Ciudad Autonoma De Buenos Aires,Ciudad Autónoma De Buenos Aires,Argentina,Merlo - Ciudad Autonoma De Buenos Aires,Porteñas,Turismo Nacional,23,22
+    > 2019-04-06,San Nicolas,Buenos Aires,Argentina,Ciudad Autonoma De Buenos Aires,Ciudad Autónoma De Buenos Aires,Argentina,San Nicolas - Ciudad Autonoma De Buenos Aires,Porteñas,Turismo Nacional,19,18
+
+## `cnrt_ferroviario` (html_links)
+- 1 archivos encontrados
+  - [Pasajeros Datos actualizados a 2026](https://www.argentina.gob.ar/sites/default/files/pax_ldregionales_tur_sep_2026.xlsx)
+
+## `yvera_busqueda` (ckan_search)
+- búsqueda `evyth`: 2 datasets
+  - `encuesta-viajes-turismo-hogares-evyth` — Encuesta de Viajes y Turismo de los Hogares (EVyTH)
+    - `csv` Turistas residentes por región de destino del viaje — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/b8f0f46d-eb2f-4d68-a182-e66778bbf89a/download/tur_int_turistas_residentes_destino_serie.csv
+    - `csv` Turistas residentes por región de residencia — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/678a669c-9fd0-4e46-a519-32d8acdf3b81/download/tur_int_turistas_residentes_origen_serie.csv
+    - `csv` Turistas residentes por motivo principal del viaje — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/54779849-690a-49da-a7c7-8d2f4e70d83f/download/tur_int_turistas_residentes_motivo_serie.csv
+    - `csv` Turistas residentes por tipo de alojamiento principal del viaje — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/eab20d9c-137f-4a56-8140-cb035848c057/download/tur_int_turistas_residentes_tipo_alojamiento_serie.csv
+    - `csv` Turistas residentes por edad — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/abdacfcd-4a6c-4283-9abb-c1352def52e1/download/tur_int_turistas_residentes_edad_serie.csv
+    - `csv` Turistas residentes por sexo — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/f5e38aa3-e038-4cf1-89f8-973d03e20fd7/download/tur_int_turistas_residentes_sexo_serie.csv
+    - `csv` Turistas residentes por tipo de transporte utilizado — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/5895fdf2-7b50-484f-9305-b368b8744423/download/tur_int_turistas_residentes_tipo_transporte_serie.csv
+    - `csv` Turistas residentes por quintil de ingresos del hogar — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/1c9e99b6-e5aa-44e5-80cb-52c01d8295a5/download/tur_int_turistas_residentes_quintil_serie.csv
+  - `encuesta-de-viajes-y-turismo-de-los-hogares-evyth-microdatos` — Encuesta de Viajes y Turismo de los Hogares (EVyTH) - Microdatos
+    - `txt` Base de microdatos EVyTH (.txt) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/8c663c32-fee2-4a57-a918-7ab0f3819624/download/evyth_microdatos.txt
+    - `csv` Base de microdatos EVyTH — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/645e5505-68ee-4cfa-90f9-fcc9a4a34a85/download/evyth_microdatos.csv
+    - `xlsx` Base de microdatos EVyTH (.xlsx) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/5dd966f5-6868-4a43-b027-d2f5c1a18038/download/evyth_microdatos.xlsx
+    - `sav` Base de microdatos EVyTH (.sav) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/ea027b0d-669c-4b4a-ac8e-6a8863dd9740/download/evyth_microdatos.sav
+    - `dta` Base de microdatos EVyTH (.dta) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/3453fb66-74a3-4903-afa4-6737b8a98e0c/download/evyth_microdatos.zip
+    - `xlsx` Diccionario de registro de la EVyTH (.xlsx) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/0f3493e9-2a99-48ed-bb19-aa1cf87f1318/download/evyth_diccionario_registro.xlsx
+    - `txt` Diccionario de registro de la EVyTH (.txt) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/20e2c018-a2ee-4d97-9c67-a4303f669255/download/evyth_diccionario_registro.txt
+    - `pdf` Ficha Técnica: EVyTH — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/1b5d26f1-0ab9-4908-a44f-9ac5bd685f1b/download/evyth-data.pdf
+- búsqueda `viajes turismo hogares`: 7 datasets
+  - `encuesta-viajes-turismo-hogares-evyth` — Encuesta de Viajes y Turismo de los Hogares (EVyTH)
+    - `csv` Turistas residentes por región de destino del viaje — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/b8f0f46d-eb2f-4d68-a182-e66778bbf89a/download/tur_int_turistas_residentes_destino_serie.csv
+    - `csv` Turistas residentes por región de residencia — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/678a669c-9fd0-4e46-a519-32d8acdf3b81/download/tur_int_turistas_residentes_origen_serie.csv
+    - `csv` Turistas residentes por motivo principal del viaje — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/54779849-690a-49da-a7c7-8d2f4e70d83f/download/tur_int_turistas_residentes_motivo_serie.csv
+    - `csv` Turistas residentes por tipo de alojamiento principal del viaje — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/eab20d9c-137f-4a56-8140-cb035848c057/download/tur_int_turistas_residentes_tipo_alojamiento_serie.csv
+    - `csv` Turistas residentes por edad — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/abdacfcd-4a6c-4283-9abb-c1352def52e1/download/tur_int_turistas_residentes_edad_serie.csv
+    - `csv` Turistas residentes por sexo — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/f5e38aa3-e038-4cf1-89f8-973d03e20fd7/download/tur_int_turistas_residentes_sexo_serie.csv
+    - `csv` Turistas residentes por tipo de transporte utilizado — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/5895fdf2-7b50-484f-9305-b368b8744423/download/tur_int_turistas_residentes_tipo_transporte_serie.csv
+    - `csv` Turistas residentes por quintil de ingresos del hogar — https://datos.yvera.gob.ar/dataset/945e10f1-eee7-48a2-b0ef-8aff11df8814/resource/1c9e99b6-e5aa-44e5-80cb-52c01d8295a5/download/tur_int_turistas_residentes_quintil_serie.csv
+  - `encuesta-de-viajes-y-turismo-de-los-hogares-evyth-microdatos` — Encuesta de Viajes y Turismo de los Hogares (EVyTH) - Microdatos
+    - `txt` Base de microdatos EVyTH (.txt) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/8c663c32-fee2-4a57-a918-7ab0f3819624/download/evyth_microdatos.txt
+    - `csv` Base de microdatos EVyTH — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/645e5505-68ee-4cfa-90f9-fcc9a4a34a85/download/evyth_microdatos.csv
+    - `xlsx` Base de microdatos EVyTH (.xlsx) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/5dd966f5-6868-4a43-b027-d2f5c1a18038/download/evyth_microdatos.xlsx
+    - `sav` Base de microdatos EVyTH (.sav) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/ea027b0d-669c-4b4a-ac8e-6a8863dd9740/download/evyth_microdatos.sav
+    - `dta` Base de microdatos EVyTH (.dta) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/3453fb66-74a3-4903-afa4-6737b8a98e0c/download/evyth_microdatos.zip
+    - `xlsx` Diccionario de registro de la EVyTH (.xlsx) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/0f3493e9-2a99-48ed-bb19-aa1cf87f1318/download/evyth_diccionario_registro.xlsx
+    - `txt` Diccionario de registro de la EVyTH (.txt) — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/20e2c018-a2ee-4d97-9c67-a4303f669255/download/evyth_diccionario_registro.txt
+    - `pdf` Ficha Técnica: EVyTH — https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/1b5d26f1-0ab9-4908-a44f-9ac5bd685f1b/download/evyth-data.pdf
+  - `certificado-unico-habilitante-para-circulacion-cuhc---verano` — Certificado Único Habilitante para Circulación (CUHC) - VERANO
+    - `csv` Serie de tiempo — http://datos.yvera.gob.ar/dataset/fdd18127-d54c-45bc-946d-5ceb445a2f32/resource/ec36bd05-6ed0-492b-be03-ae10b356ce81/download/serie-de-tiempo-personas-certificados-por-provincia-origen-destino.csv
+    - `csv` Certificados emitidos y cantidad de personas por fecha de ingreso — http://datos.yvera.gob.ar/dataset/fdd18127-d54c-45bc-946d-5ceb445a2f32/resource/ed645552-8ba6-4d3c-914d-e4e89f0757af/download/certificados-personas-por-fecha-ingreso.csv
+    - `csv` Certificados emitidos y cantidad de personas por fecha de ingreso, provincia y localidad de destino — http://datos.yvera.gob.ar/dataset/fdd18127-d54c-45bc-946d-5ceb445a2f32/resource/176dc4bc-7597-4e9b-850d-0d27bcbca8d0/download/certificados-personas-por-fecha-ingreso-provincia-localidad.csv
+    - `csv` Cantidad de personas por fecha de ingreso, provincia de origen y destino — http://datos.yvera.gob.ar/dataset/fdd18127-d54c-45bc-946d-5ceb445a2f32/resource/c1ecae40-d7b4-44e5-be53-3f07b93ea43d/download/personas-por-fecha-de-ingreso-provincia-de-origen-y-destino.csv
+    - `csv` Media de viajeros por certificado emitido según provincia y localidad de destino — http://datos.yvera.gob.ar/dataset/fdd18127-d54c-45bc-946d-5ceb445a2f32/resource/8fb98ab3-3bf3-44bb-adcf-0bcef8aa2a5d/download/personas-por-certificado-provincia-y-localidad-de-destino.csv
+    - `csv` Provincia y localidad de destino por duración del viaje — http://datos.yvera.gob.ar/dataset/fdd18127-d54c-45bc-946d-5ceb445a2f32/resource/8f533ab8-1852-4aa0-9377-96c9019f22fe/download/provincia-y-localidad-de-destino-por-duracion-de-viaje.csv
+    - `csv` Novedades — http://datos.yvera.gob.ar/dataset/fdd18127-d54c-45bc-946d-5ceb445a2f32/resource/1068cd0b-8bd3-48d3-9d04-fc7b692038f6/download/novedades_cuidar.csv
+  - `turismo-internacional-total-pais` — Turismo Internacional - Total País
+    - `csv` Turismo receptivo — https://datos.yvera.gob.ar/dataset/4cbf7d4a-702a-4911-8c1e-717a45214902/resource/fdfe0ae4-4acc-4421-aa48-6149a02bc615/download/turistas-no-residentes-serie.csv
+    - `csv` Turismo emisivo — https://datos.yvera.gob.ar/dataset/4cbf7d4a-702a-4911-8c1e-717a45214902/resource/fd710cb7-1981-43ea-aba3-7a14c356446b/download/turistas-residentes-serie.csv
+    - `csv` Balanza turística — https://datos.yvera.gob.ar/dataset/4cbf7d4a-702a-4911-8c1e-717a45214902/resource/7f96ec00-9300-4ea3-88b4-073fd4fa6d71/download/saldo-turistas-serie.csv
+    - `csv` Serie de tiempo - Mensual — https://datos.yvera.gob.ar/dataset/4cbf7d4a-702a-4911-8c1e-717a45214902/resource/39455901-5488-4a01-8594-7b2b0a1e85a1/download/serie-tiempo-turismo-internacional.csv
+    - `pdf` Ficha Técnica: Turismo Internacional - Total País — https://datos.yvera.gob.ar/dataset/4cbf7d4a-702a-4911-8c1e-717a45214902/resource/200bf770-d6f2-4847-af20-678fc0f13a0f/download/tur-inter-data.pdf
+    - `csv` Novedades — https://datos.yvera.gob.ar/dataset/4cbf7d4a-702a-4911-8c1e-717a45214902/resource/56801eb5-12c6-4cf2-b20a-b3d48399bf1f/download/novedades.csv
+  - `encuesta-turismo-internacional` — Encuesta de Turismo Internacional (ETI)
+    - `csv` Turistas no residentes, pernoctaciones y estadía media mensual en Ezeiza y Aeroparque — https://datos.yvera.gob.ar/dataset/78b880c1-50d5-4a0c-9c87-7350e70548c2/resource/32cd65c4-7558-48cf-a8ac-bbb07147b5a1/download/turistas_pernoctes_estadia_media_turistas_no_residentes_por_residencia_ezeiza_aeroparque_mensual.csv
+    - `csv` Turistas no residentes, pernoctaciones y estadía media trimestral en Ezeiza y Aeroparque — https://datos.yvera.gob.ar/dataset/78b880c1-50d5-4a0c-9c87-7350e70548c2/resource/5a6eaddb-a874-4657-a184-8795e870d6b7/download/turistas_pernoctes_estadia_media_turistas_no_residentes_por_residencia_ezeiza_aeroparque_trimest.csv
+    - `csv` Turistas no residentes, pernoctaciones y estadía media trimestral en el Aeropuerto Internacional de Córdoba — https://datos.yvera.gob.ar/dataset/78b880c1-50d5-4a0c-9c87-7350e70548c2/resource/dae8b7f8-f3dc-431b-887e-3de4b54f09a9/download/turistas_pernoctes_estadia_media_turistas_no_residentes_por_residencia_aeropuerto_cordoba_trimes.csv
+    - `csv` Turistas no residentes, pernoctaciones y estadía media trimestral en el Aeropuerto Internacional de Mendoza — https://datos.yvera.gob.ar/dataset/78b880c1-50d5-4a0c-9c87-7350e70548c2/resource/c112ca01-2563-4a48-a8d6-1126af9a5f1d/download/turistas_pernoctes_estadia_media_turistas_no_residentes_por_residencia_aeropuerto_mendoza_trimes.csv
+    - `csv` Turistas no residentes, pernoctaciones y estadía media trimestral en el Puerto de Buenos Aires — https://datos.yvera.gob.ar/dataset/78b880c1-50d5-4a0c-9c87-7350e70548c2/resource/6ca84a56-8006-435b-8062-e00868263174/download/turistas_pernoctes_estadia_media_turistas_no_residentes_por_residencia_puerto_buenos_aires_trime.csv
+    - `csv` Turistas no residentes, pernoctaciones y estadía media trimestral en el Paso Internacional Cristo Redentor — https://datos.yvera.gob.ar/dataset/78b880c1-50d5-4a0c-9c87-7350e70548c2/resource/941a5faf-898d-47f5-b889-25e3919bc468/download/turistas_pernoctes_estadia_media_turistas_no_residentes_por_residencia_cristo_redentor_trimestra.csv
+    - `csv` Turistas no residentes según principal motivo de viaje, por paso y trimestre — https://datos.yvera.gob.ar/dataset/78b880c1-50d5-4a0c-9c87-7350e70548c2/resource/8ba3c9e8-3d57-4d31-90a7-f6a0ab5bd51b/download/turistas_no_residentes_por_motivo_de_viaje_segun_paso_trimestral.csv
+    - `csv` Turistas no residentes según principal tipo de alojamiento, paso y trimestre — https://datos.yvera.gob.ar/dataset/78b880c1-50d5-4a0c-9c87-7350e70548c2/resource/eba3bb00-e0d6-4d5f-bc87-364a3e0569dd/download/turistas_no_residentes_por_tipo_de_alojamiento_segun_paso_trimestral.csv
+  - `conectividad-terrestre-interurbana` — Conectividad Terrestre Interurbana
+    - `csv` Viajes, Asientos y Pasajeros diarios — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/76847ea4-5e3b-4ae4-82d7-b85f87362577/download/viajes_asientos_pasajeros.csv
+    - `csv` Rutas con más de cuatro frecuencias por mes — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/0209bd91-dec6-41c6-9c39-192f1c9a35b1/download/rutas_por_mes.csv
+    - `csv` Viajes, Asientos y Pasajeros anuales por ruta con al menos un viaje semanal — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/0e8a61b7-8127-41a4-8e83-a37f50e24d1f/download/magnitudes_por_ruta.csv
+    - `csv` Base agregada de viajes interurbanos de micros de media y larga distancia — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/7681f929-c189-4506-ae76-c21ec31425f4/download/base_microdatos.zip
+    - `pdf` Ficha Técnica: Conectividad Terrestre Interurbana — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/a5b850c6-8865-4945-848e-44e8fc43388c/download/transporte_terrestre.pdf
+    - `csv` Novedades — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/572d9fba-0af0-4081-ba92-7fbdd7ebd3c0/download/novedades_conectividad.csv
+    - `csv` Viajes, Asientos y Pasajeros diarios - DUT — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/a2f26d1a-d82d-40b7-8fe7-b92b998b0d09/download/viajes_asientos_pasajeros_dut.csv
+    - `csv` Rutas con más de cuatro frecuencias por mes - DUT — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/b24cadce-6eca-4fbb-b0c2-1d84e38712c8/download/rutas_por_mes_dut.csv
+  - `previaje` — Previaje
+    - `csv` Comprobantes y monto por CLAE a 6 dígitos y fecha de carga — http://datos.yvera.gob.ar/dataset/09679fe3-7379-481d-a36a-6b1e3d7374b1/resource/2eaac913-0273-41cb-b1b2-c810e59d2334/download/comprobantes_fecha.csv
+    - `csv` Consumo del crédito según operaciones y monto por día — http://datos.yvera.gob.ar/dataset/09679fe3-7379-481d-a36a-6b1e3d7374b1/resource/9e938356-b471-457a-a54d-fa346fb786bc/download/gasto_credito.csv
+    - `csv` Personas beneficiarias por provincia de residencia, grupos de edad y género — http://datos.yvera.gob.ar/dataset/09679fe3-7379-481d-a36a-6b1e3d7374b1/resource/42a60de1-a6d5-473b-a2c0-415e25ad7f31/download/personas_beneficiarias.csv
+    - `csv` Prestadores inscriptos por CLAE — http://datos.yvera.gob.ar/dataset/09679fe3-7379-481d-a36a-6b1e3d7374b1/resource/70a00ea0-45fc-47b3-ae66-8e7bf369c8e8/download/prestadores_clae.csv
+    - `csv` Viajes y viajeros por mes de inicio, provincia de origen y destino — http://datos.yvera.gob.ar/dataset/09679fe3-7379-481d-a36a-6b1e3d7374b1/resource/9d4db872-0a51-4042-9daa-e55bc7a3044c/download/viajes_origen_destino_mes.csv
+    - `pdf` Ficha Técnica: Previaje — http://datos.yvera.gob.ar/dataset/09679fe3-7379-481d-a36a-6b1e3d7374b1/resource/5c38d5d2-1481-43ef-8683-15691fd5cb88/download/previaje_ficha_data_abierta.pdf
+    - `csv` Novedades — http://datos.yvera.gob.ar/dataset/09679fe3-7379-481d-a36a-6b1e3d7374b1/resource/eb96b75d-4963-451f-96d0-c8cc7bb254d6/download/novedades_pv.csv
+- búsqueda `conectividad terrestre`: 1 datasets
+  - `conectividad-terrestre-interurbana` — Conectividad Terrestre Interurbana
+    - `csv` Viajes, Asientos y Pasajeros diarios — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/76847ea4-5e3b-4ae4-82d7-b85f87362577/download/viajes_asientos_pasajeros.csv
+    - `csv` Rutas con más de cuatro frecuencias por mes — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/0209bd91-dec6-41c6-9c39-192f1c9a35b1/download/rutas_por_mes.csv
+    - `csv` Viajes, Asientos y Pasajeros anuales por ruta con al menos un viaje semanal — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/0e8a61b7-8127-41a4-8e83-a37f50e24d1f/download/magnitudes_por_ruta.csv
+    - `csv` Base agregada de viajes interurbanos de micros de media y larga distancia — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/7681f929-c189-4506-ae76-c21ec31425f4/download/base_microdatos.zip
+    - `pdf` Ficha Técnica: Conectividad Terrestre Interurbana — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/a5b850c6-8865-4945-848e-44e8fc43388c/download/transporte_terrestre.pdf
+    - `csv` Novedades — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/572d9fba-0af0-4081-ba92-7fbdd7ebd3c0/download/novedades_conectividad.csv
+    - `csv` Viajes, Asientos y Pasajeros diarios - DUT — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/a2f26d1a-d82d-40b7-8fe7-b92b998b0d09/download/viajes_asientos_pasajeros_dut.csv
+    - `csv` Rutas con más de cuatro frecuencias por mes - DUT — https://datos.yvera.gob.ar/dataset/b18f1c90-0c66-4771-8bd8-289e5cfa6e60/resource/b24cadce-6eca-4fbb-b0c2-1d84e38712c8/download/rutas_por_mes_dut.csv
+- búsqueda `cruceros`: 1 datasets
+  - `crucerismo-maritimo` — Crucerismo Marítimo
+    - `csv` Cruceristas por temporada, puerto y crucero — https://datos.yvera.gob.ar/dataset/fbc269ea-5f71-45b6-b70c-8eb38a03b8db/resource/f7ce925a-0a48-4e38-8f48-360d6513fd83/download/cruceristas-por-puerto-crucero-temporada.csv
+    - `csv` Cruceristas por temporada, mes, puerto y género — https://datos.yvera.gob.ar/dataset/fbc269ea-5f71-45b6-b70c-8eb38a03b8db/resource/720a3bcc-456e-4293-9389-e3bb15b8a2fe/download/cruceristas-por-puerto-genero-mes.csv
+    - `csv` Cruceristas por temporada, mes, puerto y grupo etario — https://datos.yvera.gob.ar/dataset/fbc269ea-5f71-45b6-b70c-8eb38a03b8db/resource/40c8b7d7-ff88-4d85-a26c-281538647b05/download/cruceristas-por-puerto-grupo-etario-mes.csv
+    - `csv` Cruceristas por temporada, mes, puerto y país de residencia — https://datos.yvera.gob.ar/dataset/fbc269ea-5f71-45b6-b70c-8eb38a03b8db/resource/0774a0bb-71c2-44d7-9ea6-780e6bd06d50/download/cruceristas-por-puerto-residencia-desagregado-por-pais-mes.csv
+    - `csv` Cruceristas por temporada, mes, puerto y residencia — https://datos.yvera.gob.ar/dataset/fbc269ea-5f71-45b6-b70c-8eb38a03b8db/resource/da85d231-6741-41b3-ba8b-8bed38d66b13/download/cruceristas-por-puerto-residencia-mes.csv
+    - `pdf` Ficha Técnica: Crucerismo Marítimo — https://datos.yvera.gob.ar/dataset/fbc269ea-5f71-45b6-b70c-8eb38a03b8db/resource/33f90b36-e763-4a26-9559-b29b725dd73c/download/crucerismo_maritimo.pdf
 
 ## `mdp_portal_catalogo` (dkan_package)
 - OK `https://datos.mardelplata.gob.ar/?q=api/3/action`: 446 datasets; coinciden: ['arribos-de-turistas', 'turismo-estable-estadía-promedio', 'turismo-en-fines-de-semana-largo', 'movimientos-del-aeropuerto-internacional-astor-piazzolla', 'pasajeros-del-aeropuerto-astor-piazzolla', 'vuelos-comerciales-pasajeros-por-tramo', 'vuelos-comerciales-vuelos-por-tramo', 'vuelos-del-aeropuerto-internacional-astor-piazzolla', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30062022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-31032022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30092021', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30092022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-31122022', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-emtur-al-31032023', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-emtur-al-30062023', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-y-cultura-emturyc-al-4', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-11', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-31', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-11', 'presupuesto-de-recursos-y-gastos-2026-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-12', 'presupuesto-de-recursos-y-gastos-2026-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5']
