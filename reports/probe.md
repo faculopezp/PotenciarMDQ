@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-25 22:04 UTC
+# Probe de fuentes — 2026-10-26 00:05 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -190,7 +190,7 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 ```
 
 ## `clima_mdq` (openmeteo)
-- HTTP 200 `https://archive-api.open-meteo.com/v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-19&daily=weather_code%2Cprecipitation_`
+- HTTP 200 `https://archive-api.open-meteo.com/v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-20&daily=weather_code%2Cprecipitation_`
 
 ## `anac_informes_mensuales` (url_pattern)
 - 0/60 URLs existen
