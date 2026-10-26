@@ -139,6 +139,33 @@ sources:
     enabled: false
     verified: true
 
+  # ── Multimodal (docs/13_plan_multimodal.md) ──────────────────────────────────────────────
+  # Ómnibus: CNRT vía Yvera, servicios regulares de jurisdicción nacional entre cabeceras, 2019+.
+  yvera_terrestre:
+    kind: ckan_package
+    base_url: https://datos.yvera.gob.ar
+    dataset: conectividad-terrestre-interurbana
+    resource_formats: [csv]
+    enabled: true
+    verified: false
+  # Tren: anuarios y reportes trimestrales de la CNRT (PDF). Solo larga distancia y regionales.
+  cnrt_ferroviario:
+    kind: html_links
+    url: https://www.argentina.gob.ar/transporte/cnrt/estadisticas-ferroviarias
+    follow_pattern: /cnrt/estadisticas-ferroviarias/
+    file_extensions: [pdf, xlsx, xls, csv]
+    include_pattern: '(?i)(larga|_ld|pax_ld|ld_)'
+    enabled: true
+    verified: false
+  # Encuesta de Viajes y Turismo de los Hogares (medio de transporte y destino): búsqueda en el
+  # catálogo de Yvera, solo probe hasta confirmar el dataset.
+  yvera_busqueda:
+    kind: ckan_search
+    base_url: https://datos.yvera.gob.ar
+    queries: [evyth, "viajes turismo hogares", conectividad terrestre, cruceros]
+    enabled: false
+    verified: false
+
   # Portal municipal (DKAN). Hallados por el probe del 2026-10-24: series propias del aeropuerto
   # y de turismo que pueden cubrir 2014–2018 y permiten cruzar vuelos con turistas.
   mdp_portal_catalogo:

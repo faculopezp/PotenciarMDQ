@@ -126,6 +126,16 @@ def probe() -> Path:
                     lines.append(f"  - `{r.format}` {r.name} — `{r.id}` — mod {r.last_modified}")
                     if r.format in ("csv", "xml", "txt") or r.url.lower().endswith(".csv"):
                         lines += [f"    > {x}" for x in _preview(http, r.url)]
+            elif cfg["kind"] == "ckan_search":
+                client = CkanClient(cfg["base_url"], http)
+                for q in cfg["queries"]:
+                    pkgs = list(client.package_search(q=q, rows=20))[:10]
+                    lines.append(f"- búsqueda `{q}`: {len(pkgs)} datasets")
+                    for pkg in pkgs:
+                        lines.append(f"  - `{pkg.get('name')}` — {pkg.get('title')}")
+                        for r in pkg.get("resources", [])[:8]:
+                            fmt = (r.get("format") or "").lower()
+                            lines.append(f"    - `{fmt}` {r.get('name')} — {r.get('url')}")
             elif cfg["kind"] == "dkan_package":
                 client = DkanClient(cfg["base_url"], http)
                 slugs = client.package_list()
@@ -139,7 +149,8 @@ def probe() -> Path:
                             lines += [f"    > {x}" for x in _preview(http, r.url, 4)]
             elif cfg["kind"] == "html_links":
                 files, warns = discover_files(
-                    http, cfg["url"], cfg["file_extensions"], cfg.get("follow_pattern")
+                    http, cfg["url"], cfg["file_extensions"], cfg.get("follow_pattern"),
+                    cfg.get("include_pattern"),
                 )
                 lines.append(f"- {len(files)} archivos encontrados")
                 lines += [f"  - [{f['text'] or 'sin texto'}]({f['url']})" for f in files[:200]]
@@ -210,7 +221,8 @@ def _ingest_source(http: PoliteSession, sid: str, cfg: dict, force: bool) -> lis
                 new_files.append(p)
     elif cfg["kind"] == "html_links":
         files, warns = discover_files(
-            http, cfg["url"], cfg["file_extensions"], cfg.get("follow_pattern")
+            http, cfg["url"], cfg["file_extensions"], cfg.get("follow_pattern"),
+            cfg.get("include_pattern"),
         )
         for w in warns:
             log.warning(w)

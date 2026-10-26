@@ -6,7 +6,7 @@ import logging
 
 import typer
 
-from potenciar_mdq import analitica, auditoria, muestras, quality, web_export
+from potenciar_mdq import analitica, auditoria, fuentes, muestras, quality, web_export
 from potenciar_mdq import bd as bd_mod
 from potenciar_mdq import ingest as ingest_mod
 from potenciar_mdq import marts as marts_mod
@@ -77,6 +77,12 @@ def web_data() -> None:
     """data/marts -> web/src/data/*.json (lo que publica la web)."""
     for p in web_export.export():
         typer.echo(p)
+
+
+@app.command(name="muestras-fuentes")
+def muestras_fuentes() -> None:
+    """Muestras de las fuentes nuevas (CSV y texto de PDF) -> reports/fuentes/."""
+    typer.echo(fuentes.run())
 
 
 @app.command(name="all")

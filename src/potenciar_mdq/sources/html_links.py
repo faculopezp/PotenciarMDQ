@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from urllib.parse import urljoin, urlparse
 
 from bs4 import BeautifulSoup
@@ -18,9 +19,13 @@ def extract_links(html: str, base_url: str) -> list[tuple[str, str]]:
 
 
 def discover_files(
-    http: PoliteSession, url: str, extensions: list[str], follow_pattern: str | None = None
+    http: PoliteSession, url: str, extensions: list[str], follow_pattern: str | None = None,
+    include_pattern: str | None = None,
 ) -> tuple[list[dict], list[str]]:
-    """Devuelve (archivos, warnings). Si no hay links en el HTML, probablemente sea render JS."""
+    """Devuelve (archivos, warnings). Si no hay links en el HTML, probablemente sea render JS.
+
+    include_pattern: regex sobre la URL del archivo (ej. solo los informes de larga distancia).
+    """
     exts = tuple(f".{e.lower()}" for e in extensions)
     warnings: list[str] = []
     pages = [url]
@@ -36,7 +41,8 @@ def discover_files(
         if not page_links:
             warnings.append(f"{page}: sin <a href>; posible render JS → scripts/capture_network.py")
         for href, text in page_links:
-            if urlparse(href).path.lower().endswith(exts):
+            if urlparse(href).path.lower().endswith(exts) and (
+                    not include_pattern or re.search(include_pattern, href)):
                 files.setdefault(href, {"url": href, "text": text, "page": page})
     if not files:
         warnings.append(f"{url}: 0 archivos {extensions} encontrados")
