@@ -13,7 +13,7 @@ from pathlib import Path
 import duckdb
 
 from potenciar_mdq import dims
-from potenciar_mdq.settings import BD, BD_EXPORT, PROCESSED, SQL, mdq
+from potenciar_mdq.settings import BD, BD_EXPORT, DATA, PROCESSED, SQL, mdq
 
 log = logging.getLogger(__name__)
 
@@ -134,6 +134,21 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
             "CREATE TABLE dim_clima (fecha DATE, codigo_tiempo INT, precipitacion_mm DOUBLE, "
             "viento_max_kmh DOUBLE, rafaga_max_kmh DOUBLE, temp_max_c DOUBLE)"
         )
+
+    # ANAC 2019 de una versión anterior del dataset (con aeronave; la vigente la trae vacía).
+    # Exportada por el usuario en 2025: solo el foco. Ver sql/bd/25_recuperacion.sql, punto 7.
+    previa = DATA / "reference" / "anac_2019_version_anterior.csv"
+    con.execute("CREATE TABLE ref_anac_previa (fecha DATE, hora_utc TIME, aeropuerto VARCHAR, "
+                "tipo_movimiento VARCHAR, origen_destino VARCHAR, aerolinea VARCHAR, "
+                "aeronave VARCHAR, pasajeros INT)")
+    if previa.exists():
+        con.execute("""
+            INSERT INTO ref_anac_previa
+            SELECT strptime("Fecha", '%d/%m/%Y')::DATE, strptime("Hora", '%H:%M:%S')::TIME,
+                   "Aeropuerto", lower("Tipo de Movimiento"), "Origen/Destino",
+                   nullif(nullif(trim("Aerolinea Nombre"), 'N/A'), '0'),
+                   nullif(nullif(trim("Aeronave"), 'N/A'), '0'), try_cast("Pasajeros" AS INT)
+            FROM read_csv(?, all_varchar = true)""", [str(previa)])
 
     cfg = mdq()
     con.execute(

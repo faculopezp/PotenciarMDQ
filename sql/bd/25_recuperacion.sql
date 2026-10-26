@@ -153,3 +153,32 @@ SELECT DISTINCT aerolinea FROM stg_movimiento WHERE clase_vuelo = 'no_regular' A
 
 CREATE OR REPLACE TABLE ref_taxi_matricula AS
 SELECT DISTINCT matricula FROM stg_movimiento WHERE clase_vuelo = 'no_regular' AND matricula IS NOT NULL;
+
+-- 7. ANAC 2019, versión anterior del dataset (data/reference/anac_2019_version_anterior.csv, solo
+--    el foco): trae la aeronave que la versión vigente dejó vacía. Mismo registro = misma fecha,
+--    hora UTC, aeropuerto, movimiento, origen/destino y pasajeros, 1 a 1. Con 2023–2024 (presentes en
+--    ambas versiones) las mismas claves cruzan el 94 % y la aeronave coincide en 11.015 de 11.016.
+CREATE OR REPLACE TABLE ref_anac_previa_cruce AS
+WITH s AS (
+  SELECT fecha, hora_utc, aeropuerto, tipo_movimiento, origen_destino, aerolinea, aeronave,
+         matricula, pasajeros,
+         count(*) OVER (PARTITION BY fecha, hora_utc, aeropuerto, tipo_movimiento, origen_destino,
+                        pasajeros) AS c_s
+  FROM stg_movimiento
+  WHERE fecha BETWEEN (SELECT min(fecha) FROM ref_anac_previa) AND (SELECT max(fecha) FROM ref_anac_previa)
+),
+p AS (
+  SELECT *, count(*) OVER (PARTITION BY fecha, hora_utc, aeropuerto, tipo_movimiento,
+                           origen_destino, pasajeros) AS c_p
+  FROM ref_anac_previa
+)
+SELECT s.fecha, s.hora_utc, s.aeropuerto, s.tipo_movimiento, s.origen_destino, s.aerolinea,
+       s.aeronave, s.matricula, s.pasajeros,
+       CASE WHEN s.aerolinea IS NULL THEN p.aerolinea END AS aerolinea_previa,
+       CASE WHEN s.aeronave IS NULL THEN p.aeronave END AS aeronave_previa
+FROM s JOIN p
+  ON p.fecha = s.fecha AND p.hora_utc = s.hora_utc AND p.aeropuerto = s.aeropuerto
+ AND p.tipo_movimiento = s.tipo_movimiento AND p.origen_destino = s.origen_destino
+ AND p.pasajeros IS NOT DISTINCT FROM s.pasajeros
+WHERE s.c_s = 1 AND p.c_p = 1
+  AND ((s.aerolinea IS NULL AND p.aerolinea IS NOT NULL) OR (s.aeronave IS NULL AND p.aeronave IS NOT NULL));

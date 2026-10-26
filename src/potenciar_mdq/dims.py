@@ -98,7 +98,9 @@ def build_dim_aeronave(con: duckdb.DuckDBPyConnection) -> None:
     cfg = load_yaml("aeronaves.yaml")
     extra = (" UNION SELECT DISTINCT aeronave FROM mun_vuelos_hist WHERE aeronave IS NOT NULL"
              if _existe(con, "mun_vuelos_hist") else "")
-    names = [r[0] for r in con.execute(
+    if _existe(con, "ref_anac_previa"):
+        extra += " UNION SELECT DISTINCT aeronave FROM ref_anac_previa WHERE aeronave IS NOT NULL"
+    names =[r[0] for r in con.execute(
         "SELECT DISTINCT aeronave FROM stg_movimiento WHERE aeronave IS NOT NULL" + extra
     ).fetchall()]
     # Tipos que solo aparecen por recuperación (serie de matrícula estatal).
@@ -165,6 +167,8 @@ def build_dim_aerolinea(con: duckdb.DuckDBPyConnection) -> None:
     rules = load_yaml("aerolineas.yaml")["aerolineas"]
     extra = (" UNION ALL SELECT aerolinea FROM mun_vuelos_hist WHERE aerolinea IS NOT NULL"
              if _existe(con, "mun_vuelos_hist") else "")
+    if _existe(con, "ref_anac_previa"):
+        extra += " UNION ALL SELECT aerolinea FROM ref_anac_previa WHERE aerolinea IS NOT NULL"
     conteo = con.execute(
         "SELECT aerolinea, count(*) FROM (SELECT aerolinea FROM stg_movimiento "
         f"WHERE aerolinea IS NOT NULL{extra}) GROUP BY 1"

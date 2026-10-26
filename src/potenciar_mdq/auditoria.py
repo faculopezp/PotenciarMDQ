@@ -145,11 +145,13 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
             WITH a AS (
               SELECT movimiento_id, fecha, hora_local, tipo_movimiento, origen_destino,
                      aerolinea_nombre AS nombre, segmento,
-                     CASE WHEN aeronave_fuente = 'anac' THEN aeronave END AS aeronave
+                     CASE WHEN aeronave_fuente = 'anac' THEN aeronave END AS aeronave,
+                     CASE WHEN aeronave_fuente = 'anac_version_anterior' THEN aeronave_familia
+                     END AS familia_previa
               FROM fct_movimiento WHERE aeropuerto = getvariable('foco') AND anio = 2019
             ),
             k AS (
-              SELECT a.movimiento_id, a.aeronave, a.segmento, m.aeronave AS av_mun,
+              SELECT a.movimiento_id, a.aeronave, a.familia_previa, a.segmento, m.aeronave AS av_mun,
                      count(*) OVER (PARTITION BY a.movimiento_id) AS c_anac,
                      count(*) OVER (PARTITION BY m.fecha, m.hora_local, m.tipo_movimiento,
                                                  m.origen_destino, m.nombre, m.aeronave) AS c_mun
@@ -174,7 +176,13 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                 "Aeronaves recuperables, por segmento y modelo municipal:", "", _table(con, """
             SELECT segmento, av_mun AS aeronave_municipal, count(*) AS movimientos
             FROM cruce WHERE c_anac = 1 AND c_mun = 1 AND aeronave IS NULL AND av_mun IS NOT NULL
-            GROUP BY ALL ORDER BY 3 DESC LIMIT 15""")]
+            GROUP BY ALL ORDER BY 3 DESC LIMIT 15"""),
+                "Validación cruzada: familia de la ANAC 2019 versión anterior contra el portal "
+                "municipal en los mismos vuelos (1 a 1):", "", _table(con, """
+            SELECT c.familia_previa, d.familia AS familia_municipal, count(*) AS vuelos
+            FROM cruce c JOIN dim_aeronave d ON d.aeronave = c.av_mun
+            WHERE c.c_anac = 1 AND c.c_mun = 1 AND c.familia_previa IS NOT NULL
+            GROUP BY ALL ORDER BY 3 DESC LIMIT 12""")]
 
     # ── E: el otro extremo sin matrícula, validado contra vuelos que traen el dato ──────────
     # Se toman vuelos del foco con operador y avión informados, se "esconde" uno de los dos y se
@@ -266,6 +274,8 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
           count(*) FILTER (operador_fuente = 'prefijo_estatal') AS operador_por_prefijo_estatal,
           count(*) FILTER (operador_fuente = 'otro_extremo_sin_matricula')
             AS operador_otro_extremo_sin_matricula,
+          count(*) FILTER (operador_fuente = 'anac_version_anterior') AS operador_anac_version_anterior,
+          count(*) FILTER (aeronave_fuente = 'anac_version_anterior') AS aeronave_anac_version_anterior,
           count(*) FILTER (aeronave_fuente = 'municipal') AS aeronave_del_municipio,
           count(*) FILTER (aeronave_fuente = 'serie_estatal') AS aeronave_por_serie_estatal,
           count(*) FILTER (aeronave_fuente = 'otro_extremo_sin_matricula')
@@ -293,14 +303,15 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                                  AND d.aeronave = f.aeronave
         WHERE f.fuente_asientos IN ('cabina_publicada', 'cabina_estandar')
         GROUP BY ALL ORDER BY 5 DESC"""),
-            "Validación: qué habría dicho la inferencia por pasajeros en los vuelos cuyo avión se "
-            "recuperó del portal municipal (ANAC 2019, foco):", "", _table(con, """
+            "Validación: qué habría dicho la inferencia por pasajeros en los vuelos 2019 del foco "
+            "cuyo avión se recuperó (ANAC versión anterior o portal municipal):", "", _table(con, """
         WITH v AS (
           SELECT f.aeronave_familia AS real, r.familia AS inferida
           FROM fct_movimiento f JOIN ref_inferencia_aeronave r
             ON regexp_matches(upper(strip_accents(coalesce(f.aerolinea, ''))), r.operador)
            AND f.pasajeros BETWEEN r.pax_min AND r.pax_max AND f.anio <= r.anio_hasta
-          WHERE f.aeronave_fuente = 'municipal' AND f.aeropuerto = getvariable('foco')
+          WHERE f.aeronave_fuente IN ('municipal', 'anac_version_anterior')
+            AND f.aeropuerto = getvariable('foco') AND f.anio = 2019
         )
         , c AS (SELECT inferida, real, count(*) AS vuelos FROM v GROUP BY inferida, real)
         SELECT *, round(100.0 * vuelos / sum(vuelos) OVER (PARTITION BY inferida), 1) AS pct

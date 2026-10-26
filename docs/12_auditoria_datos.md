@@ -31,6 +31,12 @@ Agregados el 2026-10-26 (cifras de MDQ 2019–2026, corrida del CI):
 | Modelo de aeronaves del Estado por serie con identificación pública (T-94/T-95 ERJ-140, T-99 737-700, TC-53 F28, TC-64/66 C-130H, PA-22/25 King Air 350ER, PA-40/41/43 Dauphin, PG-380 Cessna 180) | 439 + las agregadas el 26/10 | Fuente por serie en `config/estatales.yaml` |
 | Asientos publicados por aerolínea y modelo (`config/cabinas.yaml`) | 8.567 de línea | Coinciden con el p95 observado: E190 96 = 96, 737-800 Flybondi 189 = 189, MAX 8 170 vs 172, ERJ-145 50 = 50, 737-700 Andes 142 = 142 |
 
+**ANAC 2019, versión anterior** (`data/reference/anac_2019_version_anterior.csv`, exportada por el
+usuario en 2025, solo MDQ): trae la aeronave en 7.088 de 8.389 movimientos de 2019, que la versión
+vigente deja vacía (99,8 %). Cruce 1 a 1 por fecha, hora UTC, movimiento, origen/destino y pasajeros;
+validado con 2023–2024 (presentes en ambas versiones): 94 % cruza y la aeronave coincide en 11.015 de
+11.016. Tiene prioridad sobre el portal municipal. Resultado en `reports/qa/auditoria.md` (2D y 4).
+
 Lugares aptos denunciados: quedan como LAD (sin coordenadas, fuera del mapa).
 
 Reclasificación: todo vuelo **privado en jet o turbohélice ejecutivo** se analiza como taxi aéreo

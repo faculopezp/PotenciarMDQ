@@ -1,22 +1,25 @@
 -- Hecho principal: 1 fila = 1 aterrizaje o despegue, enriquecido con calendario, aerolínea,
 -- aeronave, distancia y métricas estimadas. Ver docs/07_bd_y_metricas.md.
 CREATE OR REPLACE TABLE fct_movimiento AS
--- Datos recuperados (sql/bd/25_recuperacion.sql), en orden de prioridad: operador por matrícula
--- (unánime), por el otro extremo del mismo vuelo con matrícula, por prefijo de aeronave del Estado
--- o por el otro extremo sin matrícula; aeronave del portal municipal (2015–2019), por serie
--- estatal o por el otro extremo sin matrícula.
+-- Datos recuperados (sql/bd/25_recuperacion.sql), en orden de prioridad: ANAC 2019 versión
+-- anterior (mismo registro); operador por matrícula (unánime), por el otro extremo del mismo vuelo
+-- con matrícula, por prefijo de aeronave del Estado o por el otro extremo sin matrícula; aeronave
+-- del portal municipal (2015–2019), por serie estatal o por el otro extremo sin matrícula.
 WITH s AS (
   SELECT
     s.* EXCLUDE (aeropuerto, aerolinea, aeronave),
-    coalesce(s.aerolinea, mo.aerolinea, op.aerolinea, oe.aerolinea, vp.aerolinea_par) AS aerolinea,
+    coalesce(s.aerolinea, pv.aerolinea_previa, mo.aerolinea, op.aerolinea, oe.aerolinea,
+             vp.aerolinea_par) AS aerolinea,
     s.aerolinea                                    AS aerolinea_original,
     CASE WHEN s.aerolinea IS NOT NULL THEN 'anac'
+         WHEN pv.aerolinea_previa IS NOT NULL THEN 'anac_version_anterior'
          WHEN mo.aerolinea IS NOT NULL THEN 'matricula'
          WHEN op.aerolinea IS NOT NULL THEN 'otro_extremo'
          WHEN oe.aerolinea IS NOT NULL THEN 'prefijo_estatal'
          WHEN vp.aerolinea_par IS NOT NULL THEN 'otro_extremo_sin_matricula' END AS operador_fuente,
-    coalesce(s.aeronave, am.aeronave, ae.aeronave, vp.aeronave_par) AS aeronave,
+    coalesce(s.aeronave, pv.aeronave_previa, am.aeronave, ae.aeronave, vp.aeronave_par) AS aeronave,
     CASE WHEN s.aeronave IS NOT NULL THEN 'anac'
+         WHEN pv.aeronave_previa IS NOT NULL THEN 'anac_version_anterior'
          WHEN am.aeronave IS NOT NULL THEN 'municipal'
          WHEN ae.aeronave IS NOT NULL THEN 'serie_estatal'
          WHEN vp.aeronave_par IS NOT NULL THEN 'otro_extremo_sin_matricula' END AS aeronave_fuente,
@@ -37,6 +40,10 @@ WITH s AS (
    AND vp.tipo_movimiento = s.tipo_movimiento AND vp.origen_destino = s.origen_destino
    AND vp.aerolinea IS NOT DISTINCT FROM s.aerolinea AND vp.aeronave IS NOT DISTINCT FROM s.aeronave
    AND vp.matricula IS NOT DISTINCT FROM s.matricula
+  LEFT JOIN ref_anac_previa_cruce pv
+    ON pv.fecha = s.fecha AND pv.hora_utc = s.hora_utc AND pv.aeropuerto = s.aeropuerto
+   AND pv.tipo_movimiento = s.tipo_movimiento AND pv.origen_destino = s.origen_destino
+   AND pv.pasajeros IS NOT DISTINCT FROM s.pasajeros
   LEFT JOIN ref_aeronave_municipal am
     ON s.aeronave IS NULL AND am.fecha = s.fecha AND am.hora_utc = s.hora_utc
    AND am.aeropuerto = s.aeropuerto AND am.tipo_movimiento = s.tipo_movimiento
@@ -161,7 +168,7 @@ SELECT
   j.aerolinea,
   j.aerolinea_original,
   j.operador_fuente,
-  coalesce(j.operador_fuente <> 'anac', false) AS operador_inferido,
+  coalesce(j.operador_fuente NOT IN ('anac', 'anac_version_anterior'), false) AS operador_inferido,
   j.aeronave_fuente,
   coalesce(j.aerolinea_nombre, 'Sin dato')         AS aerolinea_nombre,
   coalesce(j.aerolinea_tipo, 'sin_dato')           AS aerolinea_tipo,
