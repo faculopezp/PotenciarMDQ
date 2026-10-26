@@ -8,7 +8,7 @@ País:
 
 | anio | movimientos | pct_sin_operador | pct_sin_aeronave | pct_sin_matricula | pct_sin_pasajeros | pct_sin_hora | pct_sin_od | pct_od_lad |
 |---|---|---|---|---|---|---|---|---|
-| 2019 | 580749 | 31.4 | 99.6 | 100.0 | 0.0 | 0.0 | 0.0 | 0.9 |
+| 2019 | 580749 | 31.4 | 98.8 | 100.0 | 0.0 | 0.0 | 0.0 | 0.9 |
 | 2020 | 212686 | 48.6 | 85.3 | 100.0 | 0.0 | 0.0 | 0.0 | 1.1 |
 | 2021 | 329800 | 54.3 | 14.0 | 100.0 | 0.0 | 0.0 | 0.0 | 1.2 |
 | 2022 | 477930 | 38.3 | 15.3 | 100.0 | 0.0 | 0.0 | 0.0 | 1.3 |
@@ -21,7 +21,7 @@ Foco (MDQ):
 
 | anio | movimientos | pct_sin_operador | pct_sin_aeronave | pct_sin_matricula | pct_sin_pasajeros | pct_sin_hora | pct_sin_od | pct_od_lad |
 |---|---|---|---|---|---|---|---|---|
-| 2019 | 8388 | 32.1 | 69.1 | 100.0 | 0.0 | 0.0 | 0.0 | 0.2 |
+| 2019 | 8388 | 32.1 | 15.5 | 100.0 | 0.0 | 0.0 | 0.0 | 0.2 |
 | 2020 | 3022 | 50.6 | 82.4 | 100.0 | 0.0 | 0.0 | 0.0 | 0.2 |
 | 2021 | 3957 | 66.0 | 15.8 | 100.0 | 0.0 | 0.0 | 0.0 | 0.9 |
 | 2022 | 6387 | 49.9 | 15.1 | 100.0 | 0.0 | 0.0 | 0.0 | 0.4 |
@@ -72,9 +72,9 @@ Qué se recupera (foco, top 12):
 | CWO S.A. - SUN FLIGHT- CIAC TIPO II | 25 |
 | SAETA | 14 |
 | CEAP - AERO CHANNEL S.R.L- CIAC TIPO II | 13 |
-| TWR SRL | 10 |
-| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
 | PRESIDENCIA DE LA NACION | 10 |
+| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
+| TWR SRL | 10 |
 | FLIGHT CENTER- TWR S.R.L-CIAC TIPO III | 9 |
 
 ## 2B. Aeronave por matrícula
@@ -104,7 +104,7 @@ Comparación con la regla vigente (operador con >= 80 % de consistencia):
 
 | operador_inferido_80 | en_foco |
 |---|---|
-| 40128 | 1415 |
+| 51611 | 1552 |
 
 Aeronave faltante con matrícula presente en OpenSky (registro externo):
 
@@ -139,8 +139,8 @@ Validación cruzada: familia de la ANAC 2019 versión anterior contra el portal 
 
 | familia_previa | familia_municipal | vuelos |
 |---|---|---|
-| Embraer E190 | Embraer E190 | 4 |
-| Boeing 737 | Boeing 737 | 1 |
+| Embraer E190 | Embraer E190 | 1209 |
+| Boeing 737 | Boeing 737 | 138 |
 
 ### ANAC 2019 versión anterior ↔ vigente: diagnóstico de claves
 
@@ -167,6 +167,30 @@ Validación en el foco (vuelos no regulares con operador y avión informados; se
 |---|---|---|---|
 | aeronave | 476 | 457 | 96.0 |
 | operador | 412 | 407 | 98.8 |
+
+## 2G. Operador por la consulta de Afectación de ANAC
+
+Validación: movimientos con operador informado por ANAC cuya matrícula figura afectada (a una sola empresa, vuelo posterior a la afectación).
+
+| ambito | movimientos | coinciden | pct |
+|---|---|---|---|
+| MDQ | 1910 | 1909 | 99.9 |
+| resto del país | 172133 | 171968 | 99.9 |
+
+Desacuerdos más frecuentes (operador ANAC ≠ empresa afectada):
+
+| operador_anac | empresa_afectada | movimientos |
+|---|---|---|
+| JUST FLIGHT S.A. "ROYAL CLASS" | VOLAR S.A. | 108 |
+| DIGITAL AIR TAXI S.A. | FEELING AIR S.A. | 26 |
+| HANGAR UNO S.A- CIAC TIPO II | HANGAR UNO S.A. | 6 |
+| JUST FLIGHT S.A. "ROYAL CLASS" | PRIVATE AVIATION CONSULTING S.A. | 3 |
+| SEA CO AVIATION | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
+| SERV. Y EMPRENDIMIENTOS AERONÁUTICOS S.A | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
+| SERV AEREOS SUDAMERICANOS S.A. | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
+| CICA | AEROTEC ARGENTINA S.A. | 2 |
+| POLAR AEREA- JORGE POTENZA-CIAC TIPO III | AEROTEC ARGENTINA S.A. | 1 |
+| JUST FLIGHT S.A. "ROYAL CLASS" | DIRECCION AERON. DE AVIACION CIVIL SALTA | 1 |
 
 ## 2F. Aeronaves del Estado: operador por prefijo de la identificación (2026)
 
@@ -201,16 +225,16 @@ Modelo por serie con identificación pública (config/estatales.yaml → series)
 
 ## 4. Aplicado en la base (fct_movimiento)
 
-| ambito | operador_por_matricula | operador_por_otro_extremo | operador_por_prefijo_estatal | operador_otro_extremo_sin_matricula | operador_anac_version_anterior | aeronave_anac_version_anterior | aeronave_del_municipio | aeronave_por_serie_estatal | aeronave_otro_extremo_sin_matricula |
-|---|---|---|---|---|---|---|---|---|---|
-| MDQ | 431 | 22 | 319 | 643 | 0 | 1240 | 1351 | 516 | 6 |
-| resto del país | 20229 | 526 | 6387 | 11571 | 0 | 0 | 0 | 2286 | 245 |
+| ambito | operador_por_matricula | operador_por_otro_extremo | operador_por_prefijo_estatal | operador_otro_extremo_sin_matricula | operador_anac_version_anterior | operador_afectacion_anac | aeronave_anac_version_anterior | aeronave_del_municipio | aeronave_por_serie_estatal | aeronave_otro_extremo_sin_matricula |
+|---|---|---|---|---|---|---|---|---|---|---|
+| MDQ | 383 | 22 | 319 | 643 | 0 | 185 | 7079 | 9 | 516 | 6 |
+| resto del país | 17074 | 456 | 6387 | 11571 | 0 | 14571 | 0 | 0 | 2286 | 245 |
 
 Privado en jet o turbohélice ejecutivo analizado como taxi aéreo. Evidencia en el foco: cuántos tienen operador o matrícula que también vuela como no regular.
 
 | anio | pasan_a_taxi | con_operador_o_matricula | que_tambien_hacen_taxi |
 |---|---|---|---|
-| 2019 | 94 | 7 | 7 |
+| 2019 | 177 | 15 | 15 |
 | 2020 | 33 | 0 | 0 |
 | 2021 | 216 | 20 | 20 |
 | 2022 | 420 | 39 | 39 |
@@ -223,11 +247,13 @@ Asientos: cabina publicada (config/cabinas.yaml) contra el p95 de pasajeros obse
 
 | aerolinea_nombre | aeronave_modelo | publicados | p95_observado | movimientos_pais | con_mas_pax_que_asientos |
 |---|---|---|---|---|---|
-| Aerolíneas Argentinas | Embraer E190 | 96.0 | 97.0 | 379592 | 20004 |
-| Flybondi | Boeing 737-800 | 189.0 | 190.0 | 172853 | 9439 |
-| Aerolíneas Argentinas | Boeing 737 MAX 8 | 170.0 | 173.0 | 117100 | 9546 |
+| Aerolíneas Argentinas | Boeing 737-800 | 170.0 | 171.0 | 409696 | 30310 |
+| Aerolíneas Argentinas | Embraer E190 | 96.0 | 97.0 | 382270 | 20150 |
+| Flybondi | Boeing 737-800 | 189.0 | 190.0 | 172854 | 9439 |
+| Aerolíneas Argentinas | Boeing 737 MAX 8 | 170.0 | 173.0 | 117103 | 9546 |
 | American Jet | Embraer ERJ-145 | 50.0 | 50.0 | 5546 | 125 |
 | Andes Líneas Aéreas | Boeing 737-700 | 142.0 | 142.0 | 1404 | 0 |
+| Avian (Avianca Argentina) | ATR 72 | 72.0 |  | 599 | 16 |
 | LADE | Embraer ERJ-140 | 44.0 |  | 230 | 0 |
 | Fuerza Aérea Argentina | Embraer ERJ-140 | 44.0 |  | 28 | 0 |
 | Norwegian Argentina | Boeing 737-800 | 189.0 |  | 7 | 0 |
@@ -242,9 +268,11 @@ Validación: qué habría dicho la inferencia por pasajeros en los vuelos 2019 d
 
 | inferida | real | vuelos | pct |
 |---|---|---|---|
-| Boeing 737 | Boeing 737 | 61 | 100.0 |
-| Embraer E190 | Embraer E190 | 1158 | 97.6 |
-| Embraer E190 | Boeing 737 | 28 | 2.4 |
+| ATR 42/72 | ATR 42/72 | 661 | 100.0 |
+| Boeing 737 | Boeing 737 | 138 | 100.0 |
+| Bombardier CRJ | Bombardier Challenger | 13 | 100.0 |
+| Embraer E190 | Embraer E190 | 4083 | 98.2 |
+| Embraer E190 | Boeing 737 | 76 | 1.8 |
 
 ## 5. Yvera, base agregada de frecuencias (validación y asientos)
 
@@ -254,42 +282,42 @@ Mismo origen (SIAC/ANAC): coincidir prueba consistencia de procesamiento, no exa
 |---|---|---|---|---|---|---|
 | 2017 | 3709 |  | 277561 |  | 350401 |  |
 | 2018 | 6785 |  | 454287 |  | 596926 |  |
-| 2019 | 5418 | 6323 | 382751 | 376692 | 513318 | 177732.0 |
-| 2020 | 1373 | 1767 | 110516 | 110828 | 140923 | 41280.0 |
-| 2021 | 1168 | 1858 | 85114 | 85191 | 114222 | 115780.0 |
-| 2022 | 2901 | 3702 | 275655 | 269660 | 352247 | 353684.0 |
-| 2023 | 3790 | 4522 | 310470 | 305089 | 403475 | 401575.0 |
-| 2024 | 3464 | 4109 | 295199 | 289341 | 367775 | 364674.0 |
-| 2025 | 3229 | 3958 | 298644 | 296491 | 351522 | 345487.0 |
-| 2026 | 1834 | 2503 | 168418 | 200584 | 199475 | 236700.0 |
+| 2019 | 5418 | 6323 | 382751 | 376692 | 513318 | 515179.0 |
+| 2020 | 1373 | 1767 | 110516 | 110828 | 140923 | 41278.0 |
+| 2021 | 1168 | 1858 | 85114 | 85191 | 114222 | 115711.0 |
+| 2022 | 2901 | 3702 | 275655 | 269660 | 352247 | 352389.0 |
+| 2023 | 3790 | 4522 | 310470 | 305089 | 403475 | 400809.0 |
+| 2024 | 3464 | 4109 | 295199 | 289341 | 367775 | 364031.0 |
+| 2025 | 3229 | 3958 | 298644 | 296491 | 351522 | 344693.0 |
+| 2026 | 1834 | 2503 | 168418 | 200584 | 199475 | 236084.0 |
 
 Asientos del vuelo exacto (Yvera, 1 a 1) contra la cabina publicada / p95 que se usaría sin Yvera:
 
 | aerolinea_nombre | aeronave_modelo | vuelos | asientos_yvera | cabina_config | coinciden_con_cabina |
 |---|---|---|---|---|---|
-| Aerolíneas Argentinas | Embraer E190 | 2342 | 96.0 | 96.0 | 2340 |
-| Aerolíneas Argentinas |  | 725 | 102.2 |  | 0 |
-| Aerolíneas Argentinas | Boeing 737-800 | 125 | 170.0 |  | 0 |
-| Avian (Avianca Argentina) |  | 78 | 72.0 |  | 0 |
-| Aerolíneas Argentinas | Boeing 737-700 | 67 | 131.1 |  | 0 |
-| Aerolíneas Argentinas | Boeing 737 MAX 8 | 38 | 171.5 | 170.0 | 35 |
+| Aerolíneas Argentinas | Embraer E190 | 2731 | 96.0 | 96.0 | 2728 |
+| Aerolíneas Argentinas |  | 292 | 101.4 |  | 0 |
+| Aerolíneas Argentinas | Boeing 737-800 | 175 | 170.0 | 170.0 | 175 |
+| Aerolíneas Argentinas | Boeing 737-700 | 87 | 130.7 |  | 0 |
+| Avian (Avianca Argentina) | ATR 72 | 78 | 72.0 | 72.0 | 78 |
+| Aerolíneas Argentinas | Boeing 737 MAX 8 | 39 | 171.5 | 170.0 | 36 |
 | LADE |  | 37 | 33.1 |  | 0 |
 | Andes Líneas Aéreas | Boeing 737-800 | 29 | 176.0 |  | 0 |
-| Aerolíneas Argentinas | Boeing 737 | 27 | 156.7 |  | 0 |
 | Flybondi | Boeing 737-800 | 19 | 189.0 | 189.0 | 19 |
 | LADE | Embraer ERJ-140 | 9 | 31.8 | 44.0 | 4 |
-| Flyest S.A. Líneas Aéreas |  | 5 | 50.0 |  | 0 |
 | LADE | Boeing 737-700 | 5 | 99.0 |  | 0 |
+| Flyest S.A. Líneas Aéreas |  | 3 | 50.0 |  | 0 |
 | Aerolíneas Argentinas | Lockheed L-18 Lodestar | 2 | 89.5 |  | 0 |
+| Flyest S.A. Líneas Aéreas | Bombardier Challenger | 2 | 50.0 |  | 0 |
+| Aerolíneas Argentinas | Cessna 150 | 1 | 92.0 |  | 0 |
 | Just Flight S.A. "Royal Class" | Cessna Citation CJ1/M2 (525) | 1 | 30.0 |  | 0 |
 | Sin dato | Embraer Phenom 100 | 1 | 33.0 |  | 0 |
-| Aerolíneas Argentinas | Cessna 150 | 1 | 92.0 |  | 0 |
 
 ## 3. Sin cruce posible con las fuentes actuales
 
 | caso | movimientos_foco |
 |---|---|
-| Aeronave sin matrícula (2019–2025) | 14485 |
+| Aeronave sin matrícula (2019–2025) | 9988 |
 | Operador sin matrícula (2019–2025) | 20536 |
 | Origen/destino en lugar apto denunciado (sin coordenadas) | 266 |
 | Pasajeros sin dato | 0 |
@@ -321,8 +349,8 @@ Muestra (foco, 2 por segmento): aeronave sin dato y sin matrícula:
 | charter_linea | 2025-05-19 | 12:12:00 | despegue | BCA | no_regular | LADE | 24 |
 | instruccion | 2020-01-19 | 14:45:00 | aterrizaje | MOR | vuelo_escuela | Sin dato | 0 |
 | instruccion | 2020-02-01 | 23:10:00 | aterrizaje | BCA | vuelo_escuela | Sin dato | 0 |
-| linea_regular | 2019-01-31 | 12:08:00 | aterrizaje | AER | regular | Avian (Avianca Argentina) | 59 |
-| linea_regular | 2019-08-06 | 23:00:00 | despegue | EZE | regular | Aerolíneas Argentinas | 50 |
+| linea_regular | 2020-02-05 | 16:44:00 | aterrizaje | EZE | regular | Aerolíneas Argentinas | 64 |
+| linea_regular | 2020-03-17 | 11:39:00 | despegue | AER | regular | Aerolíneas Argentinas | 42 |
 | oficial | 2021-08-26 | 09:51:00 | despegue | MDP | vuelo_oficial_nacional | Sin dato | 0 |
 | oficial | 2025-03-13 | 15:37:00 | aterrizaje | MDP | vuelo_oficial_nacional | Sin dato | 0 |
 | privado | 2019-10-04 | 19:42:00 | despegue | MDB | vuelo_privado_con_matricula_nacional | Sin dato | 0 |

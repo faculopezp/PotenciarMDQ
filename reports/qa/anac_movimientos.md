@@ -4,7 +4,7 @@
 
 | source_file | filas | pct_fecha_null | pct_hora_null | pct_pax_null | pct_aeronave_null | pct_con_matricula | pct_provisorio | desde | hasta |
 |---|---|---|---|---|---|---|---|---|---|
-| 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580697 | 0.0 | 0.0 | 0.0 | 99.55 | 0.0 | 0.0 | 2019-01-01 | 2019-12-31 |
+| 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580697 | 0.0 | 0.0 | 0.0 | 98.78 | 0.0 | 0.0 | 2019-01-01 | 2019-12-31 |
 | 20261024_202012-informe-ministerio-actualizado-dic-final.csv | 212726 | 0.0 | 0.0 | 0.0 | 85.3 | 0.0 | 0.0 | 2019-12-31 | 2020-12-31 |
 | 20261024_202112-informe-ministerio-actualizado-dic-final.csv | 329781 | 0.0 | 0.0 | 0.0 | 14.04 | 0.0 | 0.0 | 2020-12-31 | 2021-12-31 |
 | 20261024_202212-informe-ministerio-actualizado-dic-final.csv | 477903 | 0.0 | 0.0 | 0.0 | 15.27 | 0.0 | 0.0 | 2021-12-31 | 2022-12-31 |
@@ -49,7 +49,7 @@
 
 | filas_duplicadas |
 |---|
-| 8143 |
+| 8142 |
 
 ## Correcciones de aeropuerto aplicadas
 
@@ -61,7 +61,7 @@
 
 | pct_aeronave_otro | pct_aerolinea_sin_regla | pct_sin_distancia | pct_sin_asientos |
 |---|---|---|---|
-| 0.13 | 7.37 | 0.9 | 43.29 |
+| 0.13 | 7.63 | 0.9 | 43.09 |
 
 ## Aeronaves sin clasificar (top 25 → ampliar config/aeronaves.yaml)
 
@@ -73,10 +73,10 @@
 | BE-B-36-TC | 416 |
 | BE-V-35-B | 403 |
 | ER-415-CD | 351 |
-| BE-E55 | 310 |
+| BE-E55 | 314 |
 | AVA-A-1 | 309 |
-| HAF-HA-420 | 287 |
-| BE-G36 | 286 |
+| HAF-HA-420 | 291 |
+| BE-G36 | 290 |
 | MC-BO-105-CBS | 282 |
 | CE-C-337-G | 268 |
 | BE-DUKE B-60 | 241 |
@@ -86,8 +86,8 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| AGW-AW 109SP | 165 |
 | I.A-1124 | 165 |
+| AGW-AW 109SP | 165 |
 | CE-T-303 | 153 |
 | BE-M-35 | 151 |
 | BE-D-95-A | 144 |
@@ -165,7 +165,7 @@
 
 | tramos | despegues_cabotaje | pct_emparejado |
 |---|---|---|
-| 779772 | 915317 | 85.2 |
+| 775813 | 915317 | 84.8 |
 
 ## Rotaciones: método por matrícula vs por modelo
 
@@ -173,37 +173,37 @@
 |---|---|---|---|---|
 | BAR | matricula | escala_larga | 196 | 164.5 |
 | BAR | matricula | pernocte | 94 | 1040.5 |
-| BAR | matricula | rotacion | 4184 | 68.0 |
+| BAR | matricula | rotacion | 4185 | 68.0 |
 | BAR | modelo | escala_larga | 834 | 148.0 |
 | BAR | modelo | pernocte | 369 | 926.0 |
 | BAR | modelo | rotacion | 31325 | 64.0 |
-| BCA | matricula | escala_larga | 73 | 202.0 |
+| BCA | matricula | escala_larga | 74 | 207.5 |
 | BCA | matricula | pernocte | 28 | 1139.0 |
 | BCA | matricula | rotacion | 1183 | 48.0 |
 | BCA | modelo | escala_larga | 130 | 186.5 |
 | BCA | modelo | pernocte | 281 | 605.0 |
 | BCA | modelo | rotacion | 5117 | 52.0 |
-| DOZ | matricula | escala_larga | 137 | 199.0 |
+| DOZ | matricula | escala_larga | 138 | 200.0 |
 | DOZ | matricula | pernocte | 323 | 633.0 |
-| DOZ | matricula | rotacion | 3935 | 61.0 |
+| DOZ | matricula | rotacion | 3936 | 61.0 |
 | DOZ | modelo | escala_larga | 558 | 190.0 |
 | DOZ | modelo | pernocte | 921 | 613.0 |
 | DOZ | modelo | rotacion | 26719 | 57.0 |
-| MDP | matricula | escala_larga | 282 | 235.0 |
+| MDP | matricula | escala_larga | 281 | 234.0 |
 | MDP | matricula | pernocte | 127 | 1148.0 |
-| MDP | matricula | rotacion | 1456 | 51.0 |
-| MDP | modelo | escala_larga | 386 | 204.0 |
-| MDP | modelo | pernocte | 186 | 580.5 |
-| MDP | modelo | rotacion | 7823 | 52.0 |
-| NEU | matricula | escala_larga | 295 | 209.0 |
-| NEU | matricula | pernocte | 773 | 991.0 |
+| MDP | matricula | rotacion | 1457 | 51.0 |
+| MDP | modelo | escala_larga | 471 | 218.0 |
+| MDP | modelo | pernocte | 467 | 549.0 |
+| MDP | modelo | rotacion | 9300 | 50.0 |
+| NEU | matricula | escala_larga | 296 | 210.0 |
+| NEU | matricula | pernocte | 774 | 992.0 |
 | NEU | matricula | rotacion | 3696 | 53.0 |
 | NEU | modelo | escala_larga | 515 | 247.0 |
 | NEU | modelo | pernocte | 1250 | 1025.5 |
 | NEU | modelo | rotacion | 18578 | 53.0 |
 | SAL | matricula | escala_larga | 242 | 161.5 |
 | SAL | matricula | pernocte | 1125 | 1118.0 |
-| SAL | matricula | rotacion | 4117 | 56.0 |
+| SAL | matricula | rotacion | 4119 | 56.0 |
 | SAL | modelo | escala_larga | 546 | 149.0 |
 | SAL | modelo | pernocte | 2667 | 1103.0 |
 | SAL | modelo | rotacion | 22396 | 57.0 |
@@ -212,13 +212,13 @@
 
 | anio | segmento | movimientos | sin_aeronave | sin_aeronave_mas_de_96_pax | sin_aeronave_20_a_96_pax | sin_aeronave_menos_de_20_pax |
 |---|---|---|---|---|---|---|
-| 2019 | linea_regular | 5324 | 3957 | 287 | 3579 | 91 |
-| 2019 | taxi_aereo | 938 | 662 | 0 | 7 | 655 |
-| 2019 | privado | 826 | 502 | 0 | 5 | 497 |
-| 2019 | oficial | 669 | 633 | 0 | 8 | 625 |
-| 2019 | instruccion | 548 | 22 | 0 | 0 | 22 |
+| 2019 | linea_regular | 5324 | 4 | 0 | 3 | 1 |
+| 2019 | taxi_aereo | 1010 | 319 | 0 | 6 | 313 |
+| 2019 | privado | 751 | 358 | 0 | 3 | 355 |
+| 2019 | oficial | 669 | 592 | 0 | 8 | 584 |
+| 2019 | instruccion | 548 | 6 | 0 | 0 | 6 |
 | 2019 | trabajo_aereo | 50 | 0 | 0 | 0 | 0 |
-| 2019 | charter_linea | 33 | 21 | 0 | 5 | 16 |
+| 2019 | charter_linea | 36 | 21 | 0 | 5 | 16 |
 | 2020 | linea_regular | 1351 | 1265 | 275 | 968 | 22 |
 | 2020 | privado | 499 | 306 | 0 | 0 | 306 |
 | 2020 | oficial | 411 | 397 | 0 | 2 | 395 |
@@ -285,7 +285,10 @@
 | 2022-12-28 | BO-737-76N | Aerolíneas Argentinas | 172 | 129.0 | 1.333 |
 | 2023-10-01 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 125 | 96.0 | 1.302 |
 | 2022-10-04 | BO-737-76N | Aerolíneas Argentinas | 162 | 129.0 | 1.256 |
-| 2023-01-26 | BO-B737-8MB | Aerolíneas Argentinas | 204 | 172.0 | 1.186 |
+| 2019-04-13 | ATR-ATR72-212A | Avian (Avianca Argentina) | 89 | 72.0 | 1.236 |
+| 2019-01-31 | ATR-ATR72-212A | Avian (Avianca Argentina) | 88 | 72.0 | 1.222 |
+| 2023-01-26 | BO-B737-8MB | Aerolíneas Argentinas | 204 | 170.0 | 1.2 |
+| 2019-02-16 | ATR-ATR72-212A | Avian (Avianca Argentina) | 82 | 72.0 | 1.139 |
 | 2024-12-22 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 108 | 96.0 | 1.125 |
 
 ## Reconciliación vs fuente oficial (config/reconciliacion.csv)
