@@ -34,6 +34,7 @@ TABLAS = [
     "fct_bus_viaje",
     "fct_bus_ruta_anual_publicada",
     "fct_tren_mensual",
+    "fct_evyth_mdq",
     "fct_bus_nacional_diario",
     "dim_bus_localidad",
 ]
@@ -271,6 +272,22 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
                     "tipo_servicio VARCHAR, jurisdiccion VARCHAR, servicio VARCHAR, pax INT, "
                     "archivo VARCHAR)")
 
+    # EVyTH: viajes de residentes a Mar del Plata (sql/bd/90_evyth.sql).
+    ev, evd = processed / "evyth_mdq.parquet", processed / "evyth_diccionario.parquet"
+    if ev.exists():
+        con.execute("CREATE TABLE stg_evyth AS SELECT * FROM read_parquet(?)", [str(ev)])
+    else:
+        log.warning("Sin EVyTH: no hay reparto por medio de transporte")
+        con.execute("CREATE TABLE stg_evyth (anio INT, trimestre INT, region_origen VARCHAR, "
+                    "tipo_visitante VARCHAR, px09 VARCHAR, px07 VARCHAR, px08_agrup VARCHAR, "
+                    "px10_1 VARCHAR, pondera DOUBLE, localidad_destino VARCHAR, "
+                    "provincia_destino VARCHAR)")
+    if evd.exists():
+        con.execute("CREATE TABLE stg_evyth_dicc AS SELECT * FROM read_parquet(?)", [str(evd)])
+    else:
+        con.execute("CREATE TABLE stg_evyth_dicc (variable VARCHAR, opcion VARCHAR, "
+                    "descripcion VARCHAR)")
+
     for sql_file in sorted((SQL / "bd").glob("*.sql")):
         log.info("bd: %s", sql_file.name)
         con.execute(sql_file.read_text(encoding="utf-8"))
@@ -282,6 +299,8 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
     con.execute("DROP TABLE anac_aeropuertos")
     # Ya están en fct_bus_viaje (solo el foco).
     con.execute("DROP TABLE stg_tren")
+    con.execute("DROP TABLE stg_evyth")
+    con.execute("DROP TABLE stg_evyth_dicc")
     con.execute("DROP TABLE stg_bus_base_microdatos")
     con.execute("DROP TABLE stg_bus_base_microdatos_dut")
 

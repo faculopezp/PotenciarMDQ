@@ -83,6 +83,8 @@ def _xlsx(path: Path, n: int = 12, n_foco: int = 60) -> list[str]:
         filas = [["" if v is None else str(v) for v in fila]
                  for fila in ws.iter_rows(values_only=True)]
         filas = [f for f in filas if any(f)]
+        tipos = next((fila for fila in ws.iter_rows(min_row=2, max_row=2, values_only=True)), ())
+        out.append(f"Tipos de la fila 2: {', '.join(type(v).__name__ for v in tipos[:10])}")
         foco = [f for f in filas if any(k in " ".join(f).lower() for k in FOCO)]
         out += [f"#### hoja `{ws.title}` — {len(filas)} filas, {len(foco)} del foco", "```"]
         out += [" | ".join(f).rstrip(" |") for f in filas[:n]]

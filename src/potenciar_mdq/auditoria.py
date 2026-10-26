@@ -601,7 +601,18 @@ def run_omnibus(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
         FROM fct_tren_mensual WHERE es_foco GROUP BY ALL ORDER BY desde"""),
            "Meses duplicados (mismo servicio, año y mes más de una vez):", "", _table(con, """
         SELECT anio, mes, servicio, count(*) AS filas FROM fct_tren_mensual
-        GROUP BY ALL HAVING count(*) > 1 ORDER BY 1, 2 LIMIT 20""")]
+        GROUP BY ALL HAVING count(*) > 1 ORDER BY 1, 2 LIMIT 20"""),
+           "## 8. EVyTH: viajes de residentes con destino Mar del Plata", "",
+           "Casos encuestados (sin expandir) por año y tipo de visitante, y medio informado:", "",
+           _table(con, """
+        SELECT anio, count(DISTINCT trimestre) AS trimestres,
+               count(*) FILTER (WHERE tipo_visitante = 'turista') AS casos_turistas,
+               count(*) FILTER (WHERE tipo_visitante = 'excursionista') AS casos_excursionistas,
+               round(sum(pondera) FILTER (WHERE tipo_visitante = 'turista')) AS turistas_expandidos
+        FROM fct_evyth_mdq GROUP BY anio ORDER BY anio"""),
+           _table(con, """
+        SELECT medio, medio_detalle, count(*) AS casos, round(sum(pondera)) AS expandidos
+        FROM fct_evyth_mdq GROUP BY ALL ORDER BY expandidos DESC""")]
     con.close()
     out_dir.mkdir(parents=True, exist_ok=True)
     dest = out_dir / "omnibus.md"

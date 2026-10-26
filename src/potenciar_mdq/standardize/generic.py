@@ -290,10 +290,14 @@ def build_tren(raw_dir: Path = RAW / "cnrt_ferroviario", out: Path = PROCESSED) 
     filas = []
     for fila in wb["DATOS"].iter_rows(min_row=2, max_col=8, values_only=True):
         anio, mes, linea, operador, tipo, jurisdiccion, servicio, pax = fila
-        if not isinstance(anio, int | float) or str(mes).strip().lower() not in MESES_ES:
+        # Año y PAX pueden venir como número o como texto ("2007", "2007.0", "28.062").
+        anio_txt = str(anio).strip().removesuffix(".0")
+        mes_txt = str(mes).strip().lower()
+        if not re.fullmatch(r"\d{4}", anio_txt) or mes_txt not in MESES_ES or not servicio:
             continue
-        filas.append((int(anio), MESES_ES[str(mes).strip().lower()], linea, operador, tipo,
-                      jurisdiccion, str(servicio).strip(), None if pax is None else int(pax)))
+        pax_txt = re.sub(r"[^\d]", "", str(pax).split(",")[0].removesuffix(".0")) if pax else ""
+        filas.append((int(anio_txt), MESES_ES[mes_txt], linea, operador, tipo, jurisdiccion,
+                      str(servicio).strip(), int(pax_txt) if pax_txt else None))
     if not filas:
         raise ValueError(f"{src.name}: la hoja DATOS no trae filas año/mes/servicio")
     con = duckdb.connect()
@@ -304,3 +308,33 @@ def build_tren(raw_dir: Path = RAW / "cnrt_ferroviario", out: Path = PROCESSED) 
     con.execute(f"COPY (SELECT *, {_q(src.name)} AS archivo FROM t) TO {_q(str(dest))} "
                 "(FORMAT parquet)")
     return dest
+
+
+def build_evyth(raw_dir: Path = RAW / "yvera_evyth", out: Path = PROCESSED) -> list[Path]:
+    """EVyTH (Yvera): viajes de residentes con destino Mar del Plata -> evyth_mdq.parquet, más el
+    diccionario de códigos -> evyth_diccionario.parquet. Una fila por visitante y viaje; pondera
+    es el factor de expansión."""
+    csvs = _latest_per_resource([p for p in raw_dir.rglob("*.csv")])
+    micro = [p for p in csvs if "microdatos" in p.name]
+    dicc = [p for p in csvs if "diccionario" in p.name]
+    if not micro:
+        raise FileNotFoundError(f"No hay microdatos de la EVyTH en {raw_dir}")
+    con = duckdb.connect()
+    rel = f"read_csv({_q(str(ensure_utf8(micro[-1])))}, header=true, all_varchar=true)"
+    dest = out / "evyth_mdq.parquet"
+    con.execute(f"""
+        COPY (
+          SELECT TRY_CAST(anio AS INT) AS anio, TRY_CAST(trimestre AS INT) AS trimestre,
+                 region_origen, tipo_visitante, px09, px07, px08_agrup, px10_1,
+                 TRY_CAST(replace(pondera, ',', '.') AS DOUBLE) AS pondera,
+                 trim(localidad_destino) AS localidad_destino, provincia_destino
+          FROM {rel}
+          WHERE lower(strip_accents(trim(localidad_destino))) = 'mar del plata'
+        ) TO {_q(str(dest))} (FORMAT parquet)""")
+    escritos = [dest]
+    if dicc:
+        d = out / "evyth_diccionario.parquet"
+        con.execute(f"""COPY (SELECT * FROM read_csv({_q(str(ensure_utf8(dicc[-1])))},
+                        header=true, all_varchar=true)) TO {_q(str(d))} (FORMAT parquet)""")
+        escritos.append(d)
+    return escritos

@@ -10,6 +10,7 @@ from potenciar_mdq import analitica, auditoria, fuentes, muestras, quality, web_
 from potenciar_mdq import bd as bd_mod
 from potenciar_mdq import ingest as ingest_mod
 from potenciar_mdq import marts as marts_mod
+from potenciar_mdq.settings import REPORTS
 from potenciar_mdq.standardize import anac_movimientos, generic, municipal
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
@@ -38,14 +39,23 @@ def ingest(
 def standardize() -> None:
     """raw -> processed (parquet con esquema canónico)."""
     typer.echo(anac_movimientos.build())
+    pasos = ["# Pasos de estandarización", "", "| paso | resultado |", "|---|---|"]
     for step in (generic.build_yvera, generic.build_dim_aeropuerto, generic.build_anac_aeropuertos,
                  generic.build_opensky, generic.build_madhel, generic.build_tar1090,
                  generic.build_clima, generic.build_terrestre, generic.build_tren,
+                 generic.build_evyth,
                  municipal.build):
         try:
-            typer.echo(step())
+            res = step()
+            typer.echo(res)
+            n = len(res) if isinstance(res, list) else 1
+            pasos.append(f"| {step.__name__} | ok ({n} archivo{'s' if n != 1 else ''}) |")
         except Exception as exc:  # noqa: BLE001 - fuentes secundarias: no cortan el pipeline
             typer.echo(f"skip {step.__name__}: {type(exc).__name__}: {exc}")
+            pasos.append(f"| {step.__name__} | ❌ {type(exc).__name__}: {str(exc)[:300]} |")
+    # El CI commitea reports/qa: así se ve qué fuente secundaria falló sin abrir los logs.
+    (REPORTS / "qa").mkdir(parents=True, exist_ok=True)
+    (REPORTS / "qa" / "pasos.md").write_text("\n".join(pasos) + "\n", encoding="utf-8")
 
 
 @app.command()
