@@ -58,10 +58,16 @@ jobs:
             echo "Sin cambios en los datos."
           else
             git commit -m "datos: actualización automática $(date -u +%Y-%m-%d)"
-            # Si llegó un commit a main durante la corrida, rebasar antes de subir (los datos
-            # generados no se tocan a mano, así que no hay conflictos esperables).
+            # Si llegó un commit a main durante la corrida (código u otra corrida de datos), rebasar
+            # antes de subir. Ante conflicto en archivos generados gana esta corrida (-X theirs:
+            # en un rebase "theirs" es el commit propio que se reaplica). Si no sube, falla.
+            subido=false
             for i in 1 2 3; do
-              git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break
+              if git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push; then
+                subido=true; break
+              fi
+              git rebase --abort 2>/dev/null || true
               sleep 5
             done
+            $subido || { echo "No se pudieron subir los datos"; exit 1; }
           fi
