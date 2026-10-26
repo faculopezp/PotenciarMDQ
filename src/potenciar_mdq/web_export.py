@@ -53,6 +53,7 @@ MARTS_WEB = {
     "mart_tren_mensual": "tren_mensual",
     "mart_tren_anual": "tren_anual",
     "mart_tren_servicios": "tren_servicios",
+    "mart_tren_operador": "tren_operador",
     "mart_evyth_medio": "evyth_medio",
     "mart_evyth_origen": "evyth_origen",
 }

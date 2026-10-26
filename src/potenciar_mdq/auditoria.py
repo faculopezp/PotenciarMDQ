@@ -599,9 +599,15 @@ def run_omnibus(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
         SELECT servicio, operador, jurisdiccion, min(anio) AS desde, max(anio) AS hasta,
                count(*) AS meses, sum(pax) AS pasajeros
         FROM fct_tren_mensual WHERE es_foco GROUP BY ALL ORDER BY desde"""),
-           "Meses duplicados (mismo servicio, año y mes más de una vez):", "", _table(con, """
-        SELECT anio, mes, servicio, count(*) AS filas FROM fct_tren_mensual
+           "Meses repetidos (mismo servicio, operador, año y mes más de una vez; dos operadores "
+           "en el mismo mes no es repetición: se suman):", "", _table(con, """
+        SELECT anio, mes, servicio, operador, count(*) AS filas FROM fct_tren_mensual
         GROUP BY ALL HAVING count(*) > 1 ORDER BY 1, 2 LIMIT 20"""),
+           "Meses del foco con más de un operador:", "", _table(con, """
+        SELECT anio, string_agg(DISTINCT operador, ' · ') AS operadores, count(DISTINCT mes) AS meses
+        FROM (SELECT anio, mes, operador, count(*) OVER (PARTITION BY anio, mes) AS n
+              FROM fct_tren_mensual WHERE es_foco)
+        WHERE n > 1 GROUP BY anio ORDER BY anio"""),
            "## 8. EVyTH: viajes de residentes con destino Mar del Plata", "",
            "Casos encuestados (sin expandir) por año y tipo de visitante, y medio informado:", "",
            _table(con, """
