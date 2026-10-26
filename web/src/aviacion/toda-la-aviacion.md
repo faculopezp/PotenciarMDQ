@@ -8,17 +8,17 @@ import * as d3 from "d3";
 import * as Inputs from "@observablehq/inputs";
 import {html} from "htl";
 import {TINTA, TINTA_2, ACENTO, OTRO, SEQ, SEGMENTOS, SEG_NOMBRE, SEG_COLOR, segColor, entero, pct, decimal1,
-  MESES, DIAS, PERFILES, PERFIL_NOMBRE, perfilColor, datos, columnas, ALTO, ejeAnios, fechaEje, modelosCortos} from "./components/util.js";
+  MESES, DIAS, PERFILES, PERFIL_NOMBRE, perfilColor, datos, columnas, ALTO, ejeAnios, fechaEje, modelosCortos} from "../components/util.js";
 ```
 
 ```js
-const segMensual = datos(FileAttachment("data/mdq_segmentos_mensual.json"));
-const segAnual = datos(FileAttachment("data/mdq_segmentos_anual.json"));
-const avionTipico = datos(FileAttachment("data/mdq_avion_tipico.json"));
-const operadores = datos(FileAttachment("data/mdq_operadores.json"));
-const historiaSeg = datos(FileAttachment("data/mdq_historia_segmentos.json"));
-const perfilAero = datos(FileAttachment("data/mdq_perfil_aeronave.json"));
-const base = columnas(FileAttachment("data/mdq_explorador.json"));
+const segMensual = datos(FileAttachment("../data/mdq_segmentos_mensual.json"));
+const segAnual = datos(FileAttachment("../data/mdq_segmentos_anual.json"));
+const avionTipico = datos(FileAttachment("../data/mdq_avion_tipico.json"));
+const operadores = datos(FileAttachment("../data/mdq_operadores.json"));
+const historiaSeg = datos(FileAttachment("../data/mdq_historia_segmentos.json"));
+const perfilAero = datos(FileAttachment("../data/mdq_perfil_aeronave.json"));
+const base = columnas(FileAttachment("../data/mdq_explorador.json"));
 ```
 
 <div class="portada" style="padding-top:6vh">
@@ -220,4 +220,4 @@ Plot.plot({
 })
 ```
 
-<p class="leyenda">Cómo se arma cada segmento y qué se hace con los datos incompletos: <a href="./metodologia">Metodología</a>.</p>
+<p class="leyenda">Cómo se arma cada segmento y qué se hace con los datos incompletos: <a href="../metodologia">Metodología</a>.</p>

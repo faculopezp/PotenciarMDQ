@@ -7,7 +7,7 @@ title: Explorador
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
 import * as Inputs from "@observablehq/inputs";
-import {ACENTO, entero, MESES, DIAS, CATEGORIAS, CATEGORIA_COLOR, SEGMENTOS, SEG_NOMBRE, SEG_COLOR, segColor, columnas} from "./components/util.js";
+import {ACENTO, entero, MESES, DIAS, CATEGORIAS, CATEGORIA_COLOR, SEGMENTOS, SEG_NOMBRE, SEG_COLOR, segColor, columnas} from "../components/util.js";
 import {html} from "htl";
 ```
 
@@ -16,7 +16,7 @@ import {html} from "htl";
 Filtrá los aterrizajes y despegues del Aeropuerto de Mar del Plata como en la vieja consulta interactiva de la ANAC: por año, tipo de vuelo, aerolínea y tipo de avión.
 
 ```js
-const base = columnas(FileAttachment("data/mdq_explorador.json"));
+const base = columnas(FileAttachment("../data/mdq_explorador.json"));
 ```
 
 ```js

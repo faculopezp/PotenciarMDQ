@@ -4,5 +4,17 @@
   "installCommand": "cd web && npm ci",
   "buildCommand": "cd web && npm run build",
   "outputDirectory": "web/dist",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/aviacion-general",
+      "destination": "/aviacion/toda-la-aviacion",
+      "permanent": true
+    },
+    {
+      "source": "/explorador",
+      "destination": "/aviacion/explorador",
+      "permanent": true
+    }
+  ]
 }
