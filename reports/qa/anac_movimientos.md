@@ -4,7 +4,7 @@
 
 | source_file | filas | pct_fecha_null | pct_hora_null | pct_pax_null | pct_aeronave_null | pct_con_matricula | pct_provisorio | desde | hasta |
 |---|---|---|---|---|---|---|---|---|---|
-| 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580697 | 0.0 | 0.0 | 0.0 | 99.77 | 0.0 | 0.0 | 2019-01-01 | 2019-12-31 |
+| 20261024_201912-informe-ministerio-actualizado-dic-final.csv | 580697 | 0.0 | 0.0 | 0.0 | 99.55 | 0.0 | 0.0 | 2019-01-01 | 2019-12-31 |
 | 20261024_202012-informe-ministerio-actualizado-dic-final.csv | 212726 | 0.0 | 0.0 | 0.0 | 85.3 | 0.0 | 0.0 | 2019-12-31 | 2020-12-31 |
 | 20261024_202112-informe-ministerio-actualizado-dic-final.csv | 329781 | 0.0 | 0.0 | 0.0 | 14.04 | 0.0 | 0.0 | 2020-12-31 | 2021-12-31 |
 | 20261024_202212-informe-ministerio-actualizado-dic-final.csv | 477903 | 0.0 | 0.0 | 0.0 | 15.27 | 0.0 | 0.0 | 2021-12-31 | 2022-12-31 |
@@ -61,7 +61,7 @@
 
 | pct_aeronave_otro | pct_aerolinea_sin_regla | pct_sin_distancia | pct_sin_asientos |
 |---|---|---|---|
-| 0.13 | 7.37 | 0.9 | 43.33 |
+| 0.13 | 7.37 | 0.9 | 43.32 |
 
 ## Aeronaves sin clasificar (top 25 → ampliar config/aeronaves.yaml)
 
@@ -90,8 +90,8 @@
 | AGW-AW 109SP | 165 |
 | CE-T-303 | 153 |
 | BE-M-35 | 151 |
+| BE-D-95-A | 144 |
 | ARH-EC 130 B4 | 142 |
-| BE-D-95-A | 140 |
 
 ## Códigos sin coordenadas (top 25 → revisar dim_aeropuerto)
 
@@ -165,7 +165,7 @@
 
 | tramos | despegues_cabotaje | pct_emparejado |
 |---|---|---|
-| 779827 | 915317 | 85.2 |
+| 779772 | 915317 | 85.2 |
 
 ## Rotaciones: método por matrícula vs por modelo
 
@@ -192,9 +192,9 @@
 | MDP | matricula | escala_larga | 282 | 235.0 |
 | MDP | matricula | pernocte | 127 | 1148.0 |
 | MDP | matricula | rotacion | 1456 | 51.0 |
-| MDP | modelo | escala_larga | 367 | 204.0 |
-| MDP | modelo | pernocte | 176 | 565.0 |
-| MDP | modelo | rotacion | 7771 | 52.0 |
+| MDP | modelo | escala_larga | 386 | 204.0 |
+| MDP | modelo | pernocte | 186 | 580.5 |
+| MDP | modelo | rotacion | 7823 | 52.0 |
 | NEU | matricula | escala_larga | 295 | 209.0 |
 | NEU | matricula | pernocte | 773 | 991.0 |
 | NEU | matricula | rotacion | 3696 | 53.0 |
@@ -212,13 +212,13 @@
 
 | anio | segmento | movimientos | sin_aeronave | sin_aeronave_mas_de_96_pax | sin_aeronave_20_a_96_pax | sin_aeronave_menos_de_20_pax |
 |---|---|---|---|---|---|---|
-| 2019 | linea_regular | 5324 | 3977 | 288 | 3579 | 110 |
-| 2019 | taxi_aereo | 963 | 963 | 0 | 7 | 956 |
-| 2019 | privado | 802 | 802 | 0 | 5 | 797 |
-| 2019 | oficial | 669 | 669 | 0 | 8 | 661 |
-| 2019 | instruccion | 548 | 548 | 0 | 0 | 548 |
-| 2019 | trabajo_aereo | 50 | 50 | 0 | 0 | 50 |
-| 2019 | charter_linea | 32 | 23 | 0 | 5 | 18 |
+| 2019 | linea_regular | 5324 | 3957 | 287 | 3579 | 91 |
+| 2019 | taxi_aereo | 938 | 662 | 0 | 7 | 655 |
+| 2019 | privado | 826 | 502 | 0 | 5 | 497 |
+| 2019 | oficial | 669 | 633 | 0 | 8 | 625 |
+| 2019 | instruccion | 548 | 22 | 0 | 0 | 22 |
+| 2019 | trabajo_aereo | 50 | 0 | 0 | 0 | 0 |
+| 2019 | charter_linea | 33 | 21 | 0 | 5 | 16 |
 | 2020 | linea_regular | 1351 | 1265 | 275 | 968 | 22 |
 | 2020 | privado | 499 | 306 | 0 | 0 | 306 |
 | 2020 | oficial | 411 | 397 | 0 | 2 | 395 |
