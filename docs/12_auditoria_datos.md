@@ -55,6 +55,11 @@ aeronave mal cargados en ANAC (vuelos de Aerolíneas cargados como Lodestar o Ce
 versiones: iguales en 2.194 de 7.670 registros con la misma hora); el cruce usa fecha, hora,
 movimiento y origen/destino, 1 a 1.
 
+**Aeronave por asientos (Yvera)**, sobre todo para 2020 (ANAC no cargó la aeronave): para cada
+operador y cantidad de asientos del vuelo exacto, el modelo que vuela en los años con dato; se usa
+solo si explica >= 98 % de al menos 20 vuelos (si solo llega la familia, ej. 170 asientos = 737-800 o
+MAX 8, se asigna la familia). Queda marcado como `aeronave_inferida` (fuente `asientos_yvera`).
+
 Lugares aptos denunciados: quedan como LAD (sin coordenadas, fuera del mapa).
 
 Reclasificación: todo vuelo **privado en jet o turbohélice ejecutivo** se analiza como taxi aéreo

@@ -4,7 +4,8 @@ CREATE OR REPLACE TABLE fct_movimiento AS
 -- Datos recuperados (sql/bd/25_recuperacion.sql), en orden de prioridad: ANAC 2019 versión
 -- anterior (mismo registro); operador por Afectación ANAC, por matrícula (unánime), por el otro extremo del mismo vuelo
 -- con matrícula, por prefijo de aeronave del Estado o por el otro extremo sin matrícula; aeronave
--- del portal municipal (2015–2019), por serie estatal o por el otro extremo sin matrícula.
+-- del portal municipal (2015–2019), por serie estatal, por el otro extremo sin matrícula o por
+-- los asientos del vuelo exacto (Yvera).
 WITH s AS (
   SELECT
     s.* EXCLUDE (aeropuerto, aerolinea, aeronave),
@@ -18,12 +19,14 @@ WITH s AS (
          WHEN op.aerolinea IS NOT NULL THEN 'otro_extremo'
          WHEN oe.aerolinea IS NOT NULL THEN 'prefijo_estatal'
          WHEN vp.aerolinea_par IS NOT NULL THEN 'otro_extremo_sin_matricula' END AS operador_fuente,
-    coalesce(s.aeronave, pv.aeronave_previa, am.aeronave, ae.aeronave, vp.aeronave_par) AS aeronave,
+    coalesce(s.aeronave, pv.aeronave_previa, am.aeronave, ae.aeronave, vp.aeronave_par,
+             pa.aeronave) AS aeronave,
     CASE WHEN s.aeronave IS NOT NULL THEN 'anac'
          WHEN pv.aeronave_previa IS NOT NULL THEN 'anac_version_anterior'
          WHEN am.aeronave IS NOT NULL THEN 'municipal'
          WHEN ae.aeronave IS NOT NULL THEN 'serie_estatal'
-         WHEN vp.aeronave_par IS NOT NULL THEN 'otro_extremo_sin_matricula' END AS aeronave_fuente,
+         WHEN vp.aeronave_par IS NOT NULL THEN 'otro_extremo_sin_matricula'
+         WHEN pa.aeronave IS NOT NULL THEN 'asientos_yvera' END AS aeronave_fuente,
     s.aeropuerto                                   AS aeropuerto_original,
     coalesce(c.a, s.aeropuerto)                    AS aeropuerto,
     CAST(s.fecha + s.hora_utc AS TIMESTAMP)        AS ts_utc
@@ -51,6 +54,11 @@ WITH s AS (
     ON s.aeronave IS NULL AND am.fecha = s.fecha AND am.hora_utc = s.hora_utc
    AND am.aeropuerto = s.aeropuerto AND am.tipo_movimiento = s.tipo_movimiento
    AND am.origen_destino = s.origen_destino AND am.aerolinea = s.aerolinea
+  LEFT JOIN ref_aeronave_por_asientos pa
+    ON s.aeronave IS NULL AND pa.fecha = s.fecha AND pa.hora_utc = s.hora_utc
+   AND pa.aeropuerto = s.aeropuerto AND pa.tipo_movimiento = s.tipo_movimiento
+   AND pa.origen_destino = s.origen_destino AND pa.aerolinea IS NOT DISTINCT FROM s.aerolinea
+   AND pa.matricula IS NOT DISTINCT FROM s.matricula AND pa.pasajeros = s.pasajeros
   LEFT JOIN ref_aeronave_serie ae
     ON s.aeronave IS NULL AND ae.matricula = s.matricula AND s.fecha >= ae.desde
   LEFT JOIN correcciones c
@@ -193,7 +201,8 @@ SELECT
   j.plazas                                         AS aeronave_plazas,
   coalesce(j.familia, j.familia_inferida, 'Sin dato') AS aeronave_familia_inferida,
   coalesce(j.modelo, j.modelo_inferido, j.familia, 'Sin dato') AS aeronave_modelo_inferido,
-  j.familia IS NULL AND j.familia_inferida IS NOT NULL AS aeronave_inferida,
+  (j.familia IS NULL AND j.familia_inferida IS NOT NULL)
+    OR j.aeronave_fuente = 'asientos_yvera'         AS aeronave_inferida,
   j.matricula,
   CASE WHEN j.matricula IS NULL THEN NULL
        WHEN regexp_matches(j.matricula, '^L[VQ]-') THEN 'argentina'

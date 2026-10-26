@@ -344,7 +344,8 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
           count(*) FILTER (aeronave_fuente = 'municipal') AS aeronave_del_municipio,
           count(*) FILTER (aeronave_fuente = 'serie_estatal') AS aeronave_por_serie_estatal,
           count(*) FILTER (aeronave_fuente = 'otro_extremo_sin_matricula')
-            AS aeronave_otro_extremo_sin_matricula
+            AS aeronave_otro_extremo_sin_matricula,
+          count(*) FILTER (aeronave_fuente = 'asientos_yvera') AS aeronave_por_asientos_yvera
         FROM fct_movimiento GROUP BY 1 ORDER BY 1"""),
             "Privado en jet o turbohélice ejecutivo analizado como taxi aéreo. Evidencia en el foco: "
             "cuántos tienen operador o matrícula que también vuela como no regular.", "",
@@ -417,7 +418,17 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
             LEFT JOIN ref_cabina cb ON cb.operador IS NOT NULL AND cb.modelo = f.aeronave_modelo
              AND regexp_matches(upper(strip_accents(f.aerolinea_nombre)), cb.operador)
             LEFT JOIN ref_cabina cg ON cg.operador IS NULL AND cg.modelo = f.aeronave_modelo
-            GROUP BY ALL ORDER BY 3 DESC LIMIT 20""")]
+            GROUP BY ALL ORDER BY 3 DESC LIMIT 20"""),
+                "Aeronave por asientos: reglas aprendidas (operador + asientos → modelo o familia, "
+                ">= 98 % de al menos 20 vuelos con aeronave informada):", "", _table(con, """
+            SELECT clave AS operador, asientos, nivel, valor, n AS vuelos_que_cumplen,
+                   total AS vuelos_con_esos_asientos, round(100.0 * n / total, 1) AS pct
+            FROM ref_modelo_por_asientos ORDER BY total DESC LIMIT 20"""),
+                "Aplicadas en el foco (vuelos sin aeronave):", "", _table(con, """
+            SELECT anio, aeronave_familia, aeronave_modelo, count(*) AS movimientos
+            FROM fct_movimiento WHERE aeronave_fuente = 'asientos_yvera'
+              AND aeropuerto = getvariable('foco')
+            GROUP BY ALL ORDER BY anio, movimientos DESC""")]
 
     # ── Lo que no se puede recuperar con lo que hay ────────────────────────────────────────
     out += ["## 3. Sin cruce posible con las fuentes actuales", "", _table(con, """

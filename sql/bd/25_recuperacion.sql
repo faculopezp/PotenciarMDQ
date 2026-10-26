@@ -234,3 +234,52 @@ SELECT matricula, any_value(entidad) AS aerolinea, max(fecha_afectacion) AS desd
        max(extraccion) AS hasta
 FROM ref_afectacion
 GROUP BY matricula HAVING count(DISTINCT entidad) = 1;
+
+-- 10. Aeronave por asientos del vuelo exacto (Yvera, punto 8) para los vuelos sin aeronave (sobre
+--     todo 2020). Regla aprendida de los vuelos con aeronave informada: para cada operador y
+--     cantidad de asientos, el modelo que vuela; vale solo si explica >= 98 % de al menos 20 vuelos.
+--     Si solo la familia llega (ej. 170 asientos = 737-800 o MAX 8), se asigna la familia sin
+--     variante. Validación en reports/qa/auditoria.md, sección 5.
+CREATE OR REPLACE TABLE ref_modelo_por_asientos AS
+WITH c AS (
+  SELECT coalesce(al.aerolinea_clave, r.aerolinea) AS clave, r.asientos, d.familia, d.modelo,
+         r.aeronave
+  FROM ref_asientos_vuelo r
+  JOIN dim_aeronave d ON d.aeronave = r.aeronave
+  LEFT JOIN dim_aerolinea al ON al.aerolinea = r.aerolinea
+  WHERE d.familia <> 'Otra'
+),
+por_modelo AS (
+  SELECT clave, asientos, modelo, any_value(familia) AS familia, count(*) AS n,
+         mode(aeronave) AS aeronave
+  FROM c GROUP BY clave, asientos, modelo
+),
+por_familia AS (
+  SELECT clave, asientos, familia, count(*) AS n FROM c GROUP BY clave, asientos, familia
+),
+tot AS (SELECT clave, asientos, count(*) AS total FROM c GROUP BY clave, asientos),
+m AS (
+  SELECT p.*, t.total FROM por_modelo p JOIN tot t USING (clave, asientos)
+  WHERE t.total >= 20 AND p.n >= 0.98 * t.total
+),
+f AS (
+  SELECT p.*, t.total FROM por_familia p JOIN tot t USING (clave, asientos)
+  WHERE t.total >= 20 AND p.n >= 0.98 * t.total
+),
+generico AS (  -- denominación cuya familia y modelo coinciden (sin variante), ej. "BOEING B-737"
+  SELECT familia, min(aeronave) AS aeronave FROM dim_aeronave WHERE modelo = familia GROUP BY 1
+)
+SELECT clave, asientos, 'modelo' AS nivel, modelo AS valor, aeronave, n, total FROM m
+UNION ALL
+SELECT f.clave, f.asientos, 'familia', f.familia, g.aeronave, f.n, f.total
+FROM f JOIN generico g USING (familia)
+WHERE NOT EXISTS (SELECT 1 FROM m WHERE m.clave = f.clave AND m.asientos = f.asientos);
+
+CREATE OR REPLACE TABLE ref_aeronave_por_asientos AS
+SELECT r.fecha, r.hora_utc, r.aeropuerto, r.tipo_movimiento, r.origen_destino, r.aerolinea,
+       r.matricula, r.pasajeros, p.aeronave, p.nivel
+FROM ref_asientos_vuelo r
+LEFT JOIN dim_aerolinea al ON al.aerolinea = r.aerolinea
+JOIN ref_modelo_por_asientos p
+  ON p.clave = coalesce(al.aerolinea_clave, r.aerolinea) AND p.asientos = r.asientos
+WHERE r.aeronave IS NULL;
