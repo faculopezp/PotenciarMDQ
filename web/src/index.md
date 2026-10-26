@@ -13,6 +13,8 @@ import {TINTA, TINTA_2, ACENTO, OTRO, entero, pct, pct1, compacto, variacion, da
 ```js
 const anual = datos(FileAttachment("data/mdq_anual.json"));
 const turismo = datos(FileAttachment("data/mdq_turismo.json"));
+const bus = FileAttachment("data/bus_anual.json").json();
+const tren = FileAttachment("data/tren_anual.json").json();
 ```
 
 ```js
@@ -42,10 +44,12 @@ const modos = [
    serie: turAnual.map((d) => ({x: d.anio, y: d.turistas}))},
   {path: "/aviacion/", titulo: "Aviación", estado: "listo", texto: "Cada aterrizaje y despegue desde 2019: aerolíneas, rutas, aviones, ocupación y toda la aviación general.",
    serie: anual.map((d) => ({x: d.anio, y: d.pasajeros_comerciales}))},
-  {path: "/omnibus", titulo: "Ómnibus", estado: "preparación", texto: "Micros de larga distancia desde 2019: rutas, pasajeros, asientos y ocupación (CNRT vía Yvera)."},
-  {path: "/tren", titulo: "Tren", estado: "preparación", texto: "El servicio Constitución–Mar del Plata: pasajeros por año y temporada (CNRT)."},
-  {path: "/autos", titulo: "Autos", estado: "preparación", texto: "La vía de la mayoría: lo que se sabe del tránsito por las rutas 2, 11 y 226."},
-  {path: "/cruceros", titulo: "Cruceros", estado: "preparación", texto: "Las pocas recaladas de cruceros en el puerto, una por una."}
+  {path: "/omnibus", titulo: "Ómnibus", estado: bus.length ? "listo" : "preparación", texto: "Micros de larga distancia desde 2019: cuántos llegan, desde dónde y en qué época (CNRT vía Yvera).",
+   serie: bus.length ? d3.rollups(bus, (v) => (v.every((d) => d.anio_completo) ? d3.sum(v, (d) => d.pasajeros_llegada) : null), (d) => d.anio).filter(([, y]) => y).map(([x, y]) => ({x, y})).sort((a, b) => a.x - b.x) : null},
+  {path: "/tren", titulo: "Tren", estado: tren.length ? "listo" : "preparación", texto: "El servicio Constitución–Mar del Plata: pasajeros por mes desde 2007 (CNRT).",
+   serie: tren.length ? tren.filter((d) => d.anio_completo && d.pasajeros > 0).map((d) => ({x: d.anio, y: d.pasajeros})) : null},
+  {path: "/autos", titulo: "Autos", estado: "listo", texto: "La vía de la mayoría, sin datos abiertos: lo que se sabe del tránsito por las rutas 2, 11 y 226."},
+  {path: "/cruceros", titulo: "Cruceros", estado: "listo", texto: "Las pocas recaladas de cruceros en el puerto, una por una, con su fuente."}
 ];
 const spark = (serie) => Plot.plot({width: 220, height: 48, axis: null, margin: 2,
   marks: [Plot.areaY(serie, {x: "x", y: "y", fill: ACENTO, fillOpacity: 0.12}), Plot.lineY(serie, {x: "x", y: "y", stroke: ACENTO, strokeWidth: 1.5})]});
@@ -55,7 +59,7 @@ const spark = (serie) => Plot.plot({width: 220, height: 48, axis: null, margin: 
 html`<div class="modos">${modos.map((m) => html`<a class=${`modo ${m.estado}`} href=${m.path}>
   <span class="modo-titulo">${m.titulo}</span>
   <p>${m.texto}</p>
-  ${m.serie ? spark(m.serie) : html`<span class="etiqueta">En preparación</span>`}
+  ${m.serie ? spark(m.serie) : m.estado === "listo" ? html`<span class="etiqueta">Ver</span>` : html`<span class="etiqueta">En preparación</span>`}
 </a>`)}</div>`
 ```
 

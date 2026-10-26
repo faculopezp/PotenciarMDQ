@@ -618,7 +618,19 @@ def run_omnibus(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
         FROM fct_evyth_mdq GROUP BY anio ORDER BY anio"""),
            _table(con, """
         SELECT medio, medio_detalle, count(*) AS casos, round(sum(pondera)) AS expandidos
-        FROM fct_evyth_mdq GROUP BY ALL ORDER BY expandidos DESC""")]
+        FROM fct_evyth_mdq GROUP BY ALL ORDER BY expandidos DESC"""),
+           "Peso de los casos más grandes (turistas): si pocos casos explican mucho, el reparto de ese "
+           "año es volátil.", "", _table(con, """
+        WITH r AS (
+          SELECT anio, medio, pondera,
+                 row_number() OVER (PARTITION BY anio ORDER BY pondera DESC) AS k
+          FROM fct_evyth_mdq WHERE tipo_visitante = 'turista')
+        SELECT anio, count(*) AS casos,
+               round(100.0 * sum(pondera) FILTER (WHERE k <= 10) / sum(pondera), 1) AS pct_top10,
+               round(avg(pondera) FILTER (WHERE medio = 'Auto')) AS pondera_media_auto,
+               round(avg(pondera) FILTER (WHERE medio = 'Ómnibus')) AS pondera_media_omnibus,
+               round(avg(pondera) FILTER (WHERE medio = 'Tren')) AS pondera_media_tren
+        FROM r GROUP BY anio ORDER BY anio""")]
     con.close()
     out_dir.mkdir(parents=True, exist_ok=True)
     dest = out_dir / "omnibus.md"

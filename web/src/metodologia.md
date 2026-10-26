@@ -25,6 +25,11 @@ title: Metodología y fuentes
 | Tipo de avión por matrícula | tar1090-db, base comunitaria de transpondedores (Mictronics / wiedehopf) | actual |
 | Cabinas por aerolínea y modelo | Comunicados y prensa especializada, con fuente por fila (`config/cabinas.yaml`) | — |
 | Aeronaves del Estado | Formato de identificación de cada fuerza e identificaciones públicas por serie (`config/estatales.yaml`) | — |
+| Micros de media y larga distancia: pasajeros, asientos y viajes por ruta y año; cada servicio de turismo con fecha | CNRT vía Yvera, Ministerio de Turismo — "Conectividad terrestre interurbana" | 2019 → 2024 (Yvera no actualiza desde diciembre de 2024) |
+| Tren: pasajeros pagos por mes y servicio | CNRT — planilla de pasajeros de larga distancia, regionales y turísticos | 2007 → hoy, mensual |
+| Medio de transporte y región de origen de los turistas residentes | Yvera, Ministerio de Turismo — Encuesta de Viajes y Turismo de los Hogares (EVyTH), microdatos | 2012 → 2024 (trimestral) |
+| Tránsito de autos hacia la costa | AUBASA, cifras comunicadas a la prensa con período exacto (`config/autos.yaml`) | puntual |
+| Recaladas de cruceros | Notas de prensa, con fuente por fila (`config/cruceros.yaml`): no hay datos abiertos del puerto | 2017 → hoy |
 
 Los datos se descargan y procesan automáticamente una vez por mes. El código es abierto.
 
@@ -46,6 +51,10 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **Serie larga:** hasta 2018 se usan los datos municipales y desde 2019 los de la ANAC. En 2019, año que cubren ambas fuentes, difieren menos de 4 % por mes. Desde 2021 el Municipio publica pasajeros de un solo sentido, por eso no se usa.
 - **Datos provisorios:** la ANAC marca como provisorios los últimos meses; pueden cambiar.
 - **Hora local:** hora UTC − 3.
+- **Micros:** servicios de jurisdicción nacional (CNRT) con Mar del Plata en un extremo del par origen–destino. *Regular*: líneas con horario y boleto; *turismo*: servicios contratados (DUT). Los pasajeros salen de las bases con cada viaje; en los años que esas bases no cubren, del archivo de rutas con al menos un viaje semanal (un piso). En turismo, ambas coinciden ruta por ruta donde se pueden comparar. Los nombres de localidad se unifican (con y sin tildes, "CABA" = Ciudad Autónoma de Buenos Aires). En algunas rutas largas la fuente registra más pasajeros que asientos: no se publica la ocupación por ruta. Validación en `reports/qa/omnibus.md`.
+- **Tren:** pasajeros pagos de los servicios que llegan a Mar del Plata (Constitución–Mar del Plata, con o sin extensión a Miramar), en los dos sentidos y con estaciones intermedias. Para comparar con las llegadas se toma la mitad.
+- **Reparto por medio (EVyTH):** viajes de residentes en los grandes aglomerados urbanos con destino Mar del Plata, expandidos con el factor de la encuesta; solo turistas (al menos una noche). Tren y avión salen de pocas decenas de casos por año: el visor muestra la cantidad de encuestados de cada barra.
+- **Cómo llega la gente:** turistas del EMTUR (un modelo municipal, todas las vías) contra los pasajeros que llegaron en avión (aterrizajes de línea), micro y crucero. Los pasajeros incluyen a residentes que vuelven y el auto no se mide: la relación es una aproximación, no un reparto exacto.
 
 
 </div>
@@ -147,7 +156,15 @@ const archivos = [
   ["Vuelos a destinos lejanos", FileAttachment("data/mdq_vuelos_exoticos.json")],
   ["Flota por modelo", FileAttachment("data/mdq_aeronaves.json")],
   ["Segmentos por año", FileAttachment("data/mdq_segmentos_anual.json")],
-  ["Cobertura de cada dato", FileAttachment("data/mdq_cobertura.json")]
+  ["Cobertura de cada dato", FileAttachment("data/mdq_cobertura.json")],
+  ["Micros por año", FileAttachment("data/bus_anual.json")],
+  ["Micros por ruta y año", FileAttachment("data/bus_rutas.json")],
+  ["Micros de turismo por mes", FileAttachment("data/bus_mensual.json")],
+  ["Tren por mes", FileAttachment("data/tren_mensual.json")],
+  ["Tren por año", FileAttachment("data/tren_anual.json")],
+  ["Turistas por medio de transporte (EVyTH)", FileAttachment("data/evyth_medio.json")],
+  ["Turistas por región de origen (EVyTH)", FileAttachment("data/evyth_origen.json")],
+  ["Cruceros", FileAttachment("data/cruceros.json")]
 ];
 ```
 

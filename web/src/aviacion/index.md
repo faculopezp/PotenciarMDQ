@@ -400,13 +400,13 @@ Plot.plot({
 const rotAnio = rotaciones.filter((d) => d.anio === ref.anio && d.tipo_rotacion === "rotacion");
 const rotFam = d3.rollups(rotAnio, (v) => ({n: d3.sum(v, (d) => d.rotaciones), med: d3.median(v, (d) => d.mediana_min)}), (d) => d.aeronave_familia)
   .filter(([, v]) => v.n >= 100).sort((a, b) => b[1].n - a[1].n).slice(0, 2);
-const aep = tramos.filter((d) => d.anio === ref.anio && d.origen === "AER" && d.destino === "MDP");
+const aepTramos = tramos.filter((d) => d.anio === ref.anio && d.origen === "AER" && d.destino === "MDP");
 ```
 
 <div class="cifras">
   <div><span class="rotulo">Hora pico de diseño</span><span class="valor">${entero(ref.pax_hora_sbr30)}</span><p class="nota">pasajeros en la 30.ª hora más cargada de ${ref.anio}</p></div>
   ${rotFam.map(([f, v]) => html`<div><span class="rotulo">En tierra · ${f}</span><span class="valor">${Math.round(v.med)} min</span><p class="nota">mediana entre aterrizar y volver a despegar</p></div>`)}
-  <div><span class="rotulo">Aeroparque → MDQ</span><span class="valor">${aep.length ? Math.round(d3.median(aep, (d) => d.duracion_mediana_min)) : "—"} min</span><p class="nota">de pista a pista (mediana)</p></div>
+  <div><span class="rotulo">Aeroparque → MDQ</span><span class="valor">${aepTramos.length ? Math.round(d3.median(aepTramos, (d) => d.duracion_mediana_min)) : "—"} min</span><p class="nota">de pista a pista (mediana)</p></div>
 </div>
 
 <h2 id="07" data-idx="07 — Conectividad">A dónde se vuela</h2>

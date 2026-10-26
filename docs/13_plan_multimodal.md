@@ -1,7 +1,27 @@
 # Plan: PotenciarMDQ multimodal (aviación, ómnibus, tren, autos, mar)
 
-Estado: **plan, nada construido**. Fuentes verificadas el 2026-10-26 solo con búsqueda web: desde el
-entorno de desarrollo no se llega a los sitios .gob.ar. Cada fuente lleva su estado de verificación.
+Estado al 2026-10-26: **construido** (ver "0. Estado"). Las fuentes se verificaron descargándolas en el
+CI (`reports/fuentes/muestras.md`); desde el entorno de desarrollo no se llega a los sitios .gob.ar.
+
+## 0. Estado
+
+| Sección | Fuente | Validación | Página |
+|---|---|---|---|
+| Ómnibus | Yvera "Conectividad terrestre interurbana": bases por viaje (regular 2019–nov 2024, turismo abr 2019–sep 2024) y anual por ruta | Base regular = anual ruta por ruta (mismos viajes y pasajeros en todas las rutas, 2019–2024); turismo igual en 35–37 de 37 rutas. `reports/qa/omnibus.md` | `/omnibus` |
+| Tren | CNRT, planilla de pasajeros pagos de larga distancia, regionales y turísticos (hoja DATOS, 2008–sep 2026) | Servicios del foco, meses con dos operadores. `reports/qa/omnibus.md` §7 | `/tren` |
+| Reparto por medio | EVyTH microdatos (localidad de destino = Mar del Plata, 2012–2024) | Casos y peso de los casos grandes por año (§8): un año suelto es volátil, la cifra agrupa tres años | `/llegadas`, `/autos` |
+| Autos | Sin datos abiertos: EVyTH + fines de semana largos (EMTUR) + conteos de AUBASA con fuente (`config/autos.yaml`) | Solo cifras con período exacto | `/autos` |
+| Cruceros | Registro curado con fuente por fila (`config/cruceros.yaml`) | — | `/cruceros` |
+| Cómo llega la gente | EMTUR + conteos de avión, micro, tren y crucero + EVyTH | Años con todas las vías completas | `/llegadas` |
+
+Hallazgos que condicionan la lectura:
+
+- En micros regulares, el 20 % de los viajes registra más pasajeros que asientos (rutas largas con
+  paradas): no se publica la ocupación por ruta.
+- Avión + micro + tren + crucero explican ~18 % de los turistas del EMTUR (2022–2023); la EVyTH
+  da ~58 % en auto para 2022–2024. Las dos fuentes miden cosas distintas (pasajeros vs. turistas
+  residentes de grandes aglomerados): se muestran juntas, no se fuerzan a cerrar.
+- Yvera no actualiza el conjunto de micros desde diciembre de 2024.
 
 ## 1. Diagnóstico
 
