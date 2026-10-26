@@ -40,7 +40,7 @@ def standardize() -> None:
     typer.echo(anac_movimientos.build())
     for step in (generic.build_yvera, generic.build_dim_aeropuerto, generic.build_anac_aeropuertos,
                  generic.build_opensky, generic.build_madhel, generic.build_tar1090,
-                 generic.build_clima, generic.build_terrestre,
+                 generic.build_clima, generic.build_terrestre, generic.build_tren,
                  municipal.build):
         try:
             typer.echo(step())

@@ -31,7 +31,9 @@ TABLAS = [
     "fct_municipal_mensual",
     "fct_mdq_vuelos_hist",
     "fct_bus_ruta_anual",
-    "fct_bus_turismo",
+    "fct_bus_viaje",
+    "fct_bus_ruta_anual_publicada",
+    "fct_tren_mensual",
     "fct_bus_nacional_diario",
     "dim_bus_localidad",
 ]
@@ -46,6 +48,10 @@ BUS_STG = {
     "viajes_asientos_pasajeros": "indice_tiempo DATE, viajes INT, asientos INT, pasajeros INT",
     "viajes_asientos_pasajeros_dut": "indice_tiempo DATE, viajes INT, asientos INT, "
                                      "pasajeros INT",
+    "base_microdatos": "indice_tiempo DATE, localidad_origen VARCHAR, "
+                       "provincia_origen VARCHAR, localidad_destino VARCHAR, "
+                       "provincia_destino VARCHAR, ruta_clasificacion VARCHAR, "
+                       "descripcion VARCHAR, asientos INT, pasajeros INT",
     "base_microdatos_dut": "indice_tiempo DATE, localidad_origen VARCHAR, "
                            "provincia_origen VARCHAR, localidad_destino VARCHAR, "
                            "provincia_destino VARCHAR, "
@@ -255,6 +261,16 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
             log.warning("Sin %s (Yvera terrestre): la sección de micros queda incompleta", pq.name)
             con.execute(f"CREATE TABLE stg_bus_{nombre} ({cols})")
 
+    # Tren: pasajeros pagos por mes y servicio (CNRT); sql/bd/85_tren.sql.
+    tren = processed / "tren_pasajeros.parquet"
+    if tren.exists():
+        con.execute("CREATE TABLE stg_tren AS SELECT * FROM read_parquet(?)", [str(tren)])
+    else:
+        log.warning("Sin %s (CNRT): la sección de tren queda vacía", tren.name)
+        con.execute("CREATE TABLE stg_tren (anio INT, mes INT, linea VARCHAR, operador VARCHAR, "
+                    "tipo_servicio VARCHAR, jurisdiccion VARCHAR, servicio VARCHAR, pax INT, "
+                    "archivo VARCHAR)")
+
     for sql_file in sorted((SQL / "bd").glob("*.sql")):
         log.info("bd: %s", sql_file.name)
         con.execute(sql_file.read_text(encoding="utf-8"))
@@ -264,7 +280,10 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
     con.execute("DROP TABLE mun_vuelos_hist")
     con.execute("DROP TABLE ourairports")
     con.execute("DROP TABLE anac_aeropuertos")
-    con.execute("DROP TABLE stg_bus_base_microdatos_dut")  # ya está en fct_bus_turismo (foco)
+    # Ya están en fct_bus_viaje (solo el foco).
+    con.execute("DROP TABLE stg_tren")
+    con.execute("DROP TABLE stg_bus_base_microdatos")
+    con.execute("DROP TABLE stg_bus_base_microdatos_dut")
 
     if export:
         export.mkdir(parents=True, exist_ok=True)

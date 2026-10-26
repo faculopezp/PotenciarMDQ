@@ -270,3 +270,37 @@ def build_madhel(raw_dir: Path = RAW / "madhel_api", out: Path = PROCESSED) -> P
     )
     log.info("madhel: %d registros", len(data))
     return dest
+
+
+MESES_ES = {m: i for i, m in enumerate(
+    ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre",
+     "octubre", "noviembre", "diciembre"], start=1)}
+
+
+def build_tren(raw_dir: Path = RAW / "cnrt_ferroviario", out: Path = PROCESSED) -> Path:
+    """CNRT, pasajeros pagos de larga distancia, regionales y turísticos (xlsx, hoja DATOS):
+    una fila por año, mes y servicio -> processed/tren_pasajeros.parquet."""
+    import openpyxl
+
+    files = sorted(p for p in raw_dir.rglob("*") if p.suffix.lower() == ".xlsx")
+    if not files:
+        raise FileNotFoundError(f"No hay planillas de la CNRT en {raw_dir}")
+    src = max(files, key=lambda p: p.name)
+    wb = openpyxl.load_workbook(src, read_only=True, data_only=True)
+    filas = []
+    for fila in wb["DATOS"].iter_rows(min_row=2, max_col=8, values_only=True):
+        anio, mes, linea, operador, tipo, jurisdiccion, servicio, pax = fila
+        if not isinstance(anio, int | float) or str(mes).strip().lower() not in MESES_ES:
+            continue
+        filas.append((int(anio), MESES_ES[str(mes).strip().lower()], linea, operador, tipo,
+                      jurisdiccion, str(servicio).strip(), None if pax is None else int(pax)))
+    if not filas:
+        raise ValueError(f"{src.name}: la hoja DATOS no trae filas año/mes/servicio")
+    con = duckdb.connect()
+    con.execute("CREATE TABLE t (anio INT, mes INT, linea VARCHAR, operador VARCHAR, "
+                "tipo_servicio VARCHAR, jurisdiccion VARCHAR, servicio VARCHAR, pax INT)")
+    con.executemany("INSERT INTO t VALUES (?, ?, ?, ?, ?, ?, ?, ?)", filas)
+    dest = out / "tren_pasajeros.parquet"
+    con.execute(f"COPY (SELECT *, {_q(src.name)} AS archivo FROM t) TO {_q(str(dest))} "
+                "(FORMAT parquet)")
+    return dest

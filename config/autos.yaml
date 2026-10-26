@@ -1,0 +1,24 @@
+# Tránsito de autos hacia la Costa Atlántica. No hay datos abiertos (AUBASA y Vialidad no publican
+# series actuales): registro curado de cifras que AUBASA comunicó a la prensa, solo con período
+# exacto. "Corredor del Atlántico" es el total de AUBASA hacia la costa, no solo Mar del Plata.
+# Verificado 2026-10-26 con búsqueda web.
+#
+# periodo: texto del período medido; desde/hasta: fechas.
+conteos:
+  - desde: 2025-01-01
+    hasta: 2025-01-15
+    periodo: 1 al 15 de enero de 2025
+    tramo: Corredor del Atlántico (AUBASA)
+    sentido: hacia la costa
+    vehiculos: 1391596
+    fuentes:
+      - https://www.elancasti.com.ar/informacion-general/mala-temporada-turistica-cien-mil-autos-menos-la-costa-atlantica-n603817
+  - desde: 2026-01-01
+    hasta: 2026-01-15
+    periodo: 1 al 15 de enero de 2026
+    tramo: Corredor del Atlántico (AUBASA)
+    sentido: hacia la costa
+    vehiculos: 1291519
+    nota: 7,1 % menos que en 2025 y 12 % menos que en la temporada 2023/24, según AUBASA.
+    fuentes:
+      - https://www.elancasti.com.ar/informacion-general/mala-temporada-turistica-cien-mil-autos-menos-la-costa-atlantica-n603817

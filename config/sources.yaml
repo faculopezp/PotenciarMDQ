@@ -159,6 +159,21 @@ sources:
     verified: false
   # Encuesta de Viajes y Turismo de los Hogares (medio de transporte y destino): búsqueda en el
   # catálogo de Yvera, solo probe hasta confirmar el dataset.
+  # EVyTH (Encuesta de Viajes y Turismo de los Hogares): viajes de residentes con destino y medio de
+  # transporte. Para el reparto por modo de quienes llegan a Mar del Plata, si la base identifica la
+  # localidad (se confirma con el diccionario).
+  yvera_evyth:
+    kind: ckan_package
+    base_url: https://datos.yvera.gob.ar
+    dataset: encuesta-de-viajes-y-turismo-de-los-hogares-evyth-microdatos
+    resource_formats: [csv]
+    enabled: true
+    verified: false
+  yvera_evyth_diccionario:
+    kind: static_file
+    url: https://datos.yvera.gob.ar/dataset/b5819e9b-5edf-4aad-bd39-a81158a2b3f3/resource/20e2c018-a2ee-4d97-9c67-a4303f669255/download/evyth_diccionario_registro.txt
+    enabled: true
+    verified: false
   yvera_busqueda:
     kind: ckan_search
     base_url: https://datos.yvera.gob.ar

@@ -521,46 +521,54 @@ def run_omnibus(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
         FROM fct_bus_nacional_diario GROUP BY ALL
         UNION ALL
         SELECT servicio, 'anual por ruta (foco)', min(anio)::VARCHAR, max(anio)::VARCHAR, count(*)
-        FROM fct_bus_ruta_anual GROUP BY ALL
+        FROM fct_bus_ruta_anual_publicada GROUP BY ALL
         UNION ALL
-        SELECT 'turismo', 'cada servicio (foco)', min(fecha)::VARCHAR, max(fecha)::VARCHAR, count(*)
-        FROM fct_bus_turismo
+        SELECT servicio, 'base por viaje (foco)', min(fecha)::VARCHAR, max(fecha)::VARCHAR, count(*)
+        FROM fct_bus_viaje GROUP BY ALL
         ORDER BY 1, 2"""),
-           "## 2. Turismo: base de servicios ↔ archivo anual por ruta", "",
+           "Fuente usada por servicio y año:", "", _table(con, """
+        SELECT servicio, anio, fuente, count(*) AS filas FROM fct_bus_ruta_anual
+        GROUP BY ALL ORDER BY 1, 2"""),
+           "## 2. Base por viaje ↔ archivo anual por ruta", "",
            "El anual solo trae rutas con al menos un viaje semanal: tiene que dar igual o menos que "
            "la base. Misma ruta y sentido.", "", _table(con, """
         WITH base AS (
-          SELECT year(fecha) AS anio, sentido, bus_clave(extremo_crudo) AS clave,
+          SELECT servicio, year(fecha) AS anio, sentido, bus_clave(extremo_crudo) AS clave,
                  count(*) AS viajes, sum(pasajeros) AS pasajeros
-          FROM fct_bus_turismo GROUP BY ALL),
+          FROM fct_bus_viaje GROUP BY ALL),
         anual AS (
-          SELECT anio, sentido, extremo_clave AS clave, sum(viajes) AS viajes,
+          SELECT servicio, anio, sentido, extremo_clave AS clave, sum(viajes) AS viajes,
                  sum(pasajeros) AS pasajeros
-          FROM fct_bus_ruta_anual WHERE servicio = 'turismo' GROUP BY ALL)
-        SELECT a.anio, count(*) AS rutas_anual,
+          FROM fct_bus_ruta_anual_publicada GROUP BY ALL)
+        SELECT a.servicio, a.anio, count(*) AS rutas_anual,
                count(b.clave) AS rutas_en_base,
                count(*) FILTER (WHERE a.viajes = b.viajes) AS mismos_viajes,
                count(*) FILTER (WHERE a.pasajeros = b.pasajeros) AS mismos_pasajeros,
                sum(a.pasajeros) AS pasajeros_anual, sum(b.pasajeros) AS pasajeros_base_mismas_rutas,
-               (SELECT sum(pasajeros) FROM base x WHERE x.anio = a.anio) AS pasajeros_base_total
-        FROM anual a LEFT JOIN base b USING (anio, sentido, clave)
-        GROUP BY a.anio ORDER BY 1"""),
+               (SELECT sum(pasajeros) FROM base x WHERE x.anio = a.anio
+                  AND x.servicio = a.servicio) AS pasajeros_base_total
+        FROM anual a LEFT JOIN base b USING (servicio, anio, sentido, clave)
+        GROUP BY a.servicio, a.anio ORDER BY 1, 2"""),
            "## 3. Pares con Mar del Plata sin sentido reconocido", "", _table(con, """
         SELECT 'regular' AS servicio, count(*) AS filas FROM stg_bus_magnitudes_por_ruta
         WHERE par_origen_destino ILIKE '%mar del plata%'
         UNION ALL
-        SELECT 'regular (con sentido)', count(*) FROM fct_bus_ruta_anual WHERE servicio = 'regular'
+        SELECT 'regular (con sentido)', count(*) FROM fct_bus_ruta_anual_publicada
+        WHERE servicio = 'regular'
         UNION ALL
         SELECT 'turismo', count(*) FROM stg_bus_magnitudes_por_ruta_dut
         WHERE par_origen_destino ILIKE '%mar del plata%'
         UNION ALL
-        SELECT 'turismo (con sentido)', count(*) FROM fct_bus_ruta_anual WHERE servicio = 'turismo'
+        SELECT 'turismo (con sentido)', count(*) FROM fct_bus_ruta_anual_publicada
+        WHERE servicio = 'turismo'
         """) if _existe(con, "stg_bus_magnitudes_por_ruta") else "(tablas de staging ya borradas)",
            "## 4. Nombres unificados (misma localidad escrita distinto)", "", _table(con, """
         SELECT extremo_clave, string_agg(DISTINCT extremo_crudo, ' · ') AS escrituras,
                count(DISTINCT servicio) AS servicios
-        FROM fct_bus_ruta_anual GROUP BY 1
-        HAVING count(DISTINCT extremo_crudo) > 1 ORDER BY 1"""),
+        FROM (SELECT servicio, extremo_clave, extremo_crudo FROM fct_bus_ruta_anual_publicada
+              UNION ALL
+              SELECT servicio, bus_clave(extremo_crudo), extremo_crudo FROM fct_bus_viaje)
+        GROUP BY 1 HAVING count(DISTINCT extremo_crudo) > 1 ORDER BY 1"""),
            "## 5. Rutas con más pasajeros que asientos", "",
            "Pasa en servicios largos con paradas: el archivo no dice si cuenta pasajeros por tramo. "
            "La ocupación por ruta no se publica; la total se informa con esta salvedad.", "",
@@ -571,15 +579,29 @@ def run_omnibus(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
                      / sum(pasajeros), 1) AS pct_pasajeros_en_esas_rutas
         FROM fct_bus_ruta_anual GROUP BY ALL ORDER BY 1, 2"""),
            "Las 10 más desbalanceadas (todos los años):", "", _table(con, """
-        SELECT servicio, anio, par, viajes, asientos, pasajeros,
+        SELECT servicio, anio, sentido, extremo_crudo, viajes, asientos, pasajeros,
                round(pasajeros / asientos, 2) AS pax_por_asiento
         FROM fct_bus_ruta_anual WHERE asientos > 0
         ORDER BY pasajeros / asientos DESC LIMIT 10"""),
+           "Viajes sueltos con más pasajeros que asientos (bases por viaje):", "", _table(con, """
+        SELECT servicio, count(*) AS viajes,
+               count(*) FILTER (WHERE pasajeros > asientos) AS viajes_pax_mayor_asientos,
+               round(100.0 * count(*) FILTER (WHERE pasajeros > asientos) / count(*), 1) AS pct
+        FROM fct_bus_viaje GROUP BY 1 ORDER BY 1"""),
            "## 6. Llegadas por año y servicio", "", _table(con, """
-        SELECT servicio, anio, sum(pasajeros) FILTER (WHERE sentido = 'llegada') AS llegadas,
+        SELECT servicio, anio, any_value(fuente) AS fuente, sum(pasajeros) FILTER (WHERE sentido = 'llegada') AS llegadas,
                sum(pasajeros) FILTER (WHERE sentido = 'salida') AS salidas,
                count(DISTINCT extremo_clave) AS localidades
-        FROM fct_bus_ruta_anual GROUP BY ALL ORDER BY 1, 2""")]
+        FROM fct_bus_ruta_anual GROUP BY ALL ORDER BY 1, 2"""),
+           "## 7. Tren (CNRT, pasajeros pagos)", "",
+           "Servicios que se toman como de Mar del Plata y meses con dato por año:", "",
+           _table(con, """
+        SELECT servicio, operador, jurisdiccion, min(anio) AS desde, max(anio) AS hasta,
+               count(*) AS meses, sum(pax) AS pasajeros
+        FROM fct_tren_mensual WHERE es_foco GROUP BY ALL ORDER BY desde"""),
+           "Meses duplicados (mismo servicio, año y mes más de una vez):", "", _table(con, """
+        SELECT anio, mes, servicio, count(*) AS filas FROM fct_tren_mensual
+        GROUP BY ALL HAVING count(*) > 1 ORDER BY 1, 2 LIMIT 20""")]
     con.close()
     out_dir.mkdir(parents=True, exist_ok=True)
     dest = out_dir / "omnibus.md"

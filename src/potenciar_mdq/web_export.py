@@ -50,6 +50,9 @@ MARTS_WEB = {
     "mart_bus_rutas": "bus_rutas",
     "mart_bus_mensual": "bus_mensual",
     "mart_bus_origen_provincia": "bus_origen_provincia",
+    "mart_tren_mensual": "tren_mensual",
+    "mart_tren_anual": "tren_anual",
+    "mart_tren_servicios": "tren_servicios",
 }
 COLUMNAR = {"mart_mdq_explorador": "mdq_explorador"}  # tablas grandes: {col: [valores]}
 
@@ -92,8 +95,10 @@ def export(marts: Path = MARTS, out: Path = WEB_DATA) -> list[Path]:
             encoding="utf-8",
         )
         written.append(dest)
-    for nombre, clave in (("hitos", "hitos"), ("eventos", "eventos"), ("cruceros", "cruceros")):
-        filas = [{**h, "fecha": str(h["fecha"])} for h in load_yaml(f"{nombre}.yaml")[clave]]
+    for nombre, clave in (("hitos", "hitos"), ("eventos", "eventos"), ("cruceros", "cruceros"),
+                          ("autos", "conteos")):
+        filas = [{k: str(v) if k == "fecha" or isinstance(v, date) else v for k, v in h.items()}
+                 for h in load_yaml(f"{nombre}.yaml")[clave]]
         dest = out / f"{nombre}.json"
         dest.write_text(json.dumps(filas, ensure_ascii=False, indent=1), encoding="utf-8")
         written.append(dest)

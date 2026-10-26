@@ -1,6 +1,7 @@
 -- Micros con Mar del Plata en un extremo, por año y servicio (CNRT vía Yvera).
--- Pasajeros de las rutas con al menos un viaje semanal (piso, no total). La participación es sobre
--- el total nacional del mismo servicio y año; anio_completo = el archivo diario cubre el año entero.
+-- fuente: base por viaje (todas las rutas) o, en los años que esa base no cubre, el archivo anual
+-- (solo rutas con al menos un viaje semanal: piso). La participación es sobre el total nacional del
+-- mismo servicio y año; anio_completo = el archivo diario cubre el año entero.
 WITH pais AS (
   SELECT servicio, year(fecha) AS anio, count(DISTINCT fecha) AS dias_con_datos,
          min(fecha) AS desde, max(fecha) AS hasta,
@@ -18,13 +19,18 @@ mdq AS (
          sum(pasajeros) AS pasajeros,
          sum(asientos)  AS asientos,
          sum(viajes)    AS viajes,
-         count(DISTINCT extremo_clave) AS extremos
+         count(DISTINCT extremo_clave) AS extremos,
+         any_value(fuente) AS fuente,
+         -- Rutas donde la fuente registra más pasajeros que asientos (ver reports/qa/omnibus.md).
+         round(sum(pasajeros) FILTER (WHERE pasajeros > asientos) / sum(pasajeros), 3)
+           AS share_pax_rutas_sobre_asientos
   FROM fct_bus_ruta_anual
   GROUP BY ALL
 )
 SELECT m.servicio, m.anio,
        m.pasajeros_llegada, m.pasajeros_salida, m.viajes_llegada, m.viajes_salida,
-       m.pasajeros, m.viajes, m.asientos, m.extremos,
+       m.pasajeros, m.viajes, m.asientos, m.extremos, m.fuente,
+       coalesce(m.share_pax_rutas_sobre_asientos, 0) AS share_pax_rutas_sobre_asientos,
        round(m.pasajeros / nullif(m.asientos, 0), 3)            AS ocupacion,
        round(m.pasajeros_llegada / nullif(m.asientos_llegada, 0), 3) AS ocupacion_llegada,
        round(m.pasajeros / nullif(m.viajes, 0), 1)              AS pasajeros_por_viaje,

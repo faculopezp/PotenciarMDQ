@@ -10,6 +10,7 @@ from __future__ import annotations
 import csv
 import io
 import logging
+import re
 from pathlib import Path
 
 from potenciar_mdq.settings import RAW, REPORTS
@@ -95,6 +96,30 @@ def _listado(sid: str) -> list[str]:
     return [f"- `{p.relative_to(RAW)}` — {p.stat().st_size:,} bytes" for p in archivos] + [""]
 
 
+def _perfil(path: Path, patron: str = "(destino|transporte|localidad|region|anio|trimestre)",
+            top: int = 60) -> list[str]:
+    """CSV grande: columnas, filas y los valores más frecuentes de las columnas que importan."""
+    import duckdb
+
+    from potenciar_mdq.standardize.anac_movimientos import _q, ensure_utf8
+
+    con = duckdb.connect()
+    rel = f"read_csv({_q(str(ensure_utf8(path)))}, header=true, all_varchar=true, sample_size=-1)"
+    cols = [r[0] for r in con.execute(f"DESCRIBE SELECT * FROM {rel}").fetchall()]
+    [(n,)] = con.execute(f"SELECT count(*) FROM {rel}").fetchall()
+    out = [f"### `{path.relative_to(RAW)}` — {n:,} filas, {len(cols)} columnas", "",
+           "Columnas: " + ", ".join(f"`{c}`" for c in cols), ""]
+    for c in [c for c in cols if re.search(patron, c, re.I)]:
+        filas = con.execute(f'SELECT "{c}", count(*) FROM {rel} GROUP BY 1 ORDER BY 2 DESC '
+                            f"LIMIT {top}").fetchall()
+        out += [f"#### `{c}` (top {top})", "```"] + [f"{v} | {k:,}" for v, k in filas] + ["```", ""]
+    foco = con.execute(f"SELECT * FROM {rel} WHERE regexp_matches(lower(concat_ws(',', "
+                       f"*COLUMNS(*))), '{'|'.join(FOCO)}') LIMIT 10").fetchall()
+    out += [f"Filas que nombran al foco (muestra): {len(foco)}", "```"]
+    out += [",".join("" if v is None else str(v) for v in f) for f in foco] + ["```", ""]
+    return out
+
+
 def run(out: Path = REPORTS / "fuentes") -> Path:
     out.mkdir(parents=True, exist_ok=True)
     lineas = ["# Muestras de fuentes nuevas", ""]
@@ -114,6 +139,17 @@ def run(out: Path = REPORTS / "fuentes") -> Path:
                     lineas.append(_pdf(p, out / "cnrt" / f"{p.stem}.txt"))
             except Exception as exc:  # noqa: BLE001 - muestra, no corta
                 lineas.append(f"- ❌ {p.name}: {type(exc).__name__}: {exc}")
+    lineas += ["## yvera_evyth", "", "Archivos descargados:"] + _listado("yvera_evyth")
+    for p in sorted((RAW / "yvera_evyth").rglob("*.csv")):
+        try:
+            lineas += _perfil(p)
+        except Exception as exc:  # noqa: BLE001
+            lineas.append(f"- ❌ {p.name}: {type(exc).__name__}: {exc}")
+    for p in sorted((RAW / "yvera_evyth_diccionario").rglob("*.txt"))[-1:]:
+        raw = p.read_bytes()
+        texto = next((raw.decode(e) for e in ("utf-8-sig", "latin-1") if _decodifica(raw, e)), "")
+        (out / "evyth_diccionario.txt").write_text(texto, encoding="utf-8")
+        lineas.append(f"- Diccionario EVyTH → `fuentes/evyth_diccionario.txt` ({len(texto):,})")
     dest = out / "muestras.md"
     dest.write_text("\n".join(lineas), encoding="utf-8")
     return dest
