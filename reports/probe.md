@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-26 06:04 UTC
+# Probe de fuentes — 2026-10-26 06:23 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -246,6 +246,36 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 ## `cnrt_ferroviario` (html_links)
 - 1 archivos encontrados
   - [Pasajeros Datos actualizados a 2026](https://www.argentina.gob.ar/sites/default/files/pax_ldregionales_tur_sep_2026.xlsx)
+
+## `yvera_evyth` (ckan_package)
+- OK `https://datos.yvera.gob.ar` dataset `encuesta-de-viajes-y-turismo-de-los-hogares-evyth-microdatos`: 10 recursos
+  - `txt` Base de microdatos EVyTH (.txt) — `8c663c32-fee2-4a57-a918-7ab0f3819624` — mod 2025-01-21T17:44:56.126077
+    > id_hogar,id_viajes,miembro,anio,trimestre,region_origen,aglomerado_origen,region_destino,provincia_destino,localidad_destino,cod_loc_2001,codigo_2001,codigo_2010,cod_prov_2010,cod_depto_2010,cod_loc_2010,pondera,tipo_visitante,cantidad_destinos,multidestino,px06,px06_agrup,px07,px07_agrup,px08,px08_
+    > 71,41201,1,2012,1,2,33,3,6,Mar del Tuyú                                     ,398,06420040,06420040,06,420,040,1175,1,1,1,4,2,7,2,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,1,2,2,1,,2,2,2,2,1,2,2,1,1,,,,,,,,375,4,4,1,1,54,4,2,7,1,2,1,3,4,1
+    > 71,41201,2,2012,1,2,33,3,6,Mar del Tuyú                                     ,398,06420040,06420040,06,420,040,1175,1,1,1,4,2,7,2,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,1,2,2,1,,2,2,2,2,1,2,2,1,1,,,,,,,,375,4,4,2,2,56,4,2,4,1,3,1,3,4,1
+  - `csv` Base de microdatos EVyTH — `645e5505-68ee-4cfa-90f9-fcc9a4a34a85` — mod 2025-01-21T17:44:41.515110
+    > id_hogar,id_viajes,miembro,anio,trimestre,region_origen,aglomerado_origen,region_destino,provincia_destino,localidad_destino,cod_loc_2001,codigo_2001,codigo_2010,cod_prov_2010,cod_depto_2010,cod_loc_2010,pondera,tipo_visitante,cantidad_destinos,multidestino,px06,px06_agrup,px07,px07_agrup,px08,px08_
+    > 71,41201,1,2012,1,2,33,3,6,Mar del Tuyú                                     ,398,06420040,06420040,06,420,040,1175,1,1,1,4,2,7,2,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,1,2,2,1,,2,2,2,2,1,2,2,1,1,,,,,,,,375,4,4,1,1,54,4,2,7,1,2,1,3,4,1
+    > 71,41201,2,2012,1,2,33,3,6,Mar del Tuyú                                     ,398,06420040,06420040,06,420,040,1175,1,1,1,4,2,7,2,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,1,2,2,1,,2,2,2,2,1,2,2,1,1,,,,,,,,375,4,4,2,2,56,4,2,4,1,3,1,3,4,1
+  - `xlsx` Base de microdatos EVyTH (.xlsx) — `5dd966f5-6868-4a43-b027-d2f5c1a18038` — mod 2025-01-21T17:45:02.114960
+  - `sav` Base de microdatos EVyTH (.sav) — `ea027b0d-669c-4b4a-ac8e-6a8863dd9740` — mod 2025-01-21T17:44:47.534103
+  - `dta` Base de microdatos EVyTH (.dta) — `3453fb66-74a3-4903-afa4-6737b8a98e0c` — mod 2025-01-21T17:46:54.709697
+  - `xlsx` Diccionario de registro de la EVyTH (.xlsx) — `0f3493e9-2a99-48ed-bb19-aa1cf87f1318` — mod 2022-09-07T17:31:28.686716
+  - `txt` Diccionario de registro de la EVyTH (.txt) — `20e2c018-a2ee-4d97-9c67-a4303f669255` — mod 2022-09-07T17:31:28.047688
+    > "variable","opcion","descripcion"
+    > "id_hogar",,"Código de identificación único de hogares"
+    > "id_viajes",,"Código de identificación único de viajes"
+  - `pdf` Ficha Técnica: EVyTH — `1b5d26f1-0ab9-4908-a44f-9ac5bd685f1b` — mod 2022-04-18T18:25:37.038729
+  - `csv` Novedades — `3d2884db-1f40-4ddb-915f-31fe77ccec79` — mod 2022-08-19T15:41:24.380339
+    > Fecha,Dataset,Recurso,Comentarios
+    > 19/08/2022, Encuesta de Viajes y Turismo de los Hogares (EVyTH) - Microdatos,Novedades,"Archivo para comentar novedades y dar avisos respecto del dataset"
+  - `csv` Diccionario de registro de la EVyTH (.csv) — `d8107236-f5ba-428d-8a31-f9b2034d8c8f` — mod 2022-09-07T17:31:26.976088
+    > "variable","opcion","descripcion"
+    > "id_hogar",,"Código de identificación único de hogares"
+    > "id_viajes",,"Código de identificación único de viajes"
+
+## `yvera_evyth_diccionario` (static_file)
+- HTTP 200, content-type `text/plain`
 
 ## `yvera_busqueda` (ckan_search)
 - búsqueda `evyth`: 2 datasets

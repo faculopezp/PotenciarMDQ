@@ -501,3 +501,212 @@ Ferrocentral siguió prestación de estos  servicios, hasta que por Resolución 
 2013 | P.Contitución-Mar del Plata - Miramar - Se restableció transitoriamente el servicio hasta Miramar el 04/01/13, siendo suspendido el 21/02/13.
 2015 | P. Constitución - Mar del Plata - Miramar (FERROBAIRES) Por daños en la infraestructura por inundaciones el servicio se presta con combinación automotor desde el mes de agosto.
 ```
+
+## yvera_evyth
+
+Archivos descargados:
+- `yvera_evyth/3d2884db-1f40-4ddb-915f-31fe77ccec79/20261026_novedades.csv` — 188 bytes
+- `yvera_evyth/645e5505-68ee-4cfa-90f9-fcc9a4a34a85/20261026_evyth_microdatos.csv` — 121,331,314 bytes
+- `yvera_evyth/d8107236-f5ba-428d-8a31-f9b2034d8c8f/20261026_evyth_diccionario_registro.csv` — 20,881 bytes
+
+### `yvera_evyth/3d2884db-1f40-4ddb-915f-31fe77ccec79/20261026_novedades.csv` — 1 filas, 4 columnas
+
+Columnas: `Fecha`, `Dataset`, `Recurso`, `Comentarios`
+
+Filas que nombran al foco (muestra): 0
+```
+```
+
+### `yvera_evyth/645e5505-68ee-4cfa-90f9-fcc9a4a34a85/20261026_evyth_microdatos.csv` — 490,904 filas, 88 columnas
+
+Columnas: `id_hogar`, `id_viajes`, `miembro`, `anio`, `trimestre`, `region_origen`, `aglomerado_origen`, `region_destino`, `provincia_destino`, `localidad_destino`, `cod_loc_2001`, `codigo_2001`, `codigo_2010`, `cod_prov_2010`, `cod_depto_2010`, `cod_loc_2010`, `pondera`, `tipo_visitante`, `cantidad_destinos`, `multidestino`, `px06`, `px06_agrup`, `px07`, `px07_agrup`, `px08`, `px08_agrup`, `px09`, `px10_1`, `px11`, `px12_1`, `px12_2`, `px12_3`, `px12_4`, `px12_5`, `px12_6`, `px12_7`, `px12_8`, `px13`, `px14`, `px15_1`, `px15_2`, `px15_3`, `px15_4`, `pxb16_1_1`, `pxb16_1_2`, `pxb16_1_3`, `pxb16_1_4`, `pxb16_1_5`, `pxb16_1_6`, `pxb16_1_7`, `pxb16_1_9`, `pxb16_2`, `px17_1`, `px17_2_1`, `px17_2_2`, `px17_2_3`, `px17_2_4`, `px17_2_5`, `px17_2_6`, `px17_2_7`, `px17_2_8`, `px17_2_9`, `px17_2_10`, `px17_2_11`, `px17_2_12`, `px17_2_13`, `px18_1`, `px18_2`, `px18_3`, `px18_4`, `px18_5`, `px18_6`, `px18_7`, `gasto_pc`, `quintil_pcf_visitante`, `p002`, `p004`, `p005`, `p006`, `p006_agrup`, `p007`, `nivel_ed`, `cond_act`, `p013`, `j_sexo`, `j_edad`, `j_nivel_ed`, `j_cond_act`
+
+#### `anio` (top 60)
+```
+2013 | 50,765
+2012 | 50,118
+2017 | 46,734
+2014 | 44,647
+2018 | 41,277
+2016 | 40,332
+2019 | 40,045
+2015 | 38,875
+2022 | 38,450
+2023 | 37,368
+2021 | 28,478
+2024 | 18,730
+2020 | 15,085
+```
+
+#### `trimestre` (top 60)
+```
+1 | 163,721
+3 | 112,729
+4 | 112,044
+2 | 102,410
+```
+
+#### `region_origen` (top 60)
+```
+6 | 82,481
+5 | 73,076
+4 | 72,754
+2 | 68,433
+7 | 52,048
+1 | 48,831
+3 | 46,796
+8 | 46,485
+```
+
+#### `region_destino` (top 60)
+```
+3 | 127,299
+4 | 83,906
+6 | 80,925
+5 | 76,186
+7 | 52,290
+8 | 46,066
+1 | 17,422
+2 | 6,810
+```
+
+#### `provincia_destino` (top 60)
+```
+6 | 127,317
+14 | 83,902
+82 | 29,614
+50 | 27,814
+90 | 22,473
+66 | 21,836
+30 | 19,578
+2 | 17,422
+74 | 13,416
+62 | 13,013
+26 | 12,429
+18 | 11,816
+38 | 11,229
+70 | 11,060
+86 | 9,812
+10 | 9,702
+58 | 9,208
+54 | 8,604
+4 | 6,792
+46 | 5,877
+94 | 5,039
+22 | 3,623
+42 | 3,293
+78 | 3,084
+34 | 2,951
+```
+
+#### `localidad_destino` (top 60)
+```
+Villa Carlos Paz                                   | 18,135
+Ciudad de Buenos Aires                             | 17,422
+Mar del Plata                                      | 13,630
+Córdoba                                           | 8,535
+Rosario                                            | 7,332
+Pilar                                              | 6,728
+Salta                                              | 5,857
+Luján                                             | 5,608
+Termas de Río Hondo                               | 5,556
+Potrerillos                                        | 5,280
+Puerto Madryn                                      | 5,064
+Tafí del Valle                                    | 4,841
+La Plata                                           | 4,588
+San Miguel de Tucumán (Est. Tucumán)             | 4,391
+Mendoza, Ciudad de                                 | 4,317
+Chascomús                                         | 4,241
+Alta Gracia                                        | 4,118
+San Carlos de Bariloche                            | 3,820
+Monte Hermoso                                      | 3,806
+Tigre                                              | 3,726
+Villa Gesell                                       | 3,418
+Santa Rosa de Calamuchita                          | 3,291
+Miramar                                            | 3,196
+Pinamar                                            | 3,052
+Puerto Iguazú                                     | 2,964
+Paraná                                            | 2,903
+Paso de la Patria                                  | 2,900
+999                                                | 2,823
+Merlo                                              | 2,819
+San Rafael (Ciudad)                                | 2,722
+Belén de Escobar                                  | 2,718
+Mina Clavero                                       | 2,683
+San Pedro                                          | 2,597
+El Rodeo                                           | 2,542
+Santa Fe                                           | 2,534
+La Falda                                           | 2,531
+San Pedro de Colalao                               | 2,487
+Villa General Belgrano                             | 2,460
+Victoria                                           | 2,457
+Cañuelas                                          | 2,386
+Corrientes                                         | 2,355
+Tandil                                             | 2,351
+Ushuaia                                            | 2,223
+Cosquín                                           | 2,221
+San Juan                                           | 2,204
+El Cóndor                                         | 2,203
+San Salvador de Jujuy (Est. Jujuy)                 | 2,194
+Potrero de los Funes                               | 2,167
+San Bernardo                                       | 2,149
+Las Grutas                                         | 2,143
+Río Ceballos                                      | 2,136
+Colón                                             | 2,113
+Tunuyán                                           | 2,102
+Cafayate                                           | 2,037
+998                                                | 2,029
+Sierras                                            | 2,018
+Campo Quijano                                      | 2,010
+Tolhuin                                            | 1,960
+Villa Sanagasta                                    | 1,958
+San Clemente del Tuyú                             | 1,958
+```
+
+#### `cantidad_destinos` (top 60)
+```
+1 | 473,349
+2 | 8,278
+0 | 4,670
+3 | 2,655
+4 | 1,024
+5 | 450
+6 | 224
+7 | 103
+9 | 76
+8 | 63
+10 | 4
+11 | 4
+15 | 4
+```
+
+#### `multidestino` (top 60)
+```
+1 | 478,019
+2 | 12,885
+```
+
+Filas que nombran al foco (muestra): 10
+```
+98,62201,3,2012,1,2,33,3,6,Mar del Plata                                     ,317,06357110,06357110,06,357,110,1176,1,1,1,1,1,2,1,6,4,2,1,2,10,10,10,10,10,10,10,10,2,1,9,9,9,9,,,,,,,,,,1,2,2,1,,2,2,2,2,1,2,2,2,2,99,99,99,99,99,99,99,400,5,3,3,1,19,2,1,6,1,3,1,3,3,1
+190,61201,1,2012,1,7,10,3,6,Mar del Plata                                     ,317,06357110,06357110,06,357,110,205,1,1,1,4,2,15,4,5,3,1,1,2,10,10,10,10,10,10,10,10,4,1,9,9,9,2,,,,,,,,,,1,2,2,1,,1,1,2,2,1,1,2,2,1,9,9,9,8,6,10,9,2125,5,4,1,2,47,4,2,8,1,2,2,3,3,1
+190,61201,2,2012,1,7,10,3,6,Mar del Plata                                     ,317,06357110,06357110,06,357,110,205,1,1,1,4,2,15,4,5,3,1,1,2,10,10,10,10,10,10,10,10,4,1,9,9,9,2,,,,,,,,,,1,2,2,1,,1,1,2,2,1,1,2,2,1,9,9,9,8,6,10,9,2125,5,4,2,1,45,4,2,10,1,2,2,3,3,1
+190,61201,3,2012,1,7,10,3,6,Mar del Plata                                     ,317,06357110,06357110,06,357,110,205,1,1,1,4,2,15,4,5,3,1,1,2,10,10,10,10,10,10,10,10,4,1,9,9,9,2,,,,,,,,,,1,2,2,1,,1,1,2,2,1,1,2,2,1,9,9,9,8,6,10,9,2125,5,4,3,2,18,2,1,8,3,2,2,3,3,1
+190,61201,4,2012,1,7,10,3,6,Mar del Plata                                     ,317,06357110,06357110,06,357,110,205,1,1,1,4,2,15,4,5,3,1,1,2,10,10,10,10,10,10,10,10,4,1,9,9,9,2,,,,,,,,,,1,2,2,1,,1,1,2,2,1,1,2,2,1,9,9,9,8,6,10,9,2125,5,4,3,2,17,2,1,4,3,2,2,3,3,1
+225,41201,1,2012,1,7,10,3,6,Mar del Plata                                     ,317,06357110,06357110,06,357,110,199,1,1,1,2,1,20,4,2,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,1,2,2,1,,2,1,1,1,1,1,1,2,2,,,,,,,,3500,5,3,1,2,61,5,2,4,1,2,2,4,2,1
+225,41201,2,2012,1,7,10,3,6,Mar del Plata                                     ,317,06357110,06357110,06,357,110,199,1,1,1,2,1,20,4,2,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,1,2,2,1,,2,1,1,1,1,1,1,2,2,,,,,,,,3500,5,3,2,1,57,4,1,7,1,2,2,4,2,1
+245,61201,5,2012,1,2,33,3,6,Mar del Plata                                     ,317,06357110,06357110,06,357,110,1175,1,1,1,1,1,2,1,3,2,2,1,1,1,2,2,1,1,1,2,2,99,9,,,,,,,,,,,,,,1,2,2,1,,2,2,1,2,2,2,2,2,2,99,100,99,99,99,99,99,600,5,5,3,1,18,2,1,8,3,2,2,3,3,1
+285,61201,1,2012,1,2,33,3,6,Mar del Plata                                     ,317,06357110,06357110,06,357,110,1175,1,1,1,5,3,10,3,5,3,1,1,2,10,10,10,10,10,10,10,10,4,2,10,10,10,10,,,,,,,,,,1,2,2,1,,2,2,2,2,1,2,2,1,2,7,8,6,100,2,4,7,1750,3,5,1,2,50,4,2,5,1,1,2,3,3,1
+285,61201,2,2012,1,2,33,3,6,Mar del Plata                                     ,317,06357110,06357110,06,357,110,1175,1,1,1,5,3,10,3,5,3,1,1,2,10,10,10,10,10,10,10,10,4,2,10,10,10,10,,,,,,,,,,1,2,2,1,,2,2,2,2,1,2,2,1,2,7,8,6,100,2,4,7,1750,3,5,2,1,50,4,2,7,2,1,2,3,3,1
+```
+
+### `yvera_evyth/d8107236-f5ba-428d-8a31-f9b2034d8c8f/20261026_evyth_diccionario_registro.csv` — 480 filas, 3 columnas
+
+Columnas: `variable`, `opcion`, `descripcion`
+
+Filas que nombran al foco (muestra): 1
+```
+aglomerado_origen,34,Mar del Plata - Batán
+```
+
+- Diccionario EVyTH → `fuentes/evyth_diccionario.txt` (20,608)

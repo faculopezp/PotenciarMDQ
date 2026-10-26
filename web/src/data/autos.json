@@ -1,0 +1,25 @@
+[
+ {
+  "desde": "2025-01-01",
+  "hasta": "2025-01-15",
+  "periodo": "1 al 15 de enero de 2025",
+  "tramo": "Corredor del Atlántico (AUBASA)",
+  "sentido": "hacia la costa",
+  "vehiculos": 1391596,
+  "fuentes": [
+   "https://www.elancasti.com.ar/informacion-general/mala-temporada-turistica-cien-mil-autos-menos-la-costa-atlantica-n603817"
+  ]
+ },
+ {
+  "desde": "2026-01-01",
+  "hasta": "2026-01-15",
+  "periodo": "1 al 15 de enero de 2026",
+  "tramo": "Corredor del Atlántico (AUBASA)",
+  "sentido": "hacia la costa",
+  "vehiculos": 1291519,
+  "nota": "7,1 % menos que en 2025 y 12 % menos que en la temporada 2023/24, según AUBASA.",
+  "fuentes": [
+   "https://www.elancasti.com.ar/informacion-general/mala-temporada-turistica-cien-mil-autos-menos-la-costa-atlantica-n603817"
+  ]
+ }
+]
