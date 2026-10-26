@@ -151,8 +151,8 @@ def build_refs_recuperacion(con: duckdb.DuckDBPyConnection) -> None:
                 "(orden INT, operador VARCHAR, modelo VARCHAR, asientos INT, clases VARCHAR, "
                 "fuentes VARCHAR[])")
     con.executemany("INSERT INTO ref_cabina VALUES (?, ?, ?, ?, ?, ?)",
-                    [(i, c["operador"], c["modelo"], c["asientos"], c.get("clases"), c["fuentes"])
-                     for i, c in enumerate(load_yaml("cabinas.yaml")["cabinas"])])
+                    [(i, c.get("operador"), c["modelo"], c["asientos"], c.get("clases"),
+                      c["fuentes"]) for i, c in enumerate(load_yaml("cabinas.yaml")["cabinas"])])
 
 
 def _existe(con: duckdb.DuckDBPyConnection, tabla: str) -> bool:

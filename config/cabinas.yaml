@@ -1,7 +1,9 @@
 # Asientos publicados por operador y modelo (configuración de cabina), para los que operaron en
 # MDQ. Reemplazan a la estimación por percentil 95 de pasajeros (sql/bd/20_dim_capacidad.sql) en
 # load factor y ASK. Solo configuraciones en las que las fuentes coinciden.
-# operador: regex sobre el nombre normalizado (dim_aerolinea, mayúsculas sin acentos).
+# operador: regex sobre el nombre normalizado (dim_aerolinea, mayúsculas sin acentos). Sin operador:
+#   configuración estándar del modelo, para cualquier operador (solo modelos de cifra única; ATR 72
+#   70–78 y Saab 340 30–36 dependen del operador).
 # modelo: modelo estandarizado (config/aeronaves.yaml → modelos). Verificado 2026-10-25.
 #
 # Sin cargar (fuentes contradictorias o una sola aeronave): quedan con el p95.
@@ -33,3 +35,7 @@ cabinas:
      fuentes: ['https://www.airdatanews.com/argentine-air-force-takes-delivery-of-its-first-embraer-erj-140/']}
   - {operador: 'LADE', modelo: Saab 340, asientos: 34, clases: 'clase única',
      fuentes: ['https://aviacionline.com/argentina-lade-presento-sus-destinos-para-el-verano-2025']}
+  # Estándar del modelo (cualquier operador): fabricante / dato del usuario 2026-10-26.
+  - {modelo: Embraer ERJ-145, asientos: 50, clases: 'estándar', fuentes: ['usuario (2026-10-26)']}
+  - {modelo: Bombardier CRJ200, asientos: 50, clases: 'estándar', fuentes: ['usuario (2026-10-26)']}
+  - {modelo: Embraer ERJ-140, asientos: 44, clases: 'estándar', fuentes: ['usuario (2026-10-26)']}

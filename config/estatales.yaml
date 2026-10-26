@@ -28,7 +28,7 @@ prefijos:
 # series: identificación -> modelo, solo con identificación pública reciente (las series se
 #   reutilizan: PA-22 fue un Bell 47 en los 70 y T-95 un Boeing 707). `desde`: fecha a partir de la
 #   cual vale. `aeronave`: denominación ANAC del tipo (la clasifica config/aeronaves.yaml).
-#   Sin identificar (fuentes contradictorias o inexistentes): PA-22, PG-380, 1-G-50, TC-64/66.
+#   Sin identificar (sin fuente): 1-G-50 y el resto de las series que no figuran acá.
 series:
   - {matricula: T99, aeronave: BO-B-737-700, desde: 2021-04-01,
      fuente: 'https://www.aviacionline.com/argentine-air-force-t-99-to-operate-flights-for-flybondi'}
@@ -44,3 +44,14 @@ series:
      fuente: 'https://www.helis.com/database/modelorg/Prefectura-Naval-Dauphin/'}
   - {matricula: PA43, aeronave: EUR-AS-365-N2, desde: 2020-12-01,
      fuente: 'https://www.helis.com/database/modelorg/Prefectura-Naval-Dauphin/'}
+  - {matricula: PA22, aeronave: BE-B-350ER, desde: 2012-01-01,
+     fuente: 'https://www.defensa.com/en-abierto/aviacion-prefectura-naval-argentina-custodio-mar'}
+  - {matricula: PA25, aeronave: BE-B-350ER, desde: 2026-01-01,
+     fuente: 'https://www.jetphotos.com/airport/Formosa+-+SARF'}
+  - {matricula: TC64, aeronave: LO-C-130-H, desde: 1971-01-01,
+     fuente: 'https://aviacionline.com/la-fuerza-aerea-argentina-amplia-el-contrato-de-modernizacion-de-uno-de-sus-c-130h-hercules'}
+  - {matricula: TC66, aeronave: LO-C-130-H, desde: 1975-01-01,
+     fuente: 'https://rest.hcdn.gob.ar/web/proyectos/290703/adjuntos/105051'}
+  # PG-380: Cessna 180 modificado por la FAA (dato del usuario). Ojo: PG-372 y PG-381 de la misma
+  # serie figuran como Cessna 182 en Aviation Safety Network.
+  - {matricula: PG380, aeronave: CE-180, desde: 2026-01-01, fuente: 'usuario (2026-10-26)'}

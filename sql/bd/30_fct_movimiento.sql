@@ -63,8 +63,9 @@ j AS (
       OR list_contains(getvariable('taxi_modelos_piston'), an.modelo)  AS es_piston,
     round(haversine_km(a1.lat, a1.lon, a2.lat, a2.lon))                AS distancia_km,
     -- Asientos publicados (config/cabinas.yaml) y, si no hay, el p95 de pasajeros observados.
-    coalesce(cb.asientos, ca.capacidad, cn.capacidad)                  AS capacidad,
+    coalesce(cb.asientos, cg.asientos, ca.capacidad, cn.capacidad)     AS capacidad,
     CASE WHEN cb.asientos IS NOT NULL THEN 'cabina_publicada'
+         WHEN cg.asientos IS NOT NULL THEN 'cabina_estandar'
          WHEN ca.capacidad IS NOT NULL THEN 'p95_aerolinea_aeronave'
          WHEN cn.capacidad IS NOT NULL THEN 'p95_aeronave' END         AS fuente_capacidad,
     -- Segmento de actividad (ver config/mdq.yaml → segmentos)
@@ -108,8 +109,9 @@ j AS (
                             AND ca.aerolinea = e.aerolinea AND ca.aeronave = e.aeronave
   LEFT JOIN dim_capacidad cn ON cn.metodo = 'aeronave' AND cn.aeronave = e.aeronave
   LEFT JOIN ref_cabina cb
-    ON cb.modelo = an.modelo
+    ON cb.operador IS NOT NULL AND cb.modelo = an.modelo
    AND regexp_matches(upper(strip_accents(coalesce(al.aerolinea_nombre, ''))), cb.operador)
+  LEFT JOIN ref_cabina cg ON cg.operador IS NULL AND cg.modelo = an.modelo
   -- Inferencia de familia para vuelos de línea sin aeronave (reglas disjuntas por operador)
   LEFT JOIN ref_inferencia_aeronave r
     ON e.aeronave IS NULL AND e.clase_vuelo IN ('regular', 'no_regular')

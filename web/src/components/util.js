@@ -44,7 +44,7 @@ export const PERFIL_NOMBRE = {...Object.fromEntries(PERFILES.map((p) => [p.id, p
 export const CATEGORIA_COLOR = {
   jet_ejecutivo: "#0d366b", turbohelice_ejecutivo: "#3987e5", aviacion_general_piston: "#eda100",
   helicoptero: "#1baf7a", agricola: "#008300", jet_fuselaje_angosto: TINTA_2, jet_fuselaje_ancho: TINTA_2,
-  jet_regional: TINTA_2, turbohelice_regional: TINTA_2, otro: OTRO, sin_dato: SIN_DATO
+  jet_regional: TINTA_2, turbohelice_regional: TINTA_2, transporte_militar: TINTA, otro: OTRO, sin_dato: SIN_DATO
 };
 export const perfilColor = {domain: PERFILES.map((p) => p.nombre), range: PERFILES.map((p) => p.color)};
 export const SEG_NOMBRE = Object.fromEntries(SEGMENTOS.map((s) => [s.id, s.nombre]));
@@ -73,6 +73,7 @@ export const CATEGORIAS = {
   aviacion_general_piston: "Avioneta a pistón",
   helicoptero: "Helicóptero",
   agricola: "Agrícola",
+  transporte_militar: "Transporte militar",
   otro: "Otro",
   sin_dato: "Sin dato"
 };

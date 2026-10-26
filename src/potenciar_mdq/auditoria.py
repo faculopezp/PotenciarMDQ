@@ -291,7 +291,8 @@ def run(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
         FROM fct_movimiento f
         LEFT JOIN dim_capacidad d ON d.metodo = 'aerolinea_aeronave' AND d.aerolinea = f.aerolinea
                                  AND d.aeronave = f.aeronave
-        WHERE f.fuente_asientos = 'cabina_publicada' GROUP BY ALL ORDER BY 5 DESC"""),
+        WHERE f.fuente_asientos IN ('cabina_publicada', 'cabina_estandar')
+        GROUP BY ALL ORDER BY 5 DESC"""),
             "Validación: qué habría dicho la inferencia por pasajeros en los vuelos cuyo avión se "
             "recuperó del portal municipal (ANAC 2019, foco):", "", _table(con, """
         WITH v AS (

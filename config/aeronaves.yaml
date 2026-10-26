@@ -45,6 +45,7 @@ fabricantes:            # prefijo ANAC -> nombre (solo los frecuentes; el resto 
   AB: Aero Boero
   GR: Grumman American
   MO: Mooney
+  LO: Lockheed
 
 categorias:
   - categoria: jet_fuselaje_ancho
@@ -244,6 +245,7 @@ modelos:
   - {patron: '^TSA-S2R', modelo: Thrush S2R-T34, icao: '', familia: Thrush, categoria: agricola}
   - {patron: '^WEA-620', modelo: Weatherly 620A, icao: '', familia: Weatherly, categoria: agricola}
   - {patron: '^DIP-CDP', modelo: Dipierro CDP 001, icao: '', familia: Experimental, categoria: aviacion_general_piston}
+  - {patron: '^LO-?C-?130|HERCULES', modelo: Lockheed C-130 Hercules, icao: C130, familia: Lockheed C-130 Hercules, categoria: transporte_militar}
   - {patron: '^LO-L-?18', modelo: Lockheed L-18 Lodestar, icao: '', familia: Lockheed, categoria: aviacion_general_piston}
   - {patron: '^RAB-S19', modelo: Rans S-19 Venterra, icao: '', plazas: 2, familia: Rans, categoria: aviacion_general_piston}
   - {patron: '^RSC-S6', modelo: Rans S-6S Coyote II, icao: '', plazas: 2, familia: Rans, categoria: aviacion_general_piston}

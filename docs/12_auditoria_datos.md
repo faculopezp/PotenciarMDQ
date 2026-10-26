@@ -28,7 +28,7 @@ Agregados el 2026-10-26 (cifras de MDQ 2019–2026, corrida del CI):
 |---|---|---|
 | Operador por el otro extremo del vuelo **sin matrícula** (aeropuertos cruzados, movimiento opuesto, 10 min–10 h, avión/operador compatibles, candidato único de cada lado) | 643 | 98,8 % de coincidencia en operador, 96,0 % en avión (escondiendo el dato en vuelos que lo traen) |
 | Operador de aeronaves del Estado por prefijo (`config/estatales.yaml`: FAA, Ejército, Armada, Gendarmería, Prefectura, PFA) | 319 | FAA 99 %, Ejército 99 %, Gendarmería 91 %; Prefectura 78 % y Armada 0 % porque ANAC carga "Fuerza Aérea" en aviones que fuentes públicas identifican de esas fuerzas |
-| Modelo de aeronaves del Estado por serie con identificación pública (T-94/T-95 ERJ-140, T-99 737-700, TC-53 F28, PA-40/41/43 Dauphin) | 439 | Fuente por serie en `config/estatales.yaml` |
+| Modelo de aeronaves del Estado por serie con identificación pública (T-94/T-95 ERJ-140, T-99 737-700, TC-53 F28, TC-64/66 C-130H, PA-22/25 King Air 350ER, PA-40/41/43 Dauphin, PG-380 Cessna 180) | 439 + las agregadas el 26/10 | Fuente por serie en `config/estatales.yaml` |
 | Asientos publicados por aerolínea y modelo (`config/cabinas.yaml`) | 8.567 de línea | Coinciden con el p95 observado: E190 96 = 96, 737-800 Flybondi 189 = 189, MAX 8 170 vs 172, ERJ-145 50 = 50, 737-700 Andes 142 = 142 |
 
 Lugares aptos denunciados: quedan como LAD (sin coordenadas, fuera del mapa).
@@ -54,6 +54,6 @@ Nota: ~4 % de los vuelos con cabina publicada informan más pasajeros que asient
 | Faltante | Qué haría falta |
 |---|---|
 | Aeronave y operador sin matrícula, 2019–2025 (sobre todo privados, escuelas y oficiales) | Matrícula de cada movimiento antes de 2026 (pedido de acceso a la información a ANAC, Ley 27.275) |
-| Modelo de aeronaves del Estado sin identificación pública (PA-22, PG-380, 1-G-50, TC-64/66…) | Registro de aeronaves de las Fuerzas / Prefectura, o fuentes por serie |
+| Modelo de aeronaves del Estado sin identificación pública (1-G-50 y otras) | Registro de aeronaves de las Fuerzas / Prefectura, o fuentes por serie |
 | Asientos de Aerolíneas 737-800 y 737-700, Andes 737-800, F28 | Fuente que resuelva la contradicción (170 vs 186–189; 128 vs 137; 62 vs 65); mientras tanto, p95 |
 | Lugares aptos denunciados | Se dejan como LAD |
