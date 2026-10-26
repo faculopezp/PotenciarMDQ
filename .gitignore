@@ -20,3 +20,6 @@ web/node_modules/
 web/dist/
 web/src/.observablehq/cache/
 .env
+
+# Notas de investigación (borradores; el informe final va a reports/)
+research_notes/
