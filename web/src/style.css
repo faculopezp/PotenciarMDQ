@@ -128,6 +128,10 @@ table.editorial th { font-family: var(--monospace); font-size: 11px; font-weight
 table.editorial th:first-child, table.editorial td:first-child { text-align: left; padding-left: 0; }
 table.editorial td { padding: 0.55rem 0.75rem; border-bottom: 1px solid var(--filete); text-align: right; font-variant-numeric: tabular-nums; }
 table.editorial tr.foco td { color: var(--acento); font-weight: 600; }
+/* Tabla de texto (registros con notas): ancho completo, todo alineado a la izquierda. */
+table.editorial.texto { max-width: none; }
+table.editorial.texto th, table.editorial.texto td { text-align: left; vertical-align: top; }
+table.editorial.texto td.nota { min-width: 28ch; color: var(--tinta-2); }
 .chip { display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: baseline; }
 
 table.editorial td:first-child { white-space: nowrap; }

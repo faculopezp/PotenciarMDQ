@@ -1,0 +1,102 @@
+[
+ {
+  "fecha": "2017-12-20",
+  "precision": "dia",
+  "estado": "cancelada",
+  "buque": "Med Queen / Delphin",
+  "operador": "Alteza Cruises",
+  "nota": "Primer crucero anunciado para estrenar la terminal (inaugurada en 2012, sin uso). Se cambió de buque, se reprogramó para febrero de 2018 y la naviera canceló el proyecto.",
+  "fuentes": [
+   "https://www.cronista.com/negocios/Por-primera-vez-Mar-del-Plata-recibira-cruceros-y-podra-estrenar-su-terminal-20170926-0007.html",
+   "https://www.lanacion.com.ar/turismo/mar-del-plata-se-quedo-sin-cruceros-nid2113330"
+  ]
+ },
+ {
+  "fecha": "2021-11-01",
+  "precision": "mes",
+  "estado": "realizada",
+  "buque": "Hamburg",
+  "operador": "Plantours",
+  "pasajeros": 334,
+  "origen": null,
+  "destino": "Montevideo",
+  "nota": "Escala de un viernes, amarrado en la sección 8.ª (muelle de portacontenedores). Fecha exacta sin confirmar; anterior a diciembre de 2021.",
+  "fuentes": [
+   "https://www.elmarplatense.com/un-crucero-con-mas-de-300-pasajeros-amarro-en-mar-del-plata"
+  ]
+ },
+ {
+  "fecha": "2021-12-01",
+  "precision": "mes",
+  "estado": "denegada",
+  "buque": "Hamburg",
+  "operador": "Plantours",
+  "nota": "Escalas anunciadas para diciembre de 2021 y enero de 2022. El puerto no la autorizó (no era corredor seguro durante la ola de ómicron; caso de covid a bordo).",
+  "fuentes": [
+   "https://www.lacapitalmdp.com/tras-la-polemica-el-crucero-con-300-alemanes-no-pudo-entrar-a-puerto-madryn/",
+   "https://www.diariodecuyo.com.ar/noticias/salud-aislo-a-todos-a-bordo-del-crucero-hamburg-por-un-nuevo-caso-positivo-de-covid-158648.html"
+  ]
+ },
+ {
+  "fecha": "2026-01-01",
+  "precision": "mes",
+  "estado": "realizada",
+  "buque": "Hamburg",
+  "operador": "Plantours",
+  "pasajeros": 322,
+  "origen": "Buenos Aires",
+  "destino": "Ushuaia",
+  "nota": "Escala no programada en la Terminal 2, la primera del buque desde 2022. Mes estimado por su paso por Punta del Este el 14 de enero de 2026.",
+  "fuentes": [
+   "https://www.lacapitalmdp.com/un-crucero-internacional-volvio-a-operar-en-el-puerto-de-mar-del-plata/",
+   "https://www.ambito.com/uruguay/como-es-el-lujoso-crucero-hamburg-que-visito-punta-del-este-n6234240/amp"
+  ]
+ },
+ {
+  "fecha": "2026-10-20",
+  "precision": "dia",
+  "estado": "realizada",
+  "buque": "Seaventure",
+  "operador": "66° Expeditions",
+  "pasajeros_min": 60,
+  "pasajeros_max": 187,
+  "origen": "Montevideo",
+  "destino": "Antártida",
+  "nota": "Primera recalada del crucero de expedición, en la Base Naval. Las notas informan entre 60 y 187 pasajeros (187 es la capacidad del buque).",
+  "fuentes": [
+   "https://www.elmarplatense.com/un-crucero-llego-a-mar-del-plata-y-turistas-extranjeros-recorren-la-ciudad-antes-de-partir-hacia-la-antartida",
+   "https://dataportuaria.com/es/argentina/logistica/el-crucero-seaventure-recalo-en-mar-del-plata-en-su-ruta-hacia-la-antartida"
+  ]
+ },
+ {
+  "fecha": "2027-03-28",
+  "precision": "dia",
+  "estado": "programada",
+  "buque": "Seaventure",
+  "operador": "66° Expeditions",
+  "fuentes": [
+   "https://www.lacapitalmdp.com/anuncian-tres-fechas-de-arribos-de-cruceros-a-mar-del-plata/"
+  ]
+ },
+ {
+  "fecha": "2027-03-01",
+  "precision": "mes",
+  "estado": "programada",
+  "buque": "(por confirmar)",
+  "operador": "Swan Hellenic",
+  "nota": "La naviera mostró interés en recalar; sin fecha confirmada.",
+  "fuentes": [
+   "https://www.lacapitalmdp.com/ratifican-la-llegada-de-cruceros-a-mar-del-plata-y-otra-empresa-mostro-interes/"
+  ]
+ },
+ {
+  "fecha": "2027-10-20",
+  "precision": "dia",
+  "estado": "programada",
+  "buque": "Seaventure",
+  "operador": "66° Expeditions",
+  "fuentes": [
+   "https://www.lacapitalmdp.com/anuncian-tres-fechas-de-arribos-de-cruceros-a-mar-del-plata/"
+  ]
+ }
+]
