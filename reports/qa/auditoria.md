@@ -72,9 +72,9 @@ Qué se recupera (foco, top 12):
 | CWO S.A. - SUN FLIGHT- CIAC TIPO II | 25 |
 | SAETA | 14 |
 | CEAP - AERO CHANNEL S.R.L- CIAC TIPO II | 13 |
-| PRESIDENCIA DE LA NACION | 10 |
-| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
 | TWR SRL | 10 |
+| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
+| PRESIDENCIA DE LA NACION | 10 |
 | FLIGHT CENTER- TWR S.R.L-CIAC TIPO III | 9 |
 
 ## 2B. Aeronave por matrícula
@@ -142,6 +142,23 @@ Validación cruzada: familia de la ANAC 2019 versión anterior contra el portal 
 | Embraer E190 | Embraer E190 | 4 |
 | Boeing 737 | Boeing 737 | 1 |
 
+### ANAC 2019 versión anterior ↔ vigente: diagnóstico de claves
+
+Para cada registro de la versión anterior, el de la vigente más cercano en hora (mismo día, aeropuerto, movimiento y origen/destino): diferencia en minutos y si coinciden los pasajeros.
+
+| dif_min | registros | pax_iguales | con_aeronave |
+|---|---|---|---|
+| 0 | 7670 | 2194 | 6415 |
+| otro | 584 | 110 | 540 |
+| ±5 | 133 | 3 | 132 |
+| -180 | 2 | 0 | 1 |
+
+Registros de la versión anterior sin ningún candidato el mismo día: 
+
+| registros_version_anterior | registros_vigente |
+|---|---|
+| 8389 | 8387 |
+
 ## 2E. El otro extremo del mismo vuelo sin matrícula (2019–2025)
 
 Validación en el foco (vuelos no regulares con operador y avión informados; se esconde uno y se recupera del otro extremo):
@@ -206,20 +223,20 @@ Asientos: cabina publicada (config/cabinas.yaml) contra el p95 de pasajeros obse
 
 | aerolinea_nombre | aeronave_modelo | publicados | p95_observado | movimientos_pais | con_mas_pax_que_asientos |
 |---|---|---|---|---|---|
-| Aerolíneas Argentinas | Embraer E190 | 96.0 | 97.0 | 381995 | 20004 |
-| Flybondi | Boeing 737-800 | 189.0 | 190.0 | 172881 | 9439 |
-| Aerolíneas Argentinas | Boeing 737 MAX 8 | 170.0 | 173.0 | 117143 | 9546 |
+| Aerolíneas Argentinas | Embraer E190 | 96.0 | 97.0 | 379592 | 20004 |
+| Flybondi | Boeing 737-800 | 189.0 | 190.0 | 172853 | 9439 |
+| Aerolíneas Argentinas | Boeing 737 MAX 8 | 170.0 | 173.0 | 117100 | 9546 |
 | American Jet | Embraer ERJ-145 | 50.0 | 50.0 | 5546 | 125 |
 | Andes Líneas Aéreas | Boeing 737-700 | 142.0 | 142.0 | 1404 | 0 |
-| LADE | Embraer ERJ-140 | 44.0 |  | 239 | 0 |
+| LADE | Embraer ERJ-140 | 44.0 |  | 230 | 0 |
 | Fuerza Aérea Argentina | Embraer ERJ-140 | 44.0 |  | 28 | 0 |
 | Norwegian Argentina | Boeing 737-800 | 189.0 |  | 7 | 0 |
 | JetSMART | Embraer ERJ-145 | 50.0 |  | 3 | 3 |
-| Aerolíneas Argentinas | Embraer ERJ-145 | 50.0 |  | 2 | 2 |
 | Andes Líneas Aéreas | Embraer ERJ-145 | 50.0 |  | 2 | 1 |
-| Aerovias De Mexico - Aeromexico | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
+| Aerolíneas Argentinas | Embraer ERJ-145 | 50.0 |  | 2 | 2 |
 | Sky Airline | Embraer ERJ-145 | 50.0 |  | 1 | 1 |
 | Flying America | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
+| Aerovias De Mexico - Aeromexico | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
 
 Validación: qué habría dicho la inferencia por pasajeros en los vuelos 2019 del foco cuyo avión se recuperó (ANAC versión anterior o portal municipal):
 
@@ -228,6 +245,45 @@ Validación: qué habría dicho la inferencia por pasajeros en los vuelos 2019 d
 | Boeing 737 | Boeing 737 | 61 | 100.0 |
 | Embraer E190 | Embraer E190 | 1158 | 97.6 |
 | Embraer E190 | Boeing 737 | 28 | 2.4 |
+
+## 5. Yvera, base agregada de frecuencias (validación y asientos)
+
+Mismo origen (SIAC/ANAC): coincidir prueba consistencia de procesamiento, no exactitud de la carga. Vuelos y pasajeros por año contra los movimientos regulares y no regulares del foco:
+
+| anio | vuelos_yvera | movimientos_anac | pasajeros_yvera | pasajeros_anac | asientos_yvera | asientos_estimados |
+|---|---|---|---|---|---|---|
+| 2017 | 3709 |  | 277561 |  | 350401 |  |
+| 2018 | 6785 |  | 454287 |  | 596926 |  |
+| 2019 | 5418 | 6323 | 382751 | 376692 | 513318 | 177732.0 |
+| 2020 | 1373 | 1767 | 110516 | 110828 | 140923 | 41280.0 |
+| 2021 | 1168 | 1858 | 85114 | 85191 | 114222 | 115780.0 |
+| 2022 | 2901 | 3702 | 275655 | 269660 | 352247 | 353684.0 |
+| 2023 | 3790 | 4522 | 310470 | 305089 | 403475 | 401575.0 |
+| 2024 | 3464 | 4109 | 295199 | 289341 | 367775 | 364674.0 |
+| 2025 | 3229 | 3958 | 298644 | 296491 | 351522 | 345487.0 |
+| 2026 | 1834 | 2503 | 168418 | 200584 | 199475 | 236700.0 |
+
+Asientos del vuelo exacto (Yvera, 1 a 1) contra la cabina publicada / p95 que se usaría sin Yvera:
+
+| aerolinea_nombre | aeronave_modelo | vuelos | asientos_yvera | cabina_config | coinciden_con_cabina |
+|---|---|---|---|---|---|
+| Aerolíneas Argentinas | Embraer E190 | 2342 | 96.0 | 96.0 | 2340 |
+| Aerolíneas Argentinas |  | 725 | 102.2 |  | 0 |
+| Aerolíneas Argentinas | Boeing 737-800 | 125 | 170.0 |  | 0 |
+| Avian (Avianca Argentina) |  | 78 | 72.0 |  | 0 |
+| Aerolíneas Argentinas | Boeing 737-700 | 67 | 131.1 |  | 0 |
+| Aerolíneas Argentinas | Boeing 737 MAX 8 | 38 | 171.5 | 170.0 | 35 |
+| LADE |  | 37 | 33.1 |  | 0 |
+| Andes Líneas Aéreas | Boeing 737-800 | 29 | 176.0 |  | 0 |
+| Aerolíneas Argentinas | Boeing 737 | 27 | 156.7 |  | 0 |
+| Flybondi | Boeing 737-800 | 19 | 189.0 | 189.0 | 19 |
+| LADE | Embraer ERJ-140 | 9 | 31.8 | 44.0 | 4 |
+| Flyest S.A. Líneas Aéreas |  | 5 | 50.0 |  | 0 |
+| LADE | Boeing 737-700 | 5 | 99.0 |  | 0 |
+| Aerolíneas Argentinas | Lockheed L-18 Lodestar | 2 | 89.5 |  | 0 |
+| Just Flight S.A. "Royal Class" | Cessna Citation CJ1/M2 (525) | 1 | 30.0 |  | 0 |
+| Sin dato | Embraer Phenom 100 | 1 | 33.0 |  | 0 |
+| Aerolíneas Argentinas | Cessna 150 | 1 | 92.0 |  | 0 |
 
 ## 3. Sin cruce posible con las fuentes actuales
 

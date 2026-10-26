@@ -61,7 +61,7 @@
 
 | pct_aeronave_otro | pct_aerolinea_sin_regla | pct_sin_distancia | pct_sin_asientos |
 |---|---|---|---|
-| 0.13 | 7.37 | 0.9 | 43.32 |
+| 0.13 | 7.37 | 0.9 | 43.29 |
 
 ## Aeronaves sin clasificar (top 25 → ampliar config/aeronaves.yaml)
 
@@ -86,8 +86,8 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| I.A-1124 | 165 |
 | AGW-AW 109SP | 165 |
+| I.A-1124 | 165 |
 | CE-T-303 | 153 |
 | BE-M-35 | 151 |
 | BE-D-95-A | 144 |
@@ -278,7 +278,6 @@
 | fecha | aeronave | aerolinea_nombre | pasajeros | asientos_estimados | lf_estimado |
 |---|---|---|---|---|---|
 | 2022-04-18 | LJ-60 | Aerolíneas Argentinas | 160 | 7.0 | 22.857 |
-| 2021-08-26 | CE-150-G | Aerolíneas Argentinas | 87 | 43.0 | 2.023 |
 | 2022-01-29 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 183 | 96.0 | 1.906 |
 | 2021-12-30 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 181 | 96.0 | 1.885 |
 | 2022-11-06 | EMB-ERJ190100IGW | Aerolíneas Argentinas | 156 | 96.0 | 1.625 |
