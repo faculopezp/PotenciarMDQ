@@ -15,7 +15,7 @@ País:
 | 2023 | 557168 | 33.1 | 15.6 | 100.0 | 0.0 | 0.0 | 0.0 | 1.3 |
 | 2024 | 578592 | 36.5 | 17.0 | 100.0 | 0.0 | 0.0 | 0.0 | 1.6 |
 | 2025 | 597783 | 33.6 | 22.7 | 100.0 | 0.0 | 0.0 | 0.0 | 1.6 |
-| 2026 | 419199 | 31.9 | 26.4 | 0.0 | 0.0 | 0.0 | 0.0 | 1.6 |
+| 2026 | 419199 | 31.9 | 26.2 | 0.0 | 0.0 | 0.0 | 0.0 | 1.6 |
 
 Foco (MDQ):
 
@@ -28,7 +28,7 @@ Foco (MDQ):
 | 2023 | 7571 | 47.2 | 19.2 | 100.0 | 0.0 | 0.0 | 0.0 | 0.4 |
 | 2024 | 7530 | 48.3 | 25.2 | 100.0 | 0.0 | 0.0 | 0.0 | 0.3 |
 | 2025 | 6825 | 48.4 | 18.4 | 100.0 | 0.0 | 0.0 | 0.0 | 0.4 |
-| 2026 | 4455 | 47.3 | 8.4 | 0.0 | 0.0 | 0.0 | 0.0 | 2.2 |
+| 2026 | 4455 | 47.3 | 6.7 | 0.0 | 0.0 | 0.0 | 0.0 | 2.2 |
 
 Foco 2021+, por segmento:
 
@@ -36,7 +36,7 @@ Foco 2021+, por segmento:
 |---|---|---|---|---|
 | linea_regular | 15665 | 0.3 | 1.7 | 0.0 |
 | privado | 6587 | 92.0 | 7.4 | 0.0 |
-| oficial | 6265 | 85.7 | 83.9 | 0.0 |
+| oficial | 6265 | 85.7 | 82.7 | 0.0 |
 | taxi_aereo | 5055 | 88.4 | 6.3 | 0.0 |
 | instruccion | 2659 | 89.7 | 0.2 | 0.0 |
 | charter_linea | 475 | 18.5 | 49.9 | 0.0 |
@@ -72,23 +72,23 @@ Qué se recupera (foco, top 12):
 | CWO S.A. - SUN FLIGHT- CIAC TIPO II | 25 |
 | SAETA | 14 |
 | CEAP - AERO CHANNEL S.R.L- CIAC TIPO II | 13 |
-| TWR SRL | 10 |
-| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
 | PRESIDENCIA DE LA NACION | 10 |
+| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
+| TWR SRL | 10 |
 | FLIGHT CENTER- TWR S.R.L-CIAC TIPO III | 9 |
 
 ## 2B. Aeronave por matrícula
 
 | ambito | faltan_con_matricula | recuperables_unanime | matricula_con_algun_dato |
 |---|---|---|---|
-| MDQ | 376 | 0 | 0 |
-| resto del país | 110277 | 0 | 0 |
+| MDQ | 299 | 0 | 0 |
+| resto del país | 109676 | 0 | 0 |
 
 Foco, por segmento:
 
 | segmento | faltan_con_matricula | recuperables_unanime |
 |---|---|---|
-| oficial | 292 | 0 |
+| oficial | 215 | 0 |
 | privado | 41 | 0 |
 | taxi_aereo | 21 | 0 |
 | charter_linea | 12 | 0 |
@@ -110,7 +110,7 @@ Aeronave faltante con matrícula presente en OpenSky (registro externo):
 
 | faltan_con_matricula | con_tipo_en_opensky | en_foco |
 |---|---|---|
-| 110653 | 0 | 0 |
+| 109975 | 0 | 0 |
 
 ## 2C. El otro extremo del mismo vuelo (por matrícula, un solo candidato)
 
@@ -165,17 +165,22 @@ Modelo por serie con identificación pública (config/estatales.yaml → series)
 | T94 | Embraer ERJ-140 | 564 | 94 |
 | T99 | Boeing 737-700 | 464 | 86 |
 | TC53 | Fokker F28/F100 | 337 | 42 |
+| PA25 | Beechcraft King Air 350 (B300) | 284 | 10 |
 | T95 | Embraer ERJ-140 | 256 | 22 |
 | PA40 | Airbus AS365 Dauphin | 202 | 111 |
 | PA41 | Airbus AS365 Dauphin | 171 | 34 |
+| PA22 | Beechcraft King Air 350 (B300) | 144 | 29 |
 | PA43 | Airbus AS365 Dauphin | 130 | 50 |
+| TC66 | Lockheed C-130 Hercules | 123 | 4 |
+| TC64 | Lockheed C-130 Hercules | 64 | 2 |
+| PG380 | Cessna 180 | 63 | 32 |
 
 ## 4. Aplicado en la base (fct_movimiento)
 
 | ambito | operador_por_matricula | operador_por_otro_extremo | operador_por_prefijo_estatal | operador_otro_extremo_sin_matricula | aeronave_del_municipio | aeronave_por_serie_estatal | aeronave_otro_extremo_sin_matricula |
 |---|---|---|---|---|---|---|---|
-| MDQ | 431 | 22 | 319 | 643 | 1356 | 439 | 6 |
-| resto del país | 20229 | 526 | 6387 | 11571 | 0 | 1685 | 245 |
+| MDQ | 431 | 22 | 319 | 643 | 1356 | 516 | 6 |
+| resto del país | 20229 | 526 | 6387 | 11571 | 0 | 2286 | 245 |
 
 Privado en jet o turbohélice ejecutivo analizado como taxi aéreo. Evidencia en el foco: cuántos tienen operador o matrícula que también vuela como no regular.
 
@@ -201,6 +206,12 @@ Asientos: cabina publicada (config/cabinas.yaml) contra el p95 de pasajeros obse
 | LADE | Embraer ERJ-140 | 44.0 |  | 239 | 0 |
 | Fuerza Aérea Argentina | Embraer ERJ-140 | 44.0 |  | 28 | 0 |
 | Norwegian Argentina | Boeing 737-800 | 189.0 |  | 5 | 0 |
+| JetSMART | Embraer ERJ-145 | 50.0 |  | 3 | 3 |
+| Andes Líneas Aéreas | Embraer ERJ-145 | 50.0 |  | 2 | 1 |
+| Aerolíneas Argentinas | Embraer ERJ-145 | 50.0 |  | 2 | 2 |
+| Sky Airline | Embraer ERJ-145 | 50.0 |  | 1 | 1 |
+| Flying America | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
+| Aerovias De Mexico - Aeromexico | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
 
 Validación: qué habría dicho la inferencia por pasajeros en los vuelos cuyo avión se recuperó del portal municipal (ANAC 2019, foco):
 

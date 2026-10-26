@@ -11,7 +11,7 @@
 | 20261024_202312-informe-ministerio-actualizado-dic.csv | 557152 | 0.0 | 0.0 | 0.0 | 15.62 | 0.0 | 0.0 | 2022-12-31 | 2023-12-31 |
 | 20261024_202412-informe-ministerio-actualizado-dic-final.csv | 578602 | 0.0 | 0.0 | 0.0 | 17.0 | 0.0 | 0.0 | 2023-12-31 | 2024-12-31 |
 | 20261024_202512-informe-ministerio-actualizado-dic-final.csv | 597784 | 0.0 | 0.0 | 0.0 | 22.72 | 0.0 | 0.0 | 2024-12-31 | 2025-12-31 |
-| 20261024_202609-informe-ministerio-vf-matricula.csv | 419262 | 0.0 | 0.0 | 0.0 | 26.39 | 100.0 | 21.99 | 2025-12-31 | 2026-09-30 |
+| 20261024_202609-informe-ministerio-vf-matricula.csv | 419262 | 0.0 | 0.0 | 0.0 | 26.23 | 100.0 | 21.99 | 2025-12-31 | 2026-09-30 |
 
 ## Valores fuera de vocabulario: `clasificacion_vuelo`
 
@@ -86,8 +86,8 @@
 | RW-100-150 | 206 |
 | RQ-RANQUEL | 191 |
 | II-ARAVA 102 | 188 |
-| AGW-AW 109SP | 165 |
 | I.A-1124 | 165 |
+| AGW-AW 109SP | 165 |
 | CE-T-303 | 153 |
 | BE-M-35 | 151 |
 | ARH-EC 130 B4 | 142 |
@@ -179,19 +179,19 @@
 | BAR | modelo | rotacion | 31325 | 64.0 |
 | BCA | matricula | escala_larga | 73 | 202.0 |
 | BCA | matricula | pernocte | 28 | 1139.0 |
-| BCA | matricula | rotacion | 1175 | 48.0 |
+| BCA | matricula | rotacion | 1183 | 48.0 |
 | BCA | modelo | escala_larga | 130 | 186.5 |
 | BCA | modelo | pernocte | 281 | 605.0 |
 | BCA | modelo | rotacion | 5117 | 52.0 |
 | DOZ | matricula | escala_larga | 137 | 199.0 |
 | DOZ | matricula | pernocte | 323 | 633.0 |
-| DOZ | matricula | rotacion | 3931 | 61.0 |
+| DOZ | matricula | rotacion | 3935 | 61.0 |
 | DOZ | modelo | escala_larga | 558 | 190.0 |
 | DOZ | modelo | pernocte | 921 | 613.0 |
 | DOZ | modelo | rotacion | 26719 | 57.0 |
-| MDP | matricula | escala_larga | 274 | 236.0 |
-| MDP | matricula | pernocte | 121 | 1167.0 |
-| MDP | matricula | rotacion | 1453 | 51.0 |
+| MDP | matricula | escala_larga | 282 | 235.0 |
+| MDP | matricula | pernocte | 127 | 1148.0 |
+| MDP | matricula | rotacion | 1456 | 51.0 |
 | MDP | modelo | escala_larga | 367 | 204.0 |
 | MDP | modelo | pernocte | 176 | 565.0 |
 | MDP | modelo | rotacion | 7771 | 52.0 |
@@ -261,7 +261,7 @@
 | 2025 | charter_linea | 103 | 66 | 0 | 15 | 51 |
 | 2025 | trabajo_aereo | 2 | 0 | 0 | 0 | 0 |
 | 2026 | linea_regular | 1942 | 10 | 0 | 1 | 9 |
-| 2026 | oficial | 794 | 292 | 0 | 7 | 285 |
+| 2026 | oficial | 794 | 215 | 0 | 7 | 208 |
 | 2026 | privado | 792 | 41 | 0 | 0 | 41 |
 | 2026 | taxi_aereo | 540 | 21 | 0 | 0 | 21 |
 | 2026 | instruccion | 309 | 0 | 0 | 0 | 0 |
