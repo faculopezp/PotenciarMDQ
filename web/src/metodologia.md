@@ -27,6 +27,7 @@ title: Metodología y fuentes
 | Aeronaves del Estado | Formato de identificación de cada fuerza e identificaciones públicas por serie (`config/estatales.yaml`) | — |
 | Micros de media y larga distancia: pasajeros, asientos y viajes por ruta y año; cada servicio de turismo con fecha | CNRT vía Yvera, Ministerio de Turismo — "Conectividad terrestre interurbana" | 2019 → 2024 (Yvera no actualiza desde diciembre de 2024) |
 | Tren: pasajeros pagos por mes y servicio | CNRT — planilla de pasajeros de larga distancia, regionales y turísticos | 2007 → hoy, mensual |
+| Turistas por medio de transporte (auto, ómnibus, tren, avión) y por región de procedencia | EMTUR vía datos.mardelplata.gob.ar ("Arribo de turistas por medio de transporte", "Procedencia de turistas") | 2013–2025 y 2007–2024, mensual |
 | Medio de transporte y región de origen de los turistas residentes | Yvera, Ministerio de Turismo — Encuesta de Viajes y Turismo de los Hogares (EVyTH), microdatos | 2012 → 2024 (trimestral) |
 | Tránsito de autos hacia la costa | AUBASA, cifras comunicadas a la prensa con período exacto (`config/autos.yaml`) | puntual |
 | Recaladas de cruceros | Notas de prensa, con fuente por fila (`config/cruceros.yaml`): no hay datos abiertos del puerto | 2017 → hoy |
@@ -53,6 +54,8 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **Hora local:** hora UTC − 3.
 - **Micros:** servicios de jurisdicción nacional (CNRT) con Mar del Plata en un extremo del par origen–destino. *Regular*: líneas con horario y boleto; *turismo*: servicios contratados (DUT). Los pasajeros salen de las bases con cada viaje; en los años que esas bases no cubren, del archivo de rutas con al menos un viaje semanal (un piso). En turismo, ambas coinciden ruta por ruta donde se pueden comparar. Los nombres de localidad se unifican (con y sin tildes, "CABA" = Ciudad Autónoma de Buenos Aires). En algunas rutas largas la fuente registra más pasajeros que asientos: no se publica la ocupación por ruta. Validación en `reports/qa/omnibus.md`.
 - **Tren:** pasajeros pagos de los servicios que llegan a Mar del Plata (Constitución–Mar del Plata, con o sin extensión a Miramar), en los dos sentidos y con estaciones intermedias. Para comparar con las llegadas se toma la mitad.
+- **Reparto por medio (EMTUR):** la suma de las cuatro vías es el total de turistas del mes. Avión coincide con los pasajeros que aterrizan según ANAC (diferencia menor al 2 % por año) y tren con la mitad de los pasajeros de la CNRT (hasta 11 %); el auto es la parte estimada. Comparación año por año en "Cómo llega la gente" y en `reports/qa/omnibus.md`.
+- **Procedencia:** % mensual por región de residencia; las cantidades son ese % por el total de turistas del mes. Los nombres de las regiones cambian entre planillas y se unifican (CABA, Conurbano, Resto de la provincia, Resto del país, Exterior).
 - **Reparto por medio (EVyTH):** viajes de residentes en los grandes aglomerados urbanos con destino Mar del Plata, expandidos con el factor de la encuesta; solo turistas (al menos una noche). Tren y avión salen de pocas decenas de casos por año: el visor muestra la cantidad de encuestados de cada barra.
 - **Cómo llega la gente:** turistas del EMTUR (un modelo municipal, todas las vías) contra los pasajeros que llegaron en avión (aterrizajes de línea), micro y crucero. Los pasajeros incluyen a residentes que vuelven y el auto no se mide: la relación es una aproximación, no un reparto exacto.
 
@@ -162,6 +165,8 @@ const archivos = [
   ["Micros de turismo por mes", FileAttachment("data/bus_mensual.json")],
   ["Tren por mes", FileAttachment("data/tren_mensual.json")],
   ["Tren por año", FileAttachment("data/tren_anual.json")],
+  ["Turistas por medio de transporte (EMTUR)", FileAttachment("data/mdq_arribos_medio.json")],
+  ["Turistas por procedencia (EMTUR)", FileAttachment("data/mdq_procedencia.json")],
   ["Turistas por medio de transporte (EVyTH)", FileAttachment("data/evyth_medio.json")],
   ["Turistas por región de origen (EVyTH)", FileAttachment("data/evyth_origen.json")],
   ["Cruceros", FileAttachment("data/cruceros.json")]

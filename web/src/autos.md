@@ -12,66 +12,53 @@ import {TINTA, TINTA_2, ACENTO, OTRO, entero, pct, pct1, variacion, compacto, AL
 ```js
 const conteos = await FileAttachment("data/autos.json").json();
 const findes = await FileAttachment("data/mdq_findes_largos.json").json();
-const turismo = await FileAttachment("data/mdq_turismo.json").json();
-const bus = await FileAttachment("data/bus_anual.json").json();
-const tren = await FileAttachment("data/tren_anual.json").json();
-const evyth = await FileAttachment("data/evyth_medio.json").json();
+const medios = (await FileAttachment("data/mdq_arribos_medio.json").json()).map((d) => ({...d, periodo: new Date(`${d.periodo}T00:00:00Z`)}));
 ```
 
 ```js
-// Lo que no explican avión, micro ni tren: turistas (EMTUR) menos pasajeros que llegaron por esas vías,
-// en los años con todo medido (misma cuenta que en "Cómo llega la gente").
-const turAnual = d3.rollups(turismo, (v) => ({turistas: d3.sum(v, (d) => d.turistas), avion: d3.sum(v, (d) => d.llegados_aereos ?? 0),
-    anac: v.every((d) => d.fuente_llegados === "ANAC"), meses: v.length}), (d) => d.anio)
-  .map(([anio, v]) => ({anio, ...v})).filter((d) => d.meses === 12 && d.anac);
-const resto = turAnual.map((t) => {
-  const b = bus.filter((d) => d.anio === t.anio);
-  if (b.length < 2 || !b.every((d) => d.anio_completo)) return null;
-  const tr = tren.find((d) => d.anio === t.anio && d.anio_completo);
-  if (!tr) return null;
-  const micro = d3.sum(b, (d) => d.pasajeros_llegada);
-  return {anio: t.anio, turistas: t.turistas, resto: t.turistas - t.avion - micro - tr.pasajeros / 2};
-}).filter(Boolean);
-const r = resto.at(-1);
-// Tres años juntos: un año suelto de la encuesta es volátil (ver Cómo llega la gente).
-const evAnios = [...new Set(evyth.map((d) => d.anio))].sort().slice(-3);
-const evPool = evyth.filter((d) => evAnios.includes(d.anio));
-const evAutoPool = d3.sum(evPool.filter((d) => d.medio === "Auto"), (d) => d.turistas) / d3.sum(evPool, (d) => d.turistas);
-const evRango = evAnios.length ? `${evAnios[0]}–${evAnios.at(-1)}` : "—";
-const evAuto = evyth.filter((d) => d.medio === "Auto");
+// Turistas que llegan en auto según el EMTUR (por mes, desde 2013).
+const autoAnual = d3.rollups(medios, (v) => ({auto: d3.sum(v, (d) => d.auto), total: d3.sum(v, (d) => d.total_medios), meses: v.length}), (d) => d.anio)
+  .map(([anio, v]) => ({anio, ...v, share: v.auto / v.total})).sort((a, b) => a.anio - b.anio);
+const ref = autoAnual.filter((d) => d.meses === 12).at(-1);
+const prev = autoAnual.find((d) => d.anio === ref.anio - 1 && d.meses === 12);
+// Meses sin publicar como hueco (null), no como línea que los une.
+const porMes = new Map(medios.map((d) => [+d.periodo, d]));
+const serie = d3.utcMonth.range(medios[0].periodo, d3.utcMonth.offset(medios.at(-1).periodo, 1))
+  .map((p) => porMes.get(+p) ?? {periodo: p, auto: null, total_medios: null});
 const [c0, c1] = conteos.slice().sort((a, b) => a.desde.localeCompare(b.desde)).slice(-2);
 ```
 
 <div class="portada">
-  <div><p class="etiqueta">PotenciarMDQ · rutas 2, 11 y 226</p><h1>Autos: <em>la mayoría</em>, sin datos abiertos</h1></div>
-  <p class="bajada">La mayor parte de los turistas llega en auto, pero nadie publica el tránsito de las rutas como datos abiertos. Esto es lo que se puede decir con lo que hay.</p>
+  <div><p class="etiqueta">PotenciarMDQ · rutas 2, 11 y 226</p><h1>Autos: <em>la mayoría</em>, sin conteos abiertos</h1></div>
+  <p class="bajada">Ocho de cada diez turistas llegan en auto. El municipio lo estima mes a mes, pero nadie publica el tránsito de las rutas como datos abiertos. Esto es lo que se puede decir con lo que hay.</p>
 </div>
 
 <div class="cifras c3">
-  <div><span class="rotulo">Llegaron en auto, ${evRango}</span><span class="valor">${evAnios.length ? pct(evAutoPool) : "—"}</span><p class="nota">de los turistas residentes (EVyTH); en enero de 2018 el EMTUR estimó 77 % (<a href="https://nulan.mdp.edu.ar/id/eprint/3911/1/roldan-etal-2023.pdf" target="_blank" rel="noopener">vía UNMdP</a>)</p></div>
-  <div><span class="rotulo">Turistas sin avión, micro ni tren, ${r?.anio ?? "—"}</span><span class="valor">${r ? pct(r.resto / r.turistas) : "—"}</span><p class="nota">${r ? `${compacto(r.resto)} de ${compacto(r.turistas)}: auto y otros` : ""}</p></div>
+  <div><span class="rotulo">Llegaron en auto en ${ref.anio}</span><span class="valor">${compacto(ref.auto)}</span><p class="nota">${prev ? `${variacion(ref.auto / prev.auto - 1)} contra ${prev.anio} · ` : ""}EMTUR</p></div>
+  <div><span class="rotulo">De cada 100 turistas</span><span class="valor">${Math.round(ref.share * 100)}</span><p class="nota">llegaron en auto en ${ref.anio}; entre ${pct(d3.min(autoAnual.filter((d) => d.meses === 12), (d) => d.share))} y ${pct(d3.max(autoAnual.filter((d) => d.meses === 12), (d) => d.share))} desde ${autoAnual[0].anio}</p></div>
   <div><span class="rotulo">Hacia la costa, ${c1?.periodo ?? "—"}</span><span class="valor">${c1 ? compacto(c1.vehiculos) : "—"}</span><p class="nota">${c0 && c1 ? `vehículos en las cabinas de AUBASA · ${variacion(c1.vehiculos / c0.vehiculos - 1)} contra ${c0.periodo.slice(-4)}` : ""}</p></div>
 </div>
 
-### En auto, año por año
+### Mes por mes
 
 ```js
 display(Plot.plot({
   width,
-  height: 260,
+  height: ALTO.medio,
   marginLeft: 55,
-  marginBottom: 45,
-  y: {grid: true, label: "Turistas residentes que llegaron en auto (EVyTH)", tickFormat: (v) => `${Math.round(v * 100)} %`, domain: [0, 1]},
-  x: ejeAnios,
+  y: {grid: true, label: "Turistas que llegaron en auto por mes (EMTUR)", tickFormat: compacto},
+  x: {label: null, type: "utc"},
   marks: [
-    Plot.barY(evAuto, {x: "anio", y: "share", fill: TINTA, fillOpacity: (d) => (d.anio_completo ? 1 : 0.45), inset: 1.5, tip: true,
-      title: (d) => `${d.anio}: ${pct1(d.share)} en auto\n${entero(d.n)} encuestados${d.anio_completo ? "" : `\nsolo ${d.trimestres} trimestres`}`}),
+    Plot.areaY(serie, {x: "periodo", y: "auto", fill: TINTA_2, fillOpacity: 0.12}),
+    Plot.lineY(serie, {x: "periodo", y: "auto", stroke: TINTA_2, strokeWidth: 1.5}),
+    Plot.dot(medios, {x: "periodo", y: "auto", r: 0, tip: true,
+      title: (d) => `${d.periodo.toLocaleDateString("es-AR", {month: "long", year: "numeric", timeZone: "UTC"})}\n${entero(d.auto)} en auto (${pct1(d.auto / d.total_medios)} de los turistas)`}),
     Plot.ruleY([0])
   ]
 }));
 ```
 
-<p class="leyenda">Proporción de los turistas residentes en grandes aglomerados que viajaron a Mar del Plata y llegaron en auto propio. Un año suelto de la encuesta puede saltar por pocos casos con mucho peso. El resto, en <a href="/llegadas">Cómo llega la gente</a>.</p>
+<p class="leyenda">Estimación del EMTUR, publicada en el portal de datos de Mar del Plata. Abril a noviembre de 2020 no se publicaron. En el resto de las vías el EMTUR usa conteos (ANAC, CNRT); el auto es la parte que estima, y no publica cómo (ver <a href="/llegadas">Cómo llega la gente</a>).</p>
 
 ### Fines de semana largos
 
@@ -106,7 +93,7 @@ ${conteos.map((d) => html`<tr><td>${d.periodo}</td><td>${d.tramo}</td><td>${d.se
 ```
 
 <div class="leyenda-grid">
-  <p><b>Qué falta.</b> AUBASA cuenta cada vehículo en sus cabinas de peaje, pero solo difunde cifras sueltas en temporada. Vialidad Nacional publicó el tránsito medio diario de la Ruta 226 hasta 2017.</p>
-  <p><b>El resto no medido.</b> Turistas del EMTUR menos los que llegaron en avión, micro y tren (la mitad de los pasajeros del servicio). Es una aproximación: los pasajeros incluyen marplatenses que vuelven.</p>
+  <p><b>Qué falta.</b> AUBASA cuenta cada vehículo en sus cabinas de peaje (rutas 2 y 11), pero solo difunde cifras sueltas en temporada. Vialidad Nacional publica el tránsito medio diario anual de la Ruta 226, que es el acceso desde el interior, no desde Buenos Aires.</p>
+  <p><b>Otra mirada.</b> La encuesta de hogares del Ministerio de Turismo (EVyTH) da menos auto, porque mide solo a residentes de grandes ciudades: ver <a href="/llegadas">Cómo llega la gente</a>.</p>
   <p><b>Cómo mejorarlo.</b> Un pedido de acceso a la información a AUBASA (conteos por cabina, día y sentido) permitiría una serie como la de aviación. Ver <a href="/llegadas">Cómo llega la gente</a>.</p>
 </div>
