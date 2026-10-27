@@ -140,6 +140,32 @@ def filas_medio(path: Path):
     return filas
 
 
+REGIONES = {  # encabezados de la planilla de procedencia (cambian entre años) -> región
+    "ciudad de buenos aires": "CABA", "caba": "CABA",
+    "gran bs as": "Conurbano", "gba": "Conurbano",
+    "pcia bs as": "Resto de la provincia", "resto pba": "Resto de la provincia",
+    "resto del pais": "Resto del país",
+    "exterior": "Exterior", "extranjeros": "Exterior",
+}
+
+
+def filas_procedencia(path: Path):
+    """Procedencia de turistas: filas = meses, columnas = región, en % (año en el nombre)."""
+    tabla = leer_tabla(path)
+    anio = anio_de_archivo(path)
+    regiones = [REGIONES.get(_norm(c)) for c in tabla[0][1:]]
+    filas = []
+    for r in tabla[1:]:
+        m = mes_de(r[0])
+        if m is None:
+            continue
+        for region, v in zip(regiones, r[1:], strict=False):
+            val = decimal(v.replace("%", ""))
+            if region and val is not None:
+                filas.append(["procedencia", region, anio, m, val, "porcentaje", path.name])
+    return filas
+
+
 def filas_findes(path: Path):
     """Visitantes por fin de semana largo: filas = años, columnas = feriado (mes = NULL)."""
     tabla = leer_tabla(path)
@@ -183,6 +209,8 @@ def build_series(raw: Path = RAW_MUN, out: Path = PROCESSED) -> Path:
         filas += filas_findes(p)
     for p in sorted((raw / "arribo-de-turistas-por-medio-de-transporte").glob("*.csv")):
         filas += filas_medio(p)
+    for p in sorted((raw / "procedencia-de-turistas").glob("*.csv")):
+        filas += filas_procedencia(p)
 
     for f in filas:
         if f[0] in ("pasajeros_tramo", "vuelos_tramo"):

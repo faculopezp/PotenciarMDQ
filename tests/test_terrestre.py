@@ -65,3 +65,16 @@ def test_filas_medio_lee_ambos_formatos(tmp_path: Path):
         ["avion", 2013, 1, 9720], ["tren", 2013, 1, 22035], ["omnibus", 2013, 1, 293160],
         ["auto", 2013, 1, 1080070]]
     assert [f[1:5] for f in filas_medio(nuevo)][0] == ["avion", 2025, 5, 8965]
+
+
+def test_filas_procedencia_unifica_regiones(tmp_path: Path):
+    from potenciar_mdq.standardize.municipal import filas_procedencia
+
+    viejo = tmp_path / "procedencia-turistas-2007.csv"
+    viejo.write_text("Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del país,Exterior\n"
+                     "Enero,34.3,25.5,16.2,22.0,1.6\n", encoding="latin-1")
+    nuevo = tmp_path / "procedencia-turistas-2024.csv"
+    nuevo.write_text("Mes;CABA;GBA;Resto PBA;Resto del país\nEnero;21,70%;39,50%;12,50%;26,30%\n")
+    assert {f[1] for f in filas_procedencia(viejo)} == {
+        "CABA", "Conurbano", "Resto de la provincia", "Resto del país", "Exterior"}
+    assert [f[1:5] for f in filas_procedencia(nuevo)][0] == ["CABA", 2024, 1, 21.7]
