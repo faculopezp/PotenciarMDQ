@@ -66,7 +66,7 @@ El anual solo trae rutas con al menos un viaje semanal: tiene que dar igual o me
 | cordoba | Córdoba · Cordoba | 2 |
 | neuquen | Neuquén · Neuquen | 2 |
 | parana | Parana · Paraná | 2 |
-| san miguel de tucuman | San Miguel De Tucumán · San Miguel De Tucuman | 2 |
+| san miguel de tucuman | San Miguel De Tucuman · San Miguel De Tucumán | 2 |
 
 ## 5. Rutas con más pasajeros que asientos
 
@@ -149,10 +149,30 @@ Meses del foco con más de un operador:
 
 | anio | operadores | meses |
 |---|---|---|
-| 2011 | FERROBAIRES · SOFSE | 6 |
+| 2011 | SOFSE · FERROBAIRES | 6 |
 | 2012 | FERROBAIRES · SOFSE | 10 |
 | 2014 | FERROBAIRES · SOFSE | 1 |
-| 2015 | FERROBAIRES · SOFSE | 8 |
+| 2015 | SOFSE · FERROBAIRES | 8 |
+
+## 9. EMTUR por medio de transporte contra los conteos
+
+Suma de los cuatro medios contra el total de turistas del EMTUR, y cada medio contra lo medido (avión: ANAC; micro: CNRT; tren: CNRT, ida y vuelta).
+
+| anio | emtur_medios | emtur_turistas | emtur_avion | anac_aterrizajes_linea | emtur_omnibus | cnrt_micro_llegadas | emtur_tren | cnrt_tren_ida_vuelta |
+|---|---|---|---|---|---|---|---|---|
+| 2013 | 8475341.0 | 8476928.0 | 70763.0 |  | 1492555.0 |  | 64895.0 | 132813 |
+| 2014 | 8437644.0 | 8437644.0 | 67714.0 |  | 1465398.0 |  | 46644.0 | 98029 |
+| 2015 | 8846314.0 | 8846314.0 | 96272.0 |  | 1446630.0 |  | 89611.0 | 200940 |
+| 2016 | 7622961.0 | 8452695.0 | 102009.0 |  | 1392975.0 |  | 0.0 | 10303 |
+| 2017 | 8570979.0 | 8570980.0 | 138192.0 |  | 1323507.0 |  | 67834.0 | 132480 |
+| 2018 | 8355934.0 | 8355935.0 | 222685.0 |  | 1299786.0 |  | 155383.0 | 314527 |
+| 2019 | 8063025.0 | 8063024.0 | 185601.0 | 186574 | 1188677.0 | 1029790 | 212717.0 | 425067 |
+| 2020 | 3639343.0 | 3639343.0 | 53109.0 | 52980 | 596947.0 | 442522 | 113478.0 | 235036 |
+| 2021 | 6644442.0 | 6644442.0 | 41486.0 | 41796 | 354465.0 | 386410 | 366021.0 | 738603 |
+| 2022 | 8860018.0 | 8860018.0 | 132906.0 | 133430 | 934890.0 | 1036766 | 447469.0 | 903148 |
+| 2023 | 9281513.0 | 9281017.0 | 147988.0 | 150087 | 1096722.0 | 1095496 | 385359.0 | 828973 |
+| 2024 | 8508365.0 | 8508365.0 | 140304.0 | 142599 | 842919.0 | 674928 | 312413.0 | 661775 |
+| 2025 | 8264293.0 | 8264293.0 | 145047.0 | 146116 | 888511.0 |  | 252433.0 | 532496 |
 
 ## 8. EVyTH: viajes de residentes con destino Mar del Plata
 

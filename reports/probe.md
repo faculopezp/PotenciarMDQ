@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-27 01:28 UTC
+# Probe de fuentes — 2026-10-27 02:04 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -71,7 +71,37 @@
     > "02/10/2023, Conectividad A�rea,Todos los recursos,""Luego de un proceso de revisi�n y limpieza de los registros, se actualizaron los recursos filtrando casos de vuelos desde y hacia aeropuertos sin relevancia para la actividad tur�stica."""
 
 ## `anac_dnta` (html_links)
-- ❌ ConnectTimeout: HTTPSConnectionPool(host='consultas-publicas.anac.gob.ar', port=443): Max retries exceeded with url: /estadisticas-dnta/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='consultas-publicas.anac.gob.ar', port=443) at 0x7f54c8662710>, 'Connection to consultas-publicas.anac.gob.ar timed out. (connect timeout=10)'))
+- 30 archivos encontrados
+  - [Enero](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-enero-online.pdf)
+  - [Febrero](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-febrero-2018-online.pdf)
+  - [Marzo](https://www.eana.com.ar/sites/default/files/2018-06/informe-mensual-201803-online.pdf)
+  - [Abril](https://www.eana.com.ar/sites/default/files/2018-06/informe-mensual-201804-online-1.pdf)
+  - [Junio](https://www.eana.com.ar/sites/default/files/2018-08/Informe_Mensual_201806_Online.pdf)
+  - [Julio](https://www.eana.com.ar/sites/default/files/2018-08/Informe_Mensual_201807_Online.01.pdf)
+  - [Agosto](https://www.eana.com.ar/sites/default/files/2018-09/Informe%20Mensual%20201808%20-%20Online_2.pdf)
+  - [Septiembre](https://www.eana.com.ar/sites/default/files/2018-10/Informe%20Mensual%20201809_1.pdf)
+  - [Octubre](https://www.eana.com.ar/sites/default/files/2018-11/Informe%20Mensual%20201810.pdf)
+  - [Noviembre](https://www.eana.com.ar/sites/default/files/2018-12/Informe%20Mensual%20201811.pdf)
+  - [Diciembre](https://www.eana.com.ar/sites/default/files/2019-01/Informe%20Mensual%20201812_1.pdf)
+  - [Enero](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-enero-2017-eana.pdf)
+  - [Febrero](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-febrero-2017-eana.pdf)
+  - [Marzo](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-marzo-2017-eana.pdf)
+  - [Abril](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-abril-2017-eana.pdf)
+  - [Mayo](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-mayo-2017-eana.pdf)
+  - [Junio](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-junio-2017-eana.pdf)
+  - [Julio](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-201707-eana-se.pdf)
+  - [Agosto](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-agosto-2017-eana.pdf)
+  - [Septiembre](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-septiembre-2017-eana.pdf)
+  - [Octubre](https://www.eana.com.ar/sites/default/files/2018-06/021117-informe-mensual-octubre-2017-online-1.pdf)
+  - [Noviembre](https://www.eana.com.ar/sites/default/files/2018-06/informe-mensual-noviembre-2017-eana.pdf)
+  - [Diciembre](https://www.eana.com.ar/sites/default/files/2018-06/informe-mensual-diciembre-2017-eana.pdf)
+  - [Anuario](https://www.eana.com.ar/sites/default/files/2018-06/anuario-estad%C3%ADstico-2017-eana.pdf)
+  - [Agosto](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-agosto-2016-eana.pdf)
+  - [Septiembre](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-septiembre-2016-eana.pdf)
+  - [Octubre](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-octubre-2016-eana.pdf)
+  - [Noviembre](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-noviembre-2016-eana.pdf)
+  - [Diciembre](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-diciembre-2016-eana.pdf)
+  - [Anuario](https://www.eana.com.ar/sites/default/files/2018-06/anuario-estad%C3%ADstico-2016-eana.pdf)
 
 ## `ourairports` (static_file)
 - HTTP 200, content-type `text/plain; charset=utf-8`
@@ -94,10 +124,62 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 - HTTP 200, content-type `application/octet-stream`
 
 ## `madhel` (static_file)
-- ❌ ConnectTimeout: HTTPSConnectionPool(host='ais.anac.gob.ar', port=443): Max retries exceeded with url: /madhel/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='ais.anac.gob.ar', port=443) at 0x7f54c86639d0>, 'Connection to ais.anac.gob.ar timed out. (connect timeout=10)'))
+- HTTP 200, content-type `text/html`
+```
+<!DOCTYPE html>
+<html lang="es" ng-app='angularApp'>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+```
+- URLs encontradas:
+  - `#main-navbar-collapse`
+  - `$sanitize`
+  - `Book/Gatsby`
+  - `Book/Gatsby/ch/4?key=value`
+  - `Book/Moby`
+  - `Book/Moby/ch/1`
+  - `Book/Scarlet`
+  - `Iterator`
+  - `_blank`
+  - `acerca.html`
+  - `book.html`
+  - `chapter.html`
+  - `data:`
+  - `data:image/svg+xml;base64,${btoa(i)}`
+  - `http://ais.anac.gob.ar`
+  - `http://angularjs.org/`
+  - `http://www.openstreetmap.org/copyright`
+  - `https://ais.anac.gob.ar/notam/json`
+  - `https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js`
+  - `https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.2.31/angular-sanitize.js`
+  - `https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.3/angular-route.js`
+  - `https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.7/angular.min.js`
+  - `https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js`
+  - `https://datos.anac.gob.ar/madhel/api/v2/airports/`
+  - `https://datos.anac.gob.ar/madhel/api/v2/info/legal/disclaimer/web-app`
+  - `https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB5QEo5K82nS5ovG5qeQdL64XWXQ6emz5A&libraries=marker&loading=async&callback=initMap`
+  - `https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js`
+  - `https://twitter.com/anacargentina?lang=es`
+  - `https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js`
+  - `https://www.anac.gob.ar`
+  - `https://www.facebook.com/ANAC-248699361838722/`
+  - `https://www.googletagmanager.com/gtag/js?id=G-SR3CKD1CLW`
+  - `https://www.youtube.com/user/anacnoticias`
+  - `index.html`
+  - `js/angular-leaflet-directive.min.js`
+  - `js/app.js`
+  - `js/mapa.js`
+  - `mailto:`
+  - `resourceUrl`
+  - `url`
 
 ## `madhel_api` (static_file)
-- ❌ ConnectTimeout: HTTPSConnectionPool(host='datos.anac.gob.ar', port=443): Max retries exceeded with url: /madhel/api/v2/airports/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='datos.anac.gob.ar', port=443) at 0x7f54c86e4910>, 'Connection to datos.anac.gob.ar timed out. (connect timeout=10)'))
+- HTTP 200, content-type `application/json`
+```
+{"count":712,"results":[{"uri":"/madhel/api/v2/airports/ACB/?format=json","the_geom":{"geometry":{"type":"Point","coordinates":[-60.57066,-33.27226]},"properties":{"name":"CORONEL BOGADO / AGROSERVICIOS - (ACB) - DRCE - PRIVADO NO CONTROLADO [** USO AGROA\u00c9REO **]","gg_point_coordinates":[-33.27
+```
 
 ## `opensky_indice` (static_file)
 - HTTP 200, content-type `text/html`
@@ -114,7 +196,7 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 - HTTP 200 `https://archive-api.open-meteo.com/v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-21&daily=weather_code%2Cprecipitation_`
 
 ## `anac_informes_mensuales` (url_pattern)
-- ❌ ConnectTimeout: HTTPSConnectionPool(host='datos.anac.gob.ar', port=443): Max retries exceeded with url: /static/docs/Informe_Mensual_201401.pdf (Caused by ConnectTimeoutError(<HTTPSConnection(host='datos.anac.gob.ar', port=443) at 0x7f54c86e5a90>, 'Connection to datos.anac.gob.ar timed out. (connect timeout=10)'))
+- 0/60 URLs existen
 
 ## `sna_anuales` (url_pattern)
 - 2/5 URLs existen
@@ -694,6 +776,301 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
     > Enero,"9,720","22,035","293,160","1,080,070"
     > Febrero,"7,470","9,907","262,340","897,519"
     > Marzo,"6,086","5,793","150,029","627,806"
+### `procedencia-de-turistas`
+  - `csv` Procedencia de turistas año 2024 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2024.csv — mod Date changed  Lun, 26/05/2025 - 11:12
+    > Mes;CABA;GBA;Resto PBA;Resto del pa�s
+    > Enero;21,70%;39,50%;12,50%;26,30%
+    > Febrero;17,60%;41,40%;14,80%;26,20%
+    > Marzo;17,40%;42,80%;22,10%;17,60%
+  - `csv` Procedencia de turistas año 2023 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2023.csv — mod Date changed  Lun, 26/05/2025 - 09:37
+    > Mes;CABA;GBA;Resto PBA;Resto del pa�s;Extranjeros
+    > Enero;22,0%;39,6%;13,3%;24,5%;0,7%
+    > Febrero;18,1%;42,7%;13,9%;24,7%;0,7%
+    > Marzo;15,0%;41,6%;23,0%;18,7%;1,7%
+  - `csv` Procedencia de turistas año 2022 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2022.csv — mod Date changed  Lun, 26/05/2025 - 09:34
+    > Mes;CABA;GBA;Resto PBA;Resto del pa�s;Exterior
+    > Enero;21,1%;41,3%;12,5%;25,1%;-
+    > Febrero;17,2%;43,4%;15,3%;24,0%;-
+    > Marzo;17,4%;40,0%;22,5%;20,2%;-
+  - `csv` Procedencia de turistas año 2021 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2021.csv — mod Date changed  Jue, 10/11/2022 - 15:28
+    > Mes;Ciudad de Buenos Aires;Gran Bs As;Pcia Bs As;Resto del pais;Exterior
+    > Enero;23.1;47.6;14.1;15.2;-
+    > Febrero;18.3;51;15.9;14.8;-
+    > Marzo;16.7;46.5;21.4;15.4;-
+  - `csv` Procedencia de turistas año 2020 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2020_0.csv — mod Date changed  Jue, 10/11/2022 - 15:31
+    > Mes;Ciudad de Buenos Aires;Gran Bs As;Pcia Bs As;Resto del pa�s;Exterior
+    > Enero;24.60;39.50;22.50;13.10;0.30
+    > Febrero;24.60;39.50;22.50;13.10;0.30
+    > Serie interrumpida por la pandemia;;;;;
+  - `csv` Procedencia de turistas año 2019 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2019.csv — mod Date changed  Jue, 10/11/2022 - 15:24
+    > Mes;Ciudad de Buenos Aires;Gran Bs As;Pcia Bs As;Resto del pa�s;Exterior
+    > Enero;24,4%;42,3%;19,6%;13,3%;0,3%
+    > Febrero;24,4%;42,3%;19,6%;13,3%;0,3%
+    > Marzo;sin dato;sin dato;sin dato;sin dato;sin dato
+  - `csv` Procedencia de turistas año 2018 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2018.csv — mod Date changed  Jue, 10/11/2022 - 15:01
+    > Mes;Ciudad de Buenos Aires;Gran Bs As;Pcia Bs As;Resto del pais;Exterior
+    > Enero;22.0;39.0;21.4;16.9;0.7
+    > Febrero;22.0;39.0;21.4;16.9;0.7
+    > Marzo;29.0;44.6;21.9;4.0;0.6
+  - `csv` Procedencia de turistas año 2017 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2017.csv — mod Date changed  Mié, 21/11/2018 - 16:15
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,29.1,31.9,25.0,13.3,0.8
+    > Febrero,30.3,32.5,23.6,12.8,0.8
+    > Marzo,27.7,35.4,28.8,7.5,0.7
+  - `csv` Procedencia de turistas año 2016 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2016.csv — mod Date changed  Mié, 21/11/2018 - 16:15
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,38.5,33.6,14.4,12.6,0.8
+    > Febrero,31.4,36.6,16.9,14.2,0.9
+    > Marzo,41.3,26.4,21.3,10.4,0.6
+  - `csv` Procedencia de turistas año 2015 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2015.csv — mod Date changed  Mié, 21/11/2018 - 16:15
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,38.0,28.0,19.1,13.8,1.0
+    > Febrero,42.2,29.5,14.2,13.4,0.8
+    > Marzo,35.4,33.9,21.6,8.1,0.9
+  - `csv` Procedencia de turistas año 2014 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2013.csv — mod Date changed  Mié, 21/11/2018 - 16:16
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,26.0,45.3,13.7,14.0,1.0
+    > Febrero,29.4,44.5,13.8,11.3,1.0
+    > Marzo,33.9,42.5,15.9,7.1,0.6
+  - `csv` Procedencia de turistas año 2013 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2013.csv — mod Date changed  Mié, 21/11/2018 - 16:16
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,26.0,45.3,13.7,14.0,1.0
+    > Febrero,29.4,44.5,13.8,11.3,1.0
+    > Marzo,33.9,42.5,15.9,7.1,0.6
+  - `csv` Procedencia de turistas año 2012 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2012.csv — mod Date changed  Mié, 21/11/2018 - 16:17
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,18.1,42.8,15.5,22.5,1.1
+    > Febrero,27.7,44.1,13.3,13.9,1.0
+    > Marzo,30.5,48.3,11.6,8.7,1.1
+  - `csv` Procedencia de turistas año 2011 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2011.csv — mod Date changed  Mié, 21/11/2018 - 16:17
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,21.9,41.0,13.2,22.9,1.0
+    > Febrero,25.6,45.1,14.5,13.7,1.2
+    > Marzo,30.9,45.8,15.3,7.1,0.9
+  - `csv` Procedencia de turistas año 2010 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2010.csv — mod Date changed  Mié, 21/11/2018 - 16:18
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,25.9,35.2,18.0,19.9,1.0
+    > Febrero,35.8,38.3,12.3,12.7,0.9
+    > Marzo,35.0,40.3,13.1,10.9,0.7
+  - `csv` Procedencia de turistas año 2009 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2009.csv — mod Date changed  Mié, 21/11/2018 - 16:18
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,26.3,39.9,11.9,21.1,0.9
+    > Febrero,26.9,47.5,13.1,11.9,0.6
+    > Marzo,29.8,44.2,15.8,9.4,0.8
+  - `csv` Procedencia de turistas año 2008 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2008.csv — mod Date changed  Mié, 21/11/2018 - 16:19
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,25.1,37.2,11.1,24.9,0.7
+    > Febrero,30.0,38.4,17.4,13.3,0.9
+    > Marzo,37.4,24.6,28.4,9.0,0.6
+  - `csv` Procedencia de turistas año 2007 — https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2007.csv — mod Date changed  Mié, 21/11/2018 - 16:19
+    > Mes,Ciudad de Buenos Aires,Gran Bs As,Pcia Bs As,Resto del pa�s,Exterior
+    > Enero,34.3,25.5,16.2,22.0,1.6
+    > Febrero,34.3,25.5,16.2,22.0,1.3
+    > Marzo,41.7,30.5,18.1,8.5,1.1
+### `ocupación-hotelera`
+  - `csv` Ocupación Hotelera. Año 2025 — https://datos.mardelplata.gob.ar/sites/default/files/2025-ocup-hotelera.csv — mod Date changed  Mar, 28/07/2026 - 12:51
+    > Categor�a;Enero;Febrero;Marzo;Abril;Mayo;Junio;Julio;Agosto;Septiembre;Octubre;Noviembre;Diciembre
+    > 5 estrellas;66,09%;39,10%;36,85%;32,58%;20,28%;20,90%;20,98%;21,21%;22,24%;21,79%;51,47%;45,33%
+    > 4 estrellas;67,78%;55,15%;42,64%;38,04%;23,80%;39,04%;45,60%;38,97%;41,95%;47,37%;59,80%;53,67%
+    > Apart Hotel;66,8%;55,0%;33,6%;34,2%;12,1%;13,7%;29,2%;18,4%;25,7%;41,3%;49,6%;44,5%
+  - `csv` Ocupación Hotelera. Año 2024 — https://datos.mardelplata.gob.ar/sites/default/files/2024-ocup-hotelera.csv — mod Date changed  Lun, 26/05/2025 - 10:05
+    > Categor�a;Enero;Febrero;Marzo;Abril;Mayo;Junio;Julio;Agosto;Septiembre;Octubre;Noviembre;Diciembre
+    > 5 estrellas;67,80%;44,20%;49,20%;34,40%;24,30%;18,70%;24,50%;18,10%;29,40%;37,40%;42,50%;40,80%
+    > 4 estrellas;65,70%;53,90%;40,00%;35,30%;24,20%;30,60%;37,90%;25,10%;38,50%;47,30%;66,20%;48,30%
+    > Apart Hotel;64,20%;54,40%;36,40%;31,60%;8,10%;21,10%;30,50%;14,40%;21,20%;35,40%;53,60%;39,50%
+  - `csv` Ocupación Hotelera. Año 2023 — https://datos.mardelplata.gob.ar/sites/default/files/2023-ocup-hotelera.csv — mod Date changed  Lun, 26/05/2025 - 10:03
+    > Categor�a;Enero;Febrero;Marzo;Abril;Mayo;Junio;Julio;Agosto;Septiembre;Octubre;Noviembre;Diciembre
+    > 5 estrellas;78,96%;60,04%;51,55%;42,50%;38,49%;29,97%;39,74%;24,02%;37,32%;39,93%;42,02%;42,71%
+    > 4 estrellas;74,86%;63,48%;40,94%;39,53%;28,76%;26,99%;35,32%;35,94%;55,62%;48,69%;48,15%;44,84%
+    > Apart Hotel;66,88%;60,43%;33,09%;32,45%;17,44%;20,28%;30,40%;26,76%;52,70%;32,09%;35,31%;40,92%
+  - `csv` Ocupación Hotelera. Año 2022 — https://datos.mardelplata.gob.ar/sites/default/files/2022-ocup-hotelera.csv — mod Date changed  Lun, 26/05/2025 - 10:01
+    > Categor�a;Enero;Febrero;Marzo;Abril;Mayo;Junio;Julio;Agosto;Septiembre;Octubre;Noviembre;Diciembre
+    > 5 estrellas;82,69%;77,36%;58,54%;44,00%;29,62%;26,70%;37,96%;27,30%;35,90%;52,60%;51,88%;48,23%
+    > 4 estrellas;71,13%;73,18%;52,55%;36,49%;21,02%;28,31%;37,83%;24,90%;27,30%;61,60%;65,62%;45,08%
+    > 3 estrellas;76,02%;74,44%;51,40%;40,15%;24,58%;26,19%;39,12%;27,70%;30,70%;61,20%;61,86%;49,77%
+  - `csv` Ocupación Hotelera. Año 2021 — https://datos.mardelplata.gob.ar/sites/default/files/2021-ocup-hotelera_0.csv — mod Date changed  Mié, 02/11/2022 - 16:11
+    > Categoria;Enero;Febrero;Marzo;Abril;Mayo;Junio;Julio;Agosto;Septiembre;Octubre;Noviembre;Diciembre
+    > 5 estrellas;44,40%;49,60%;35,20%;19,00%;11,80%;10,00%;38,50%;30,60%;32,80%;44,30%;46,80%;54,40%
+    > 4 estrellas;24,70%;42,60%;33,40%;19,80%;10,30%;16,20%;43,70%;35,20%;37,80%;42,10%;44,70%;44,40%
+    > 3 estrellas;32,50%;41,90%;26,20%;17,90%;8,50%;11,10%;37,30%;29,10%;28,00%;33,40%;42,00%;49,50%
+  - `csv` Ocupación Hotelera. Año 2020 — https://datos.mardelplata.gob.ar/sites/default/files/2020-ocup-hotelera.csv — mod Date changed  Mié, 02/11/2022 - 16:09
+    > Categoria;Enero;Febrero;Marzo;Abril;Mayo;Junio;Julio;Agosto;Septiembre;Octubre;Noviembre;Diciembre
+    > 5 estrellas;76,8%;58,0%;35,6%;-;-;-;-;-;-;-;-;32,5%
+    > 4 estrellas;76,8%;70,7%;39,6%;-;-;-;-;-;-;-;-;21,7%
+    > 3 estrellas;79,2%;76,1%;48,5%;-;-;-;-;-;-;-;-;17,1%
+  - `csv` Ocupación Hotelera. Año 2019 — https://datos.mardelplata.gob.ar/sites/default/files/2019-ocup-hotelera.csv — mod Date changed  Mié, 02/11/2022 - 16:06
+    > Categoria;enero;febrero;marzo;abril;mayo;junio;julio;agosto;septiembre;octubre;noviembre;diciembre
+    > 5 estrellas;67,15%;56,15%;56,20%;47,45%;23,09%;26,70%;42,27%;34,12%;23,18%;29,57%;50,12%;48,84%
+    > 4 estrellas;72,83%;75,54%;54,85%;42,80%;25,74%;31,72%;45,16%;36,96%;36,87%;38,80%;48,39%;47,22%
+    > 3 estrellas;73,99%;70,88%;51,44%;29,68%;18,74%;24,11%;34,54%;24,47%;32,61%;42,25%;41,86%;46,51%
+  - `csv` Ocupación Hotelera. Año 2018 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2018.csv — mod Date changed  Mié, 06/03/2019 - 13:41
+    > Categor�a,enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre
+    > 5 estrellas,77.10%,66.90%,50.20%,44.80%,29.80%,18.90%,33.00%,36.20%,38.00%,54.10%,50.00%,52.00%
+    > 4 estrellas,74.30%,75.20%,54.40%,43.40%,26.70%,22.20%,46.70%,33.60%,36.90%,51.20%,49.50%,49.20%
+    > 3 estrellas,77.20%,76.50%,50.80%,31.70%,19.90%,14.20%,31.70%,22.00%,26.80%,41.20%,43.40%,40.00%
+  - `csv` Ocupación Hotelera. Año 2017 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2017.csv — mod Date changed  Vie, 09/03/2018 - 10:02
+    > Categor�a,enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre
+    > 5 estrellas,72.97%,54.71%,49.71%,54.06%,39.11%,20.88%,38.58%,34.34%,38.55%,41.43%,65.88%,54.54%
+    > 4 estrellas,73.00%,75.74%,55.55%,44.51%,26.96%,19.63%,43.60%,36.03%,39.23%,51.66%,52.25%,52.39%
+    > 3 estrellas,77.71%,77.75%,51.30%,33.47%,20.43%,20.10%,34.44%,25.91%,27.87%,44.58%,44.90%,44.99%
+  - `csv` Ocupación Hotelera. Año 2016 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2016.csv — mod Date changed  Vie, 09/03/2018 - 10:02
+    > Categor�a,enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre
+    > 5 estrellas,77.22%,54.77%,65.24%,49.54%,36.01%,38.25%,40.92%,43.45%,50.59%,63.06%,69.23%,52.05%
+    > 4 estrellas,80.40%,80.68%,66.81%,39.56%,31.17%,32.28%,52.62%,36.87%,36.53%,59.62%,58.08%,52.08%
+    > 3 estrellas,81.41%,78.19%,59.00%,29.60%,18.26%,25.06%,39.81%,24.97%,28.90%,56.64%,43.74%,48.41%
+  - `csv` Ocupación Hotelera. Año 2015 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2015.csv — mod Date changed  Vie, 09/03/2018 - 10:01
+    > Categor�a,enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre
+    > 5 estrellas,81.86%,64.83%,56.36%,64.98%,37.24%,31.90%,48.72%,47.98%,58.10%,59.38%,59.87%,57.28%
+    > 4 estrellas,86.94%,84.87%,69.30%,48.86%,36.17%,28.85%,47.73%,38.58%,51.39%,50.61%,57.20%,52.76%
+    > 3 estrellas,83.75%,82.18%,56.64%,34.77%,28.09%,19.20%,33.36%,27.30%,43.85%,36.88%,42.88%,50.36%
+  - `csv` Ocupación Hotelera. Año 2014 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2014.csv — mod Date changed  Vie, 09/03/2018 - 10:01
+    > Categor�a,enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre
+    > 5 estrellas,77.89%,60.14%,58.20%,55.72%,29.19%,32.36%,42.43%,41.13%,65.15%,63.15%,73.17%,68.53%
+    > 4 estrellas,83.21%,81.41%,61.56%,34.60%,30.20%,25.07%,34.89%,34.54%,42.50%,47.40%,66.35%,60.70%
+    > 3 estrellas,77.92%,72.08%,49.72%,27.83%,25.73%,18.24%,25.15%,29.23%,26.04%,34.51%,51.05%,49.33%
+  - `csv` Ocupación Hotelera. Año 2013 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2013.csv — mod Date changed  Vie, 09/03/2018 - 10:00
+    > Categor�a,enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre
+    > 5 estrellas,66.79%,61.59%,57.51%,60.87%,29.10%,37.90%,46.84%,32.71%,51.46%,56.08%,79.47%,60.05%
+    > 4 estrellas,76.30%,72.01%,62.62%,35.75%,26.26%,32.98%,37.13%,29.42%,33.85%,37.63%,70.81%,54.82%
+    > 3 estrellas,73.76%,73.72%,53.99%,30.86%,22.76%,28.13%,32.17%,23.78%,32.85%,36.17%,58.49%,47.42%
+  - `csv` Ocupación Hotelera. Año 2012 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2012.csv — mod Date changed  Vie, 09/03/2018 - 10:00
+    > Categor�a,Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre
+    > 5 estrellas,71.92%,69.29%,63.46%,61.23%,41.30%,26.74%,37.05%,35.45%,46.23%,58.40%,73.12%,68.65%
+    > 4 estrellas,83.21%,77.46%,57.39%,50.72%,26.02%,18.33%,40.19%,26.85%,37.71%,37.72%,61.37%,48.30%
+    > 3 estrellas,77.59%,74.99%,50.96%,40.06%,22.90%,15.03%,29.02%,21.30%,29.13%,27.65%,49.69%,40.28%
+  - `csv` Ocupación Hotelera. Año 2011 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2011.csv — mod Date changed  Vie, 09/03/2018 - 10:00
+    > Categor�a,Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre
+    > 5 estrellas,89.79%,73.36%,56.38%,46.95%,54.88%,24.30%,43.67%,42.99%,58.45%,58.89%,76.98%,64.48%
+    > 4 estrellas,84.09%,78.74%,66.27%,36.75%,28.85%,26.53%,37.15%,39.62%,41.02%,48.25%,56.84%,51.13%
+    > 3 estrellas,83.76%,74.82%,59.62%,34.00%,23.68%,18.71%,25.96%,25.47%,34.70%,40.52%,47.41%,46.24%
+  - `csv` Ocupación Hotelera. Año 2010 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2010.csv — mod Date changed  Vie, 09/03/2018 - 09:59
+    > Categor�a,Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre
+    > 5 estrellas,87.49%,66.32%,64.86%,53.21%,56.20%,33.40%,39.56%,56.78%,41.46%,70.23%,78.32%,62.98%
+    > 4 estrellas,83.20%,79.01%,56.15%,44.55%,34.07%,23.42%,34.02%,30.71%,31.49%,54.57%,61.62%,48.59%
+    > 3 estrellas,81.49%,77.77%,56.09%,40.30%,29.64%,15.89%,31.04%,26.47%,28.13%,49.31%,54.91%,43.48%
+  - `csv` Ocupación Hotelera. Año 2009 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2009.csv — mod Date changed  Vie, 09/03/2018 - 09:59
+    > Categor�a,Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre
+    > 5 estrellas,74.47%,67.61%,62.87%,57.92%,38.61%,43.33%,35.36%,41.14%,54.73%,64.52%,72.55%,53.75%
+    > 4 estrellas,77.06%,69.52%,56.55%,47.20%,34.71%,25.35%,26.97%,34.16%,43.78%,48.47%,62.27%,45.21%
+    > 3 estrellas,74.56%,70.60%,52.64%,36.27%,27.93%,16.11%,17.24%,26.28%,29.95%,39.56%,53.08%,43.16%
+  - `csv` Ocupación Hotelera. Año 2008 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2008.csv — mod Date changed  Vie, 09/03/2018 - 09:59
+    > Categor�a,Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre
+    > 5 estrellas,83.49%,68.12%,65.46%,54.55%,47.03%,45.58%,41.06%,55.81%,75.65%,79.02%,76.07%,67.33%
+    > 4 estrellas,84.67%,75.99%,61.95%,41.17%,32.34%,27.61%,37.92%,46.31%,41.91%,44.81%,65.69%,58.02%
+    > 3 estrellas,83.35%,74.64%,61.89%,27.11%,21.78%,19.13%,23.36%,34.63%,27.46%,38.26%,55.93%,47.20%
+  - `csv` Ocupación Hotelera. Año 2007 — https://datos.mardelplata.gob.ar/sites/default/files/ocupacion-hotelera-2007.csv — mod Date changed  Vie, 09/03/2018 - 09:58
+    > Categor�a,Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre
+    > 5 estrellas,87.77%,68.92%,66.08%,74.08%,43.21%,39.00%,46.98%,42.33%,51.08%,60.01%,72.28%,72.00%
+    > 4 estrellas,86.81%,82.27%,70.99%,49.81%,34.14%,29.04%,43.66%,45.25%,43.03%,52.63%,60.44%,61.80%
+    > 3 estrellas,85.36%,83.40%,59.44%,38.32%,29.83%,23.10%,35.79%,30.69%,34.03%,45.68%,43.43%,51.97%
+### `gasto-turístico`
+  - `csv` Gasto con transporte 2007-2019 — https://datos.mardelplata.gob.ar/sites/default/files/gasto-con-transporte-2007-2019.csv — mod Date changed  Vie, 11/11/2022 - 14:31
+    > ;2007;2008;2009;2010;2011;2012;2013;2014;2015;2016;2017;2018;2019
+    > Enero;88.15;96.92;117.53;138.41;170.93;225.81;275.98;345.99;443.73;524.00;718.00;923.00;1127
+    > Febrero;82.31;97.60;110.68;136.20;170.40;226.50;301.40;366.61;453.69;584.00;812.00;980.00;1226
+    > Marzo;88.49;113.68;126.26;159.56;205.74;260.88;343.25;423.85;501.10;736.00;1018.00;1163.00;1365
+  - `csv` Gasto sin transporte 2009-2019 — https://datos.mardelplata.gob.ar/sites/default/files/gasto-sin-transporte-2009-2019.csv — mod Date changed  Vie, 11/11/2022 - 14:29
+    > ;2009;2010;2011;2012;2013;2014;2015;2016;2017;2018;2019
+    > Enero;103.74;118.99;149.10;193.19;235.20;291.89;367.00;432.00;566.00;709.00;843
+    > Febrero;97.01;116.94;150.06;188.22;257.07;303.75;382.28;481.00;635.00;736.00;949
+    > Marzo;109.24;135.37;170.50;211.33;281.61;346.10;404.13;578.00;749.00;865.00;1008
+  - `csv` Giro estimado con transporte 2003-2021 — https://datos.mardelplata.gob.ar/sites/default/files/giro-estimado-con-transporte-2003-2021_0.csv — mod Date changed  Vie, 11/11/2022 - 14:23
+    > ;Ano 2003;Ano 2004;Ano 2005;Ano 2006;Ano 2007;Ano 2008;Ano 2009;Ano 2010;Ano 2011;Ano 2012;Ano 2013;Ano 2014;Ano 2015;Ano 2016;ano 2017;ano 2018;ano 2019;ano 2020;ano 2021
+    > Enero;-;$511,705,164;$666,223,166;$749,987,458;$951,268,414;$987,528,076;$1,055,875,649;$1,375,918,027;$1,742,978,096;$2,202,729,977;$2,420,060,276;$3,101,273,328;$4,217,972,831;$4,536,659,360;$6,028,517,822;$ 7.975.026.559;$ 9.191.708.376;$ 15.127.895.802;sin datos, no se pudo realizar operativo
+    > Febrero;-;$353,536,808;$413,923,880;$478,858,177;$589,504,643;$684,562,728;$658,688,709;$891,405,458;$1,091,938,101;$1,529,000,697;$1,908,046,767;$2,276,154,509;$3,064,181,011;$3,813,825,360;$5,030,564,861;$ 6.516.936.511;$ 7.491.081.529;$ 13.886.524.121;
+    > Marzo;-;$128,315,747;$212,916,392;$216,227,813;$251,641,567;$367,445,207;$254,323,334;$320,794,283;$625,931,226;$467,533,738;$924,250,888;$1,176,508,923;$1,366,095,243;$1,758,225,381;$1,830,742,089;$ 2.390.962.363;$ 3.005.280.009;serie interrumpida por la pandemia;
+  - `csv` Giro estimado sin transporte 2009-2018 — https://datos.mardelplata.gob.ar/sites/default/files/giro-estimado-sin-transporte-2009-2018.csv — mod Date changed  Jue, 03/11/2022 - 09:30
+    > ,A�o 2009,A�o 2010,A�o 2011,A�o 2012,A�o 2013,A�o 2014,A�o 2015,A�o 2016,A�o 2017,A�o 2018
+    > enero,932016848,1182891798,1520353331,1884791212,2062465629,2616347360,3488662373,3738633000,4752703699,6126561513
+    > febrero,577326150,765350810,961638675,1270575428,1627408968,1885873028,2581902631,3140737806,3931464776,4896136492
+    > marzo,220035878,272154118,518736035,378732113,758260854,960700494,1101717047,1380604811,1347471924,1778904450
+### `pasajeros-transporte-interurbano-en-autobus-estudio-origen-destino`
+  - `csv` Pasajeros de transporte interurbano - Año 2017 — https://datos.mardelplata.gob.ar/sites/default/files/od-pasajeros-interurbanos-2017.csv — mod Date changed  Lun, 15/04/2019 - 12:14
+    > A�o,Provincia origen,Localidad origen,Provincia destino,Localidad destino,Cantidad L�neas, Cantidad Pasajeros ,Cantidad Servicios
+    > 2017,BUENOS AIRES,MAR DEL PLATA,BUENOS AIRES,25 DE MAYO,1,266,696
+    > 2017,BUENOS AIRES,MAR DEL PLATA,BUENOS AIRES,9 DE JULIO,1, -   ,99
+    > 2017,BUENOS AIRES,MAR DEL PLATA,RIO NEGRO,ALLEN,2,604,2.022
+  - `csv` Pasajeros de transporte interurbano - Año 2016 — https://datos.mardelplata.gob.ar/sites/default/files/od-pasajeros-interurbanos-2016.csv — mod Date changed  Lun, 15/04/2019 - 12:14
+    > A�o,Provincia origen,Localidad origen,Provincia destino,Localidad destino,Cantidad L�neas, Cantidad Pasajeros ,Cantidad Servicios
+    > 2016,BUENOS AIRES,MAR DEL PLATA,BUENOS AIRES,25 DE MAYO,2,264,749
+    > 2016,BUENOS AIRES,MAR DEL PLATA,BUENOS AIRES,9 DE JULIO,1, -   ,103
+    > 2016,BUENOS AIRES,MAR DEL PLATA,RIO NEGRO,ALLEN,2,860,2.938
+  - `csv` Pasajeros de transporte interurbano - Año 2014 — https://datos.mardelplata.gob.ar/sites/default/files/od-pasajeros-interurbanos-2014.csv — mod Date changed  Lun, 15/04/2019 - 12:14
+    > A�o,Provincia origen,Localidad origen,Provincia destino,Localidad destino,Cantidad L�neas, Cantidad Pasajeros ,Cantidad Servicios
+    > 2014,BUENOS AIRES,MAR DEL PLATA,BUENOS AIRES,25 DE MAYO,2,330,881
+    > 2014,BUENOS AIRES,MAR DEL PLATA,BUENOS AIRES,9 DE JULIO,1, -   ,244
+    > 2014,BUENOS AIRES,MAR DEL PLATA,RIO NEGRO,ALLEN,2,917,3.258
+### `pesca-marítima`
+  - `csv` Desembarques marítimos a Nivel Nacional por especies. Años 2025 - 2026 — https://datos.mardelplata.gob.ar/sites/default/files/Desembarques%20mar%C3%ADtimos%20a%20nivel%20nacional%20por%20especies.%20Variaci%C3%B3n%20Primer%20trimestre%202025%20-%202026%20%28t%29.csv — mod Date changed  Mié, 13/05/2026 - 10:03
+    > A�os;Peces ; Crust�ceos ; Moluscos ;TOTAL
+    > Primer trimestre 2025;76.450,02;57.242,15;99.292,84;232.985,01
+    > Primer trimestre 2026;82.282,79;49.358,56;170.874,51;302.515,85
+    > Variaci�n Anual;7,63%;-13,77%;72,09%;29,84%
+  - `csv` Capturas Marítimas por Especie MOLUSCOS. Años 2022 - 2025 — https://datos.mardelplata.gob.ar/sites/default/files/MOLUSCOS.%20A%C3%B1os%202022%20-%202023%20-%202024%20-%202025_0.csv — mod Date changed  Mar, 12/05/2026 - 16:16
+    > A�o;MOLUSCOS;Total
+    > 2022;Calamar Illex;167.109,07
+    > 2022;Calamar Loligo;18,98
+    > 2022;Caracol;3,62
+  - `csv` Capturas Marítimas por Especie CRUSTÁCEOS. Años 2022 - 2025 — https://datos.mardelplata.gob.ar/sites/default/files/CRUST%C3%81CEOS.%20A%C3%B1os%202022%20-%202023%20-%202024%20-%202025_0.csv — mod Date changed  Mar, 12/05/2026 - 16:18
+    > A�o;Crust�ceos ;Total
+    > 2022;Cangrejo;23,9
+    > 2022;Centolla;48,63
+    > 2022;Langostino;15.081,08
+  - `csv` Capturas Marítimas por Especie PECES. Años 2022 - 2025 — https://datos.mardelplata.gob.ar/sites/default/files/PECES.%20A%C3%B1os%202022%20-%202023%20-%202024%20-%202025_0.csv — mod Date changed  Mar, 12/05/2026 - 16:17
+    > A�os;Peces;Totales
+    > 2022;Abadejo;1.353,63
+    > 2022;Anchoa de banco;113,86
+    > 2022;Ancho�ta al norte del 41�;6.608,27
+  - `csv` Capturas Marítimas por PUERTOS. Años 2022 - 2025 — https://datos.mardelplata.gob.ar/sites/default/files/PUERTOS.%20A%C3%B1os%202022%20-%202023%20-%202024%20-%202025.csv — mod Date changed  Vie, 17/04/2026 - 10:56
+    > A�o;Puertos;Totales
+    > 2022;Bah�a Blanca;470,44
+    > 2022;General Lavalle;7.405,24
+    > 2022;Mar del Plata;381.874,76
+  - `csv` Capturas Marítimas por tipo de ESPECIES. Años 2013 - 2025 — https://datos.mardelplata.gob.ar/sites/default/files/Por%20tipo%20de%20Peces%20-%20Crust%C3%A1ceos%20-%20Moluscos.%20A%C3%B1os%202013-2025.csv — mod Date changed  Vie, 17/04/2026 - 10:57
+    > A�os;Peces ; Crust�ceos ; Moluscos 
+    > 2013;354.757,40;3.652,50;88.195,50
+    > 2014;321.655,20;4.402,30;92.500,30
+    > 2015;336.890,90;10.350,10;90.551,60
+  - `csv` Capturas Marítimas por Flota. Años 2020 - 2025 — https://datos.mardelplata.gob.ar/sites/default/files/Capturas%20Mar%C3%ADtimas%20por%20Flota.%20A%C3%B1os%202020-2025.csv — mod Date changed  Vie, 17/04/2026 - 10:59
+    > A�o;Tipo de Flota;Flota;Totales
+    > 2020;Congeladores ;Arrastre;97.393,64
+    > 2021;Congeladores ;Arrastre;90.306,24
+    > 2022;Congeladores ;Arrastre;85.663,68
+  - `csv` Capturas Marítimas a nivel NACIONAL. Años 2020 - 2025 — https://datos.mardelplata.gob.ar/sites/default/files/Captura%20Nacional-2020-2025.csv — mod Date changed  Vie, 17/04/2026 - 10:57
+    > Captura Nacional;Buenos Aires;Rio Negro;Chubut;Santa Cruz;Tierra del Fuego;Otros
+    > 2020;432.521,57;13.124,08;229.963,51;64.469,75;49.666,61;-
+    > 2021;389.609,86;15.121,91;254.141,21;88.236,36;49.645,07;58,73
+    > 2022;408.076,37;10.099,88;241.645,23;92.876,11;37.723,42;-
+  - `csv` Capturas Marítimas por Especie. Año 2017 — https://datos.mardelplata.gob.ar/sites/default/files/capturas-maritimas-especie-2017.csv — mod Date changed  Mar, 12/06/2018 - 13:20
+    > Especie,Desembarques
+    > Peces,
+    > Abadejo,2458.33
+    > Anchoa de banco,211.177
+  - `csv` Capturas Marítimas por Flota. Año 2017 — https://datos.mardelplata.gob.ar/sites/default/files/capturas-maritimas-flota-2017.csv — mod Date changed  Mar, 12/06/2018 - 13:20
+    > tipo_flota,desembarques
+    > Costeros,56020.8
+    > Fresqueros,162504.1
+    > Rada o R�a,8004.9
+  - `csv` Capturas Marítimas por Mes. Año 2017 — https://datos.mardelplata.gob.ar/sites/default/files/capturas-maritimas-mes-2017.csv — mod Date changed  Mar, 12/06/2018 - 13:21
+    > mes,desembarques
+    > Enero,11664.628
+    > Febrero,45552.623
+    > Marzo,46935.835
+  - `csv` Capturas Marítimas por Especie. Año 2016 — https://datos.mardelplata.gob.ar/sites/default/files/capturas-maritimas-especie-2016.csv — mod Date changed  Vie, 09/03/2018 - 10:10
+    > ﻿Especie,Desembarques
+    > Peces,
+    > Abadejo,2689.398
+    > Anchoa de banco,238.963
+  - `csv` Capturas Marítimas por Flota. Año 2016 — https://datos.mardelplata.gob.ar/sites/default/files/capturas-maritimas-flota-2016_1.csv — mod Date changed  Vie, 09/03/2018 - 10:28
+    > tipo_flota,desembarques
+    > Costeros,62816.5
+    > Fresqueros,170970.10
+    > Rada o Ría,6067.9
+  - `csv` Capturas Marítimas por Mes. Año 2016 — https://datos.mardelplata.gob.ar/sites/default/files/capturas-maritimas-mes-2016_0.csv — mod Date changed  Vie, 09/03/2018 - 10:28
+    > mes,desembarques
+    > Enero,11459
+    > Febrero,29340.8
+    > Marzo,3537.3
 ### `turismo-en-fines-de-semana-largo`
   - `csv` Visitantes fines de semana largos 2007-2025 — https://datos.mardelplata.gob.ar/sites/default/files/visitantes-fines-de-semana-largos-2007-2025.csv — mod Date changed  Mar, 28/07/2026 - 12:58
     > Anio;Carnavales;27 de febrero;24 de marzo;Semana Santa;2 de Abril;1ro mayo;25 de Mayo;17 de Junio;20 de Junio;9 de Julio;17 de Agosto;24 de septiembre;12 de Octubre;20 de noviembre;8 de Diciembre;Navidad;A�o nuevo
