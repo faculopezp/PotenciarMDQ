@@ -123,6 +123,23 @@ def filas_mes_x_anio(path: Path, dataset: str, unidad: str, parse=entero):
     return filas
 
 
+def filas_medio(path: Path):
+    """Turistas por medio de transporte: filas = meses, columnas = medio (año en el nombre)."""
+    tabla = leer_tabla(path)
+    anio = anio_de_archivo(path)
+    medios = [_norm(c) for c in tabla[0][1:]]
+    filas = []
+    for r in tabla[1:]:
+        m = mes_de(r[0])
+        if m is None:
+            continue
+        for medio, v in zip(medios, r[1:], strict=False):
+            val = entero(v)
+            if val is not None and medio:
+                filas.append(["arribos_medio", medio, anio, m, val, "turistas", path.name])
+    return filas
+
+
 def filas_findes(path: Path):
     """Visitantes por fin de semana largo: filas = años, columnas = feriado (mes = NULL)."""
     tabla = leer_tabla(path)
@@ -164,6 +181,8 @@ def build_series(raw: Path = RAW_MUN, out: Path = PROCESSED) -> Path:
         filas += filas_mes_x_anio(p, "turistas_estables", "turistas")
     for p in sorted((raw / "turismo-en-fines-de-semana-largo").glob("*.csv")):
         filas += filas_findes(p)
+    for p in sorted((raw / "arribo-de-turistas-por-medio-de-transporte").glob("*.csv")):
+        filas += filas_medio(p)
 
     for f in filas:
         if f[0] in ("pasajeros_tramo", "vuelos_tramo"):

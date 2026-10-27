@@ -52,3 +52,16 @@ def test_pares_de_micro_separan_sentido_y_unifican_nombres():
                      ("salida", "ciudad autonoma de buenos aires", 40, "anual_por_ruta")]
     [(nombre,)] = con.execute("SELECT nombre FROM dim_bus_localidad").fetchall()
     assert nombre == "Ciudad Autónoma de Buenos Aires"
+
+
+def test_filas_medio_lee_ambos_formatos(tmp_path: Path):
+    from potenciar_mdq.standardize.municipal import filas_medio
+
+    viejo = tmp_path / "arribos-medio-transporte-2013.csv"
+    viejo.write_text('Mes,AVION,TREN,OMNIBUS,AUTO\nEnero,"9,720","22,035","293,160","1,080,070"\n')
+    nuevo = tmp_path / "Arribo-de-Turistas-por-Medio-de-Transporte-2025.csv"
+    nuevo.write_text("Mes;AVION;TREN;OMNIBUS;AUTO\nMayo;8965;15.881;42.088;378.806\n")
+    assert [f[1:5] for f in filas_medio(viejo)] == [
+        ["avion", 2013, 1, 9720], ["tren", 2013, 1, 22035], ["omnibus", 2013, 1, 293160],
+        ["auto", 2013, 1, 1080070]]
+    assert [f[1:5] for f in filas_medio(nuevo)][0] == ["avion", 2025, 5, 8965]

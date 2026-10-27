@@ -608,6 +608,31 @@ def run_omnibus(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
         FROM (SELECT anio, mes, operador, count(*) OVER (PARTITION BY anio, mes) AS n
               FROM fct_tren_mensual WHERE es_foco)
         WHERE n > 1 GROUP BY anio ORDER BY anio"""),
+           "## 9. EMTUR por medio de transporte contra los conteos", "",
+           "Suma de los cuatro medios contra el total de turistas del EMTUR, y cada medio contra lo "
+           "medido (avión: ANAC; micro: CNRT; tren: CNRT, ida y vuelta).", "", _table(con, """
+        SELECT e.anio,
+               sum(e.auto + e.omnibus + e.tren + e.avion) AS emtur_medios,
+               sum(t.valor) AS emtur_turistas,
+               sum(e.avion) AS emtur_avion, sum(a.pax) AS anac_aterrizajes_linea,
+               sum(e.omnibus) AS emtur_omnibus, sum(m.pax) AS cnrt_micro_llegadas,
+               sum(e.tren) AS emtur_tren, sum(r.pax) AS cnrt_tren_ida_vuelta
+        FROM (SELECT anio, mes,
+                     sum(valor) FILTER (WHERE serie = 'auto') AS auto,
+                     sum(valor) FILTER (WHERE serie = 'omnibus') AS omnibus,
+                     sum(valor) FILTER (WHERE serie = 'tren') AS tren,
+                     sum(valor) FILTER (WHERE serie = 'avion') AS avion
+              FROM fct_municipal_mensual WHERE dataset = 'arribos_medio' GROUP BY ALL) e
+        LEFT JOIN (SELECT anio, mes, valor FROM fct_municipal_mensual
+                   WHERE dataset = 'arribos_turistas') t USING (anio, mes)
+        LEFT JOIN (SELECT anio, mes, sum(pasajeros) AS pax FROM fct_movimiento
+                   WHERE aeropuerto = getvariable('foco') AND tipo_movimiento = 'aterrizaje'
+                     AND es_linea GROUP BY ALL) a USING (anio, mes)
+        LEFT JOIN (SELECT year(fecha) AS anio, month(fecha) AS mes, sum(pasajeros) AS pax
+                   FROM fct_bus_viaje WHERE sentido = 'llegada' GROUP BY ALL) m USING (anio, mes)
+        LEFT JOIN (SELECT anio, mes, sum(pax) AS pax FROM fct_tren_mensual WHERE es_foco
+                   GROUP BY ALL) r USING (anio, mes)
+        GROUP BY e.anio ORDER BY e.anio"""),
            "## 8. EVyTH: viajes de residentes con destino Mar del Plata", "",
            "Casos encuestados (sin expandir) por año y tipo de visitante, y medio informado:", "",
            _table(con, """

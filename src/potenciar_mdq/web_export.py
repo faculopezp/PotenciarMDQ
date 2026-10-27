@@ -55,6 +55,7 @@ MARTS_WEB = {
     "mart_tren_servicios": "tren_servicios",
     "mart_tren_operador": "tren_operador",
     "mart_evyth_medio": "evyth_medio",
+    "mart_mdq_arribos_medio": "mdq_arribos_medio",
     "mart_evyth_origen": "evyth_origen",
 }
 COLUMNAR = {"mart_mdq_explorador": "mdq_explorador"}  # tablas grandes: {col: [valores]}
