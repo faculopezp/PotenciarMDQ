@@ -1,310 +1,185 @@
-<!DOCTYPE html><html lang="es"><!--<![endif]--><head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>TMDA | Vialidad Nacional</title>
-	<meta name="description" content="Base de html y css para la creación de sitios pertenecientes a la Administración Pública Nacional de la República Argentina.">
-	<meta name="author" content="Presidencia de la Nación">
-	<link rel="shortcut icon" href="layout/poncho/img/favicon.ico">
-
-	<!-- Nav and address bar color -->
-	<meta name="theme-color" content="#0072b8">
-	<meta name="msapplication-navbutton-color" content="#0072b8">
-	<meta name="apple-mobile-web-app-status-bar-style" content="#0072b8">
-
-  <meta property="og:site_name" content="Documentación Poncho">
-	<meta property="og:url" content="http://argob.github.io/poncho/patrones/formularios/como_disenar.html">
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="TMDA">
-	<meta property="og:description" content="Base de html y css para la creación de sitios pertenecientes a la Administración Pública Nacional de la República Argentina.">
-	<meta property="og:image" content="http://argob.github.io/poncho/img/poncho_social.jpg">
-	<meta property="og:locale" content="es_AR">
-
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="TMDA">
-	<meta name="twitter:description" content="Base de html y css para la creación de sitios pertenecientes a la Administración Pública Nacional de la República Argentina.">
-	<meta name="twitter:image" content="http://argob.github.io/poncho/img/poncho_social.jpg">
-
-  <link href="layout/poncho/dist/css/roboto-fontface.css" rel="stylesheet">
-  <!-- <link href="/poncho/node_modules/argob-poncho/dist/css/droid-serif.css" rel="stylesheet"> -->
-  <link href="layout/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="layout/fontawesome/css/all.min.css" rel="stylesheet">
-  <link href="layout/poncho/dist/css/poncho.css" rel="stylesheet">
-  <link href="layout/poncho/dist/css/docs.css" rel="stylesheet">
-  <link href="layout/poncho/dist/css/prism.css" rel="stylesheet">
-  
-  <link href="https://id.argentina.gob.ar/static/css/chosen/chosen.css" rel="stylesheet">
-  <link href="../../css/argentina.css" rel="stylesheet">
-  <link href="https://www.argentina.gob.ar/sites/default/files/css/css_Ps9-OBRN7HporQYTFlUHQ3dOUxkPLFaWo3JP9-kISkQ.css" rel="stylesheet">
-  
-
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-      <script src="http://poncheado.herokuapp.com/node_modules/html5shiv/html5shiv.js"></script>
-      <script src="http://poncheado.herokuapp.com/node_modules/respond.js/respond.min.js"></script>
-      <![endif]-->  
-
-
- <script src="layout/jquery/jquery-3.3.1.min.js"></script>
-    <script src="layout/bootstrap/js/bootstrap.min.js"></script>
-    <script src="layout/poncho/js/prism.js"></script>
-  
-  <script src="https://id.argentina.gob.ar/static/js/chosen.jquery.js"></script>
-  <script src="layout/poncho/js/scripts.js"></script>
-  <script src="layout/list/list.min.js"></script>
-  </head>
-  
-    
-  <body>
-  	<header>
-
-
-  		<nav class="navbar navbar-top navbar-default" role="navigation">
-    <div class="container">
-      <div>
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="https://www.argentina.gob.ar/transporte/vialidad-nacional" class="navbar-brand">
-            <img alt="DNV" src="img/LOGO-FINAL-VN-00.png" height="65">
-            <h1></h1>
-          </a>
-        </div>
-        <div class="collapse navbar-collapse" id="main-navbar-collapse" data-seccion="2"><ul class="nav navbar-nav navbar-right">
-	<li><a data-seccion="1" href="#" onclick="menu('index')">Inicio</a></li>
-	<li class="active"><a data-seccion="2" href="#" onclick="menu('tmda')">TMDA</a></li>
-	<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Variaciones <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#" onclick="menu('variaciones_temporales')">Temporales</a></li>
-            <li><a href="#" onclick="menu('variaciones_interanuales')">Interanuales</a></li>
-          </ul>
-        </li>
-	<li><a data-seccion="4" href="#" onclick="menu('segmentacion')">Segmentación</a></li>
-	<li><a data-seccion="5" href="#" onclick="menu('clasificacion')">Clasificación</a></li>
-</ul>
-
-<script>
-	function menu(seleccionado) {
-      var _url;
-      
-      //name="tmda_anual" : de la pagina de cada tmda anual.-
-		if ( $('div[name="tmda_anual"]').length > 0)
-      	_url = '../../'+seleccionado+'.html';
-      else _url = seleccionado+'.html';
-      
-		location.href = _url;
-	}
-
-</script></div>
-      </div>
-    </div>
-  </nav>
-
-  	</header>
-
-<div class="jumbotron bg-primary">
-  <div class="container">
-  <div class="col-sm-12">
-      <ol class="breadcrumb">
-        <li><a href="index.html">Inicio</a></li>
-        <li class="active">TMDA</li>
-      </ol>
-      <div class="jumbotron_body p-t-2 p-b-2">
-      <h3>Tránsito en la Red Nacional de Caminos <!--span class="badge">badge</span--></h3>
-      </div>
-
-  </div>
-  </div>
-</div>
-  	<main role="main">
-  	<div class="container" id="tabla_datos">
-      
-      <div class="row">
-        <div class="col-sm-3" id="menuLateral" data-seccion="1"><h5 class="m-t-2">Año</h5>
-<!--label for class="m-t-2">
-   <strong>Año</strong>
-</label-->
-<div class="form-group">
-<select id="tmda" class="form-control">
-	<option value="0">Elegir
-	</option><option data-seccion="2025" valoptionue="2025">2025</option>
-    <option data-seccion="2024">2024</option>
-	<option data-seccion="2023" value="2023">2023</option>
-	<option data-seccion="2022" value="2022">2022</option>
-	<option data-seccion="2021" value="2021">2021</option>
-	<option data-seccion="2020" value="2020">2020</option>
-	<option data-seccion="2019" value="2019">2019</option>
-	<option data-seccion="2016" value="2018">2018</option>
-	<option data-seccion="2017" value="2017">2017</option>
-	<option data-seccion="2016" value="2016">2016</option>
-	<option data-seccion="2015" value="2015">2015</option>
-	<option data-seccion="2014" value="2014">2014</option>
-	<option data-seccion="2013" value="2013">2013</option>
-	<option data-seccion="2012" value="2012">2012</option>
-	<option data-seccion="2011" value="2011">2011</option>
-	<option data-seccion="2010" value="2010">2010</option>
-	<option data-seccion="2009" value="2009">2009</option>
-	<option data-seccion="2008" value="2008">2008</option>
-	<option data-seccion="2007" value="2007">2007</option>
-	<option data-seccion="2006" value="2006">2006</option>
-</select> 
-</div>
-
-<script>
-      $(function(){
-      	$('#tmda').change(function(){
-      		
-      		var seleccionado = $('#tmda option:selected').val();
-
-            if (seleccionado > 0 ){
-               /*var _url;
-               var pathname = window.location.pathname;
-               var actual = $('#tmda option[data-seccion]').val();
-      		
-               if (pathname.indexOf(actual) > 0 )
-      			   _url = '../'+seleccionado+'/index.html';
-               else _url = 'tmda/'+seleccionado+'/index.html';
-      		
-               location.href = _url;*/
-               
-               //alert(seleccionado);
-               //$('#tmda_contenido').fadeOut(1000);
-               
-               $('#tmda_contenido').load('tmda/'+seleccionado+'/index.html');
-               $('#tmda_contenido').fadeIn(1000);
-               /*
-               $('#breadcrumb_menu').
-                     
-                        <li class="tmda.html">TMDA</li>
-                        <li class="active">'+seleccionado+'</li>
-                        */
-               $('#busqueda').fadeIn(250);
-            } else {
-               $('#busqueda').fadeOut(250);
-               $('#tmda_contenido').fadeOut(250);
-            }
-            
-        });
-      })
-</script></div>
-        
-        <div class="col-sm-6 form-group" id="busqueda" hidden="">
-          <h5 class="m-t-2">Búsqueda por campos</h5>
-          <input class="form-control search" placeholder="">
-        </div>
-
-        <div class="col-sm-12"><hr></div>
-        
-      <div class="col-sm-12">
-      
-        <section>
-          <article class="row" id="tmda_contenido">
-            <div class="col-sm-12">
-
-<fieldset>
-
-<h3>Sobre la consulta</h3>
-
-<ul>
-<li>Seleccionar una <b>Ruta</b>.</li>
-
-<li>Seleccionar un <b>Tramo</b>.</li>
-
-<li>En la columna <b>Observaciones</b>, en los tramos que tienen valor de T.M.D.A., aparece: <b>cobertura o permanente</b> según sea la fuente de obtención de datos.</li>
-
-<li>Si en la columna <b>Detalle</b> está la leyenda <b>ver</b> significa que se cuenta con mediciones de ese año, caso contrario el valor del T.M.D.A. proviene de actualizar los valores de censo de cobertura que puede tener una antigüedad de 3 años.</li>
-</ul>
-
-<hr>
-
-<h2>Información disponible por tipo de censo</h2>
-
-<h3>Censos Cobertura</h3>
-
-<p>En primer término está la clasificación vehicular por ejes, año y mes en que fue realizado el censo, su duración, el porciento de vehículos livianos, agrupados en autos y camionetas; el porciento de ómnibus de larga distancia, y el porciento de pesados, divididos en tres (3) categorías: camiones sin acoplado más ómnibus de corta distancia y combis de pasajeros, camiones con acoplado y camiones con semi-remolques. A continuación está el Tránsito Medio Diario (TMD) del censo y la cantidad de puestos utilizados para su realización. Finalmente, aparecen datos de velocidad para vehículos livianos y para el resto, indicando dos estimadores: el percentil 85 y la velocidad media.</p>
-
-<h3>Estación Permanente</h3>
-
-<p>La información comprende la Serie Histórica para los últimos ocho (8) años o desde el años en que se instaló el puesto, la clasificación por longitud en dos (2) o tres (3) categorías, el volumen y la distribución por sentido de circulación de la hora trigésima,  y si se han realizado censos cortos de clasificación por ejes se indica la clasificación y los indicadores de velocidad con igual información que la descripta para un censo de cobertura.</p>
-
-</fieldset>
-
-            </div>
-          </article>
-          </section>
-
-
-                
-      </div>
-    </div>
-
-      </div>
-
-  			
-  		</main>
-  		<footer class="main-footer" id="footer-web"><!--footer class="main-footer" id="footer-web"-->
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6"> 
-            <section class="block block-block clearfix"> 
-              <img class="image-responsive" src="img/logo_argentina-azul.svg" alt="Argentina.gob.ar - Presidencia de la Nación">
-                <p class="text-muted small"> Los contenidos de Argentina.gob.ar están licenciados bajo <a href="https://creativecommons.org/licenses/by/2.5/ar/" target="_blank">Creative Commons Reconocimiento 2.5 Argentina License</a>
-                </p> 
-            </section> 
-            <a href="/sugerencias-b?url_refence=node/99485" class=" active hidden">
-              <p class="btn btn-primary m-t-1">¿Querés hacernos una sugerencia?</p> 
-            </a>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="region region-footer2">
-              <section id="block-menu-menu-footer-2" class="block block-menu clearfix">
-                <ul class="menu nav">
-                  <li class="first leaf"><a href="https://www.argentina.gob.ar/servicios">Trámites y servicios</a></li>
-                  <li class="leaf"><a href="https://www.argentina.gob.ar/turnos">Turnos</a></li>
-                  <li class="leaf"><a href="https://www.argentina.gob.ar/organismos">Organismos del Estado</a></li>
-                  <li class="leaf"><a href="http://mapadelestado.jefatura.gob.ar/">Mapa del Estado</a></li>
-                  <li class="last leaf"><a href="https://www.argentina.gob.ar/normativa">Leyes argentinas</a></li>
-                </ul>
-              </section>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="region region-footer3">
-              <section id="block-menu-menu-footer-3" class="block block-menu clearfix">
-                <ul class="menu nav">
-                  <li class="first leaf"><a href="https://www.argentina.gob.ar/acerca">Acerca de este sitio</a></li>
-                  <li class="leaf"><a href="https://www.argentina.gob.ar/terminos-y-condiciones">Términos y condiciones</a></li>
-                  <li class="last leaf"><a href="https://www.argentina.gob.ar/ayuda">Ayuda</a></li>
-                </ul>
-              </section>
-            </div>
-          </div>
-        </div>
-      </div>
-    <!--/footer--></footer>
-
-    <script>
-      $(function(){
-        //Esta para el menu general
-        $("#main-navbar-collapse").load("includes/menu_principal.html",function(){
-          var seccion = $("#main-navbar-collapse").data("seccion");
-          $("#main-navbar-collapse ul li a[data-seccion="+seccion+"]").parent().addClass("active");
-        });
-        //select de añios.-
-        $("#menuLateral").load("includes/tmda_select_anio.html",function(){
-          var seccion = $("#menuLateral").data("seccion");
-          $("#menuLateral ul li a[data-seccion="+seccion+"]").parent().addClass("active");
-        });
-        //Footer.-
-        $("#footer-web").load("includes/footer.html",function(){
-        });
-      })
-
-    </script>
-  	
-  	</body></html>
+<html><head></head><body><div class="col-sm-12"><div class="row"><div class="col-sm-12 text-right"> <a href="javascript:cambiarcont('index.html');">Volver a Rutas</a></div><div class="col-sm-12"><h1 class="">Tramos Ruta: 0226</h1></div></div><div class="table-responsive"><table class="table table-striped table-bordered"><thead><tr>
+<th class="">Número</th>
+<th class="">Distrito</th>
+<th class="">Límites del Tramo</th>
+<th class="">Inicio</th>
+<th class="">Fin</th>
+<th class="">TMDA</th>
+<th class="">Detalle</th>
+<th class="">Observaciones</th>
+</tr>
+</thead>
+<tbody class="list">
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">INT.R.P.2 - MAR DEL PLATA (SAL.)                                                                    </td>
+<td class="FILA3">0</td>
+<td class="FILA4">4.91</td>
+<td class="FILA5">&nbsp;</td>
+<td class="FILA6">&nbsp;</td>
+<td class="FILA7">Area Urbana</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">MAR DEL PLATA (SAL.) - ACC.A SIERRA DE LOS PADRES (I)                                               </td>
+<td class="FILA3">4.91</td>
+<td class="FILA4">16.55</td>
+<td class="FILA5">12600</td>
+<td class="FILA6"><a href="javascript:cambiarcont(&quot;html_tramos/8086.html&quot;);">ver</a></td>
+<td class="FILA7">Cobertura</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">ACC.A SIERRA DE LOS PADRES (I) - INT.R.P.55                                                         </td>
+<td class="FILA3">16.55</td>
+<td class="FILA4">64</td>
+<td class="FILA5">6250</td>
+<td class="FILA6">&nbsp;</td>
+<td class="FILA7">Cobertura</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">INT.R.P.55 - B/N R.P.29                                                                             </td>
+<td class="FILA3">64</td>
+<td class="FILA4">90.33</td>
+<td class="FILA5">3875</td>
+<td class="FILA6"><a href="javascript:cambiarcont(&quot;html_tramos/8088.html&quot;);">ver</a></td>
+<td class="FILA7">Permanente</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">B/N R.P.29 - INT.R.P.227 (I)                                                                        </td>
+<td class="FILA3">90.33</td>
+<td class="FILA4">120.19</td>
+<td class="FILA5">2500</td>
+<td class="FILA6">&nbsp;</td>
+<td class="FILA7">Cobertura</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">INT.R.P.227 (I) - INT.R.P.74                                                                        </td>
+<td class="FILA3">120.19</td>
+<td class="FILA4">154.9</td>
+<td class="FILA5">3467</td>
+<td class="FILA6"><a href="javascript:cambiarcont(&quot;html_tramos/8759.html&quot;);">ver</a></td>
+<td class="FILA7">Permanente</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">INT.R.P.74 - ACC.A TANDIL (I)                                                                       </td>
+<td class="FILA3">154.9</td>
+<td class="FILA4">161.37</td>
+<td class="FILA5">4850</td>
+<td class="FILA6">&nbsp;</td>
+<td class="FILA7">Cobertura</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">ACC.A TANDIL (I) - ACC.A BASE AEREA (D)                                                             </td>
+<td class="FILA3">161.37</td>
+<td class="FILA4">174.25</td>
+<td class="FILA5">&nbsp;</td>
+<td class="FILA6">&nbsp;</td>
+<td class="FILA7">Area Urbana</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">ACC.A BASE AEREA (D) - INT.R.N.3/ ACC.A AZUL (D)                                                    </td>
+<td class="FILA3">174.25</td>
+<td class="FILA4">254.95</td>
+<td class="FILA5">3000</td>
+<td class="FILA6"><a href="javascript:cambiarcont(&quot;html_tramos/8093.html&quot;);">ver</a></td>
+<td class="FILA7">Cobertura</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">INT.R.N.3/ ACC.A AZUL (D) - INT.R.P.51 (D)                                                          </td>
+<td class="FILA3">254.95</td>
+<td class="FILA4">260.71</td>
+<td class="FILA5">5350</td>
+<td class="FILA6">&nbsp;</td>
+<td class="FILA7">Cobertura</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">INT.R.P.51 (D) - INT.R.P.76 (I)                                                                     </td>
+<td class="FILA3">260.71</td>
+<td class="FILA4">288.61</td>
+<td class="FILA5">7644</td>
+<td class="FILA6"><a href="javascript:cambiarcont(&quot;html_tramos/8095.html&quot;);">ver</a></td>
+<td class="FILA7">Permanente</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">INT.R.P.76 (I) - ACC.A OLAVARRIA (I)                                                                </td>
+<td class="FILA3">288.61</td>
+<td class="FILA4">297.69</td>
+<td class="FILA5">6400</td>
+<td class="FILA6">&nbsp;</td>
+<td class="FILA7">Cobertura</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">ACC.A OLAVARRIA (I) - INT.R.P.65 (BOLIVAR)                                                          </td>
+<td class="FILA3">297.69</td>
+<td class="FILA4">404.32</td>
+<td class="FILA5">3237</td>
+<td class="FILA6"><a href="javascript:cambiarcont(&quot;html_tramos/8097.html&quot;);">ver</a></td>
+<td class="FILA7">Permanente</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">INT.R.P.65 (BOLIVAR) - A/N R.N.5                                                                    </td>
+<td class="FILA3">404.32</td>
+<td class="FILA4">484.74</td>
+<td class="FILA5">1520</td>
+<td class="FILA6"><a href="javascript:cambiarcont(&quot;html_tramos/8098.html&quot;);">ver</a></td>
+<td class="FILA7">Cobertura</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">A/N R.N.5 - ACC.A PEHUAJO (D)                                                                       </td>
+<td class="FILA3">484.74</td>
+<td class="FILA4">487.51</td>
+<td class="FILA5">2100</td>
+<td class="FILA6">&nbsp;</td>
+<td class="FILA7">Cobertura</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">ACC.A PEHUAJO (D) - INT.R.P.70 (CARLOS TEJEDOR)                                                     </td>
+<td class="FILA3">487.51</td>
+<td class="FILA4">558.14</td>
+<td class="FILA5">1222</td>
+<td class="FILA6"><a href="javascript:cambiarcont(&quot;html_tramos/8389.html&quot;);">ver</a></td>
+<td class="FILA7">Permanente</td>
+</tr>
+<tr>
+<td class="FILA0">1</td>
+<td class="FILA1">Buenos Aires</td>
+<td class="FILA2">INT.R.P.70 (C.TEJEDOR) - INT.R.N.33 (GRAL.VILLEGAS)                                                 </td>
+<td class="FILA3">558.14</td>
+<td class="FILA4">623.02</td>
+<td class="FILA5">1260</td>
+<td class="FILA6">&nbsp;</td>
+<td class="FILA7">Cobertura</td>
+</tr>
+</tbody>
+</table>
+</div></div><script type="text/javascript" src="js/lista.rutas.js"></script></body></html>
