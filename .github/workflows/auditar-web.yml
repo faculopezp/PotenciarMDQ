@@ -27,6 +27,9 @@ on:
       valor:
         description: Valor para la consulta de prueba (ruta)
         default: "0226"
+      catalogo:
+        description: Portal DKAN/CKAN a volcar entero (vacío = no)
+        default: ""
 
 permissions:
   contents: write
@@ -52,12 +55,17 @@ jobs:
           --menu "${{ inputs.menu }}" --valor "${{ inputs.valor }}"
         continue-on-error: true
 
+      - name: Catálogo completo
+        if: ${{ inputs.catalogo != '' }}
+        run: uv run python scripts/catalogo_dkan.py "${{ inputs.catalogo }}"
+        continue-on-error: true
+
       - name: Commit del informe
         run: |
           git config user.name "potenciar-mdq-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p reports/fuentes/auditoria_web
-          git add reports/fuentes/auditoria_web
+          git add reports/fuentes/auditoria_web reports/fuentes/catalogo_*
           git diff --cached --quiet && { echo "Sin cambios"; exit 0; }
           git commit -m "auditoría web: ${{ inputs.navegador }}"
           subido=false
