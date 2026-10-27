@@ -245,6 +245,11 @@ def _ingest_source(http: PoliteSession, sid: str, cfg: dict, force: bool) -> lis
         p = download(http, cfg["url"], dest_dir, sid, force=force)
         if p:
             new_files.append(p)
+    elif cfg["kind"] == "failbondi_dump":
+        from potenciar_mdq.sources import failbondi
+
+        new_files.append(failbondi.descargar(dest_dir, cfg["aeropuertos"],
+                                             http.session.headers["User-Agent"]))
     elif cfg["kind"] == "url_pattern":
         for url in expand_pattern(cfg):
             if not _exists(http, url):

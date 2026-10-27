@@ -10,6 +10,7 @@ import io
 import json
 import logging
 import re
+from datetime import datetime
 from pathlib import Path
 
 import duckdb
@@ -338,3 +339,68 @@ def build_evyth(raw_dir: Path = RAW / "yvera_evyth", out: Path = PROCESSED) -> l
                         header=true, all_varchar=true)) TO {_q(str(d))} (FORMAT parquet)""")
         escritos.append(d)
     return escritos
+
+
+CANCELADOS = {"cancelado", "no opera"}
+
+
+def hora_aa2000(texto: str | None, referencia: datetime) -> datetime | None:
+    """'DD/MM HH:MM' (hora local, sin año) -> datetime, con el año de la fecha de referencia y
+    corrigiendo el cruce de año (vuelo del 31/12 informado el 1/1 o al revés)."""
+    m = re.fullmatch(r"(\d{2})/(\d{2}) (\d{2}):(\d{2})", (texto or "").strip())
+    if not m:
+        return None
+    dia, mes, hh, mm = map(int, m.groups())
+    anio = referencia.year
+    if mes == 1 and referencia.month == 12:
+        anio += 1
+    elif mes == 12 and referencia.month == 1:
+        anio -= 1
+    try:
+        return datetime(anio, mes, dia, hh, mm)
+    except ValueError:
+        return None
+
+
+def build_failbondi(raw_dir: Path = RAW / "failbondi", out: Path = PROCESSED) -> Path:
+    """failbondi.fail (estado de vuelos de AA2000, foco) -> processed/vuelos_aa2000.parquet.
+
+    El programado (stda) y el real (atda) vienen como 'DD/MM HH:MM' sin año: el año sale de la fecha
+    del vuelo (x_date), no de la fecha de actualización (así el sitio fecha mal los vuelos que
+    cruzan el año)."""
+    files = sorted(raw_dir.glob("*_dump.jsonl"))
+    if not files:
+        raise FileNotFoundError(f"No hay dumps de failbondi en {raw_dir}")
+    filas = []
+    for linea in files[-1].read_text(encoding="utf-8").splitlines():
+        o = json.loads(linea)
+        j = o.get("json") or {}
+        try:
+            fecha = datetime.strptime(str(j.get("x_date"))[:10], "%Y-%m-%d")
+        except ValueError:
+            continue
+        prog = hora_aa2000(j.get("stda"), fecha)
+        real = hora_aa2000(j.get("atda"), prog or fecha)
+        estado = (j.get("estes") or "").strip()
+        cancelado = estado.lower() in CANCELADOS
+        operado = prog and real and not cancelado
+        demora = round((real - prog).total_seconds() / 60) if operado else None
+        pax = str(j.get("pasajeros") or "").strip()
+        filas.append((
+            o.get("aerolineas_flight_id"), fecha.date(), j.get("arpt"),
+            "salida" if j.get("mov") == "D" else "llegada" if j.get("mov") == "A" else j.get("mov"),
+            (j.get("aerolinea") or "").strip(), (j.get("nro") or "").strip(),
+            (j.get("IATAdestorig") or "").strip(), prog, real, demora, estado, cancelado,
+            int(pax) if pax.isdigit() else None, (j.get("matricula") or "").strip() or None,
+            (j.get("idshared") or "").strip() or None, o.get("last_updated"),
+        ))
+    con = duckdb.connect()
+    con.execute("""CREATE TABLE t (flight_id VARCHAR, fecha DATE, aeropuerto VARCHAR,
+        movimiento VARCHAR, aerolinea VARCHAR, nro VARCHAR, otro_extremo VARCHAR,
+        programado TIMESTAMP, real TIMESTAMP, demora_min INT, estado VARCHAR, cancelado BOOLEAN,
+        pasajeros INT, matricula VARCHAR, idshared VARCHAR, actualizado VARCHAR)""")
+    con.executemany("INSERT INTO t VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", filas)
+    dest = out / "vuelos_aa2000.parquet"
+    con.execute(f"COPY (SELECT *, {_q(files[-1].name)} AS archivo FROM t) TO {_q(str(dest))} "
+                "(FORMAT parquet)")
+    return dest

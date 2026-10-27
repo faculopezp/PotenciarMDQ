@@ -57,6 +57,8 @@ MARTS_WEB = {
     "mart_evyth_medio": "evyth_medio",
     "mart_mdq_arribos_medio": "mdq_arribos_medio",
     "mart_mdq_procedencia": "mdq_procedencia",
+    "mart_mdq_puntualidad_mensual": "mdq_puntualidad_mensual",
+    "mart_mdq_puntualidad_aerolinea": "mdq_puntualidad_aerolinea",
     "mart_evyth_origen": "evyth_origen",
 }
 COLUMNAR = {"mart_mdq_explorador": "mdq_explorador"}  # tablas grandes: {col: [valores]}

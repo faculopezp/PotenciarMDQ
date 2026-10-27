@@ -672,3 +672,51 @@ def run_omnibus(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
     dest = out_dir / "omnibus.md"
     dest.write_text("\n".join(out), encoding="utf-8")
     return dest
+
+
+def run_puntualidad(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
+    """Estado de vuelos de AA2000 (failbondi.fail) contra ANAC -> puntualidad.md."""
+    con = bd.connect(db_path, read_only=True)
+    out = ["# Puntualidad y cancelaciones: validación", "",
+           "Fuente: web de Aeropuertos Argentina recopilada por failbondi.fail (último estado de "
+           "cada vuelo). ANAC: movimientos de línea en el foco.", "",
+           "## 1. Vuelos y pasajeros por mes contra ANAC", "",
+           "Operados = no cancelados. ANAC cuenta despegues y aterrizajes de línea.", "",
+           _table(con, """
+        WITH aa AS (
+          SELECT anio, mes,
+                 count(*) FILTER (WHERE movimiento = 'salida' AND NOT cancelado) AS aa_salidas,
+                 count(*) FILTER (WHERE movimiento = 'llegada' AND NOT cancelado) AS aa_llegadas,
+                 sum(pasajeros) FILTER (WHERE movimiento = 'salida' AND NOT cancelado) AS aa_pax_sal,
+                 sum(pasajeros) FILTER (WHERE movimiento = 'llegada' AND NOT cancelado) AS aa_pax_lleg
+          FROM fct_vuelo_aa2000 GROUP BY ALL),
+        an AS (
+          SELECT anio, mes,
+                 count(*) FILTER (WHERE tipo_movimiento = 'despegue') AS anac_despegues,
+                 count(*) FILTER (WHERE tipo_movimiento = 'aterrizaje') AS anac_aterrizajes,
+                 sum(pasajeros) FILTER (WHERE tipo_movimiento = 'despegue') AS anac_pax_sal,
+                 sum(pasajeros) FILTER (WHERE tipo_movimiento = 'aterrizaje') AS anac_pax_lleg
+          FROM fct_movimiento WHERE aeropuerto = getvariable('foco') AND es_linea GROUP BY ALL)
+        SELECT aa.anio, aa.mes, aa_salidas, anac_despegues, aa_llegadas, anac_aterrizajes,
+               aa_pax_sal, anac_pax_sal,
+               round(100.0 * aa_pax_sal / nullif(anac_pax_sal, 0) - 100, 1) AS dif_pax_sal_pct,
+               aa_pax_lleg, anac_pax_lleg,
+               round(100.0 * aa_pax_lleg / nullif(anac_pax_lleg, 0) - 100, 1) AS dif_pax_lleg_pct
+        FROM aa LEFT JOIN an USING (anio, mes) ORDER BY 1, 2"""),
+           "## 2. Estados informados", "", _table(con, """
+        SELECT movimiento, estado, cancelado, count(*) AS vuelos,
+               count(demora_min) AS con_horario_real
+        FROM fct_vuelo_aa2000 GROUP BY ALL ORDER BY 1, 4 DESC"""),
+           "## 3. Posibles duplicados (mismo sentido, programado y matrícula)", "", _table(con, """
+        SELECT movimiento, programado, matricula, string_agg(aerolinea || ' ' || nro, ' · ') AS vuelos
+        FROM fct_vuelo_aa2000 WHERE matricula IS NOT NULL
+        GROUP BY ALL HAVING count(*) > 1 ORDER BY programado LIMIT 30"""),
+           "## 4. Demoras extremas (más de 6 horas o adelantos de más de 1 hora)", "", _table(con, """
+        SELECT fecha, movimiento, aerolinea, nro, otro_extremo, programado, real, demora_min, estado
+        FROM fct_vuelo_aa2000 WHERE demora_min > 360 OR demora_min < -60
+        ORDER BY abs(demora_min) DESC LIMIT 20""")]
+    con.close()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    dest = out_dir / "puntualidad.md"
+    dest.write_text("\n".join(out), encoding="utf-8")
+    return dest

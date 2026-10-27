@@ -78,3 +78,13 @@ def test_filas_procedencia_unifica_regiones(tmp_path: Path):
     assert {f[1] for f in filas_procedencia(viejo)} == {
         "CABA", "Conurbano", "Resto de la provincia", "Resto del país", "Exterior"}
     assert [f[1:5] for f in filas_procedencia(nuevo)][0] == ["CABA", 2024, 1, 21.7]
+
+
+def test_hora_aa2000_corrige_cruce_de_anio():
+    from datetime import datetime
+
+    ref = datetime(2025, 12, 31)
+    assert generic.hora_aa2000("31/12 23:50", ref) == datetime(2025, 12, 31, 23, 50)
+    assert generic.hora_aa2000("01/01 00:20", ref) == datetime(2026, 1, 1, 0, 20)
+    assert generic.hora_aa2000("31/12 23:50", datetime(2026, 1, 1)) == datetime(2025, 12, 31, 23, 50)
+    assert generic.hora_aa2000("", ref) is None

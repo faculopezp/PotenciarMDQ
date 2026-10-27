@@ -22,7 +22,8 @@ from pathlib import Path
 
 import requests
 
-URL = "https://failbondi.fail/api/dump"
+from potenciar_mdq.sources.failbondi import URL, objetos
+
 OUT = Path(__file__).resolve().parents[1] / "reports" / "fuentes" / "failbondi"
 CAMPOS = ["aerolineas_flight_id", "last_updated", "stda", "atda", "delta", "matricula"]
 CAMPOS_JSON = ["arpt", "mov", "aerolinea", "idaerolinea", "nro", "IATAdestorig", "destorig",
@@ -31,28 +32,11 @@ CAMPOS_JSON = ["arpt", "mov", "aerolinea", "idaerolinea", "nro", "IATAdestorig",
 
 
 def filas(resp, max_seg: float):
-    """Objetos del arreglo JSON a medida que llegan (sin cargar todo en memoria)."""
-    dec = json.JSONDecoder()
-    buf, inicio, t0 = "", True, time.time()
-    for chunk in resp.iter_content(chunk_size=1 << 20, decode_unicode=True):
-        buf += chunk
-        if inicio:
-            buf = buf.lstrip()
-            if buf.startswith("["):
-                buf, inicio = buf[1:], False
-        while True:
-            buf = buf.lstrip(", \n\r\t")
-            if not buf or buf[0] == "]":
-                break
-            try:
-                obj, fin = dec.raw_decode(buf)
-            except json.JSONDecodeError:
-                break  # objeto incompleto: esperar más bytes
-            yield obj
-            buf = buf[fin:]
-        if time.time() - t0 > max_seg:
-            yield None  # corte por tiempo
-            return
+    """Objetos del dump; None al final si se cortó por tiempo."""
+    try:
+        yield from objetos(resp, max_seg)
+    except TimeoutError:
+        yield None
 
 
 def main() -> None:

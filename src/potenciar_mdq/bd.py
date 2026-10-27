@@ -35,6 +35,7 @@ TABLAS = [
     "fct_bus_ruta_anual_publicada",
     "fct_tren_mensual",
     "fct_evyth_mdq",
+    "fct_vuelo_aa2000",
     "fct_bus_nacional_diario",
     "dim_bus_localidad",
 ]
@@ -74,6 +75,7 @@ def _lit(values: list[str]) -> str:
 def set_variables(con: duckdb.DuckDBPyConnection) -> None:
     cfg = mdq()
     con.execute(f"SET VARIABLE foco = '{cfg['foco']['codigo_anac']}'")
+    con.execute(f"SET VARIABLE foco_iata = '{cfg['foco']['iata']}'")
     con.execute(f"SET VARIABLE pares = {_lit([p['codigo_anac'] for p in cfg['pares']])}")
     con.execute(f"SET VARIABLE comerciales = {_lit(cfg['clases_comerciales'])}")
     con.execute(f"SET VARIABLE utc_offset = {int(cfg['utc_offset_horas'])}")
@@ -272,6 +274,18 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
                     "tipo_servicio VARCHAR, jurisdiccion VARCHAR, servicio VARCHAR, pax INT, "
                     "archivo VARCHAR)")
 
+    # Estado de vuelos de AA2000 vía failbondi.fail (sql/bd/95_puntualidad.sql).
+    aa = processed / "vuelos_aa2000.parquet"
+    if aa.exists():
+        con.execute("CREATE TABLE stg_vuelos_aa2000 AS SELECT * FROM read_parquet(?)", [str(aa)])
+    else:
+        log.warning("Sin vuelos de AA2000 (failbondi): no hay puntualidad ni cancelaciones")
+        con.execute("CREATE TABLE stg_vuelos_aa2000 (flight_id VARCHAR, fecha DATE, "
+                    "aeropuerto VARCHAR, movimiento VARCHAR, aerolinea VARCHAR, nro VARCHAR, "
+                    "otro_extremo VARCHAR, programado TIMESTAMP, real TIMESTAMP, demora_min INT, "
+                    "estado VARCHAR, cancelado BOOLEAN, pasajeros INT, matricula VARCHAR, "
+                    "idshared VARCHAR, actualizado VARCHAR, archivo VARCHAR)")
+
     # EVyTH: viajes de residentes a Mar del Plata (sql/bd/90_evyth.sql).
     ev, evd = processed / "evyth_mdq.parquet", processed / "evyth_diccionario.parquet"
     if ev.exists():
@@ -300,6 +314,7 @@ def build(processed: Path = PROCESSED, db_path: Path = BD, export: Path | None =
     # Ya están en fct_bus_viaje (solo el foco).
     con.execute("DROP TABLE stg_tren")
     con.execute("DROP TABLE stg_evyth")
+    con.execute("DROP TABLE stg_vuelos_aa2000")
     con.execute("DROP TABLE stg_evyth_dicc")
     con.execute("DROP TABLE stg_bus_base_microdatos")
     con.execute("DROP TABLE stg_bus_base_microdatos_dut")

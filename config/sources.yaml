@@ -215,6 +215,15 @@ sources:
     enabled: true
     verified: true
 
+  # Estado de vuelos de AA2000 (programado, real, cancelado, pasajeros) desde dic-2024, todas las
+  # aerolíneas, recopilado por failbondi.fail (Nulo Science) de la web de Aeropuertos Argentina.
+  # Dump abierto, sin garantía de estabilidad: https://failbondi.fail/acerca. Solo se guarda el foco.
+  failbondi:
+    kind: failbondi_dump
+    aeropuertos: [MDQ]
+    enabled: true
+    verified: true      # 2026-10-27: 496.951 vuelos; MDQ coincide con ANAC en pasajeros (±3 %)
+
   series_tiempo_busqueda:
     kind: static_file
     url: https://apis.datos.gob.ar/series/api/search/?q=pasajeros%20aereos&limit=50

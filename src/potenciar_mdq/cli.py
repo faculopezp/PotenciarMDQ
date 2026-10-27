@@ -43,7 +43,7 @@ def standardize() -> None:
     for step in (generic.build_yvera, generic.build_dim_aeropuerto, generic.build_anac_aeropuertos,
                  generic.build_opensky, generic.build_madhel, generic.build_tar1090,
                  generic.build_clima, generic.build_terrestre, generic.build_tren,
-                 generic.build_evyth,
+                 generic.build_evyth, generic.build_failbondi,
                  municipal.build):
         try:
             res = step()
@@ -77,6 +77,10 @@ def qa() -> None:
         typer.echo(auditoria.run_omnibus())
     except Exception as exc:  # noqa: BLE001
         typer.echo(f"skip auditoria micros: {type(exc).__name__}: {exc}")
+    try:
+        typer.echo(auditoria.run_puntualidad())
+    except Exception as exc:  # noqa: BLE001
+        typer.echo(f"skip auditoria puntualidad: {type(exc).__name__}: {exc}")
 
 
 @app.command()
