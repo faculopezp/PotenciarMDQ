@@ -1,65 +1,98 @@
 # Recaladas de cruceros en el puerto de Mar del Plata. No hay datos abiertos (ni el Consorcio
-# Portuario ni la Subsecretaría de Puertos publican series): registro curado desde la prensa, con
-# fuente por fila. Verificado 2026-10-26 con búsqueda web; los sitios no se pudieron abrir desde el
-# entorno de desarrollo, así que las fechas sin día exacto quedan con su precisión declarada.
+# Portuario, ni la Provincia, ni Migraciones publican series para este puerto): registro curado
+# desde la prensa, con fuente por fila. Revisado el 2026-10-27 con una investigación dedicada
+# (reports/Cruceros en Mar del Plata.md); quedan afuera las filas de confianza baja (anuncios de
+# interés sin reserva y menciones sin buque ni fecha). Las fechas sin día quedan con su precisión.
 #
 # estado: realizada | cancelada (anunciada y no ocurrió) | denegada (el puerto no la autorizó) |
-#         programada
+#         programada (amarre pedido o anunciado)
 # fecha: AAAA-MM-DD; con precision: mes, se usa el día 1.
 # pasajeros: lo informado; si las fuentes difieren, pasajeros_min / pasajeros_max.
 cruceros:
-  - fecha: 2017-12-20
-    precision: dia
+  - fecha: 2014-03-01
+    precision: mes
+    estado: realizada
+    buque: Ocean Diamond
+    operador: Quark Expeditions
+    pasajeros: 184
+    origen: Antártida y Georgias del Sur
+    destino: Buenos Aires (los pasajeros siguieron por tierra)
+    nota: Escala no programada de un sábado de marzo (probablemente el 22). Desembarcó a 184 turistas (92 tripulantes) para que llegaran a sus vuelos en Buenos Aires, su destino original. No usó la terminal.
+    fuentes:
+      - https://noticiasdecruceros.com/2014/03/26/el-ocean-diamond-hizo-escala-en-mar-del-plata/
+      - https://www.lanacion.com.ar/economia/mar-del-plata-tiene-su-terminal-de-cruceros-pero-los-buques-no-llegan-nid1703203/
+  - fecha: 2017-12-01
+    precision: mes
     estado: cancelada
-    buque: Med Queen / Delphin
+    buque: Delphin
     operador: Alteza Cruises
-    nota: Primer crucero anunciado para estrenar la terminal (inaugurada en 2012, sin uso). Se cambió de buque, se reprogramó para febrero de 2018 y la naviera canceló el proyecto.
+    nota: Primer crucero anunciado para estrenar la terminal. La salida inaugural desde Buenos Aires estaba prevista para el 20 de diciembre de 2017; se reprogramó para el 9 de febrero de 2018 y la naviera no operó.
     fuentes:
       - https://www.cronista.com/negocios/Por-primera-vez-Mar-del-Plata-recibira-cruceros-y-podra-estrenar-su-terminal-20170926-0007.html
+      - https://www.hosteltur.com/lat/164300_alteza-cruises-primera-linea-cruceros-all-inclusive-argentina.html
       - https://www.lanacion.com.ar/turismo/mar-del-plata-se-quedo-sin-cruceros-nid2113330
-  - fecha: 2021-11-01
-    precision: mes
+      - https://cruiseindustrynews.com/cruise-news/2018/02/alteza-cruises-faces-launch-troubles/
+  - fecha: 2020-02-14
+    precision: dia
     estado: realizada
     buque: Hamburg
     operador: Plantours
     pasajeros: 334
-    origen: null
+    origen: Puerto Madryn
     destino: Montevideo
-    nota: Escala de un viernes, amarrado en la sección 8.ª (muelle de portacontenedores). Fecha exacta sin confirmar; anterior a diciembre de 2021.
+    nota: Primera visita del buque, un viernes, por pocas horas. 0223 informa 338 pasajeros y 171 tripulantes. Fin del viaje en Buenos Aires.
     fuentes:
+      - https://www.0223.com.ar/nota/2020-2-14-9-49-0-asi-es-el-lujoso-crucero-que-llego-este-viernes-a-mar-del-plata
       - https://www.elmarplatense.com/un-crucero-con-mas-de-300-pasajeros-amarro-en-mar-del-plata
-  - fecha: 2021-12-01
+      - https://www.lanacion.com.ar/sociedad/crucero-hamburg-las-dudas-que-despiertan-las-primeras-doce-horas-y-media-del-arribo-del-buque-al-nid29112021/
+  - fecha: 2021-11-01
     precision: mes
     estado: denegada
     buque: Hamburg
     operador: Plantours
-    nota: Escalas anunciadas para diciembre de 2021 y enero de 2022. El puerto no la autorizó (no era corredor seguro durante la ola de ómicron; caso de covid a bordo).
+    origen: Buenos Aires
+    destino: Puerto Madryn
+    nota: A fines de noviembre (entre el 26 y el 30) el puerto no autorizó la escala de unos 300 pasajeros alemanes porque no estaba declarado corredor seguro. Venía de Cabo Verde y fue derivado a Buenos Aires.
     fuentes:
-      - https://www.lacapitalmdp.com/tras-la-polemica-el-crucero-con-300-alemanes-no-pudo-entrar-a-puerto-madryn/
-      - https://www.diariodecuyo.com.ar/noticias/salud-aislo-a-todos-a-bordo-del-crucero-hamburg-por-un-nuevo-caso-positivo-de-covid-158648.html
-  - fecha: 2026-01-01
-    precision: mes
+      - https://www.lacapitalmdp.com/mas-de-300-turistas-a-bordo-de-un-crucero-no-podran-llegar-al-puerto-local-porque-no-es-corredor-seguro/
+      - https://noticiasdecruceros.com/2021/11/28/hamburg-no-desembarca-en-mar-del-plata/
+  - fecha: 2022-12-23
+    precision: dia
+    estado: realizada
+    buque: Hamburg
+    operador: Plantours
+    pasajeros: 260
+    origen: Buenos Aires
+    destino: Ushuaia
+    nota: Unos 260 pasajeros, mayoría alemanes, que bajaron a conocer la ciudad.
+    fuentes:
+      - https://consejoportuario.com.ar/el-crucero-hamburg-ingreso-al-puerto-de-mar-del-plata-con-mas-de-260-pasajeros/
+      - https://quedigital.com.ar/sociedad/un-crucero-entro-al-puerto-de-mar-del-plata-con-260-pasajeros/
+  - fecha: 2026-01-11
+    precision: dia
     estado: realizada
     buque: Hamburg
     operador: Plantours
     pasajeros: 322
     origen: Buenos Aires
     destino: Ushuaia
-    nota: Escala no programada en la Terminal 2, la primera del buque desde 2022. Mes estimado por su paso por Punta del Este el 14 de enero de 2026.
+    nota: Escala técnica no programada, un domingo, porque un temporal cerró Montevideo. 155 tripulantes. Amarró en la Terminal 2 (Espigón 2, sección 8.ª) de 7 a mediodía. Primera del buque desde 2022.
     fuentes:
       - https://www.lacapitalmdp.com/un-crucero-internacional-volvio-a-operar-en-el-puerto-de-mar-del-plata/
-      - https://www.ambito.com/uruguay/como-es-el-lujoso-crucero-hamburg-que-visito-punta-del-este-n6234240/amp
+      - https://pescare.com.ar/sorpresa-en-la-costa-marplatense-llego-el-crucero-hamburg-al-puerto-local-tras-el-cierre-preventivo-de-montevideo/
+      - https://diarioelatlantico.com.ar/2026/01/11/el-puerto-recibio-al-crucero-hamburg-con-mas-de-300-pasajeros/
   - fecha: 2026-10-20
     precision: dia
     estado: realizada
     buque: Seaventure
     operador: 66° Expeditions
-    pasajeros_min: 60
-    pasajeros_max: 187
+    pasajeros: 61
     origen: Montevideo
-    destino: Antártida
-    nota: Primera recalada del crucero de expedición, en la Base Naval. Las notas informan entre 60 y 187 pasajeros (187 es la capacidad del buque).
+    destino: Georgias del Sur, Antártida y Ushuaia
+    nota: Primera recalada del crucero de expedición, en la Base Naval. Embarcaron 61 pasajeros chinos; una nota dice que ya traía cerca de 100 a bordo. La capacidad del buque es de 150 (comercial) a 187 (máxima).
     fuentes:
+      - https://www.lu9mardelplata.com.ar/llega-el-crucero-de-expedicion-ms-seaventure-a-mar-del-plata-con-61-pasajeros-rumbo-a-la-antartida
+      - https://pescare.com.ar/el-crucero-ms-seaventure-ingreso-a-mar-del-plata-rumbo-a-la-antartida/
       - https://www.elmarplatense.com/un-crucero-llego-a-mar-del-plata-y-turistas-extranjeros-recorren-la-ciudad-antes-de-partir-hacia-la-antartida
       - https://dataportuaria.com/es/argentina/logistica/el-crucero-seaventure-recalo-en-mar-del-plata-en-su-ruta-hacia-la-antartida
   - fecha: 2027-03-28
@@ -67,20 +100,44 @@ cruceros:
     estado: programada
     buque: Seaventure
     operador: 66° Expeditions
+    nota: Reserva de amarre en la Base Naval pedida por la naviera; sin confirmar.
     fuentes:
       - https://www.lacapitalmdp.com/anuncian-tres-fechas-de-arribos-de-cruceros-a-mar-del-plata/
-  - fecha: 2027-03-01
-    precision: mes
-    estado: programada
-    buque: (por confirmar)
-    operador: Swan Hellenic
-    nota: La naviera mostró interés en recalar; sin fecha confirmada.
-    fuentes:
-      - https://www.lacapitalmdp.com/ratifican-la-llegada-de-cruceros-a-mar-del-plata-y-otra-empresa-mostro-interes/
+      - https://ahoramardelplata.com.ar/1/el-crucero-que-llego-a-mar-del-plata-ya-pidio-dos-nuevas-fechas-de-amarre-para-2027
   - fecha: 2027-10-20
     precision: dia
     estado: programada
     buque: Seaventure
     operador: 66° Expeditions
+    nota: Reserva de amarre en la Base Naval pedida por la naviera; sin confirmar.
     fuentes:
       - https://www.lacapitalmdp.com/anuncian-tres-fechas-de-arribos-de-cruceros-a-mar-del-plata/
+      - https://ahoramardelplata.com.ar/1/el-crucero-que-llego-a-mar-del-plata-ya-pidio-dos-nuevas-fechas-de-amarre-para-2027
+
+# Paradas por emergencia médica: el buque se detuvo en rada, no amarró y solo bajaron
+# pacientes. No son recaladas turísticas y no se cuentan como tales.
+emergencias_rada:
+  - fecha: 2022-03-14
+    precision: dia
+    buque: Viking Jupiter
+    operador: Viking
+    nota: Bajó una pasajera de unos 75 años en lancha, coordinado por Prefectura. Iba de Montevideo a la Patagonia.
+    fuentes:
+      - https://www.0223.com.ar/nota/2022-3-14-11-17-0-un-crucero-de-lujo-tuvo-que-arribar-a-mar-del-plata-por-una-emergencia-a-bordo
+      - https://noticiasdecruceros.com/2022/03/14/el-viking-jupiter-en-mar-del-plata/
+  - fecha: 2023-02-10
+    precision: dia
+    buque: Viking Jupiter
+    operador: Viking
+    nota: Prefectura bajó a un pasajero de 78 años y a su acompañante. Fecha del comunicado oficial.
+    fuentes:
+      - https://www.argentina.gob.ar/noticias/mar-del-plata-emergencia-bordo-de-un-crucero
+      - https://noticiasdecruceros.com/2023/02/12/viking-jupiter-en-mar-del-plata-por-emergencia-medica/
+  - fecha: 2025-03-08
+    precision: dia
+    buque: Oosterdam
+    operador: Holland America Line
+    nota: Bajaron una pasajera estadounidense de 86 años con embolia pulmonar y su marido, en lancha del crucero hasta el club náutico.
+    fuentes:
+      - https://www.0223.com.ar/nota/2025-3-8-13-19-0-sorpresa-por-la-llegada-de-un-enorme-crucero-a-mar-del-plata-por-que-se-detuvo-en-la-costa
+      - https://www.infobrisas.com/noticias/2025/03/09/79073-prefectura-de-mar-del-plata-asistio-a-una-mujer-estadounidense-que-estaba-a-bordo-de-un-crucero

@@ -1,0 +1,35 @@
+[
+ {
+  "fecha": "2022-03-14",
+  "precision": "dia",
+  "buque": "Viking Jupiter",
+  "operador": "Viking",
+  "nota": "Bajó una pasajera de unos 75 años en lancha, coordinado por Prefectura. Iba de Montevideo a la Patagonia.",
+  "fuentes": [
+   "https://www.0223.com.ar/nota/2022-3-14-11-17-0-un-crucero-de-lujo-tuvo-que-arribar-a-mar-del-plata-por-una-emergencia-a-bordo",
+   "https://noticiasdecruceros.com/2022/03/14/el-viking-jupiter-en-mar-del-plata/"
+  ]
+ },
+ {
+  "fecha": "2023-02-10",
+  "precision": "dia",
+  "buque": "Viking Jupiter",
+  "operador": "Viking",
+  "nota": "Prefectura bajó a un pasajero de 78 años y a su acompañante. Fecha del comunicado oficial.",
+  "fuentes": [
+   "https://www.argentina.gob.ar/noticias/mar-del-plata-emergencia-bordo-de-un-crucero",
+   "https://noticiasdecruceros.com/2023/02/12/viking-jupiter-en-mar-del-plata-por-emergencia-medica/"
+  ]
+ },
+ {
+  "fecha": "2025-03-08",
+  "precision": "dia",
+  "buque": "Oosterdam",
+  "operador": "Holland America Line",
+  "nota": "Bajaron una pasajera estadounidense de 86 años con embolia pulmonar y su marido, en lancha del crucero hasta el club náutico.",
+  "fuentes": [
+   "https://www.0223.com.ar/nota/2025-3-8-13-19-0-sorpresa-por-la-llegada-de-un-enorme-crucero-a-mar-del-plata-por-que-se-detuvo-en-la-costa",
+   "https://www.infobrisas.com/noticias/2025/03/09/79073-prefectura-de-mar-del-plata-asistio-a-una-mujer-estadounidense-que-estaba-a-bordo-de-un-crucero"
+  ]
+ }
+]

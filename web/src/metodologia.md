@@ -30,7 +30,7 @@ title: Metodología y fuentes
 | Turistas por medio de transporte (auto, ómnibus, tren, avión) y por región de procedencia | EMTUR vía datos.mardelplata.gob.ar ("Arribo de turistas por medio de transporte", "Procedencia de turistas") | 2013–2025 y 2007–2024, mensual |
 | Medio de transporte y región de origen de los turistas residentes | Yvera, Ministerio de Turismo — Encuesta de Viajes y Turismo de los Hogares (EVyTH), microdatos | 2012 → 2024 (trimestral) |
 | Tránsito de autos hacia la costa | AUBASA, cifras comunicadas a la prensa con período exacto (`config/autos.yaml`) | puntual |
-| Recaladas de cruceros | Notas de prensa, con fuente por fila (`config/cruceros.yaml`): no hay datos abiertos del puerto | 2017 → hoy |
+| Recaladas de cruceros y paradas por emergencia en rada | Notas de prensa, con fuente por fila (`config/cruceros.yaml`), revisadas con una investigación dedicada: no hay datos abiertos del puerto | 2014 → hoy |
 
 Los datos se descargan y procesan automáticamente una vez por mes. El código es abierto.
 

@@ -100,11 +100,14 @@ def export(marts: Path = MARTS, out: Path = WEB_DATA) -> list[Path]:
             encoding="utf-8",
         )
         written.append(dest)
-    for nombre, clave in (("hitos", "hitos"), ("eventos", "eventos"), ("cruceros", "cruceros"),
-                          ("autos", "conteos")):
+    # yaml, clave, json de salida
+    registros = (("hitos", "hitos", "hitos"), ("eventos", "eventos", "eventos"),
+                 ("cruceros", "cruceros", "cruceros"),
+                 ("cruceros", "emergencias_rada", "cruceros_rada"), ("autos", "conteos", "autos"))
+    for nombre, clave, salida in registros:
         filas = [{k: str(v) if k == "fecha" or isinstance(v, date) else v for k, v in h.items()}
-                 for h in load_yaml(f"{nombre}.yaml")[clave]]
-        dest = out / f"{nombre}.json"
+                 for h in load_yaml(f"{nombre}.yaml").get(clave, [])]
+        dest = out / f"{salida}.json"
         dest.write_text(json.dumps(filas, ensure_ascii=False, indent=1), encoding="utf-8")
         written.append(dest)
     return written

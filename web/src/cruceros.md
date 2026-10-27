@@ -10,6 +10,9 @@ import {TINTA, TINTA_2, ACENTO, OTRO, SIN_DATO, entero, MESES} from "./component
 ```
 
 ```js
+const rada = (await FileAttachment("data/cruceros_rada.json").json())
+  .map((d) => ({...d, fecha: new Date(`${d.fecha}T00:00:00Z`)}))
+  .sort((a, b) => a.fecha - b.fecha);
 const cruceros = (await FileAttachment("data/cruceros.json").json())
   .map((d) => ({...d, fecha: new Date(`${d.fecha}T00:00:00Z`)}))
   .sort((a, b) => a.fecha - b.fecha);
@@ -30,11 +33,11 @@ const paxTxt = (d) => d.pasajeros ? entero(d.pasajeros) : d.pasajeros_min ? `${e
 
 <div class="portada">
   <div><p class="etiqueta">PotenciarMDQ · puerto</p><h1>Cruceros: <em>pocos</em> y espaciados</h1></div>
-  <p class="bajada">Mar del Plata tiene terminal de cruceros desde 2012, pero las recaladas se cuentan con los dedos: escalas sueltas de buques chicos y de expedición. Acá están todas las que encontramos, una por una.</p>
+  <p class="bajada">Mar del Plata tiene terminal de cruceros en la Escollera Norte desde 2012, pero según la prensa local nunca recibió un barco: las pocas escalas amarraron en otros muelles del puerto o en la Base Naval. Acá están todas las que encontramos, una por una.</p>
 </div>
 
 <div class="cifras c3">
-  <div><span class="rotulo">Recaladas registradas</span><span class="valor">${realizadas.length}</span><p class="nota">desde la inauguración de la terminal</p></div>
+  <div><span class="rotulo">Recaladas registradas</span><span class="valor">${realizadas.length}</span><p class="nota">desde ${realizadas[0]?.fecha.getUTCFullYear() ?? "—"}, con amarre y turistas en tierra</p></div>
   <div><span class="rotulo">Pasajeros, la mayor</span><span class="valor">${entero(d3.max(realizadas, (d) => d.pasajeros ?? d.pasajeros_max))}</span><p class="nota">un crucero grande lleva más de 3.000</p></div>
   <div><span class="rotulo">Próximas anunciadas</span><span class="valor">${proximas.length}</span><p class="nota">${proximas.map((d) => d.operador).filter((v, i, a) => a.indexOf(v) === i).join(" · ")}</p></div>
 </div>
@@ -45,7 +48,7 @@ Plot.plot({
   height: 180,
   marginLeft: 20,
   marginRight: 20,
-  x: {label: null, type: "utc", domain: [new Date("2017-01-01"), new Date("2028-01-01")]},
+  x: {label: null, type: "utc", domain: [new Date("2013-01-01"), new Date("2028-01-01")]},
   y: {axis: null, domain: [0, 1]},
   color: {domain: ESTADOS.map((e) => e.nombre), range: ESTADOS.map((e) => e.color), legend: true},
   marks: [
@@ -69,8 +72,18 @@ ${cruceros.slice().reverse().map((d) => html`<tr><td>${fechaTxt(d)}</td><td>${NO
 </tbody></table>`
 ```
 
+### Paradas por emergencia médica
+
+```js
+display(html`<table class="editorial texto"><thead><tr><th>Fecha</th><th>Buque</th><th>Naviera</th><th>Qué pasó</th><th>Fuente</th></tr></thead><tbody>
+${rada.slice().reverse().map((d) => html`<tr><td>${fechaTxt(d)}</td><td>${d.buque}</td><td>${d.operador}</td><td class="nota">${d.nota ?? ""}</td><td>${d.fuentes.map((f, i) => html`<a href=${f} target="_blank" rel="noopener">[${i + 1}]</a> `)}</td></tr>`)}
+</tbody></table>`);
+```
+
+<p class="leyenda">Cruceros grandes que pasaban frente a la costa y se detuvieron en rada para bajar a un pasajero enfermo, con Prefectura o una lancha del buque. No amarraron ni bajaron turistas: no cuentan como recaladas, aunque la prensa los titule "llegó un crucero".</p>
+
 <div class="leyenda-grid">
   <p><b>Por qué hay tan pocos.</b> El puerto es ante todo pesquero y de carga; el calado y el largo de los muelles no permiten recibir buques grandes, y el dragado pendiente se discute cada vez que llega uno.</p>
   <p><b>Qué llega.</b> Cruceros chicos (300 pasajeros) o de expedición (menos de 200) que usan Mar del Plata como escala camino a Ushuaia o la Antártida, a veces sin programar.</p>
-  <p><b>De dónde sale.</b> No hay datos abiertos de cruceros: el Consorcio Portuario no publica series. Es un registro armado con notas de prensa, con la fuente de cada fila; cuando las notas difieren se muestra el rango.</p>
+  <p><b>De dónde sale.</b> No hay datos abiertos de cruceros para este puerto: el Consorcio Portuario no publica series y la de cruceros del Ministerio de Turismo (Migraciones) cubre solo Buenos Aires, Puerto Madryn y Ushuaia. Es un registro armado con notas de prensa, con la fuente de cada fila.</p>
 </div>
