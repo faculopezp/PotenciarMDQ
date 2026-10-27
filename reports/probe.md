@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-26 06:56 UTC
+# Probe de fuentes — 2026-10-27 01:28 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -71,37 +71,7 @@
     > "02/10/2023, Conectividad A�rea,Todos los recursos,""Luego de un proceso de revisi�n y limpieza de los registros, se actualizaron los recursos filtrando casos de vuelos desde y hacia aeropuertos sin relevancia para la actividad tur�stica."""
 
 ## `anac_dnta` (html_links)
-- 30 archivos encontrados
-  - [Enero](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-enero-online.pdf)
-  - [Febrero](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-febrero-2018-online.pdf)
-  - [Marzo](https://www.eana.com.ar/sites/default/files/2018-06/informe-mensual-201803-online.pdf)
-  - [Abril](https://www.eana.com.ar/sites/default/files/2018-06/informe-mensual-201804-online-1.pdf)
-  - [Junio](https://www.eana.com.ar/sites/default/files/2018-08/Informe_Mensual_201806_Online.pdf)
-  - [Julio](https://www.eana.com.ar/sites/default/files/2018-08/Informe_Mensual_201807_Online.01.pdf)
-  - [Agosto](https://www.eana.com.ar/sites/default/files/2018-09/Informe%20Mensual%20201808%20-%20Online_2.pdf)
-  - [Septiembre](https://www.eana.com.ar/sites/default/files/2018-10/Informe%20Mensual%20201809_1.pdf)
-  - [Octubre](https://www.eana.com.ar/sites/default/files/2018-11/Informe%20Mensual%20201810.pdf)
-  - [Noviembre](https://www.eana.com.ar/sites/default/files/2018-12/Informe%20Mensual%20201811.pdf)
-  - [Diciembre](https://www.eana.com.ar/sites/default/files/2019-01/Informe%20Mensual%20201812_1.pdf)
-  - [Enero](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-enero-2017-eana.pdf)
-  - [Febrero](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-febrero-2017-eana.pdf)
-  - [Marzo](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-marzo-2017-eana.pdf)
-  - [Abril](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-abril-2017-eana.pdf)
-  - [Mayo](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-mayo-2017-eana.pdf)
-  - [Junio](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-junio-2017-eana.pdf)
-  - [Julio](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-201707-eana-se.pdf)
-  - [Agosto](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-agosto-2017-eana.pdf)
-  - [Septiembre](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-septiembre-2017-eana.pdf)
-  - [Octubre](https://www.eana.com.ar/sites/default/files/2018-06/021117-informe-mensual-octubre-2017-online-1.pdf)
-  - [Noviembre](https://www.eana.com.ar/sites/default/files/2018-06/informe-mensual-noviembre-2017-eana.pdf)
-  - [Diciembre](https://www.eana.com.ar/sites/default/files/2018-06/informe-mensual-diciembre-2017-eana.pdf)
-  - [Anuario](https://www.eana.com.ar/sites/default/files/2018-06/anuario-estad%C3%ADstico-2017-eana.pdf)
-  - [Agosto](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-agosto-2016-eana.pdf)
-  - [Septiembre](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-septiembre-2016-eana.pdf)
-  - [Octubre](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-octubre-2016-eana.pdf)
-  - [Noviembre](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-noviembre-2016-eana.pdf)
-  - [Diciembre](https://www.eana.com.ar/sites/default/files/2018-03/informe-mensual-diciembre-2016-eana.pdf)
-  - [Anuario](https://www.eana.com.ar/sites/default/files/2018-06/anuario-estad%C3%ADstico-2016-eana.pdf)
+- ❌ ConnectTimeout: HTTPSConnectionPool(host='consultas-publicas.anac.gob.ar', port=443): Max retries exceeded with url: /estadisticas-dnta/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='consultas-publicas.anac.gob.ar', port=443) at 0x7f54c8662710>, 'Connection to consultas-publicas.anac.gob.ar timed out. (connect timeout=10)'))
 
 ## `ourairports` (static_file)
 - HTTP 200, content-type `text/plain; charset=utf-8`
@@ -124,62 +94,10 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 - HTTP 200, content-type `application/octet-stream`
 
 ## `madhel` (static_file)
-- HTTP 200, content-type `text/html`
-```
-<!DOCTYPE html>
-<html lang="es" ng-app='angularApp'>
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-```
-- URLs encontradas:
-  - `#main-navbar-collapse`
-  - `$sanitize`
-  - `Book/Gatsby`
-  - `Book/Gatsby/ch/4?key=value`
-  - `Book/Moby`
-  - `Book/Moby/ch/1`
-  - `Book/Scarlet`
-  - `Iterator`
-  - `_blank`
-  - `acerca.html`
-  - `book.html`
-  - `chapter.html`
-  - `data:`
-  - `data:image/svg+xml;base64,${btoa(i)}`
-  - `http://ais.anac.gob.ar`
-  - `http://angularjs.org/`
-  - `http://www.openstreetmap.org/copyright`
-  - `https://ais.anac.gob.ar/notam/json`
-  - `https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js`
-  - `https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.2.31/angular-sanitize.js`
-  - `https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.3/angular-route.js`
-  - `https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.7/angular.min.js`
-  - `https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js`
-  - `https://datos.anac.gob.ar/madhel/api/v2/airports/`
-  - `https://datos.anac.gob.ar/madhel/api/v2/info/legal/disclaimer/web-app`
-  - `https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB5QEo5K82nS5ovG5qeQdL64XWXQ6emz5A&libraries=marker&loading=async&callback=initMap`
-  - `https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js`
-  - `https://twitter.com/anacargentina?lang=es`
-  - `https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js`
-  - `https://www.anac.gob.ar`
-  - `https://www.facebook.com/ANAC-248699361838722/`
-  - `https://www.googletagmanager.com/gtag/js?id=G-SR3CKD1CLW`
-  - `https://www.youtube.com/user/anacnoticias`
-  - `index.html`
-  - `js/angular-leaflet-directive.min.js`
-  - `js/app.js`
-  - `js/mapa.js`
-  - `mailto:`
-  - `resourceUrl`
-  - `url`
+- ❌ ConnectTimeout: HTTPSConnectionPool(host='ais.anac.gob.ar', port=443): Max retries exceeded with url: /madhel/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='ais.anac.gob.ar', port=443) at 0x7f54c86639d0>, 'Connection to ais.anac.gob.ar timed out. (connect timeout=10)'))
 
 ## `madhel_api` (static_file)
-- HTTP 200, content-type `application/json`
-```
-{"count":713,"results":[{"uri":"/madhel/api/v2/airports/ACB/?format=json","the_geom":{"geometry":{"type":"Point","coordinates":[-60.57066,-33.27226]},"properties":{"name":"CORONEL BOGADO / AGROSERVICIOS - (ACB) - DRCE - PRIVADO NO CONTROLADO [** USO AGROA\u00c9REO **]","gg_point_coordinates":[-33.27
-```
+- ❌ ConnectTimeout: HTTPSConnectionPool(host='datos.anac.gob.ar', port=443): Max retries exceeded with url: /madhel/api/v2/airports/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='datos.anac.gob.ar', port=443) at 0x7f54c86e4910>, 'Connection to datos.anac.gob.ar timed out. (connect timeout=10)'))
 
 ## `opensky_indice` (static_file)
 - HTTP 200, content-type `text/html`
@@ -193,10 +111,10 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 ```
 
 ## `clima_mdq` (openmeteo)
-- HTTP 200 `https://archive-api.open-meteo.com/v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-20&daily=weather_code%2Cprecipitation_`
+- HTTP 200 `https://archive-api.open-meteo.com/v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-21&daily=weather_code%2Cprecipitation_`
 
 ## `anac_informes_mensuales` (url_pattern)
-- 0/60 URLs existen
+- ❌ ConnectTimeout: HTTPSConnectionPool(host='datos.anac.gob.ar', port=443): Max retries exceeded with url: /static/docs/Informe_Mensual_201401.pdf (Caused by ConnectTimeoutError(<HTTPSConnection(host='datos.anac.gob.ar', port=443) at 0x7f54c86e5a90>, 'Connection to datos.anac.gob.ar timed out. (connect timeout=10)'))
 
 ## `sna_anuales` (url_pattern)
 - 2/5 URLs existen
@@ -377,7 +295,7 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
     - `pdf` Ficha Técnica: Crucerismo Marítimo — https://datos.yvera.gob.ar/dataset/fbc269ea-5f71-45b6-b70c-8eb38a03b8db/resource/33f90b36-e763-4a26-9559-b29b725dd73c/download/crucerismo_maritimo.pdf
 
 ## `mdp_portal_catalogo` (dkan_package)
-- OK `https://datos.mardelplata.gob.ar/?q=api/3/action`: 446 datasets; coinciden: ['arribos-de-turistas', 'turismo-estable-estadía-promedio', 'turismo-en-fines-de-semana-largo', 'movimientos-del-aeropuerto-internacional-astor-piazzolla', 'pasajeros-del-aeropuerto-astor-piazzolla', 'vuelos-comerciales-pasajeros-por-tramo', 'vuelos-comerciales-vuelos-por-tramo', 'vuelos-del-aeropuerto-internacional-astor-piazzolla', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30062022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-31032022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30092021', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30092022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-31122022', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-emtur-al-31032023', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-emtur-al-30062023', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-y-cultura-emturyc-al-4', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-11', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-31', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-11', 'presupuesto-de-recursos-y-gastos-2026-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-12', 'presupuesto-de-recursos-y-gastos-2026-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5']
+- OK `https://datos.mardelplata.gob.ar/?q=api/3/action`: 446 datasets; coinciden: ['arribos-de-turistas', 'turismo-estable-estadía-promedio', 'transportes-de-acceso-la-ciudad', 'transportes-escolares-habilitados', 'encuesta-permanente-de-hogares-eph-evolución-de-indicadores-mercado-de-trabajo', 'transporte-urbano-por-ramal', 'transporte-urbano-por-empresa', 'turismo-en-fines-de-semana-largo', 'movimientos-del-aeropuerto-internacional-astor-piazzolla', 'pasajeros-del-aeropuerto-astor-piazzolla', 'arribo-de-turistas-por-medio-de-transporte', 'procedencia-de-turistas', 'flota-de-transporte-público-de-pasajeros', 'pasajeros-transporte-interurbano-en-autobus-estudio-origen-destino', 'vuelos-comerciales-pasajeros-por-tramo', 'vuelos-comerciales-vuelos-por-tramo', 'transporte-público-de-pasajeros', 'líneas-de-transporte-público-de-pasajeros', 'vuelos-del-aeropuerto-internacional-astor-piazzolla', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30062022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-31032022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30092021', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30092022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-31122022', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-emtur-al-31032023', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-emtur-al-30062023', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-y-cultura-emturyc-al-4', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-11', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-31', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-11', 'presupuesto-de-recursos-y-gastos-2026-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-12', 'presupuesto-de-recursos-y-gastos-2026-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5']
 ### `movimientos-del-aeropuerto-internacional-astor-piazzolla`
   - `csv` Movimientos del aeropuerto. Año 2020 — https://datos.mardelplata.gob.ar/sites/default/files/movimientos-aeropuerto-2020.csv — mod Date changed  Jue, 21/01/2021 - 10:16
     > ,Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic
@@ -710,6 +628,72 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
     > Enero;1.422.547;1.337.838;1.321.784;1.411.820;1.437.571;1.463.852;1.404.985;1.422.550;1.472.464;1.381.896;1.399.071;1.380.590;1.290.276;1.383.870;834.779;1.327.732;1.494.586;1.401.422;1.378.520
     > Febrero;1.109.344;1.171.826;1.129.601;1.165.370;1.115.055;1.252.839;1.177.236;1.155.817;1.229.299;1.218.370;1.188.766;1.213.463;1.100.400;1.263.355;810.799;1.215.092;1.249.469;1.141.012;1.062.056
     > Marzo;683.866;744.354;619.312;701.466;856.555;699.128;789.714;744.902;762.051;771.527;702.908;824.970;778.132;406.036;603.017;749.259;800.993;822.096;738.161
+### `arribo-de-turistas-por-medio-de-transporte`
+  - `csv` Arribos por medio de transporte. Año 2025 — https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2025.csv — mod Date changed  Mar, 28/07/2026 - 13:02
+    > Mes;AVION;TREN;OMNIBUS;AUTO
+    > Enero;21.103;45.277;191.800;1.120.340
+    > Febrero;16.370;40.311;156.584;848.791
+    > Marzo;13.747;26.430;84.106;613.878
+  - `csv` Arribos por medio de transporte. Año 2024 — https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2024.csv — mod Date changed  Lun, 26/05/2025 - 10:19
+    > Mes;AVION;TREN;OMNIBUS;AUTO
+    > Enero;23.556;44.818;193.560;1.139.488
+    > Febrero;20.250;42.200;158.452;920.110
+    > Marzo;15.134;30.420;82.244;694.298
+  - `csv` Arribos por medio de transporte. Año 2023 — https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2023.csv — mod Date changed  Lun, 26/05/2025 - 10:19
+    > Mes;AVION;TREN;OMNIBUS;AUTO
+    > Enero;20.264;60.255;239.656;1.174.411
+    > Febrero;14.861;54.848;197.286;982.474
+    > Marzo;14.259;59.674;96.848;630.212
+  - `csv` Arribos por medio de transporte. Año 2022 — https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2022.csv — mod Date changed  Lun, 26/05/2025 - 10:19
+    > Mes;AVION;TREN;OMNIBUS;AUTO
+    > Enero;18.088;62.513;199.860;1.047.271
+    > Febrero;16.841;53.375;173.817;971.059
+    > Marzo;13.437;61.842;75.854;598.126
+  - `csv` Arribos por medio de transporte. Año 2021 — https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2021.csv — mod Date changed  Mié, 02/11/2022 - 15:36
+    > Mes;AVION;TREN;OMNIBUS;AUTO
+    > Enero;6.554;34.157;47.725;746.343
+    > Febrero;5.390;42.680;46.454;716.275
+    > Marzo;3.124;44.228;34.889;520.776
+  - `csv` Arribos por medio de transporte. Año 2020 — https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2020.csv — mod Date changed  Mié, 02/11/2022 - 15:35
+    > Mes;AVION;TREN;OMNIBUS;AUTO
+    > Enero;24.661;35.648;262.566;1.060.995
+    > Febrero;19.390;35.190;242.596;966.179
+    > Marzo;6.725;21.887;69.788;307.636
+  - `csv` Arribos por medio de transporte. Año 2019 — https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2019.csv — mod Date changed  Mié, 02/11/2022 - 15:34
+    > Mes;AVION;TREN;OMNIBUS;AUTO
+    > Enero;30.333;34.971;240.344;984.628
+    > Febrero;24.292;31.427;208.442;836.239
+    > Marzo;16.167;16.319;132.175;613.471
+  - `csv` Arribos por medio de transporte. Año 2018 — https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2018.csv — mod Date changed  Mié, 06/03/2019 - 13:02
+    > Mes,AVION,TREN,OMNIBUS,AUTO
+    > Enero,"33,687","31,980","250,718","1,064,205"
+    > Febrero,"26,003","29,746","222,430","935,284"
+    > Marzo,"18,755","14,028","127,496","664,691"
+  - `csv` Arribos por medio de transporte. Año 2017 — https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2017.csv — mod Date changed  Mié, 21/11/2018 - 10:12
+    > Mes,AVION,TREN,OMNIBUS,AUTO
+    > Enero,"23,326",0,"266,292","1,109,453"
+    > Febrero,"17,452",0,"228,852","942,462"
+    > Marzo,"8,507",0,"130,051","564,350"
+  - `csv` Arribos por medio de transporte. Año 2016 — https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2016.csv — mod Date changed  Mié, 21/11/2018 - 10:12
+    > Mes,AVION,TREN,OMNIBUS,AUTO
+    > Enero,"18,861",0,"280,644","1,082,391"
+    > Febrero,"14,122",0,"255,268","948,980"
+    > Marzo,"8,944",0,"138,592","623,991"
+  - `csv` Arribos por medio de transporte. Año 2015 — https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2015.csv — mod Date changed  Mié, 21/11/2018 - 10:13
+    > Mes,AVION,TREN,OMNIBUS,AUTO
+    > Enero,"13,494","23,989","292,370","1,142,611"
+    > Febrero,"10,581","20,180","248,612","949,926"
+    > Marzo,"5,991","12,122","138,314","605,624"
+  - `csv` Arribos por medio de transporte. Año 2014 — https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2014.csv — mod Date changed  Mié, 21/11/2018 - 10:13
+    > Mes,AVION,TREN,OMNIBUS,AUTO
+    > Enero,"10,145","5,790","306,098","1,100,517"
+    > Febrero,"8,206","4,000","254,644","888,967"
+    > Marzo,"5,080","2,500","147,557","589,765"
+  - `csv` Arribos por medio de transporte. Año 2013 — https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2013.csv — mod Date changed  Mié, 21/11/2018 - 10:14
+    > Mes,AVION,TREN,OMNIBUS,AUTO
+    > Enero,"9,720","22,035","293,160","1,080,070"
+    > Febrero,"7,470","9,907","262,340","897,519"
+    > Marzo,"6,086","5,793","150,029","627,806"
 ### `turismo-en-fines-de-semana-largo`
   - `csv` Visitantes fines de semana largos 2007-2025 — https://datos.mardelplata.gob.ar/sites/default/files/visitantes-fines-de-semana-largos-2007-2025.csv — mod Date changed  Mar, 28/07/2026 - 12:58
     > Anio;Carnavales;27 de febrero;24 de marzo;Semana Santa;2 de Abril;1ro mayo;25 de Mayo;17 de Junio;20 de Junio;9 de Julio;17 de Agosto;24 de septiembre;12 de Octubre;20 de noviembre;8 de Diciembre;Navidad;A�o nuevo

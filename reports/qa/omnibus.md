@@ -66,7 +66,7 @@ El anual solo trae rutas con al menos un viaje semanal: tiene que dar igual o me
 | cordoba | Córdoba · Cordoba | 2 |
 | neuquen | Neuquén · Neuquen | 2 |
 | parana | Parana · Paraná | 2 |
-| san miguel de tucuman | San Miguel De Tucuman · San Miguel De Tucumán | 2 |
+| san miguel de tucuman | San Miguel De Tucumán · San Miguel De Tucuman | 2 |
 
 ## 5. Rutas con más pasajeros que asientos
 
@@ -149,10 +149,10 @@ Meses del foco con más de un operador:
 
 | anio | operadores | meses |
 |---|---|---|
-| 2011 | SOFSE · FERROBAIRES | 6 |
-| 2012 | SOFSE · FERROBAIRES | 10 |
+| 2011 | FERROBAIRES · SOFSE | 6 |
+| 2012 | FERROBAIRES · SOFSE | 10 |
 | 2014 | FERROBAIRES · SOFSE | 1 |
-| 2015 | SOFSE · FERROBAIRES | 8 |
+| 2015 | FERROBAIRES · SOFSE | 8 |
 
 ## 8. EVyTH: viajes de residentes con destino Mar del Plata
 
@@ -184,3 +184,21 @@ Casos encuestados (sin expandir) por año y tipo de visitante, y medio informado
 | Otros | Ns./ Nr. | 5 | 4906.0 |
 | Otros | Embarcación | 5 | 3370.0 |
 | Otros | Taxi o remís | 2 | 358.0 |
+
+Peso de los casos más grandes (turistas): si pocos casos explican mucho, el reparto de ese año es volátil.
+
+| anio | casos | pct_top10 | pondera_media_auto | pondera_media_omnibus | pondera_media_tren |
+|---|---|---|---|---|---|
+| 2012 | 1301 | 4.6 | 1450.0 | 1442.0 | 1851.0 |
+| 2013 | 1202 | 5.2 | 1560.0 | 1439.0 | 4713.0 |
+| 2014 | 1134 | 5.3 | 1599.0 | 1535.0 | 1767.0 |
+| 2015 | 1126 | 7.6 | 1313.0 | 1508.0 | 1541.0 |
+| 2016 | 1160 | 6.1 | 1734.0 | 1987.0 |  |
+| 2017 | 1255 | 8.4 | 1640.0 | 1439.0 | 2770.0 |
+| 2018 | 1249 | 8.6 | 1436.0 | 1491.0 | 2741.0 |
+| 2019 | 1070 | 7.7 | 1555.0 | 1591.0 | 2671.0 |
+| 2020 | 434 | 17.2 | 1829.0 | 1115.0 | 3603.0 |
+| 2021 | 502 | 34.0 | 795.0 | 542.0 | 4012.0 |
+| 2022 | 836 | 15.0 | 1682.0 | 1227.0 | 3183.0 |
+| 2023 | 938 | 14.3 | 1118.0 | 2354.0 | 1766.0 |
+| 2024 | 685 | 15.8 | 1671.0 | 1599.0 | 2193.0 |
