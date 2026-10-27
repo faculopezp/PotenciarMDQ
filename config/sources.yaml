@@ -200,15 +200,20 @@ sources:
       - arribo-de-turistas-por-medio-de-transporte
       # Halladas con el volcado completo del catálogo (reports/fuentes/catalogo_*.md, 2026-10-27).
       - procedencia-de-turistas
-      - ocupación-hotelera
-      - gasto-turístico
       - pasajeros-transporte-interurbano-en-autobus-estudio-origen-destino
-      - pesca-marítima
       - turismo-en-fines-de-semana-largo
       - turismo-estable-estadía-promedio
     resource_formats: [csv, xlsx, xls]
     enabled: true
     verified: true      # API DKAN responde vía /?q=api/3/action
+
+  # Procedencia 2014: el portal enlaza por error la planilla de 2013 en el recurso de 2014; el
+  # archivo de 2014 existe en el servidor (verificado 2026-10-27). Se copia a procedencia-de-turistas.
+  mdp_procedencia_2014:
+    kind: static_file
+    url: https://datos.mardelplata.gob.ar/sites/default/files/procedencia-turistas-2014.csv
+    enabled: true
+    verified: true
 
   series_tiempo_busqueda:
     kind: static_file

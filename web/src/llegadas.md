@@ -132,7 +132,7 @@ display(Plot.plot({
 }));
 ```
 
-<p class="leyenda">Cada mes, el % de cada región por la cantidad de turistas del mes. En ${procUlt}: ${procRef.sort((a, b) => b.share - a.share).map((d) => `${d.region} ${pct(d.share)}`).join(", ")}. Barras claras: años con meses sin publicar; 2014 no está (el portal enlaza la planilla de 2013 en su lugar). "Exterior" no se publica todos los años.</p>
+<p class="leyenda">Cada mes, el % de cada región por la cantidad de turistas del mes. En ${procUlt}: ${procRef.sort((a, b) => b.share - a.share).map((d) => `${d.region} ${pct(d.share)}`).join(", ")}. Barras claras: años con meses sin publicar. ${procAnual.some((d) => d.anio === 2014) ? "La planilla de 2014 no está enlazada en el portal (repite la de 2013); se baja directo del servidor." : "Falta 2014: el portal enlaza la planilla de 2013 en su lugar."} "Exterior" no se publica todos los años.</p>
 
 ### Cómo arma el EMTUR estos números
 

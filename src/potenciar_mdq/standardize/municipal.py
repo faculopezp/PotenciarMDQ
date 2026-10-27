@@ -289,8 +289,26 @@ def sincronizar(
     return n
 
 
+# Archivos que el portal no enlaza bien y se bajan aparte: fuente -> (dataset, nombre).
+EXTRAS = {"mdp_procedencia_2014": ("procedencia-de-turistas", "procedencia-turistas-2014.csv")}
+
+
+def sincronizar_extras(raw: Path = RAW_MUN) -> int:
+    n = 0
+    for fuente, (dataset, nombre) in EXTRAS.items():
+        archivos = sorted((DATA / "raw" / fuente).glob("*.csv"))
+        if not archivos:
+            continue
+        destino = raw / dataset / nombre
+        destino.parent.mkdir(parents=True, exist_ok=True)
+        if not destino.exists() or destino.read_bytes() != archivos[-1].read_bytes():
+            shutil.copyfile(archivos[-1], destino)
+            n += 1
+    return n
+
+
 def build(raw: Path = RAW_MUN, out: Path = PROCESSED) -> list[Path]:
-    log.info("municipal: %d archivos actualizados", sincronizar(raw=raw))
+    log.info("municipal: %d archivos actualizados", sincronizar(raw=raw) + sincronizar_extras(raw))
     if not raw.exists():
         raise FileNotFoundError(f"No hay fuentes municipales en {raw.relative_to(ROOT)}")
     return [build_series(raw, out), build_vuelos_hist(raw, out)]
