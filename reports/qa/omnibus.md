@@ -66,7 +66,7 @@ El anual solo trae rutas con al menos un viaje semanal: tiene que dar igual o me
 | cordoba | Córdoba · Cordoba | 2 |
 | neuquen | Neuquén · Neuquen | 2 |
 | parana | Parana · Paraná | 2 |
-| san miguel de tucuman | San Miguel De Tucuman · San Miguel De Tucumán | 2 |
+| san miguel de tucuman | San Miguel De Tucumán · San Miguel De Tucuman | 2 |
 
 ## 5. Rutas con más pasajeros que asientos
 
@@ -149,10 +149,10 @@ Meses del foco con más de un operador:
 
 | anio | operadores | meses |
 |---|---|---|
-| 2011 | SOFSE · FERROBAIRES | 6 |
+| 2011 | FERROBAIRES · SOFSE | 6 |
 | 2012 | FERROBAIRES · SOFSE | 10 |
 | 2014 | FERROBAIRES · SOFSE | 1 |
-| 2015 | SOFSE · FERROBAIRES | 8 |
+| 2015 | FERROBAIRES · SOFSE | 8 |
 
 ## 9. EMTUR por medio de transporte contra los conteos
 

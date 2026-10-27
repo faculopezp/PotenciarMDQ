@@ -72,9 +72,9 @@ Qué se recupera (foco, top 12):
 | CWO S.A. - SUN FLIGHT- CIAC TIPO II | 25 |
 | SAETA | 14 |
 | CEAP - AERO CHANNEL S.R.L- CIAC TIPO II | 13 |
-| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
-| PRESIDENCIA DE LA NACION | 10 |
 | TWR SRL | 10 |
+| PRESIDENCIA DE LA NACION | 10 |
+| RADIAL 340 S.A.S.- CIAC TIPO II | 10 |
 | FLIGHT CENTER- TWR S.R.L-CIAC TIPO III | 9 |
 
 ## 2B. Aeronave por matrícula
@@ -116,7 +116,7 @@ Tipo de aeronave en tar1090-db (base comunitaria de transpondedores) contra el t
 
 | matriculas_comparables | mismo_tipo | pct_tipo | misma_familia | tipo_desconocido_en_la_base |
 |---|---|---|---|---|
-| 546 | 507 | 92.9 | 518 | 26 |
+| 546 | 507 | 92.9 | 517 | 26 |
 
 (Las diferencias de tipo son variantes de la misma familia: CJ1/CJ M2, Learjet 45/40/75, 182/182RG; tar1090-db solo se aplica cuando su tipo ya existe en la base.)
 
@@ -124,8 +124,8 @@ Completado por tar1090-db (movimientos sin aeronave en ANAC):
 
 | ambito | aeronave_modelo | movimientos |
 |---|---|---|
-| MDQ | Bell 407 | 2 |
 | MDQ | Learjet 60 | 2 |
+| MDQ | Bell 407 | 2 |
 | resto del país | Cessna 182 | 307 |
 | resto del país | Bell 407 | 297 |
 | resto del país | Cessna 208B Grand Caravan | 206 |
@@ -211,8 +211,8 @@ Desacuerdos más frecuentes (operador ANAC ≠ empresa afectada):
 | SERV AEREOS SUDAMERICANOS S.A. | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
 | CICA | AEROTEC ARGENTINA S.A. | 2 |
 | SERV. Y EMPRENDIMIENTOS AERONÁUTICOS S.A | SERV. EMPRENDIM. AERON. S.A. (FLYZAR) | 2 |
+| JUST FLIGHT S.A. "ROYAL CLASS" | DIRECCION AERON. DE AVIACION CIVIL SALTA | 1 |
 | POLAR AEREA- JORGE POTENZA-CIAC TIPO III | AEROTEC ARGENTINA S.A. | 1 |
-| BAIRES FLY SA | CIELOS DE AMERICA | 1 |
 
 ## 2F. Aeronaves del Estado: operador por prefijo de la identificación (2026)
 
@@ -281,12 +281,12 @@ Asientos: cabina publicada (config/cabinas.yaml) contra el p95 de pasajeros obse
 | Flyest S.A. Líneas Aéreas | Bombardier CRJ200 | 50.0 |  | 11 | 0 |
 | Norwegian Argentina | Boeing 737-800 | 189.0 |  | 7 | 0 |
 | JetSMART | Embraer ERJ-145 | 50.0 |  | 3 | 3 |
-| Andes Líneas Aéreas | Embraer ERJ-145 | 50.0 |  | 2 | 1 |
 | Aerolíneas Argentinas | Embraer ERJ-145 | 50.0 |  | 2 | 2 |
+| Andes Líneas Aéreas | Embraer ERJ-145 | 50.0 |  | 2 | 1 |
+| Aerovias De Mexico - Aeromexico | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
 | Sky Airline | Embraer ERJ-145 | 50.0 |  | 1 | 1 |
 | Flying America | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
 | Bocca Jorge Luis Roque | Bombardier CRJ200 | 50.0 |  | 1 | 0 |
-| Aerovias De Mexico - Aeromexico | Embraer ERJ-145 | 50.0 |  | 1 | 0 |
 
 Validación: qué habría dicho la inferencia por pasajeros en los vuelos 2019 del foco cuyo avión se recuperó (ANAC versión anterior o portal municipal):
 
@@ -333,8 +333,8 @@ Asientos del vuelo exacto (Yvera, 1 a 1) contra la cabina publicada / p95 que se
 | Flyest S.A. Líneas Aéreas |  | 3 | 50.0 |  | 0 |
 | Flyest S.A. Líneas Aéreas | Bombardier CRJ200 | 2 | 50.0 | 50.0 | 2 |
 | Aerolíneas Argentinas | Lockheed L-18 Lodestar | 2 | 89.5 |  | 0 |
-| Aerolíneas Argentinas | Cessna 150 | 1 | 92.0 |  | 0 |
 | Just Flight S.A. "Royal Class" | Cessna Citation CJ1/M2 (525) | 1 | 30.0 |  | 0 |
+| Aerolíneas Argentinas | Cessna 150 | 1 | 92.0 |  | 0 |
 | Sin dato | Embraer Phenom 100 | 1 | 33.0 |  | 0 |
 
 Aeronave por asientos: reglas aprendidas (operador + asientos → modelo o familia, >= 98 % de al menos 20 vuelos con aeronave informada):
