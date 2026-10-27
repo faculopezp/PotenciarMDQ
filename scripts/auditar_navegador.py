@@ -106,43 +106,46 @@ def main() -> None:
                     informe.append(f"### Menú «{item}»: ✗ {str(exc)[:150]}")
 
             if args.valor:
-                etapa[0] = f"consulta_{args.valor}"
-                page.goto(url, wait_until="networkidle", timeout=60_000)
-                page.wait_for_timeout(1500)
-                hecho = []
-                for sel in page.query_selector_all("select"):
-                    opciones = sel.evaluate("s => [...s.options].map(o => [o.value, o.text])")
-                    elegida = next(
-                        (v for v, t in opciones if args.valor in v or args.valor in t), None
-                    )
-                    if elegida is not None:
-                        sel.select_option(elegida)
-                        page.wait_for_timeout(1500)
-                        campo = sel.get_attribute("name") or sel.get_attribute("id")
-                        hecho.append(f"select {campo}={elegida}")
-                for inp in page.query_selector_all("input[type=text], input:not([type])"):
-                    nombre = (inp.get_attribute("name") or "") + (inp.get_attribute("id") or "")
-                    if "ruta" in nombre.lower():
-                        inp.fill(args.valor)
-                        hecho.append(f"input {nombre}={args.valor}")
-                botones = [
-                    b
-                    for b in page.query_selector_all(
-                        "button, input[type=submit], input[type=button], a"
-                    )
-                    if BOTON.search((b.inner_text() or "") + (b.get_attribute("value") or ""))
-                ]
-                if botones:
-                    botones[0].click()
-                    page.wait_for_load_state("networkidle")
-                    page.wait_for_timeout(3000)
-                    rotulo = botones[0].inner_text() or botones[0].get_attribute("value") or ""
-                    hecho.append(f"click «{rotulo.strip()}»")
-                informe += [
-                    f"### Consulta de prueba ({args.valor})",
-                    f"- Acciones: {hecho or 'ninguna'}",
-                    f"- DOM: `{guardar(etapa[0] + '__dom.html', page.content())}`",
-                ]
+                try:
+                    etapa[0] = f"consulta_{args.valor}"
+                    page.goto(url, wait_until="networkidle", timeout=60_000)
+                    page.wait_for_timeout(1500)
+                    hecho = []
+                    for sel in page.query_selector_all("select"):
+                        opciones = sel.evaluate("s => [...s.options].map(o => [o.value, o.text])")
+                        elegida = next(
+                            (v for v, t in opciones if args.valor in v or args.valor in t), None
+                        )
+                        if elegida is not None:
+                            sel.select_option(elegida)
+                            page.wait_for_timeout(1500)
+                            campo = sel.get_attribute("name") or sel.get_attribute("id")
+                            hecho.append(f"select {campo}={elegida}")
+                    for inp in page.query_selector_all("input[type=text], input:not([type])"):
+                        nombre = (inp.get_attribute("name") or "") + (inp.get_attribute("id") or "")
+                        if "ruta" in nombre.lower():
+                            inp.fill(args.valor)
+                            hecho.append(f"input {nombre}={args.valor}")
+                    botones = [
+                        b
+                        for b in page.query_selector_all(
+                            "button, input[type=submit], input[type=button], a"
+                        )
+                        if BOTON.search((b.inner_text() or "") + (b.get_attribute("value") or ""))
+                    ]
+                    if botones:
+                        botones[0].click()
+                        page.wait_for_load_state("networkidle")
+                        page.wait_for_timeout(3000)
+                        rotulo = botones[0].inner_text() or botones[0].get_attribute("value") or ""
+                        hecho.append(f"click «{rotulo.strip()}»")
+                    informe += [
+                        f"### Consulta de prueba ({args.valor})",
+                        f"- Acciones: {hecho or 'ninguna'}",
+                        f"- DOM: `{guardar(etapa[0] + '__dom.html', page.content())}`",
+                    ]
+                except Exception as exc:  # noqa: BLE001 - la consulta de prueba es opcional
+                    informe.append(f"### Consulta de prueba: ✗ {str(exc)[:200]}")
         browser.close()
 
     informe += ["", "## Pedidos de red", ""]
