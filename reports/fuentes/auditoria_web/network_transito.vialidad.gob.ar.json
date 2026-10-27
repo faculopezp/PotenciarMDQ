@@ -1,0 +1,115 @@
+{
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html",
+      "status": 200,
+      "type": "document",
+      "content_type": "text/html",
+      "post_data": null
+    },
+    {
+      "method": "GET",
+      "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/tmda_select_anio.html",
+      "status": 200,
+      "type": "xhr",
+      "content_type": "text/html",
+      "post_data": null
+    },
+    {
+      "method": "GET",
+      "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/footer.html",
+      "status": 200,
+      "type": "xhr",
+      "content_type": "text/html",
+      "post_data": null
+    },
+    {
+      "method": "GET",
+      "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/menu_principal.html",
+      "status": 200,
+      "type": "xhr",
+      "content_type": "text/html",
+      "post_data": null
+    }
+  ],
+  "links": [
+    [
+      "https://www.argentina.gob.ar/transporte/vialidad-nacional",
+      ""
+    ],
+    [
+      "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html#",
+      "INICIO"
+    ],
+    [
+      "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html#",
+      "TMDA"
+    ],
+    [
+      "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html#",
+      "VARIACIONES "
+    ],
+    [
+      "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html#",
+      "Temporales"
+    ],
+    [
+      "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html#",
+      "Interanuales"
+    ],
+    [
+      "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html#",
+      "SEGMENTACIÓN"
+    ],
+    [
+      "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html#",
+      "CLASIFICACIÓN"
+    ],
+    [
+      "https://transito.vialidad.gob.ar/SelCE_WEB/index.html",
+      "Inicio"
+    ],
+    [
+      "https://creativecommons.org/licenses/by/2.5/ar/",
+      "Creative Commons Reconocimiento 2.5 Argentina License"
+    ],
+    [
+      "https://transito.vialidad.gob.ar/sugerencias-b?url_refence=node/99485",
+      "\n              ¿Querés hacernos una sugerencia? \n            "
+    ],
+    [
+      "https://www.argentina.gob.ar/servicios",
+      "Trámites y servicios"
+    ],
+    [
+      "https://www.argentina.gob.ar/turnos",
+      "Turnos"
+    ],
+    [
+      "https://www.argentina.gob.ar/organismos",
+      "Organismos del Estado"
+    ],
+    [
+      "http://mapadelestado.jefatura.gob.ar/",
+      "Mapa del Estado"
+    ],
+    [
+      "https://www.argentina.gob.ar/normativa",
+      "Leyes argentinas"
+    ],
+    [
+      "https://www.argentina.gob.ar/acerca",
+      "Acerca de este sitio"
+    ],
+    [
+      "https://www.argentina.gob.ar/terminos-y-condiciones",
+      "Términos y condiciones"
+    ],
+    [
+      "https://www.argentina.gob.ar/ayuda",
+      "Ayuda"
+    ]
+  ]
+}
