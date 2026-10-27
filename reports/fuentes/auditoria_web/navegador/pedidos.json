@@ -1,122 +1,162 @@
 [
  {
-  "etapa": "SelCE_WEB_tmda_2025_html_rutas_0226.html",
+  "etapa": "SelCE_WEB_tmda_2025_html_tramos_9493.html",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_rutas/0226.html",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/9493.html",
   "status": 200,
   "type": "document",
   "content_type": "text/html",
   "post_data": null,
-  "guardado": "SelCE_WEB_tmda_2025_html_rutas_0226.html___SelCE_WEB_tmda_2025_html_rutas_0226.html"
+  "guardado": "SelCE_WEB_tmda_2025_html_tramos_9493.html___SelCE_WEB_tmda_2025_html_tramos_9493.html"
  },
  {
-  "etapa": "SelCE_WEB_tmda_2025_html_rutas_0226.html",
+  "etapa": "SelCE_WEB_tmda_2025_html_tramos_9493.html",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_rutas/js/lista.rutas.js",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/js/lista.tramos.js",
   "status": 404,
   "type": "script",
   "content_type": "text/html;charset=utf-8",
   "post_data": null,
-  "guardado": "SelCE_WEB_tmda_2025_html_rutas_0226.html___SelCE_WEB_tmda_2025_html_rutas_js_lista.rutas.js"
+  "guardado": "SelCE_WEB_tmda_2025_html_tramos_9493.html___SelCE_WEB_tmda_2025_html_tramos_js_lista.tramos.js"
  },
  {
   "etapa": "consulta_0226",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_rutas/0226.html",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/9493.html",
   "status": 200,
   "type": "document",
   "content_type": "text/html",
   "post_data": null,
-  "guardado": "consulta_0226___SelCE_WEB_tmda_2025_html_rutas_0226.html"
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2025_html_tramos_9493.html"
  },
  {
   "etapa": "consulta_0226",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_rutas/js/lista.rutas.js",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/js/lista.tramos.js",
   "status": 404,
   "type": "script",
   "content_type": "text/html;charset=utf-8",
   "post_data": null,
-  "guardado": "consulta_0226___SelCE_WEB_tmda_2025_html_rutas_js_lista.rutas.js"
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2025_html_tramos_js_lista.tramos.js"
  },
  {
-  "etapa": "SelCE_WEB_tmda_2019_html_rutas_0226.html",
+  "etapa": "SelCE_WEB_tmda_2025_html_tramos_8087.html",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/html_rutas/0226.html",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/8087.html",
   "status": 200,
   "type": "document",
   "content_type": "text/html",
   "post_data": null,
-  "guardado": "SelCE_WEB_tmda_2019_html_rutas_0226.html___SelCE_WEB_tmda_2019_html_rutas_0226.html"
+  "guardado": "SelCE_WEB_tmda_2025_html_tramos_8087.html___SelCE_WEB_tmda_2025_html_tramos_8087.html"
  },
  {
-  "etapa": "SelCE_WEB_tmda_2019_html_rutas_0226.html",
+  "etapa": "SelCE_WEB_tmda_2025_html_tramos_8087.html",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/html_rutas/js/lista.rutas.js",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/js/lista.tramos.js",
   "status": 404,
   "type": "script",
   "content_type": "text/html;charset=utf-8",
   "post_data": null,
-  "guardado": "SelCE_WEB_tmda_2019_html_rutas_0226.html___SelCE_WEB_tmda_2019_html_rutas_js_lista.rutas.js"
+  "guardado": "SelCE_WEB_tmda_2025_html_tramos_8087.html___SelCE_WEB_tmda_2025_html_tramos_js_lista.tramos.js"
  },
  {
   "etapa": "consulta_0226",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/html_rutas/0226.html",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/8087.html",
   "status": 200,
   "type": "document",
   "content_type": "text/html",
   "post_data": null,
-  "guardado": "consulta_0226___SelCE_WEB_tmda_2019_html_rutas_0226.html"
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2025_html_tramos_8087.html"
  },
  {
   "etapa": "consulta_0226",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/html_rutas/js/lista.rutas.js",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/js/lista.tramos.js",
   "status": 404,
   "type": "script",
   "content_type": "text/html;charset=utf-8",
   "post_data": null,
-  "guardado": "consulta_0226___SelCE_WEB_tmda_2019_html_rutas_js_lista.rutas.js"
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2025_html_tramos_js_lista.tramos.js"
  },
  {
-  "etapa": "SelCE_WEB_tmda_2010_html_rutas_0226.html",
+  "etapa": "SelCE_WEB_tmda_2025_html_tramos_8088.html",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2010/html_rutas/0226.html",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/8088.html",
   "status": 200,
   "type": "document",
   "content_type": "text/html",
   "post_data": null,
-  "guardado": "SelCE_WEB_tmda_2010_html_rutas_0226.html___SelCE_WEB_tmda_2010_html_rutas_0226.html"
+  "guardado": "SelCE_WEB_tmda_2025_html_tramos_8088.html___SelCE_WEB_tmda_2025_html_tramos_8088.html"
  },
  {
-  "etapa": "SelCE_WEB_tmda_2010_html_rutas_0226.html",
+  "etapa": "SelCE_WEB_tmda_2025_html_tramos_8088.html",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2010/html_rutas/js/lista.rutas.js",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/js/lista.tramos.js",
   "status": 404,
   "type": "script",
   "content_type": "text/html;charset=utf-8",
   "post_data": null,
-  "guardado": "SelCE_WEB_tmda_2010_html_rutas_0226.html___SelCE_WEB_tmda_2010_html_rutas_js_lista.rutas.js"
+  "guardado": "SelCE_WEB_tmda_2025_html_tramos_8088.html___SelCE_WEB_tmda_2025_html_tramos_js_lista.tramos.js"
  },
  {
   "etapa": "consulta_0226",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2010/html_rutas/0226.html",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/8088.html",
   "status": 200,
   "type": "document",
   "content_type": "text/html",
   "post_data": null,
-  "guardado": "consulta_0226___SelCE_WEB_tmda_2010_html_rutas_0226.html"
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2025_html_tramos_8088.html"
  },
  {
   "etapa": "consulta_0226",
   "method": "GET",
-  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2010/html_rutas/js/lista.rutas.js",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/html_tramos/js/lista.tramos.js",
   "status": 404,
   "type": "script",
   "content_type": "text/html;charset=utf-8",
   "post_data": null,
-  "guardado": "consulta_0226___SelCE_WEB_tmda_2010_html_rutas_js_lista.rutas.js"
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2025_html_tramos_js_lista.tramos.js"
+ },
+ {
+  "etapa": "SelCE_WEB_tmda_2019_html_tramos_9493.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/html_tramos/9493.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "SelCE_WEB_tmda_2019_html_tramos_9493.html___SelCE_WEB_tmda_2019_html_tramos_9493.html"
+ },
+ {
+  "etapa": "SelCE_WEB_tmda_2019_html_tramos_9493.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/html_tramos/js/lista.tramos.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_tmda_2019_html_tramos_9493.html___SelCE_WEB_tmda_2019_html_tramos_js_lista.tramos.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/html_tramos/9493.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2019_html_tramos_9493.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/html_tramos/js/lista.tramos.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2019_html_tramos_js_lista.tramos.js"
  }
 ]
