@@ -64,9 +64,82 @@ El anual solo trae rutas con al menos un viaje semanal: tiene que dar igual o me
 |---|---|---|
 | ciudad autonoma de buenos aires | Ciudad Autónoma De Buenos Aires · Ciudad Autonoma De Buenos Aires · Caba | 2 |
 | cordoba | Córdoba · Cordoba | 2 |
-| neuquen | Neuquen · Neuquén | 2 |
+| neuquen | Neuquén · Neuquen | 2 |
 | parana | Parana · Paraná | 2 |
 | san miguel de tucuman | San Miguel De Tucuman · San Miguel De Tucumán | 2 |
+
+Localidades con más de una provincia en las bases (se toma la más frecuente):
+
+| clave | provincias |
+|---|---|
+| 25 de mayo | Buenos Aires (44) · Santiago Del Estero (1) |
+| aimogasta | La Rioja (17) · Catamarca (2) |
+| alvear | Corrientes (1) · Mendoza (1) |
+| andalgala | Santiago Del Estero (1) · Catamarca (2) |
+| aristobulo del valle | Misiones (1) · Tucumán (1) |
+| arroyito | Córdoba (22) · Santa Fe (1) |
+| avellaneda | Buenos Aires (77) · Santa Fe (4) · Entre Ríos (1) |
+| bandera | Santiago Del Estero (1) · Buenos Aires (2) |
+| bella vista | Buenos Aires (6) · Corrientes (3) |
+| capital | Buenos Aires (8) · San Juan (10) · Santiago Del Estero (5) · Tucumán (2) · Entre Ríos (1) |
+| catrilo | Buenos Aires (1) · La Pampa (37) |
+| chanar ladeado | Córdoba (1) · Santa Fe (2) |
+| chubut | Chubut (2) · Buenos Aires (1) |
+| cipolletti | Neuquén (1) · Río Negro (35) |
+| ciudad | Mendoza (11) · San Juan (1) · San Luis (3) |
+| ciudad autonoma de buenos aires | Buenos Aires (369) · Ciudad Autónoma De Buenos Aires (105498) |
+| de omnibus | Santiago Del Estero (1) · Mendoza (3) |
+| el bolson | Neuquén (1) · Río Negro (17) |
+| el calafate | Santa Cruz (18) · Río Negro (1) |
+| el trebol | Córdoba (1) · Santa Fe (10) |
+| federacion | Entre Ríos (215) · Buenos Aires (1) · Misiones (1) · Santiago Del Estero (1) |
+| flores | Buenos Aires (188) · Salta (1) |
+| general alvear | Buenos Aires (1) · Mendoza (2) |
+| general gelly | Santa Fe (199) · Santa Cruz (1) · Buenos Aires (2) |
+| general roca | Río Negro (35) · Neuquén (1) |
+| general san martin | La Pampa (15) · Buenos Aires (3) · Chaco (1) |
+| ituzaingo | Corrientes (19) · Buenos Aires (31) |
+| jacinto arauz | Buenos Aires (3) · La Pampa (22) |
+| juan jose castelli | Buenos Aires (4) · Chaco (6) |
+| la pampa | Buenos Aires (1) · Santa Fe (1) · La Pampa (7) |
+| la paz | Entre Ríos (8) · Córdoba (2) |
+| lavalle | Mendoza (1) · Tucumán (1) |
+| libertador general san martin | Jujuy (70) · Entre Ríos (1) |
+| lujan | Buenos Aires (35) · San Luis (1) |
+| maipu | Buenos Aires (4) · Mendoza (21) |
+| malvinas argentinas | Buenos Aires (8) · Córdoba (1) |
+| marco juarez | Córdoba (1) · Santa Fe (1) |
+| mercedes | Corrientes (14) · Buenos Aires (67) |
+| merlo | Buenos Aires (76) · San Luis (390) |
+| miramar | Buenos Aires (11) · Córdoba (1) |
+| misiones | Corrientes (1) · Misiones (3) |
+| piedritas | La Pampa (1) · Buenos Aires (1) |
+| recreo | Catamarca (2) · Santa Fe (3) |
+| rio colorado | Buenos Aires (5) · Tucumán (4) · Río Negro (170) |
+| rio cuarto | Córdoba (90) · Tucumán (1) |
+| rio hondo | Santiago Del Estero (37) · Buenos Aires (1) |
+| rio negro | Río Negro (2) · Neuquén (1) |
+| roca | La Pampa (1) · Río Negro (1) |
+| roldan | Córdoba (1) · Santa Fe (6) |
+| san andres | Buenos Aires (3) · Tucumán (2) |
+| san bernardo | Chaco (1) · Buenos Aires (8) |
+| san carlos | Santa Fe (1) · Mendoza (4) |
+| san fernando | Buenos Aires (31) · Chaco (2) · Catamarca (2) |
+| san javier | Córdoba (1) · Misiones (2) |
+| san jose | Misiones (1) · Entre Ríos (7) |
+| san justo | Buenos Aires (83) · Santa Fe (12) |
+| san lorenzo | Corrientes (1) · Santa Fe (91) |
+| san martin | Buenos Aires (27) · Mendoza (16) · La Pampa (4) · Chaco (1) |
+| san miguel | Buenos Aires (9047) · Tucumán (23) |
+| san nicolas | Buenos Aires (56) · Santa Fe (2) |
+| san pedro | Jujuy (8) · Buenos Aires (54) · Salta (1) |
+| san vicente | Misiones (2) · Buenos Aires (2) |
+| santa ana | Misiones (1) · Córdoba (1) · Tucumán (2) |
+| santo tome | Santa Fe (9) · Corrientes (8) |
+| suipacha | Mendoza (1) · Buenos Aires (2) |
+| vila gobernador galvez | Entre Ríos (1) · Santa Fe (15) |
+| villa constitucion | Santa Fe (195) · Buenos Aires (3) |
+| villa union | La Rioja (10) · San Juan (2) |
 
 ## 5. Rutas con más pasajeros que asientos
 
@@ -150,8 +223,8 @@ Meses del foco con más de un operador:
 | anio | operadores | meses |
 |---|---|---|
 | 2011 | SOFSE · FERROBAIRES | 6 |
-| 2012 | FERROBAIRES · SOFSE | 10 |
-| 2014 | SOFSE · FERROBAIRES | 1 |
+| 2012 | SOFSE · FERROBAIRES | 10 |
+| 2014 | FERROBAIRES · SOFSE | 1 |
 | 2015 | SOFSE · FERROBAIRES | 8 |
 
 ## 9. EMTUR por medio de transporte contra los conteos
