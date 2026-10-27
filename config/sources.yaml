@@ -186,7 +186,8 @@ sources:
   mdp_portal_catalogo:
     kind: dkan_package
     base_url: https://datos.mardelplata.gob.ar
-    search_terms: [aeropuerto, turismo, vuelos, arribos]
+    search_terms: [aeropuerto, turismo, turista, vuelos, arribo, transporte, procedencia, origen,
+                   encuesta, perfil]
     datasets:
       - movimientos-del-aeropuerto-internacional-astor-piazzolla
       - pasajeros-del-aeropuerto-astor-piazzolla
@@ -194,6 +195,9 @@ sources:
       - vuelos-comerciales-pasajeros-por-tramo
       - vuelos-comerciales-vuelos-por-tramo
       - arribos-de-turistas
+      # EMTUR: turistas por medio de transporte (auto, ómnibus, avión, tren). El probe del
+      # 2026-10-24 no lo encontró porque buscaba "arribos"; lo señaló el usuario el 2026-10-27.
+      - arribo-de-turistas-por-medio-de-transporte
       - turismo-en-fines-de-semana-largo
       - turismo-estable-estadía-promedio
     resource_formats: [csv, xlsx, xls]
