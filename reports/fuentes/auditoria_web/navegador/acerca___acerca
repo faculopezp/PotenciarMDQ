@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+	<head>
+<meta name="sentry-trace" content="1f398bafc6cc43bb56afef1e2342a166-ccc31e29040c960b-1"/>
+<meta name="baggage" content="sentry-environment=production,sentry-release=78688783950b42fe95561d6a7a2b5979,sentry-public_key=2b0f8d068605d79a5cdb9e3f5ac0af06,sentry-trace_id=1f398bafc6cc43bb56afef1e2342a166,sentry-sample_rate=1,sentry-transaction=GET%20%2Facerca,sentry-sampled=true"/>
+<script >
+    const f = window.fetch;
+    if(f){
+      window._sentryFetchProxy = function(...a){return f(...a)}
+      window.fetch = function(...a){return window._sentryFetchProxy(...a)}
+    }
+</script>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="./favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+		<link rel="shortcut icon" href="./favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<link href="./_app/immutable/assets/0.nbuEj4wu.css" rel="stylesheet"><!--[--><meta name="description" content="Failbondi.fail es una página web homenaje a todos los vuelos atrasados y cancelados de la aerolinea argentina low-cost Flybondi."> <meta property="og:type" content="website"> <meta property="og:title" content="Acerca de - failbondi.fail"> <meta property="og:description" content="Failbondi.fail es una página web homenaje a todos los vuelos atrasados y cancelados de la aerolinea argentina low-cost Flybondi."> <meta property="og:url" content="https://failbondi.fail/acerca"> <meta property="og:image" content="https://failbondi.fail/_app/immutable/assets/twitter-card.DkCfErtj.png"> <meta name="twitter:card" content="summary_large_image"> <meta name="twitter:site" content="@esoesnulo"> <meta name="twitter:title" content="Acerca de - failbondi.fail"> <meta name="twitter:description" content="Failbondi.fail es una página web homenaje a todos los vuelos atrasados y cancelados de la aerolinea argentina low-cost Flybondi."> <meta name="twitter:url" content="https://failbondi.fail/acerca"> <meta name="twitter:image" content="https://failbondi.fail/_app/immutable/assets/twitter-card.DkCfErtj.png"><!--]--><title>Acerca de - failbondi.fail</title>
+	</head>
+
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!----><div class="min-h-screen bg-white dark:bg-neutral-900 dark:text-neutral-200"><!----><div class="prose prose-neutral dark:prose-invert max-w-[600px] mx-auto p-4"><h1>Acerca de Failbondi.fail</h1> <p>Failbondi.fail es una página web homenaje a todos los vuelos atrasados y cancelados de la aerolinea argentina low-cost Flybondi. Fue creada por <a href="https://nulo.lol" rel="nofollow">Nulo Science Inc.™</a>, la empresa lider en shitposts políticos de alta calidad.</p> <h2>¿De dónde salen los datos?</h2> <p>Los datos salen de la página web de estados de vuelos de <a href="https://www.aeropuertosargentina.com/es/AEP" rel="nofollow">Aeropuertos Argentina</a>, ya que administran la mayoría de los aeropuertos en Argentina. Alguna información complementaria, como la configuración de asientos de los aviones, es accedida de <a href="https://www.airfleets.es" rel="nofollow">Airfleets</a>.</p> <p>Podes descargar una copia de los datos en el endpoint <code>https://failbondi.fail/api/dump</code>, aunque no garantizamos la estabilidad del endpoint. Si te interesa tener una copia en algun otro formato, incluyendo una copia cruda de todas las respuestas de la API de Aeropuertos Argentinas, <a href="/cdn-cgi/l/email-protection#e78f888b86a789928b88c98b888b">contactanos</a>.</p> <p>Podes ver todo el código <a href="https://github.com/catdevnull/flybondi.fail" rel="nofollow">en GitHub</a>.</p> <h2>¿Quien financió esto?</h2> <p>Failbondi.fail es desarrollada en el tiempo libre de los empleados y colaboradores de Nulo Science Inc.™, con los fondos privados de la misma. Hasta la fecha, ninguna otra empresa u organización proveyó fondos ni recursos para el desarrollo de la página.</p> <h2>¿Donde te envio cartas de amor/amenazas de muerte/cartas documento?</h2> <p><a href="/cdn-cgi/l/email-protection#9ff7f0f3fedff1eaf3f0b1f3f0f3"><span class="__cf_email__" data-cfemail="dbb3b4b7ba9bb5aeb7b4f5b7b4b7">[email&#160;protected]</span></a></p></div> <footer class="mt-8 border-t border-neutral-200 px-4 py-6 text-sm text-neutral-600 dark:border-neutral-800 dark:text-neutral-400"><div class="mx-auto max-w-[1000px]"><p class="max-w-3xl text-xs leading-5">La marca Flybondi es de FB Líneas Aéreas S.A. Este sitio web no está afiliado, respaldado ni
+			patrocinado por FB Líneas Aéreas S.A. Todos los derechos asociados a la marca y su uso están
+			reservados a su propietario legítimo. El uso de la marca en este sitio es únicamente
+			informativo. No nos hacemos responsables de los errores que puedan haber en la información
+			presentada.</p> <div class="mt-5 grid grid-cols-1 gap-5 md:grid-cols-3"><nav class="flex flex-col gap-2" aria-label="Datos"><h2 class="font-medium text-neutral-900 dark:text-neutral-100">Datos</h2> <a href="/date/2026-10-27" class="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100">Ver vuelos de hoy</a> <a href="/" class="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100">Estado de Flybondi</a> <a href="/historico" class="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100">Histórico diario</a> <a href="/historico-meses" class="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100">Histórico mensual</a> <a href="/aeropuertos" class="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100">Por aeropuerto</a> <a href="/rutas" class="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100">Por ruta</a> <a href="/leaderboard" class="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100">Ranking de aerolíneas</a></nav> <nav class="flex flex-col gap-2" aria-label="Información"><h2 class="font-medium text-neutral-900 dark:text-neutral-100">Información</h2> <a href="/acerca" class="transition-colors text-neutral-900 dark:text-neutral-100 font-medium">Acerca del sitio y sus datos</a> <a href="https://github.com/catdevnull/flybondi.fail" class="hover:text-neutral-900 dark:hover:text-neutral-100">Código fuente</a></nav> <div class="flex flex-col gap-2"><h2 class="font-medium text-neutral-900 dark:text-neutral-100">Contacto</h2> <a href="https://x.com/esoesnulo" class="hover:text-neutral-900 dark:hover:text-neutral-100">@esoesnulo</a> <a href="/cdn-cgi/l/email-protection#395156555879574c555617555655" class="hover:text-neutral-900 dark:hover:text-neutral-100"><span class="__cf_email__" data-cfemail="2b4344474a6b455e474405474447">[email&#160;protected]</span></a> <p class="text-xs leading-5">Failbondi.fail es un experimento de <a href="https://nulo.lol" class="hover:text-neutral-900 dark:hover:text-neutral-100">Nulo Science Inc™</a>.</p></div></div></div></footer><!----><!----><!----></div> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0; height: 0;"><defs><symbol viewBox="0 0 576 512" id="fa6-solid-plane"><path fill="currentColor" d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64H365.7L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1h-56.2c-10.6 0-18.3-10.2-15.4-20.4l49-171.6H112l-43.2 57.6c-3 4-7.8 6.4-12.8 6.4H14c-7.8 0-14-6.3-14-14c0-1.3.2-2.6.5-3.9L32 256L.5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14h42c5 0 9.8 2.4 12.8 6.4L112 192h102.9l-49-171.6c-3-10.2 4.7-20.4 15.3-20.4h56.2c11.5 0 22.1 6.2 27.8 16.1L365.7 192z"></path></symbol><symbol viewBox="0 0 640 512" id="fa6-solid-plane-slash"><path fill="currentColor" d="M514.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64h-73.8l190.3 149.1c10.4 8.2 12.3 23.3 4.1 33.7s-23.3 12.3-33.7 4.1l-592-464C-1.2 34.7-3.1 19.6 5.1 9.2S28.4-3.1 38.8 5.1l199.3 156.2l-40.3-140.9C194.9 10.2 202.6 0 213.2 0h56.2c11.5 0 22.1 6.2 27.8 16.1L397.7 192zM41.5 128.7l321 252.9l-65.3 114.3c-5.7 10-16.3 16.1-27.8 16.1h-56.2c-10.6 0-18.3-10.2-15.4-20.4l49-171.6H144l-43.2 57.6c-3 4-7.8 6.4-12.8 6.4H46c-7.8 0-14-6.3-14-14c0-1.3.2-2.6.5-3.9L64 256L32.5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-6.2 4-11.4 9.5-13.3"></path></symbol><symbol viewBox="0 0 24 24" id="grommet-icons-info"><path fill="none" stroke="currentColor" stroke-width="2" d="M15 17c0-3 4-5 4-9s-3-7-7-7s-7 3-7 7s4 6 4 9v3q0 3 3 3t3-3zm-6 1h6"></path></symbol><symbol viewBox="0 0 24 24" id="lucide-plane-takeoff"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 22h20M6.36 17.4L4 17l-2-4l1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12L5 6l.9-.45a2 2 0 0 1 2.09.2l4.02 3a2 2 0 0 0 2.1.2l4.19-2.06a2.4 2.4 0 0 1 1.73-.17L21 7a1.4 1.4 0 0 1 .87 1.99l-.38.76c-.23.46-.6.84-1.07 1.08L7.58 17.2a2 2 0 0 1-1.22.18Z"></path></symbol></defs></svg><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+				{
+					__sveltekit_r23ae7 = {
+						base: new URL(".", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("./_app/immutable/entry/start.DlVELbDv.js"),
+						import("./_app/immutable/entry/app.Ddrg6ap6.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 3],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

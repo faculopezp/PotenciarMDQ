@@ -1,0 +1,1 @@
+import{h as s}from"../chunks/entry.Csn-TgBM.js";(function(){try{var e=typeof window<"u"?window:typeof global<"u"?global:typeof self<"u"?self:{},n=new e.Error().stack;n&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[n]="476b0235-9275-4570-92c2-96542e511ee7",e._sentryDebugIdIdentifier="sentry-dbid-476b0235-9275-4570-92c2-96542e511ee7")}catch{}})();export{s as start};
