@@ -569,6 +569,17 @@ def run_omnibus(db_path: Path = BD, out_dir: Path = REPORTS / "qa") -> Path:
               UNION ALL
               SELECT servicio, bus_clave(extremo_crudo), extremo_crudo FROM fct_bus_viaje)
         GROUP BY 1 HAVING count(DISTINCT extremo_crudo) > 1 ORDER BY 1"""),
+           "Localidades con más de una provincia en las bases (se toma la más frecuente):", "",
+           _table(con, """
+        SELECT bus_clave(extremo_crudo) AS clave,
+               string_agg(DISTINCT extremo_provincia || ' (' || n || ')', ' · ') AS provincias
+        FROM (SELECT extremo_crudo, extremo_provincia,
+                     count(*) OVER (PARTITION BY bus_clave(extremo_crudo),
+                                    lower(strip_accents(extremo_provincia))) AS n
+              FROM fct_bus_viaje)
+        GROUP BY 1
+        HAVING count(DISTINCT lower(strip_accents(extremo_provincia))) > 1
+        ORDER BY 1"""),
            "## 5. Rutas con más pasajeros que asientos", "",
            "Pasa en servicios largos con paradas: el archivo no dice si cuenta pasajeros por tramo. "
            "La ocupación por ruta no se publica; la total se informa con esta salvedad.", "",

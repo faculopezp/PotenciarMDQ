@@ -119,11 +119,22 @@ WITH nombres AS (
   SELECT extremo_crudo AS nombre, NULL AS provincia FROM fct_bus_ruta_anual_publicada
   UNION ALL
   SELECT extremo_crudo, extremo_provincia FROM fct_bus_viaje
+),
+-- Provincia: la más frecuente para esa localidad (una fila mal cargada no la cambia); entre las
+-- escrituras de esa provincia, la que tiene tildes.
+prov AS (
+  SELECT bus_clave(nombre) AS clave, lower(strip_accents(provincia)) AS k, count(*) AS n,
+         max_by(provincia, (provincia <> strip_accents(provincia))::INT) AS provincia
+  FROM nombres WHERE provincia IS NOT NULL
+  GROUP BY ALL
 )
-SELECT bus_clave(nombre)                                                     AS clave,
-       replace(replace(max_by(nombre, (nombre <> strip_accents(nombre))::INT), ' De ', ' de '),
+, provincia_clave AS (
+  SELECT clave, replace(arg_max(provincia, n), ' De ', ' de ') AS provincia FROM prov GROUP BY 1
+)
+SELECT bus_clave(n.nombre)                                                   AS clave,
+       replace(replace(max_by(n.nombre, (n.nombre <> strip_accents(n.nombre))::INT), ' De ', ' de '),
                ' Del ', ' del ')                                             AS nombre,
-       replace(max_by(provincia, (provincia <> strip_accents(provincia))::INT)
-               FILTER (WHERE provincia IS NOT NULL), ' De ', ' de ')         AS provincia
-FROM nombres
+       any_value(pc.provincia)                                               AS provincia
+FROM nombres n
+LEFT JOIN provincia_clave pc ON pc.clave = bus_clave(n.nombre)
 GROUP BY 1;

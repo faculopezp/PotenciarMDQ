@@ -181,10 +181,18 @@ const rango = (servicio) => {
 
 ### Ruta por ruta, ${anioRef}
 
+<p class="leyenda">Superavitaria: llegaron más pasajeros de los que salieron hacia esa localidad en el año (la ciudad "gana" gente por esa ruta); deficitaria, al revés; pareja, diferencia menor al 5 %.</p>
+
 ```js
-html`<table class="editorial"><thead><tr><th>Localidad</th><th>Provincia</th><th>Llegaron</th><th>Salieron</th><th>Viajes</th><th>Regular</th><th>Turismo</th></tr></thead><tbody>
-${top.slice(0, 30).map((d) => html`<tr><td>${d.extremo}</td><td>${d.provincia ?? "—"}</td><td>${entero(d.llegada)}</td><td>${entero(d.salida)}</td><td>${entero(d.viajes)}</td><td>${entero(d.regular)}</td><td>${entero(d.turismo)}</td></tr>`)}
-</tbody></table>`
+// Saldo de la ruta: llegaron − salieron. Superavitaria = llegan más de los que se van (±5 % = pareja).
+const balance = (d) => {
+  const r = d.salida ? d.llegada / d.salida - 1 : Infinity;
+  return Math.abs(r) < 0.05 ? {txt: "Pareja", color: TINTA_2} : r > 0 ? {txt: "Superavitaria", color: ACENTO} : {txt: "Deficitaria", color: TINTA};
+};
+const signo = (v) => (v > 0 ? "+" : v < 0 ? "−" : "") + entero(Math.abs(v));
+display(html`<table class="editorial"><thead><tr><th>Localidad</th><th>Provincia</th><th>Llegaron</th><th>Salieron</th><th>Saldo</th><th>Balance</th><th>Viajes</th><th>Regular</th><th>Turismo</th></tr></thead><tbody>
+${top.slice(0, 30).map((d) => { const b = balance(d); return html`<tr><td>${d.extremo}</td><td>${d.provincia ?? "—"}</td><td>${entero(d.llegada)}</td><td>${entero(d.salida)}</td><td>${signo(d.llegada - d.salida)}</td><td style=${`color:${b.color};font-weight:600`}>${b.txt}</td><td>${entero(d.viajes)}</td><td>${entero(d.regular)}</td><td>${entero(d.turismo)}</td></tr>`; })}
+</tbody></table>`);
 ```
 
 <div class="leyenda-grid">
