@@ -26,7 +26,7 @@ title: Metodología y fuentes
 | Cabinas por aerolínea y modelo | Comunicados y prensa especializada, con fuente por fila (`config/cabinas.yaml`) | — |
 | Aeronaves del Estado | Formato de identificación de cada fuerza e identificaciones públicas por serie (`config/estatales.yaml`) | — |
 | Micros de media y larga distancia: pasajeros, asientos y viajes por ruta y año; cada servicio de turismo con fecha | CNRT vía Yvera, Ministerio de Turismo — "Conectividad terrestre interurbana" | 2019 → 2024 (Yvera no actualiza desde diciembre de 2024) |
-| Tren: pasajeros pagos por mes y servicio | CNRT — planilla de pasajeros de larga distancia, regionales y turísticos | 2007 → hoy, mensual |
+| Tren: pasajeros pagos por mes y servicio | CNRT — planilla de pasajeros de larga distancia, regionales y turísticos | 2008 → hoy, mensual |
 | Turistas por medio de transporte (auto, ómnibus, tren, avión) y por región de procedencia | EMTUR vía datos.mardelplata.gob.ar ("Arribo de turistas por medio de transporte", "Procedencia de turistas") | 2013–2025 y 2007–2024, mensual |
 | Medio de transporte y región de origen de los turistas residentes | Yvera, Ministerio de Turismo — Encuesta de Viajes y Turismo de los Hogares (EVyTH), microdatos | 2012 → 2024 (trimestral) |
 | Tránsito de autos hacia la costa | AUBASA, cifras comunicadas a la prensa con período exacto (`config/autos.yaml`) | puntual |
@@ -94,6 +94,19 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 | Peso en la red | PageRank de la red de vuelos de cabotaje reconstruidos | — |
 | Avión típico | Familia con más movimientos por segmento; "capacidad observada" = p95 de pasajeros de ese modelo en ese segmento en todo el país | En aviación general es pasajeros llevados, no asientos |
 
+## Disponibilidad de datos
+
+Qué hay, qué falta y quién lo tiene. "Pedido de acceso" = solicitud de acceso a la información pública (Ley 27.275 para organismos nacionales; en la Provincia y el Municipio, sus propios regímenes de acceso).
+
+| Vía | Lo que tenemos | Lo que falta | Quién lo tiene / debería publicarlo |
+|---|---|---|---|
+| **Avión** | Cada aterrizaje y despegue desde 2019 (ANAC); asientos por vuelo (Yvera); serie municipal 2001–2020 | Operador y avión de vuelos privados, escuelas y oficiales 2019–2025 (sin matrícula); horarios programados (puntualidad, cancelaciones); tarifas | ANAC (matrícula histórica, pedido de acceso); Aeropuertos Argentina (horarios programados); las aerolíneas (tarifas) |
+| **Ómnibus** | Cada viaje de larga distancia con pasajeros y asientos, regular y turismo, 2019–nov 2024 (CNRT vía Yvera) | Datos desde diciembre de 2024 (Yvera dejó de actualizar); servicios provinciales (no son de la CNRT); pasajeros reales por tramo (hay rutas con más pasajeros que asientos) | Ministerio de Turismo / CNRT (actualizar el conjunto); Provincia de Buenos Aires (servicios provinciales); Terminal de Ómnibus de Mar del Plata (arribos por andén) |
+| **Tren** | Pasajeros pagos por mes y servicio desde 2008 (CNRT) | Subidas y bajadas por estación y por sentido (hoy es el servicio entero, ida y vuelta) | Trenes Argentinos (SOFSE) / CNRT |
+| **Auto** | Estimación mensual del EMTUR desde 2013; cifras de AUBASA comunicadas a la prensa; tránsito medio diario anual de la Ruta 226 (Vialidad Nacional) | Conteos por cabina de peaje, día y sentido en las rutas 2 y 11; el método con que el EMTUR estima el auto | AUBASA y Ministerio de Infraestructura de la Provincia (conteos, pedido de acceso); EMTUR (método) |
+| **Cruceros** | Registro armado con notas de prensa, con fuente por fila | Cualquier serie oficial: la de cruceros de Yvera/Migraciones cubre solo Buenos Aires, Puerto Madryn y Ushuaia | Dirección Nacional de Migraciones (entradas por el puerto de Mar del Plata, pedido de acceso); Consorcio Portuario Regional de Mar del Plata (recaladas y pasajeros) |
+| **Turistas** | Total mensual, reparto por vía (desde 2013) y procedencia por región (desde 2007) del EMTUR; encuesta de hogares EVyTH (Ministerio de Turismo) | Abril–noviembre de 2020; procedencia de algunos meses (2014, 2019–2021); la base de cálculo detrás de cada cifra | EMTUR (Municipio de General Pueyrredon) |
+
 <div class="met-grid">
 <div>
 
@@ -120,7 +133,7 @@ ${cob.filter((d) => d.alcance === "todos").map((t) => {
 - Puntualidad y cancelaciones (no hay horarios programados).
 - Operador y avión de privados, escuelas y vuelos oficiales 2019–2025: la ANAC publica la matrícula recién desde 2026 y sin matrícula no hay cruce posible.
 - Tarifas.
-- Origen de los turistas (los pasajeros no tienen nacionalidad ni residencia en este dataset).
+- Origen de los pasajeros aéreos (el dataset de la ANAC no trae nacionalidad ni residencia; la procedencia del EMTUR es de todos los turistas, no por vía).
 
 
 ## Colores
