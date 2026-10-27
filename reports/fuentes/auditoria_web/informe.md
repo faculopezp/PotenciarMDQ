@@ -1,42 +1,22 @@
 # Auditoría web
 
-Semillas: https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte
+Semillas: https://catalogo.datos.gba.gob.ar/
 Hosts: none
 
-## https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte
+## https://catalogo.datos.gba.gob.ar/
 
-- HTTP 200 · `text/html; charset=utf-8` · 50,215 bytes
-- Título: Arribo de Turistas por Medio de Transporte | Datos Mar del Plata
-- Guardado: `datos.mardelplata.gob.ar/index__q=dataset_arribo-de-turistas-por-medio-de-transporte.html`
-- **Formulario** POST `https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte`
-  - `input` name=`search` id=`edit-search` type=`text` value=`` opciones=[]
-  - `input` name=`op` id=`edit-submit` type=`submit` value=`` opciones=[]
-  - `input` name=`form_build_id` id=`None` type=`hidden` value=`form-RM6czUGacDWWyWzKPS-uxYtKrqnt-ZSS7AgYfMM4K0Y` opciones=[]
-  - `input` name=`form_id` id=`None` type=`hidden` value=`dkan_sitewide_dataset_search_form` opciones=[]
-- script: https://datos.mardelplata.gob.ar/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js
-- script: https://datos.mardelplata.gob.ar/sites/default/files/js/js_0XZACGAWOXNBhziKLno49B6bgpWGR56bkTGlyj-Z9ms.js
-- script: https://datos.mardelplata.gob.ar/sites/default/files/js/js_25bvMzABc643C2RtgT3od2Hhzqq3MLLVzA6KVX1-QAE.js
-- script: https://datos.mardelplata.gob.ar/sites/default/files/js/js_29qYXJz8NLGg8Aomg-RZPjJcj9yEdEst1BMZ9gZbs-4.js
-- script: https://datos.mardelplata.gob.ar/sites/default/files/js/js_gPM6NXOQjN2XM2JWQGfy07nKmcdDFrL289YA7h80ySs.js
-- script: https://datos.mardelplata.gob.ar/sites/default/files/js/js_nX4BRFuQbSxibMtQuvp9YjLG4g_VFcwE6oJjfcFlKZk.js
-- script: https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js
-- script: https://www.googletagmanager.com/gtag/js?id=G-60TLN1L6K4
+- HTTP 200 · `text/html; charset=utf-8` · 24,122 bytes
+- Título: Datos Abiertos PBA
+- Guardado: `catalogo.datos.gba.gob.ar/index.html`
+- **Formulario** GET `https://catalogo.datos.gba.gob.ar/dataset`
+  - `input` name=`q` id=`None` type=`text` value=`` opciones=[]
+- script: https://catalogo.datos.gba.gob.ar/fanstatic/base/:version:2019-12-02T16:58:12/:bundle:plugins/jquery.inherit.min.js;plugins/jquery.proxy-all.min.js;plugins/jquery.url-helpers.min.js;plugins/jquery.date-helpers.min.js;plugins/jquery.slug.min.js;plugins/jquery.slug-preview.min.js;plugins/jquery.truncator.min.js;plugins/jquery.masonry.min.js;plugins/jquery.form-warning.min.js;sandbox.min.js;module.min.js;pubsub.min.js;client.min.js;notify.min.js;i18n.min.js;main.min.js;modules/select-switch.min.js;modules/slug-preview.min.js;modules/basic-form.min.js;modules/confirm-action.min.js;modules/api-info.min.js;modules/autocomplete.min.js;modules/custom-fields.min.js;modules/data-viewer.min.js;modules/table-selectable-rows.min.js;modules/resource-form.min.js;modules/resource-upload-field.min.js;modules/resource-reorder.min.js;modules/resource-view-reorder.min.js;modules/follow.min.js;modules/activity-stream.min.js;modules/dashboard.min.js;modules/resource-view-embed.min.js;view-filters.min.js;modules/resource-view-filters-form.min.js;modules/resource-view-filters.min.js;modules/table-toggle-more.min.js;modules/dataset-visibility.min.js;modules/media-grid.min.js;modules/image-upload.min.js
+- script: https://catalogo.datos.gba.gob.ar/fanstatic/ckanext-googleanalytics/:version:2019-12-02T16:58:24/googleanalytics_event_tracking.js
+- script: https://catalogo.datos.gba.gob.ar/fanstatic/gobar_js/:version:2019-12-02T17:16:31/:bundle:background_ie.js;console_message.js;header.js;replace_svg.js;forms/custom_popup.js;home/groups.js;libs/BootstrapMenu.js;libs/bootstrap_scripts.js;libs/clamp.js
+- script: https://catalogo.datos.gba.gob.ar/fanstatic/vendor/:version:2019-12-02T16:58:12/:bundle:bootstrap/js/bootstrap.min.js;jed.min.js;moment-with-locales.js;select2/select2.min.js
+- script: https://catalogo.datos.gba.gob.ar/fanstatic/vendor/:version:2019-12-02T16:58:12/jquery.min.js
 - Rutas mencionadas en el HTML:
-  - `https://storage.mardelplata.gov.ar/index.php/s/BsA2RWNjjk6Lxon/download/footer%20datos-abiertos.jpg`
+  - `https://catalogo.datos.gba.gob.ar/catalog.jsonld`
 
 ## Archivos enlazados
 
-- https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2019.csv — HTTP 200 · `text/csv` · 479 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2020.csv — HTTP 200 · `text/csv` · 312 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2021.csv — HTTP 200 · `text/csv` · 459 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2022.csv — HTTP 200 · `text/csv` · 474 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2023.csv — HTTP 200 · `text/csv` · 474 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2024.csv — HTTP 200 · `text/csv` · 473 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/Arribo-de-Turistas-por-Medio-de-Transporte-2025.csv — HTTP 200 · `text/csv` · 474 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2013.csv — HTTP 200 · `text/csv` · 558 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2014.csv — HTTP 200 · `text/csv` · 557 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2015.csv — HTTP 200 · `text/csv` · 539 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2016.csv — HTTP 200 · `text/csv` · 487 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2017.csv — HTTP 200 · `text/csv` · 526 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://datos.mardelplata.gob.ar/sites/default/files/arribos-medio-transporte-2018.csv — HTTP 200 · `text/csv` · 573 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
-- https://www.mardelplata.gob.ar/documentos/estadisticas/informe%20anuario%202018.pdf — HTTP 200 · `application/pdf` · 1702432 bytes (en https://datos.mardelplata.gob.ar/?q=dataset/arribo-de-turistas-por-medio-de-transporte)
