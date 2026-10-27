@@ -668,8 +668,8 @@ Cafayate                                           | 2,037
 Sierras                                            | 2,018
 Campo Quijano                                      | 2,010
 Tolhuin                                            | 1,960
-Villa Sanagasta                                    | 1,958
 San Clemente del Tuyú                             | 1,958
+Villa Sanagasta                                    | 1,958
 ```
 
 #### `cantidad_destinos` (top 60)
@@ -685,8 +685,8 @@ San Clemente del Tuyú                             | 1,958
 9 | 76
 8 | 63
 11 | 4
-10 | 4
 15 | 4
+10 | 4
 ```
 
 #### `multidestino` (top 60)
