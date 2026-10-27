@@ -16,9 +16,17 @@ on:
       hosts:
         description: Hosts donde seguir enlaces (coma)
         default: transito.vialidad.gob.ar
-      capturar:
-        description: URL a abrir con navegador para registrar sus pedidos (XHR/fetch)
-        default: https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html
+      navegador:
+        description: URLs a abrir con navegador (pedidos de red, DOM, menú y consulta de prueba)
+        default: >-
+          https://transito.vialidad.gob.ar/SelCE_WEB/intro.html
+          https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html
+      menu:
+        description: Ítems del menú a cliquear (coma)
+        default: TMDA,Temporales,Interanuales,SEGMENTACIÓN,CLASIFICACIÓN
+      valor:
+        description: Valor para la consulta de prueba (ruta)
+        default: "0226"
 
 permissions:
   contents: write
@@ -38,8 +46,10 @@ jobs:
         run: uv run python scripts/auditar_web.py ${{ inputs.urls }} --hosts "${{ inputs.hosts }}"
         continue-on-error: true
 
-      - name: Pedidos de red con navegador
-        run: uv run python scripts/capture_network.py "${{ inputs.capturar }}"
+      - name: Auditoría con navegador
+        run: >-
+          uv run python scripts/auditar_navegador.py ${{ inputs.navegador }}
+          --menu "${{ inputs.menu }}" --valor "${{ inputs.valor }}"
         continue-on-error: true
 
       - name: Commit del informe
@@ -47,10 +57,9 @@ jobs:
           git config user.name "potenciar-mdq-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p reports/fuentes/auditoria_web
-          mv reports/network_*.json reports/fuentes/auditoria_web/ 2>/dev/null || true
           git add reports/fuentes/auditoria_web
           git diff --cached --quiet && { echo "Sin cambios"; exit 0; }
-          git commit -m "auditoría web: ${{ inputs.capturar }}"
+          git commit -m "auditoría web: ${{ inputs.navegador }}"
           subido=false
           for i in 1 2 3; do
             if git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push; then subido=true; break; fi
