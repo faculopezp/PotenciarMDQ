@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="es"><!--<![endif]--><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Clasificaciones extendidas | Vialidad Nacional</title>
+	<meta name="description" content="Base de html y css para la creación de sitios pertenecientes a la Administración Pública Nacional de la República Argentina.">
+	<meta name="author" content="Presidencia de la Nación">
+	<link rel="shortcut icon" href="layout/poncho/img/favicon.ico">
+
+	<!-- Nav and address bar color -->
+	<meta name="theme-color" content="#0072b8">
+	<meta name="msapplication-navbutton-color" content="#0072b8">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#0072b8">
+
+  <meta property="og:site_name" content="Documentación Poncho">
+	<meta property="og:url" content="http://argob.github.io/poncho/patrones/formularios/como_disenar.html">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Cómo diseñar formularios">
+	<meta property="og:description" content="Base de html y css para la creación de sitios pertenecientes a la Administración Pública Nacional de la República Argentina.">
+	<meta property="og:image" content="http://argob.github.io/poncho/img/poncho_social.jpg">
+	<meta property="og:locale" content="es_AR">
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Cómo diseñar formularios">
+	<meta name="twitter:description" content="Base de html y css para la creación de sitios pertenecientes a la Administración Pública Nacional de la República Argentina.">
+	<meta name="twitter:image" content="http://argob.github.io/poncho/img/poncho_social.jpg">
+
+  <link href="layout/poncho/dist/css/roboto-fontface.css" rel="stylesheet">
+  <!-- <link href="/poncho/node_modules/argob-poncho/dist/css/droid-serif.css" rel="stylesheet"> -->
+  <link href="layout/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="layout/fontawesome/css/all.min.css" rel="stylesheet">
+  <link href="layout/poncho/dist/css/poncho.css" rel="stylesheet">
+  <link href="layout/poncho/dist/css/docs.css" rel="stylesheet">
+  <link href="layout/poncho/dist/css/prism.css" rel="stylesheet">
+
+  <link href="https://id.argentina.gob.ar/static/css/chosen/chosen.css" rel="stylesheet">
+  <link href="../../css/argentina.css" rel="stylesheet">
+  <link href="https://www.argentina.gob.ar/sites/default/files/css/css_Ps9-OBRN7HporQYTFlUHQ3dOUxkPLFaWo3JP9-kISkQ.css" rel="stylesheet">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="http://poncheado.herokuapp.com/node_modules/html5shiv/html5shiv.js"></script>
+      <script src="http://poncheado.herokuapp.com/node_modules/respond.js/respond.min.js"></script>
+      <![endif]-->  
+
+
+ <script src="layout/jquery/jquery-3.3.1.min.js"></script>
+    <script src="layout/bootstrap/js/bootstrap.min.js"></script>
+    <script src="layout/poncho/js/prism.js"></script>
+  
+  <script src="https://id.argentina.gob.ar/static/js/chosen.jquery.js"></script>
+  <script src="layout/poncho/js/scripts.js"></script>
+  </head>
+  
+    
+  <body>
+  	<header>
+
+
+  		<nav class="navbar navbar-top navbar-default" role="navigation">
+    <div class="container">
+      <div>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="https://www.argentina.gob.ar/transporte/vialidad-nacional" class="navbar-brand">
+            <img alt="DNV" src="img/LOGO-FINAL-VN-00.png" height="65">
+            <h1></h1>
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="main-navbar-collapse" data-seccion="5"><ul class="nav navbar-nav navbar-right">
+	<li><a data-seccion="1" href="#" onclick="menu('index')">Inicio</a></li>
+	<li><a data-seccion="2" href="#" onclick="menu('tmda')">TMDA</a></li>
+	<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Variaciones <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" onclick="menu('variaciones_temporales')">Temporales</a></li>
+            <li><a href="#" onclick="menu('variaciones_interanuales')">Interanuales</a></li>
+          </ul>
+        </li>
+	<li><a data-seccion="4" href="#" onclick="menu('segmentacion')">Segmentación</a></li>
+	<li class="active"><a data-seccion="5" href="#" onclick="menu('clasificacion')">Clasificación</a></li>
+</ul>
+
+<script>
+	function menu(seleccionado) {
+      var _url;
+      
+      //name="tmda_anual" : de la pagina de cada tmda anual.-
+		if ( $('div[name="tmda_anual"]').length > 0)
+      	_url = '../../'+seleccionado+'.html';
+      else _url = seleccionado+'.html';
+      
+		location.href = _url;
+	}
+
+</script></div>
+      </div>
+    </div>
+  </nav>
+
+  	</header>
+
+<div class="jumbotron bg-primary">
+  <div class="container">
+  <div class="col-sm-12">
+      <ol class="breadcrumb">
+        <li><a href="index.html">Inicio</a></li>
+        <li class="active">Clasificación</li>
+      </ol>
+      <div class="jumbotron_body p-t-2 p-b-2">
+      <h3>Clasificación extendida por ejes <!-- span class="badge">Alpha</span--></h3>
+      </div>
+  </div>
+  </div>
+</div>
+  	<main role="main">
+  	<div class="container">
+      
+      <div class="row">
+     
+      <div class="col-sm-12">
+
+        <section>
+          <article class="row">
+            <div class="col-sm-12">
+<h1>Clasificación extendida por ejes</h1>
+
+<p>Esta consulta brinda información sobre el <b>tipo de vehículos</b> que circulan por la Red Nacional de Caminos, clasificándolos en <b>12 categorías.</b></p>
+
+<hr>
+
+<fieldset>
+
+<h3>Sobre la consulta</h3>
+
+<ul>
+<li>La solicitud de los datos se realiza entre <b>progresivas</b> de una <b>Ruta</b> para un <b>período</b> definido. 
+Seleccionada la ruta, el sistema indica sus progresivas extremas que sirven de guía para indicar 
+la <b>sección</b> requerida. El período se define seleccionando el año de inicio y se extiende hasta el 
+último año disponible.</li>
+
+<li>El resultado agrupa la <b>clasificación</b> expresada en porcentaje, por <b>año</b> 
+(a solicitud del usuario desde el año 2004 y hasta el 2017) y <b>mes</b> para aquellos <b>tramos</b> de tránsito 
+homogéneo que comprenden la <b>sección</b>. Además, se indica en horas la duración del censo y el volumen 
+medio diario medido <b>(TMD)</b>. La visualización de la información se limita a 25 registros por consulta.</li>
+</ul>
+
+<hr>
+<div id="clasificacion_consultas"><style> .load, .loadII, .error { display: none; } </style><script type="text/javascript" src="librerias/date.js"></script><script type="text/javascript" src="librerias/jquery.datePicker.js"></script><script src="js/script_f.js" type="text/javascript" charset="utf-8"></script><script language="JavaScript" type="text/javascript">function isInteger(s){var i;for (i = 0; i < s.length; i++){  var c = s.charAt(i); if (((c < "0") || (c > "9"))) return false; }  return true;}
+function stripCharsInBag(s, bag){	var i;    var retString = "";         var c = s.charAt(i);        if (bag.indexOf(c) == -1) retString += c; return retString;}
+function daysInFebruary (year){	return (((year % 4 == 0) && ( (!(year % 100 == 0)) || (year % 400 == 0))) ? 29 : 28 );}
+function DaysArray(n) {for (var i = 1; i <= n; i++) {this[i] = 31;		if (i==4 || i==6 || i==9 || i==11) {this[i] = 30;} if (i==2) {this[i] = 29;}} return this;}
+function isDate(dtStr){var formatDate = /^(\d{2})(\/)(\d{2})\2(\d{4})$/;var matchArray = dtStr.match(formatDate);if (matchArray == null) return false; var dtCh= "/";	var minYear=2004;	var maxYear=2008;	var daysInMonth = DaysArray(12);var pos1=dtStr.indexOf(dtCh);	var pos2=dtStr.indexOf(dtCh,pos1+1);var strDay=dtStr.substring(0,pos1);	var strMonth=dtStr.substring(pos1+1,pos2);var strYear=dtStr.substring(pos2+1);	strYr=strYear; if (strDay.charAt(0)=="0" && strDay.length>1) strDay=strDay.substring(1); if (strMonth.charAt(0)=="0" && strMonth.length>1) strMonth=strMonth.substring(1);	for (var i = 1; i <= 3; i++) {		if (strYr.charAt(0)=="0" && strYr.length>1) strYr=strYr.substring(1);}	month=parseInt(strMonth);	day=parseInt(strDay);	year=parseInt(strYr);	if (pos1==-1 || pos2==-1)	return false;if (strMonth.length<1 || month<1 || month>12) return false;	if (strDay.length<1 || day<1 || day>31 || (month==2 && day>daysInFebruary(year)) || day > daysInMonth[month])return false; if (strYear.length != 4 || year==0 || year<minYear || year>maxYear)	return false;	if (dtStr.indexOf(dtCh,pos2+1)!=-1 || isInteger(stripCharsInBag(dtStr, dtCh))==false) return false; return true;}
+function vacio(strString) {if (strString.length == 0) return true; for(var i = 0; i<strString.length; i++){ ch = strString.charAt(i); if (ch != ' ' && ch != '	') return false;}return true;} function nuevoAjax(){	var xmlhttp=false; 
+	try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+	} catch (e) {	try {			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); 
+		} catch (E) {	xmlhttp = false; 	
+	}  	}	if (!xmlhttp && typeof XMLHttpRequest!='undefined') { 		xmlhttp = new XMLHttpRequest();	
+}	return xmlhttp;
+}function update() {	var contenedor = document.getElementById('p');
+  var ruta = document.getElementById('ruta').options[document.getElementById('ruta').selectedIndex].text;
+ $('.error').hide();ajax=nuevoAjax();
+ajax.open("POST", "ClasificacionExtendida",true);
+	ajax.onreadystatechange=function() 
+{	if (ajax.readyState==1) { $('.loadII').show();$('.error').hide();} if (ajax.readyState==4) 
+{		
+ contenedor.innerHTML = ajax.responseText ; $('.btn_entrar').css('cursor','pointer');
+  }
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("ajax=true&Ruta="+ruta);
+}function consulta(){  $('.error').hide(); $('#spanConsultar').addClass('state-loading');var isIE = (window.navigator.userAgent.indexOf('MSIE')> 0);
+ if (! isIE){
+ HTMLElement.prototype.__defineGetter__('innerText',function () { return(this.textContent); });
+ HTMLElement.prototype.__defineSetter__('innerText',function (txt) { this.textContent = txt; });}
+$('.error').hide();var contenedor = document.getElementById('p');
+ var ruta = document.getElementById('ruta').options[document.getElementById('ruta').selectedIndex].text;
+ var progresivaI = document.getElementById('progresivaI').value;
+ var progresivaF = document.getElementById('progresivaF').value;
+  var pini = document.getElementById('progresivaI').placeholder; pini = pini.split(': '); pini = pini[1]; var pfin = document.getElementById('progresivaF').placeholder; pfin = pfin.split(': '); pfin = pfin[1];var anoi = document.getElementById('anoI').value;if(vacio(progresivaI) || vacio(progresivaF)  ){ $('#spanConsultar').removeClass('state-loading'); $('.e3').show(); return;} if(!isInteger(progresivaI) || !isInteger(progresivaF)){ $('#spanConsultar').removeClass('state-loading'); $('.e2').show(); return;} if(! (parseInt(pini)<= parseInt(progresivaI) && parseInt(progresivaI)<=parseInt(pfin) && parseInt(pini)<=parseInt(progresivaF) && parseInt(progresivaF)<= parseInt(pfin)))  { $('#spanConsultar').removeClass('state-loading'); $('.e1').show(); return;} ajax=nuevoAjax();
+	ajax.open("POST", "ClasificacionExtendida",true);
+	ajax.onreadystatechange=function() 
+{	if (ajax.readyState==1) { $('#spanConsultar').removeClass('state-loading'); $('.error').hide();	}
+ if (ajax.readyState==4) 
+{		
+ contenedor.innerHTML = ajax.responseText ;
+	 	}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("ajax=true&Ruta="+ruta+"&ProgresivaI="+progresivaI+"&ProgresivaF="+progresivaF+"&AnoI="+anoi);
+}</script>
+<div id="p">
+<h3> Realizar consulta</h3><hr><div class="row"><div class="col-sm-4"><h5 class="m-t-2">Seleccione Ruta: </h5><div class="form-group"><select id="ruta" name="ruta" onchange="javascript:update();" class="form-control">
+<option>0001</option>
+<option>0003</option>
+<option>0005</option>
+<option>0007</option>
+<option>0008</option>
+<option>0009</option>
+<option>0011</option>
+<option>0012</option>
+<option>0014</option>
+<option>0016</option>
+<option>0018</option>
+<option>0019</option>
+<option>0020</option>
+<option>0022</option>
+<option>0023</option>
+<option>0025</option>
+<option>0026</option>
+<option>0033</option>
+<option>0034</option>
+<option>0035</option>
+<option>0036</option>
+<option>0038</option>
+<option>0040</option>
+<option>0050</option>
+<option>0051</option>
+<option>0052</option>
+<option>0060</option>
+<option>0064</option>
+<option>0065</option>
+<option>0066</option>
+<option>0068</option>
+<option>0073</option>
+<option>0074</option>
+<option>0075</option>
+<option>0076</option>
+<option>0077</option>
+<option>0078</option>
+<option>0079</option>
+<option>0081</option>
+<option>0086</option>
+<option>0089</option>
+<option>0095</option>
+<option>0098</option>
+<option>009C</option>
+<option>0101</option>
+<option>0102</option>
+<option>0105</option>
+<option>0117</option>
+<option>0118</option>
+<option>0119</option>
+<option>0120</option>
+<option>0121</option>
+<option>0122</option>
+<option>0123</option>
+<option>0127</option>
+<option>0130</option>
+<option>0131</option>
+<option>0135</option>
+<option>0136</option>
+<option>0141</option>
+<option>0142</option>
+<option>0143</option>
+<option>0144</option>
+<option>0145</option>
+<option>0146</option>
+<option>0147</option>
+<option>0148</option>
+<option>0149</option>
+<option>0150</option>
+<option>0151</option>
+<option>0152</option>
+<option>0153</option>
+<option>0154</option>
+<option>0157</option>
+<option>0158</option>
+<option>0168</option>
+<option>0173</option>
+<option>0174</option>
+<option>0175</option>
+<option>0177</option>
+<option>0178</option>
+<option>0188</option>
+<option>0193</option>
+<option>01V3</option>
+<option>0202</option>
+<option>0205</option>
+<option>0226</option>
+<option>0228</option>
+<option>0229</option>
+<option>0231</option>
+<option>0232</option>
+<option>0234</option>
+<option>0237</option>
+<option>0242</option>
+<option>0249</option>
+<option>0250</option>
+<option>0251</option>
+<option>0252</option>
+<option>0259</option>
+<option>0260</option>
+<option>0281</option>
+<option>0288</option>
+<option>0293</option>
+<option>040N</option>
+<option>040S</option>
+<option>1S40</option>
+<option>1V03</option>
+<option>1V08</option>
+<option>1V09</option>
+<option>1V11</option>
+<option>1V12</option>
+<option>1V22</option>
+<option>1V38</option>
+<option>1V40</option>
+<option>1V66</option>
+<option>205V</option>
+<option>24CA</option>
+<option>24CB</option>
+<option>24CI</option>
+<option>24CJ</option>
+<option>24CK</option>
+<option>2S40</option>
+<option>2V03</option>
+<option>2V09</option>
+<option>3S40</option>
+<option>3V09</option>
+<option>A001</option>
+<option>A002</option>
+<option>A003</option>
+<option>A004</option>
+<option>A005</option>
+<option>A006</option>
+<option>A007</option>
+<option>A008</option>
+<option>A009</option>
+<option>A010</option>
+<option>A011</option>
+<option>A012</option>
+<option>A013</option>
+<option>A014</option>
+<option>A015</option>
+<option>A016</option>
+<option>A017</option>
+<option>A019</option>
+<option>A01P</option>
+<option>A022</option>
+<option>A023</option>
+<option>A024</option>
+<option>A025</option>
+<option>A026</option>
+<option>V007</option>
+<option>V034</option>
+<option>V143</option>
+<option>V146</option>
+<option>V205</option>
+</select></div></div></div><hr><div class="estados"><span class="loadII">Procesando <img src="img/load.gif" alt="cargando"></span></div></div>
+</div>
+
+</fieldset>
+
+            </div>
+          </article>
+          </section>
+
+
+                
+      </div>
+    </div>
+
+      </div>
+
+  			
+  		</main>
+  		<footer class="main-footer" id="footer-web"><!--footer class="main-footer" id="footer-web"-->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6"> 
+            <section class="block block-block clearfix"> 
+              <img class="image-responsive" src="img/logo_argentina-azul.svg" alt="Argentina.gob.ar - Presidencia de la Nación">
+                <p class="text-muted small"> Los contenidos de Argentina.gob.ar están licenciados bajo <a href="https://creativecommons.org/licenses/by/2.5/ar/" target="_blank">Creative Commons Reconocimiento 2.5 Argentina License</a>
+                </p> 
+            </section> 
+            <a href="/sugerencias-b?url_refence=node/99485" class=" active hidden">
+              <p class="btn btn-primary m-t-1">¿Querés hacernos una sugerencia?</p> 
+            </a>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="region region-footer2">
+              <section id="block-menu-menu-footer-2" class="block block-menu clearfix">
+                <ul class="menu nav">
+                  <li class="first leaf"><a href="https://www.argentina.gob.ar/servicios">Trámites y servicios</a></li>
+                  <li class="leaf"><a href="https://www.argentina.gob.ar/turnos">Turnos</a></li>
+                  <li class="leaf"><a href="https://www.argentina.gob.ar/organismos">Organismos del Estado</a></li>
+                  <li class="leaf"><a href="http://mapadelestado.jefatura.gob.ar/">Mapa del Estado</a></li>
+                  <li class="last leaf"><a href="https://www.argentina.gob.ar/normativa">Leyes argentinas</a></li>
+                </ul>
+              </section>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="region region-footer3">
+              <section id="block-menu-menu-footer-3" class="block block-menu clearfix">
+                <ul class="menu nav">
+                  <li class="first leaf"><a href="https://www.argentina.gob.ar/acerca">Acerca de este sitio</a></li>
+                  <li class="leaf"><a href="https://www.argentina.gob.ar/terminos-y-condiciones">Términos y condiciones</a></li>
+                  <li class="last leaf"><a href="https://www.argentina.gob.ar/ayuda">Ayuda</a></li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--/footer--></footer>
+
+    <script>
+      $(function(){
+        //Esta para el menu general
+        $("#main-navbar-collapse").load("includes/menu_principal.html",function(){
+          var seccion = $("#main-navbar-collapse").data("seccion");
+          $("#main-navbar-collapse ul li a[data-seccion="+seccion+"]").parent().addClass("active");
+        });
+      //Consultas
+        //$('#clasificacion_consultas').load('http://transito.vialidad.gob.ar:8080/SelCE_WEB/ClasificacionExtendida');
+		$('#clasificacion_consultas').load('/SelCE_WEB/ClasificacionExtendida');
+		//$('#clasificacion_consultas').load('http://127.0.0.1:8080/SelCE_WEB/ClasificacionExtendida');
+     	//$('#clasificacion_consultas').load('http://10.8.34.149:8080/s_web/ClasificacionExtendida');
+        //Footer.-
+        $("#footer-web").load("includes/footer.html",function(){
+        });
+      })
+      
+       function cambiarcont(pagina) { 
+     
+          //Recarga de consulta
+          $('#clasificacion_consultas').load('/SelCE_WEB/'+pagina);
+		  //$('#clasificacion_consultas').load('http://transito.vialidad.gob.ar:8080/SelCE_WEB/'+pagina);
+          //$('#clasificacion_consultas').load('http://127.0.0.1:8080/s_web/'+pagina);
+          //$('#clasificacion_consultas').load('http://10.8.34.149:8080/s_web/'+pagina);
+          $('#clasificacion_consultas').fadeIn(1000);
+        }
+      
+    </script>
+  	
+  	</body></html>

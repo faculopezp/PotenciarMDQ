@@ -1,0 +1,185 @@
+<h3> Realizar consulta</h3><hr><div class='row'><div class='col-sm-4'><h5 class='m-t-2'>Seleccione Ruta: </h5><div class='form-group'><select id='ruta' name='ruta' onchange='javascript:update()' class='form-control'>
+<option default>0226</option>
+<option>0001</option>
+<option>0003</option>
+<option>0005</option>
+<option>0007</option>
+<option>0008</option>
+<option>0009</option>
+<option>0011</option>
+<option>0012</option>
+<option>0014</option>
+<option>0016</option>
+<option>0018</option>
+<option>0019</option>
+<option>0020</option>
+<option>0022</option>
+<option>0023</option>
+<option>0025</option>
+<option>0026</option>
+<option>0033</option>
+<option>0034</option>
+<option>0035</option>
+<option>0036</option>
+<option>0038</option>
+<option>0040</option>
+<option>0050</option>
+<option>0051</option>
+<option>0052</option>
+<option>0060</option>
+<option>0064</option>
+<option>0065</option>
+<option>0066</option>
+<option>0068</option>
+<option>0073</option>
+<option>0074</option>
+<option>0075</option>
+<option>0076</option>
+<option>0077</option>
+<option>0078</option>
+<option>0079</option>
+<option>0081</option>
+<option>0086</option>
+<option>0089</option>
+<option>0095</option>
+<option>0098</option>
+<option>009C</option>
+<option>0101</option>
+<option>0102</option>
+<option>0105</option>
+<option>0117</option>
+<option>0118</option>
+<option>0119</option>
+<option>0120</option>
+<option>0121</option>
+<option>0122</option>
+<option>0123</option>
+<option>0127</option>
+<option>0130</option>
+<option>0131</option>
+<option>0135</option>
+<option>0136</option>
+<option>0141</option>
+<option>0142</option>
+<option>0143</option>
+<option>0144</option>
+<option>0145</option>
+<option>0146</option>
+<option>0147</option>
+<option>0148</option>
+<option>0149</option>
+<option>0150</option>
+<option>0151</option>
+<option>0152</option>
+<option>0153</option>
+<option>0154</option>
+<option>0157</option>
+<option>0158</option>
+<option>0168</option>
+<option>0173</option>
+<option>0174</option>
+<option>0175</option>
+<option>0177</option>
+<option>0178</option>
+<option>0188</option>
+<option>0193</option>
+<option>01V3</option>
+<option>0202</option>
+<option>0205</option>
+<option>0226</option>
+<option>0228</option>
+<option>0229</option>
+<option>0231</option>
+<option>0232</option>
+<option>0234</option>
+<option>0237</option>
+<option>0242</option>
+<option>0249</option>
+<option>0250</option>
+<option>0251</option>
+<option>0252</option>
+<option>0259</option>
+<option>0260</option>
+<option>0281</option>
+<option>0288</option>
+<option>0293</option>
+<option>040N</option>
+<option>040S</option>
+<option>1S40</option>
+<option>1V03</option>
+<option>1V08</option>
+<option>1V09</option>
+<option>1V11</option>
+<option>1V12</option>
+<option>1V22</option>
+<option>1V38</option>
+<option>1V40</option>
+<option>1V66</option>
+<option>205V</option>
+<option>24CA</option>
+<option>24CB</option>
+<option>24CI</option>
+<option>24CJ</option>
+<option>24CK</option>
+<option>2S40</option>
+<option>2V03</option>
+<option>2V09</option>
+<option>3S40</option>
+<option>3V09</option>
+<option>A001</option>
+<option>A002</option>
+<option>A003</option>
+<option>A004</option>
+<option>A005</option>
+<option>A006</option>
+<option>A007</option>
+<option>A008</option>
+<option>A009</option>
+<option>A010</option>
+<option>A011</option>
+<option>A012</option>
+<option>A013</option>
+<option>A014</option>
+<option>A015</option>
+<option>A016</option>
+<option>A017</option>
+<option>A019</option>
+<option>A01P</option>
+<option>A022</option>
+<option>A023</option>
+<option>A024</option>
+<option>A025</option>
+<option>A026</option>
+<option>V007</option>
+<option>V034</option>
+<option>V143</option>
+<option>V146</option>
+<option>V205</option>
+</select></div></div></div><hr><span class='loadII'>Procesando <img src='img/load.gif' alt='cargando' /></span>
+<div class='row'>
+<div class='col-sm-3'><h5 class='m-t-2'>Progresiva de inicio:</h5><div class='form-group item-form'><input   id='progresivaI' class='progresiva form-control' placeholder='Inicio de Tramo: 0'></div></div>
+<div class='col-sm-3'><h5 class='m-t-2'>Progresiva de final:</h5><div class='form-group item-form'><input id='progresivaF' class='progresiva form-control' placeholder='Fin de Tramo: 623'></div></div>
+<div class='col-sm-3'><h5 class='m-t-2'>A&ntilde;o inicio:</h5><div class='form-group'><select   name='anoI' id='anoI'  class='form-control'>
+<option value='2004'>2004</option>
+<option value='2005'>2005</option>
+<option value='2006'>2006</option>
+<option value='2007'>2007</option>
+<option value='2008'>2008</option>
+<option value='2009'>2009</option>
+<option value='2010'>2010</option>
+<option value='2011'>2011</option>
+<option value='2012'>2012</option>
+<option value='2013'>2013</option>
+<option value='2014'>2014</option>
+<option value='2015'>2015</option>
+<option value='2016'>2016</option>
+<option value='2017'>2017</option>
+<option value='2018'>2018</option>
+<option value='2019'>2019</option>
+<option value='2020'>2020</option>
+<option value='2021'>2021</option>
+<option value='2022'>2022</option>
+<option value='2023'>2023</option>
+<option value='2024'>2024</option>
+</select></div></div><div class='col-sm-3'><h5 class='m-t-2'>A&ntilde;o final:</h5><label class='m-t-1'>2025</label></div></div><br clear ='all'><div class='estados'><span id='spanConsultar' onclick='javascript:consulta();' class='btn btn-primary btn-small'>Calcular</span><p id='error' class='help-block text-danger error e1'>La progresiva de c&aacute;lculo esta fuera de los limites. </p><p id='error' class='help-block text-danger error e2'>No es el valor num&eacute;rico. </p><p id='error' class='help-block text-danger error e3'>No se introdujo valor en la progresiva de c&aacute;lculo. </p></div></div>
+</div>

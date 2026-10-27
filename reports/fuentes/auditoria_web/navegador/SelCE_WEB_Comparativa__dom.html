@@ -1,0 +1,205 @@
+<html><head><style> .load, .loadII, .error { display: none; } </style><script src="js/script_f.js" type="text/javascript" charset="utf-8"></script><script language="JavaScript" type="text/javascript">function isInteger(s){var i;for (i = 0; i < s.length; i++){  var c = s.charAt(i); if (((c < "0") || (c > "9"))) return false; }  return true;}
+function stripCharsInBag(s, bag){	var i;    var retString = "";         var c = s.charAt(i);        if (bag.indexOf(c) == -1) retString += c; return retString;}
+function daysInFebruary (year){	return (((year % 4 == 0) && ( (!(year % 100 == 0)) || (year % 400 == 0))) ? 29 : 28 );}
+function DaysArray(n) {for (var i = 1; i <= n; i++) {this[i] = 31;		if (i==4 || i==6 || i==9 || i==11) {this[i] = 30;} if (i==2) {this[i] = 29;}} return this;}
+function isDate(dtStr){var formatDate = /^(\d{2})(\/)(\d{2})\2(\d{4})$/;var matchArray = dtStr.match(formatDate);if (matchArray == null) return false; var dtCh= "/";	var minYear=2004;	var maxYear=2025;	var daysInMonth = DaysArray(12);var pos1=dtStr.indexOf(dtCh);	var pos2=dtStr.indexOf(dtCh,pos1+1);var strDay=dtStr.substring(0,pos1);	var strMonth=dtStr.substring(pos1+1,pos2);var strYear=dtStr.substring(pos2+1);	strYr=strYear; if (strDay.charAt(0)=="0" && strDay.length>1) strDay=strDay.substring(1); if (strMonth.charAt(0)=="0" && strMonth.length>1) strMonth=strMonth.substring(1);	for (var i = 1; i <= 3; i++) {		if (strYr.charAt(0)=="0" && strYr.length>1) strYr=strYr.substring(1);}	month=parseInt(strMonth);	day=parseInt(strDay);	year=parseInt(strYr);	if (pos1==-1 || pos2==-1)	return false;if (strMonth.length<1 || month<1 || month>12) return false;	if (strDay.length<1 || day<1 || day>31 || (month==2 && day>daysInFebruary(year)) || day > daysInMonth[month])return false; if (strYear.length != 4 || year==0 || year<minYear || year>maxYear)	return false;	if (dtStr.indexOf(dtCh,pos2+1)!=-1 || isInteger(stripCharsInBag(dtStr, dtCh))==false) return false; return true;}
+function vacio(strString) {if (strString.length == 0) return true; for(var i = 0; i<strString.length; i++){ ch = strString.charAt(i); if (ch != ' ' && ch != '	') return false;}return true;} function nuevoAjax(){	var xmlhttp=false; 
+	try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+	} catch (e) {	try {			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); 
+		} catch (E) {	xmlhttp = false; 	
+	}  	}	if (!xmlhttp && typeof XMLHttpRequest!='undefined') { 		xmlhttp = new XMLHttpRequest();	
+}	return xmlhttp;
+}function update() {	var contenedor = document.getElementById('p');
+  var ruta = document.getElementById('Ruta').options[document.getElementById('Ruta').selectedIndex].text;
+ var horaI= document.getElementById('horaI').options[document.getElementById('horaI').selectedIndex].value;
+   var horaF= document.getElementById('horaF').options[document.getElementById('horaF').selectedIndex].value;
+ var fechaI= document.getElementById('fechaI').value;
+ var fechaF= document.getElementById('fechaF').value;
+$('.error').hide();if(vacio(fechaI) || vacio(fechaF) ){ $('.e6').show(); $('#spanConsultar').removeClass('state-loading'); return;} var anoI=fechaI.substring(0,4);  var anoF=fechaF.substring(0,4);var mesI=fechaI.substring(5,7);  var mesF=fechaF.substring(5,7);var diaI=fechaI.substring(8,10); var diaF=fechaF.substring(8,10);if(parseInt(anoF)!=parseInt(anoI)) { $('.e4').show(); $('#spanConsultar').removeClass('state-loading'); return;}if(parseInt(mesF,10)<parseInt(mesI,10)) { $('.e3').show(); $('#spanConsultar').removeClass('state-loading'); return;}if(parseInt(mesF,10)==parseInt(mesI,10) && parseInt(diaF,10)<parseInt(diaI,10) ) { $('.e2').show(); $('#spanConsultar').removeClass('state-loading'); return;}if(parseInt(mesF,10)==parseInt(mesI,10) && parseInt(diaF,10)==parseInt(diaI,10) && parseInt(horaF)<parseInt(horaI) ) { $('.e1').show(); $('#spanConsultar').removeClass('state-loading'); return;}ajax=nuevoAjax();
+ajax.open("POST", "Comparativa",true);
+	ajax.onreadystatechange=function() 
+{	if (ajax.readyState==1) { $('.loadII').show();$('.error').hide();} if (ajax.readyState==4) 
+{		
+ contenedor.innerHTML = ajax.responseText ; $('.btn_entrar').css('cursor','pointer');
+  }
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("ajax=true&Ruta="+ruta+"&Ano="+anoI+"&horaI="+horaI+"&horaF="+horaF+"&fechaI="+fechaI+"&fechaF="+fechaF);
+}function consulta(){  $('.error').hide(); $('#spanConsultar').addClass('state-loading');var contenedor = document.getElementById('p');
+ var ruta = document.getElementById('Ruta').options[document.getElementById('Ruta').selectedIndex].text;
+ var tramo = document.getElementById('Tramo').options[document.getElementById('Tramo').selectedIndex].text;
+ var horaI=  document.getElementById('horaI').options[document.getElementById('horaI').selectedIndex].value;
+ var horaF=  document.getElementById('horaF').options[document.getElementById('horaF').selectedIndex].value;
+ var fechaI= document.getElementById('fechaI').value;
+ var fechaF= document.getElementById('fechaF').value;
+if(vacio(fechaI) || vacio(fechaF) ){ $('.e6').show(); $('#spanConsultar').removeClass('state-loading'); return;} var anoI=fechaI.substring(0,4);  var anoF=fechaF.substring(0,4);var mesI=fechaI.substring(5,7);  var mesF=fechaF.substring(5,7);var diaI=fechaI.substring(8,10); var diaF=fechaF.substring(8,10);if(parseInt(anoF)!=parseInt(anoI)) { $('.e4').show(); $('#spanConsultar').removeClass('state-loading'); return;}if(parseInt(mesF,10)<parseInt(mesI,10)) { $('.e3').show(); $('#spanConsultar').removeClass('state-loading'); return;}if(parseInt(mesF,10)==parseInt(mesI,10) && parseInt(diaF,10)<parseInt(diaI,10) ) { $('.e2').show(); $('#spanConsultar').removeClass('state-loading'); return;}if(parseInt(mesF,10)==parseInt(mesI,10) && parseInt(diaF,10)==parseInt(diaI,10) && parseInt(horaF,10)<parseInt(horaI,10) ) { $('.e1').show(); $('#spanConsultar').removeClass('state-loading'); return;}ajax=nuevoAjax();
+	ajax.open("POST", "Comparativa",true);
+	ajax.onreadystatechange=function() 
+{	if (ajax.readyState==1) { $('#spanConsultar').removeClass('state-loading'); $('.error').hide();	}
+ if (ajax.readyState==4) 
+{		
+ contenedor.innerHTML = ajax.responseText ;
+	 	}
+	}
+	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	ajax.send("ajax=true&Ruta="+ruta+"&Tramo="+tramo+"&horaI="+horaI+"&horaF="+horaF+"&fechaI="+fechaI+"&fechaF="+fechaF+"&Ano="+anoI);
+}</script><script type="text/javascript">$(document).ready(function(){$('#fechaF').datepicker({format: 'dd-mm-yyyy',startDate: new Date('01-01-2017'),endDate: new Date('31-05-2017')});});</script>
+</head><body><div id="p">
+<h2>Factores de Período</h2><hr><div class="alert alert-success"><div class="row"><div class="col-sm-2"><b> TP &lt; 1 día</b></div> <div class="col-sm-3"><b>F1 = TMDA / VP</b></div> <div class="col-sm-3"><b> F2 = TMDM / VP</b></div> <div class="col-sm-4"><b> F3 = TD / VP</b></div><div class="col-sm-2"><b> TP &lt; 1 mes </b></div><b> <div class="col-sm-3">F1 = TMDA / VP</div> </b><div class="col-sm-7"><b>F2 = TMDM / VP</b></div> <div class="col-sm-2"><b> TP &gt; 1 mes </b></div><b> </b><div class="col-sm-10"><b>F1 = TMDA / VP </b></div><div class="col-sm-12 text-right">TP: Tiempo del período </div> <div class="col-sm-12 text-right">VP: Volumen de tránsito del período </div></div></div><div class="row"><div class="col-sm-4"><h5 class="m-t-2">Hora Inicial:</h5><div class="form-group"><select id="horaI" name="horaI" class="form-control"><option value="0">0 - 1</option><option value="1">1 - 2</option><option value="2">2 - 3</option><option value="3">3 - 4</option><option value="4">4 - 5</option><option value="5">5 - 6</option><option value="6">6 - 7</option><option value="7">7 - 8</option><option value="8">8 - 9</option><option value="9">9 - 10</option><option value="10">10 - 11</option><option value="11">11 - 12</option><option value="12">12 - 13</option><option value="13">13 - 14</option><option value="14">14 - 15</option><option value="15">15 - 16</option><option value="16">16 - 17</option><option value="17">17 - 18</option><option value="18">18 - 19</option><option value="19">19 - 20</option><option value="20">20 - 21</option><option value="21">21 - 22</option><option value="22">22 - 23</option><option value="23">23 - 24</option></select></div></div><div class="col-sm-4"><h5 class="m-t-2">Hora Final:</h5><div class="form-group"><select id="horaF" name="horaF" class="form-control"><option value="0">0 - 1</option><option value="1">1 - 2</option><option value="2">2 - 3</option><option value="3">3 - 4</option><option value="4">4 - 5</option><option value="5">5 - 6</option><option value="6">6 - 7</option><option value="7">7 - 8</option><option value="8">8 - 9</option><option value="9">9 - 10</option><option value="10">10 - 11</option><option value="11">11 - 12</option><option value="12">12 - 13</option><option value="13">13 - 14</option><option value="14">14 - 15</option><option value="15">15 - 16</option><option value="16">16 - 17</option><option value="17">17 - 18</option><option value="18">18 - 19</option><option value="19">19 - 20</option><option value="20">20 - 21</option><option value="21">21 - 22</option><option value="22">22 - 23</option><option value="23">23 - 24</option></select></div></div></div><div class="row"><div class="col-sm-4 from-group item-form"><h5 class="m-t-2"> Fecha Inicial</h5><input type="date" name="fechaI" id="fechaI" min="2004-01-01" max="2025-12-31" class="form-control"> </div><div class="col-sm-4 from-group item-form" '=""><h5 class="m-t-2">Fecha Final</h5> <input type="date" name="fechaF" id="fechaF" min="2004-01-01" max="2025-12-31" class="form-control"></div></div><div class="row"><div class="col-sm-4"><h5 class="m-t-2">Seleccione Ruta:</h5> <div class="form-group"><select id="Ruta" name="Ruta" onchange="javascript:update();" class="form-control">
+<option>0001</option>
+<option>0003</option>
+<option>0005</option>
+<option>0007</option>
+<option>0008</option>
+<option>0009</option>
+<option>0011</option>
+<option>0012</option>
+<option>0014</option>
+<option>0016</option>
+<option>0018</option>
+<option>0019</option>
+<option>0020</option>
+<option>0022</option>
+<option>0023</option>
+<option>0025</option>
+<option>0026</option>
+<option>0033</option>
+<option>0034</option>
+<option>0035</option>
+<option>0036</option>
+<option>0038</option>
+<option>0040</option>
+<option>0050</option>
+<option>0051</option>
+<option>0052</option>
+<option>0060</option>
+<option>0064</option>
+<option>0065</option>
+<option>0066</option>
+<option>0068</option>
+<option>0073</option>
+<option>0074</option>
+<option>0075</option>
+<option>0076</option>
+<option>0077</option>
+<option>0078</option>
+<option>0079</option>
+<option>0081</option>
+<option>0086</option>
+<option>0089</option>
+<option>0095</option>
+<option>0098</option>
+<option>009C</option>
+<option>0101</option>
+<option>0102</option>
+<option>0105</option>
+<option>0117</option>
+<option>0118</option>
+<option>0119</option>
+<option>0120</option>
+<option>0121</option>
+<option>0122</option>
+<option>0123</option>
+<option>0127</option>
+<option>0130</option>
+<option>0131</option>
+<option>0135</option>
+<option>0136</option>
+<option>0141</option>
+<option>0142</option>
+<option>0143</option>
+<option>0144</option>
+<option>0145</option>
+<option>0146</option>
+<option>0147</option>
+<option>0148</option>
+<option>0149</option>
+<option>0150</option>
+<option>0151</option>
+<option>0152</option>
+<option>0153</option>
+<option>0154</option>
+<option>0157</option>
+<option>0158</option>
+<option>0168</option>
+<option>0173</option>
+<option>0174</option>
+<option>0175</option>
+<option>0177</option>
+<option>0178</option>
+<option>0188</option>
+<option>0193</option>
+<option>01V3</option>
+<option>0202</option>
+<option>0205</option>
+<option>0226</option>
+<option>0228</option>
+<option>0229</option>
+<option>0231</option>
+<option>0232</option>
+<option>0234</option>
+<option>0237</option>
+<option>0242</option>
+<option>0249</option>
+<option>0250</option>
+<option>0251</option>
+<option>0252</option>
+<option>0259</option>
+<option>0260</option>
+<option>0281</option>
+<option>0288</option>
+<option>0293</option>
+<option>040N</option>
+<option>040S</option>
+<option>1S40</option>
+<option>1V03</option>
+<option>1V08</option>
+<option>1V09</option>
+<option>1V11</option>
+<option>1V12</option>
+<option>1V22</option>
+<option>1V38</option>
+<option>1V40</option>
+<option>1V66</option>
+<option>205V</option>
+<option>24CA</option>
+<option>24CB</option>
+<option>24CI</option>
+<option>24CJ</option>
+<option>24CK</option>
+<option>2S40</option>
+<option>2V03</option>
+<option>2V09</option>
+<option>3S40</option>
+<option>3V09</option>
+<option>A001</option>
+<option>A002</option>
+<option>A003</option>
+<option>A004</option>
+<option>A005</option>
+<option>A006</option>
+<option>A007</option>
+<option>A008</option>
+<option>A009</option>
+<option>A010</option>
+<option>A011</option>
+<option>A012</option>
+<option>A013</option>
+<option>A014</option>
+<option>A015</option>
+<option>A016</option>
+<option>A017</option>
+<option>A019</option>
+<option>A01P</option>
+<option>A022</option>
+<option>A023</option>
+<option>A024</option>
+<option>A025</option>
+<option>A026</option>
+<option>V007</option>
+<option>V034</option>
+<option>V143</option>
+<option>V146</option>
+<option>V205</option>
+</select></div></div></div> <div class="barra"><hr class="consulta"></div><div class="estados"><p id="error" class="help-block text-danger error e1">La hora de la fecha final debe ser mayor al de la inicial. </p><p id="error" class="help-block text-danger error e2">El dia de la fecha final debe ser mayor al de la inicial. </p><p id="error" class="help-block text-danger error e3">El mes de la fecha final debe ser mayor al de la inicial. </p><p id="error" class="help-block text-danger error e4">La comparación debe ser del mismo año. </p><p id="error" class="help-block text-danger error e5">No se ha completado la fecha o su formato no es el correcto - dd/mm/aaaa.  </p><p id="error" class="help-block text-danger error e6">Ha dejado un campo vacio.  </p></div></div>
+</body></html>

@@ -1,0 +1,1606 @@
+[
+ {
+  "etapa": "SelCE_WEB_tmda_2025_index.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/index.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "SelCE_WEB_tmda_2025_index.html___SelCE_WEB_tmda_2025_index.html"
+ },
+ {
+  "etapa": "SelCE_WEB_tmda_2025_index.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/js/lista.rutas.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_tmda_2025_index.html___SelCE_WEB_tmda_2025_js_lista.rutas.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/index.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2025_index.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2025/js/lista.rutas.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2025_js_lista.rutas.js"
+ },
+ {
+  "etapa": "SelCE_WEB_tmda_2019_index.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/index.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "SelCE_WEB_tmda_2019_index.html___SelCE_WEB_tmda_2019_index.html"
+ },
+ {
+  "etapa": "SelCE_WEB_tmda_2019_index.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/js/lista.rutas.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_tmda_2019_index.html___SelCE_WEB_tmda_2019_js_lista.rutas.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/index.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2019_index.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda/2019/js/lista.rutas.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_tmda_2019_js_lista.rutas.js"
+ },
+ {
+  "etapa": "SelCE_WEB_FactoresEstacionales",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/FactoresEstacionales",
+  "status": 200,
+  "type": "document",
+  "content_type": "",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_FactoresEstacionales",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/load.gif",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/gif",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_FactoresEstacionales",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/js/script_f.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_FactoresEstacionales___SelCE_WEB_js_script_f.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/FactoresEstacionales",
+  "status": 200,
+  "type": "document",
+  "content_type": "",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/load.gif",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/gif",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/js/script_f.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_js_script_f.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "POST",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/FactoresEstacionales",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": "ajax=true&Ruta=0226&Ano=2004&init=false",
+  "guardado": "consulta_0226___SelCE_WEB_FactoresEstacionales"
+ },
+ {
+  "etapa": "SelCE_WEB_Comparativa",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/Comparativa",
+  "status": 200,
+  "type": "document",
+  "content_type": "",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_Comparativa",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/js/script_f.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_Comparativa___SelCE_WEB_js_script_f.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/Comparativa",
+  "status": 200,
+  "type": "document",
+  "content_type": "",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/js/script_f.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_js_script_f.js"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/clasificacion.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_clasificacion.html"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/docs.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_layout_poncho_dist_css_docs.css"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/prism.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_layout_poncho_dist_css_prism.css"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/css/argentina.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html; charset=iso-8859-1",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___css_argentina.css"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/prism.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_layout_poncho_js_prism.js"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/roboto-fontface.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_layout_poncho_dist_css_roboto-fontface.css"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/scripts.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_layout_poncho_js_scripts.js"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/css/chosen/chosen.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___static_css_chosen_chosen.css"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/LOGO-FINAL-VN-00.png",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/png",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/css/bootstrap.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_layout_bootstrap_css_bootstrap.min.css"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/fontawesome/css/all.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_layout_fontawesome_css_all.min.css"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/js/bootstrap.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_layout_bootstrap_js_bootstrap.min.js"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/jquery/jquery-3.3.1.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_layout_jquery_jquery-3.3.1.min.js"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/poncho.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_layout_poncho_dist_css_poncho.css"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css; charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___css2"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/js/chosen.jquery.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "application/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___static_js_chosen.jquery.js"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwr7Iw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/ClasificacionExtendida",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/logo_argentina-azul.svg",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/svg+xml",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/load.gif",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/gif",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/menu_principal.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_includes_menu_principal.html"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/footer.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_includes_footer.html"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/librerias/date.js",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_librerias_date.js"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/librerias/jquery.datePicker.js",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "error": "'utf-8' codec can't decode byte 0xf1 in position 40762: invalid continuation byte"
+ },
+ {
+  "etapa": "SelCE_WEB_clasificacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/js/script_f.js",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_clasificacion.html___SelCE_WEB_js_script_f.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/LOGO-FINAL-VN-00.png",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/png",
+  "post_data": null
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/roboto-fontface.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_dist_css_roboto-fontface.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/css/bootstrap.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_bootstrap_css_bootstrap.min.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/fontawesome/css/all.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_fontawesome_css_all.min.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/poncho.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_dist_css_poncho.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_tmda.html"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/css/chosen/chosen.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "menu_TMDA___static_css_chosen_chosen.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/jquery/jquery-3.3.1.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_jquery_jquery-3.3.1.min.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/js/bootstrap.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_bootstrap_js_bootstrap.min.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/js/chosen.jquery.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "application/javascript",
+  "post_data": null,
+  "guardado": "menu_TMDA___static_js_chosen.jquery.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css; charset=utf-8",
+  "post_data": null,
+  "guardado": "menu_TMDA___css2"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/prism.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_dist_css_prism.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/docs.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_dist_css_docs.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/css/argentina.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html; charset=iso-8859-1",
+  "post_data": null,
+  "guardado": "menu_TMDA___css_argentina.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/prism.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_js_prism.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/scripts.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_js_scripts.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwr7Iw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/list/list.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_list_list.min.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/logo_argentina-azul.svg",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/svg+xml",
+  "post_data": null
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/menu_principal.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_includes_menu_principal.html"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/footer.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_includes_footer.html"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/tmda_select_anio.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_includes_tmda_select_anio.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/LOGO-FINAL-VN-00.png",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/png",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/clasificacion.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_clasificacion.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/roboto-fontface.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_dist_css_roboto-fontface.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/css/bootstrap.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_bootstrap_css_bootstrap.min.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/fontawesome/css/all.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_fontawesome_css_all.min.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/poncho.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_dist_css_poncho.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/css/chosen/chosen.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "consulta_0226___static_css_chosen_chosen.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/jquery/jquery-3.3.1.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_jquery_jquery-3.3.1.min.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/js/bootstrap.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_bootstrap_js_bootstrap.min.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/js/chosen.jquery.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "application/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___static_js_chosen.jquery.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css; charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___css2"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/docs.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_dist_css_docs.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/prism.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_dist_css_prism.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/css/argentina.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html; charset=iso-8859-1",
+  "post_data": null,
+  "guardado": "consulta_0226___css_argentina.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwr7Iw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/prism.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_js_prism.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/scripts.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_js_scripts.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/logo_argentina-azul.svg",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/svg+xml",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/menu_principal.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_includes_menu_principal.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/footer.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_includes_footer.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/ClasificacionExtendida",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/load.gif",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/gif",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/librerias/date.js",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_librerias_date.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/librerias/jquery.datePicker.js",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "error": "'utf-8' codec can't decode byte 0xf1 in position 40762: invalid continuation byte"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/js/script_f.js",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_js_script_f.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "POST",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/ClasificacionExtendida",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": "ajax=true&Ruta=0226",
+  "guardado": "consulta_0226___SelCE_WEB_ClasificacionExtendida"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/LOGO-FINAL-VN-00.png",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/png",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/roboto-fontface.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_layout_poncho_dist_css_roboto-fontface.css"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/css/bootstrap.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_layout_bootstrap_css_bootstrap.min.css"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/fontawesome/css/all.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_layout_fontawesome_css_all.min.css"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/poncho.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_layout_poncho_dist_css_poncho.css"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/css/chosen/chosen.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___static_css_chosen_chosen.css"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/jquery/jquery-3.3.1.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_layout_jquery_jquery-3.3.1.min.js"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/js/bootstrap.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_layout_bootstrap_js_bootstrap.min.js"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/js/chosen.jquery.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "application/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___static_js_chosen.jquery.js"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/segmentacion.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_segmentacion.html"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css; charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___css2"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/docs.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_layout_poncho_dist_css_docs.css"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/prism.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_layout_poncho_dist_css_prism.css"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/css/argentina.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html; charset=iso-8859-1",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___css_argentina.css"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/prism.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_layout_poncho_js_prism.js"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/scripts.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_layout_poncho_js_scripts.js"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwr7Iw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/logo_argentina-azul.svg",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/svg+xml",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/menu_principal.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_includes_menu_principal.html"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/footer.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_includes_footer.html"
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/Segmentacion",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "",
+  "post_data": null
+ },
+ {
+  "etapa": "SelCE_WEB_segmentacion.html",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/js/script_f.js",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "SelCE_WEB_segmentacion.html___SelCE_WEB_js_script_f.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/LOGO-FINAL-VN-00.png",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/png",
+  "post_data": null
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/roboto-fontface.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_dist_css_roboto-fontface.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/tmda.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_tmda.html"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/css/bootstrap.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_bootstrap_css_bootstrap.min.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/fontawesome/css/all.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_fontawesome_css_all.min.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/poncho.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_dist_css_poncho.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/css/chosen/chosen.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "menu_TMDA___static_css_chosen_chosen.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/jquery/jquery-3.3.1.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_jquery_jquery-3.3.1.min.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/js/bootstrap.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_bootstrap_js_bootstrap.min.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/js/chosen.jquery.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "application/javascript",
+  "post_data": null,
+  "guardado": "menu_TMDA___static_js_chosen.jquery.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/list/list.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_list_list.min.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css; charset=utf-8",
+  "post_data": null,
+  "guardado": "menu_TMDA___css2"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/docs.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_dist_css_docs.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/prism.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_js_prism.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/prism.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_dist_css_prism.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/css/argentina.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html; charset=iso-8859-1",
+  "post_data": null,
+  "guardado": "menu_TMDA___css_argentina.css"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwr7Iw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/scripts.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_layout_poncho_js_scripts.js"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/logo_argentina-azul.svg",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/svg+xml",
+  "post_data": null
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/menu_principal.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_includes_menu_principal.html"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/tmda_select_anio.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_includes_tmda_select_anio.html"
+ },
+ {
+  "etapa": "menu_TMDA",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/footer.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "menu_TMDA___SelCE_WEB_includes_footer.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/LOGO-FINAL-VN-00.png",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/png",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/segmentacion.html",
+  "status": 200,
+  "type": "document",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_segmentacion.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/roboto-fontface.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_dist_css_roboto-fontface.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/css/bootstrap.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_bootstrap_css_bootstrap.min.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/fontawesome/css/all.min.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_fontawesome_css_all.min.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/poncho.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_dist_css_poncho.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/css/chosen/chosen.css",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css",
+  "post_data": null,
+  "guardado": "consulta_0226___static_css_chosen_chosen.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/jquery/jquery-3.3.1.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_jquery_jquery-3.3.1.min.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/bootstrap/js/bootstrap.min.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_bootstrap_js_bootstrap.min.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://id.argentina.gob.ar/static/js/chosen.jquery.js",
+  "status": 200,
+  "type": "script",
+  "content_type": "application/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___static_js_chosen.jquery.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap",
+  "status": 200,
+  "type": "stylesheet",
+  "content_type": "text/css; charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___css2"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/docs.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_dist_css_docs.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/scripts.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_js_scripts.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/js/prism.js",
+  "status": 404,
+  "type": "script",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_js_prism.js"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/layout/poncho/dist/css/prism.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html;charset=utf-8",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_layout_poncho_dist_css_prism.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwr7Iw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2",
+  "status": 200,
+  "type": "font",
+  "content_type": "font/woff2",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/css/argentina.css",
+  "status": 404,
+  "type": "stylesheet",
+  "content_type": "text/html; charset=iso-8859-1",
+  "post_data": null,
+  "guardado": "consulta_0226___css_argentina.css"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/img/logo_argentina-azul.svg",
+  "status": 200,
+  "type": "image",
+  "content_type": "image/svg+xml",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/menu_principal.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_includes_menu_principal.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/includes/footer.html",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/html",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_includes_footer.html"
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/Segmentacion",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "",
+  "post_data": null
+ },
+ {
+  "etapa": "consulta_0226",
+  "method": "GET",
+  "url": "https://transito.vialidad.gob.ar/SelCE_WEB/js/script_f.js",
+  "status": 200,
+  "type": "xhr",
+  "content_type": "text/javascript",
+  "post_data": null,
+  "guardado": "consulta_0226___SelCE_WEB_js_script_f.js"
+ }
+]
