@@ -198,6 +198,12 @@ sources:
       # EMTUR: turistas por medio de transporte (auto, ómnibus, avión, tren). El probe del
       # 2026-10-24 no lo encontró porque buscaba "arribos"; lo señaló el usuario el 2026-10-27.
       - arribo-de-turistas-por-medio-de-transporte
+      # Halladas con el volcado completo del catálogo (reports/fuentes/catalogo_*.md, 2026-10-27).
+      - procedencia-de-turistas
+      - ocupación-hotelera
+      - gasto-turístico
+      - pasajeros-transporte-interurbano-en-autobus-estudio-origen-destino
+      - pesca-marítima
       - turismo-en-fines-de-semana-largo
       - turismo-estable-estadía-promedio
     resource_formats: [csv, xlsx, xls]
