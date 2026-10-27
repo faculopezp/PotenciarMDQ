@@ -1,27 +1,90 @@
 # Auditoría con navegador
 
-## https://datos.mardelplata.gob.ar/?q=dataset/procedencia-de-turistas
+## https://failbondi.fail/
 
-- ✗ Page.goto: Timeout 60000ms exceeded.
+- DOM: `raiz__dom.html`
+### Menú «TMDA»: ✗ Locator.click: Timeout 5000ms exceeded.
 Call log:
-  - navigating to "https://datos.mardelplata.gob.ar/?q=dataset/procedencia-de-turistas", waiting until "networkidle"
+  - waiting for get_by_text("TMDA", exact=True).first
 
+### Menú «Temporales»: ✗ Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for get_by_text("Temporales", exact=True).first
+
+### Menú «Interanuales»: ✗ Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for get_by_text("Interanuales", exact=True).first
+
+### Menú «SEGMENTACIÓN»: ✗ Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for get_by_text("SEGMENTACIÓN", exact=True).first
+
+### Menú «CLASIFICACIÓN»: ✗ Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for get_by_text("CLASIFICACIÓN", exact=True).first
+
+### Consulta de prueba: ✗ ElementHandle.inner_text: Error: Node is not an HTMLElement
+Call log:
+  - waiting for locator(":scope")
 
 
 ## Pedidos de red
 
-- [raiz] GET https://datos.mardelplata.gob.ar/?q=dataset/procedencia-de-turistas → 307 `` (document)
-- [raiz] GET https://datos.mardelplata.gob.ar/?q=dataset/procedencia-de-turistas → 403 `text/html; charset=UTF-8` (document) · guardado `raiz___`
-- [raiz] GET https://datos.mardelplata.gob.ar/cdn-cgi/speculation → 200 `application/speculationrules+json` (other) · guardado `raiz___cdn-cgi_speculation`
-- [raiz] GET https://datos.mardelplata.gob.ar/cdn-cgi/challenge-platform/h/b/orchestrate/chl_page/v1?ray=a50e53a7abe3286e → 200 `application/javascript; charset=UTF-8` (script) · guardado `raiz___cdn-cgi_challenge-platform_h_b_orchestrate_chl_page_v1`
-- [raiz] GET https://challenges.cloudflare.com/turnstile/v0/b/d2d3316b729e/api.js?onload=DraY9&render=explicit → 200 `application/javascript; charset=UTF-8` (script) · guardado `raiz___turnstile_v0_b_d2d3316b729e_api.js`
-- [raiz] POST https://datos.mardelplata.gob.ar/cdn-cgi/challenge-platform/h/b/fo/1855912013:1793067309:unFfYWtLTeAfvaqBu8hAGpQhWEF1A2vbQCqIb47SnDo/a50e53a7abe3286e/rcTHbDYNH1A1RzTSz2_mAuFdvWZy.2U5pzqIKq9IrtY-1793068729-1.2.1.1-.WvqplWGAvNDwRmJc5N02t7Sv2NnYTz_9fsfndTA7xNKdmwv26LiK2NsjGtGhPML → 200 `text/plain; charset=UTF-8` (xhr) · POST `0e0Tcz$c7zs57$zzCEbtQFwE7QqROKI3-M3GFnIccM6hDi0AiqLqmLwgixRCzSMS6CSsa+IZUYdDhnl8DATROKBsTuetcKjeXcncDTzvVUpcVkfPAhKufZpCD4trmQtAVK3TSwCHN-ZdvtcAgqx$sfwD2aMWZW5$kXmK2$ETPFgvYL92lZ4+gu2F2BNT6FPFEWgPTqLHIXCPtyEXyNEYb8vsVgftwlzyzCBOKdYH0UwmfEa6fcumTf$HmP5uEy6fSPs0J0t1jzUD-Msu9gDOj81OXxR9D9b2G-JM3AvECT3M` · guardado `raiz___cdn-cgi_challenge-platform_h_b_fo_1855912013_1793067309_unFfYWtLTeAfvaqBu8hAGpQhWEF1A2vbQCqIb47SnDo_a50e53a7abe3286e_rcTHbDYNH1A1RzTSz2_mAuFdvW`
-- [raiz] GET blob:https://datos.mardelplata.gob.ar/03a777b6-f68d-4c13-9907-03e9209a4fe6 → 200 `text/javascript` (script) · guardado `raiz__https___datos.mardelplata.gob.ar_03a777b6-f68d-4c13-9907-03e9209a4fe6`
-- [raiz] GET https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/turnstile/f/av0/rch/hpbvr/0x4AAAAAAADnPIDROrmt1Wwj/light/fbE/new/normal?lang=auto → 200 `text/html; charset=UTF-8` (document) · guardado `raiz___cdn-cgi_challenge-platform_h_b_turnstile_f_av0_rch_hpbvr_0x4AAAAAAADnPIDROrmt1Wwj_light_fbE_new_normal`
-- [raiz] POST https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/fo/4168663942:1793067312:Khxmz0s8RIzxwMICF7BKG3UMWHwO5bPYRlKSV3D21fs/a50e53a9ecead6a3/JQ9m3lWjF9TzW6AslE6mOakhn7XjUKkar5cVTfOfM8Q-1793068729-1.2.1.1-.L4k5B82_rsFyoHiNxJ6zmUErIhf3c04s4yoqtG5Wzh6MvqJSz2Heea.V7C844XJ → 200 `text/plain; charset=UTF-8` (xhr) · POST `050setz7pSzXhmFr--msEMrUZBSA7kAfEnqw9vGk+-dblGJS9E8NchbhOBpiFlU87-+vn1cbHsFH$AP1H-jEPHWEin6-zMMbQeiIqXP6Q+onILpVozKGHQKdgx7XvCDdhLHzZHI0xaXZlFWeVMhHOj5ej+v0pfRzD8-webCVb+Is1Eazvlv5DhhIykGlBLXuaOI58GbGSeraby-RhK-EiztvtP6ChLl6G7zckHwubPFEzUFARI552gC2hoZIbucJnmfwHAiuCrf6Bq1H2Gk8lknk$dsKPZz4jrPEuhiekRZx` · guardado `raiz___cdn-cgi_challenge-platform_h_b_fo_4168663942_1793067312_Khxmz0s8RIzxwMICF7BKG3UMWHwO5bPYRlKSV3D21fs_a50e53a9ecead6a3_JQ9m3lWjF9TzW6AslE6mOakhn7`
-- [raiz] GET blob:https://challenges.cloudflare.com/5002e891-f750-43c1-a595-fa5cde8d5281 → 200 `text/javascript` (script) · guardado `raiz__https___challenges.cloudflare.com_5002e891-f750-43c1-a595-fa5cde8d5281`
-- [raiz] GET https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/pat/a50e53a9ecead6a3/1793068730337/0d6521e862322f25c963caba0d6dd57717883f6d2736ea5dcf0c71ba2a2d5e53/cGQeHxDyKtSo5y.GIys_I3wz0A5aW_WP9aVTKyEVq.s-1793068730-1.3.1.1-epUMaQLni2bOsbBYJ.o0xiRBlunZbC7N86x3uGmO52Svq0.nd5U2re.o7hMEz0Lgm4AvCMqDuzwJ7lVUExUQK.M0vFy4gjMdDOjLFYdu2qdyIOIcHw4EYnc_IbkT9uiI0uATfeLf9Xsi0DH4VRlY1hY51xKd346H0XMDr12bZGRIAWIMbwhyWe5_gizwLxHoo6K.LGTi.u5oQ7soeX5p8ZTP_OEU5P8UGOjIiZv8_Vikm2llevVYbvKcVNzpDpOFZnGLjblXGcbgr_fZN.pJbgIFmgsbEQqd8NDrsmai4DXGc4_97bNOQBT8eWIad_UtCRmWr0uBC_bxGg6G0pNz7DmqlYRFVOq8ZNv5z6RnQA4iF4m7yG2wV7jUx.lNztiqnrngnjMC9TbxUz1DHSTRHM4EZlxf0Iw5GKvcJAYT.ow5x87z3pbZiF3OM_W799CvETZ_TdeBYwdeh_dMDTyMpXiHmLWCFjYn_EKjbJRSZCeGXHVTLZ2oeK8usOHn3_0bmhZu7myJjr5uY_HNGTRXgP3LYlMDb28kedGik1TiOS2jwM1C2NR2mDeoUYiz5mOHa6kE6QMPJD_8xBymx5xwnrbjLpJOaGK8yMabYced9Qinw56Yh3OFPZoCtr2Au27nYkxkr7mEI8dv846rdDttUE4W6kx29l_fP8cc3GlSdIfHwBJ8_QMheqREFToNMXd72pWzwodolykJaPDp3NetTVEfq4eTTkDFljqUNKwdeN0dezRH3jHQPPQExt_VRtT5VSx.720DrkV7BU61lRDrBVwP3SSoST1zeCEKMSGFrMrUOK5n2Mntay48H76ULuXq → 401 `text/plain; charset=utf-8` (fetch) · guardado `raiz___cdn-cgi_challenge-platform_h_b_pat_a50e53a9ecead6a3_1793068730337_0d6521e862322f25c963caba0d6dd57717883f6d2736ea5dcf0c71ba2a2d5e53_cGQeHxDyKtSo`
-- [raiz] GET blob:https://challenges.cloudflare.com/5002e891-f750-43c1-a595-fa5cde8d5281 → 200 `text/javascript` (script) · guardado `raiz__https___challenges.cloudflare.com_5002e891-f750-43c1-a595-fa5cde8d5281`
-- [raiz] GET blob:https://challenges.cloudflare.com/5002e891-f750-43c1-a595-fa5cde8d5281 → 200 `text/javascript` (script)
-- [raiz] POST https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/fo/4168663942:1793067312:Khxmz0s8RIzxwMICF7BKG3UMWHwO5bPYRlKSV3D21fs/a50e53a9ecead6a3/JQ9m3lWjF9TzW6AslE6mOakhn7XjUKkar5cVTfOfM8Q-1793068729-1.2.1.1-.L4k5B82_rsFyoHiNxJ6zmUErIhf3c04s4yoqtG5Wzh6MvqJSz2Heea.V7C844XJ → 200 `text/plain; charset=UTF-8` (xhr) · POST `050setz7pSzXhmFr--msEMrUZBSA7kAfEnqw9vGk+-dblGJS9E8NchbhOBpiFlU87-+vn1cbHsFH$AP1H-jEPHWEin6-zMMbQeiIqXP6Q+onILpVozKGHQKdgx7XvCDdhLHzZHI0xaXZlFWeVMhHOj5ej+v0pfRzD8-webCVb+Iw8RmVIXOXfU3DSMZBWe3tbgZm7Jq-KbFHo9lv3cmrAoosPCoQT$b4v0oJrsdhaamBCGuI7qR8cZtz4JHgZ9v92d3efGPWWMwa-8Mlx3zxMT$Llq82j-ADEygJTilW7lfI` · guardado `raiz___cdn-cgi_challenge-platform_h_b_fo_4168663942_1793067312_Khxmz0s8RIzxwMICF7BKG3UMWHwO5bPYRlKSV3D21fs_a50e53a9ecead6a3_JQ9m3lWjF9TzW6AslE6mOakhn7`
-- [raiz] GET blob:https://challenges.cloudflare.com/ccf01f9a-9684-4cf8-a984-f017232dc07a → 200 `text/javascript` (script) · guardado `raiz__https___challenges.cloudflare.com_ccf01f9a-9684-4cf8-a984-f017232dc07a`
+- [raiz] GET https://failbondi.fail/ → 200 `text/html` (document) · guardado `raiz___`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/each.BOIRXKm_.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_each.BOIRXKm_.js`
+- [raiz] GET https://failbondi.fail/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js → 200 `application/javascript` (script) · guardado `raiz___cdn-cgi_scripts_5c5dd728_cloudflare-static_email-decode.min.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/colors.xAMgvq2Y.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_colors.xAMgvq2Y.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/svelte-head.CWgiuA-e.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_svelte-head.CWgiuA-e.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/lifecycle.Dhrqs-NG.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_lifecycle.Dhrqs-NG.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/legacy.CaDdV04V.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_legacy.CaDdV04V.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/entry/start.DlVELbDv.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_entry_start.DlVELbDv.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/attributes.Cdoa6Xkk.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_attributes.Cdoa6Xkk.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/props.BhKx9rAc.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_props.BhKx9rAc.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/nodes/2.DNKXyugE.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_nodes_2.DNKXyugE.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/runtime.BVg55-zi.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_runtime.BVg55-zi.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/stores.DgSmSITM.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_stores.DgSmSITM.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/this.3O_fRTEM.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_this.3O_fRTEM.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/disclose-version.BKIpyz32.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_disclose-version.BKIpyz32.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/footer.irhuIVsV.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_footer.irhuIVsV.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/aerolineas.t9PBoTFw.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_aerolineas.t9PBoTFw.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/render.WPOn1qXf.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_render.WPOn1qXf.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/entry.Csn-TgBM.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_entry.Csn-TgBM.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/chunks/flight-summary-chart.D1ijsd57.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_chunks_flight-summary-chart.D1ijsd57.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/nodes/0.sLNiPhyU.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_nodes_0.sLNiPhyU.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/entry/app.Ddrg6ap6.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_entry_app.Ddrg6ap6.js`
+- [raiz] POST https://o4508549255266304.ingest.us.sentry.io/api/4508570755465216/envelope/?sentry_version=7&sentry_key=2b0f8d068605d79a5cdb9e3f5ac0af06&sentry_client=sentry.javascript.sveltekit%2F8.47.0 → 200 `application/json` (fetch) · POST `{"sent_at":"2026-10-27T23:28:07.388Z","sdk":{"name":"sentry.javascript.sveltekit","version":"8.47.0"}}
+{"type":"session"}
+{"sid":"103f6470ad6f4a85b80696e597235be5","init":true,"started":"2026-10-27T23:28:07.388Z","timestamp":"2026-10-27T23:28:07.388Z","status":"ok","errors":0,"attrs":{"release":"786` · guardado `raiz___api_4508570755465216_envelope_`
+- [raiz] GET https://us-assets.i.posthog.com/array/phc_rZpVo1fOZZutITBd4iAXRbGu4Zpng0y7lpOUgk9Fizk/config.js → 200 `application/javascript` (script) · guardado `raiz___array_phc_rZpVo1fOZZutITBd4iAXRbGu4Zpng0y7lpOUgk9Fizk_config.js`
+- [raiz] GET https://failbondi.fail/_app/immutable/nodes/1.CcBzkYI8.js → 200 `text/javascript` (script) · guardado `raiz____app_immutable_nodes_1.CcBzkYI8.js`
+- [raiz] POST https://us.i.posthog.com/decide/?v=3&ip=1&_=1793143687450&ver=1.215.3&compression=base64 → 200 `application/json` (fetch) · POST `data=eyJ0b2tlbiI6InBoY19yWnBWbzFmT1padXRJVEJkNGlBWFJiR3U0WnBuZzB5N2xwT1VnazlGaXprIiwiZGlzdGluY3RfaWQiOiIwMWExN2ZiMS00OTE4LTc5ZDItOTc4Yi0yNzEzOTM3YTUxNjEiLCJncm91cHMiOnt9fQ%3D%3D` · guardado `raiz___decide_`
+- [raiz] POST https://o4508549255266304.ingest.us.sentry.io/api/4508570755465216/envelope/?sentry_version=7&sentry_key=2b0f8d068605d79a5cdb9e3f5ac0af06&sentry_client=sentry.javascript.sveltekit%2F8.47.0 → 200 `application/json` (fetch) · POST `{"event_id":"ae11ff65cadd4d14b23747aae4d4821e","sent_at":"2026-10-27T23:28:08.582Z","sdk":{"name":"sentry.javascript.sveltekit","version":"8.47.0"},"trace":{"environment":"production","release":"78688783950b42fe95561d6a7a2b5979","public_key":"2b0f8d068605d79a5cdb9e3f5ac0af06","trace_id":"f2fb817c51b` · guardado `raiz___api_4508570755465216_envelope_`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/entry/start.DlVELbDv.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_entry_start.DlVELbDv.js`
+- [consulta_0226] GET https://failbondi.fail/ → 200 `text/html` (document) · guardado `consulta_0226___`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/entry.Csn-TgBM.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_entry.Csn-TgBM.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/runtime.BVg55-zi.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_runtime.BVg55-zi.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/entry/app.Ddrg6ap6.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_entry_app.Ddrg6ap6.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/disclose-version.BKIpyz32.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_disclose-version.BKIpyz32.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/stores.DgSmSITM.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_stores.DgSmSITM.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/render.WPOn1qXf.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_render.WPOn1qXf.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/svelte-head.CWgiuA-e.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_svelte-head.CWgiuA-e.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/props.BhKx9rAc.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_props.BhKx9rAc.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/this.3O_fRTEM.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_this.3O_fRTEM.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/nodes/0.sLNiPhyU.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_nodes_0.sLNiPhyU.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/nodes/2.DNKXyugE.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_nodes_2.DNKXyugE.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/legacy.CaDdV04V.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_legacy.CaDdV04V.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/each.BOIRXKm_.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_each.BOIRXKm_.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/attributes.Cdoa6Xkk.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_attributes.Cdoa6Xkk.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/footer.irhuIVsV.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_footer.irhuIVsV.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/lifecycle.Dhrqs-NG.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_lifecycle.Dhrqs-NG.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/flight-summary-chart.D1ijsd57.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_flight-summary-chart.D1ijsd57.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/colors.xAMgvq2Y.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_colors.xAMgvq2Y.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/chunks/aerolineas.t9PBoTFw.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_chunks_aerolineas.t9PBoTFw.js`
+- [consulta_0226] GET https://failbondi.fail/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js → 200 `application/javascript` (script) · guardado `consulta_0226___cdn-cgi_scripts_5c5dd728_cloudflare-static_email-decode.min.js`
+- [consulta_0226] GET https://failbondi.fail/_app/immutable/nodes/1.CcBzkYI8.js → 200 `text/javascript` (script) · guardado `consulta_0226____app_immutable_nodes_1.CcBzkYI8.js`
+- [consulta_0226] GET https://us-assets.i.posthog.com/array/phc_rZpVo1fOZZutITBd4iAXRbGu4Zpng0y7lpOUgk9Fizk/config.js → 200 `application/javascript` (script) · guardado `consulta_0226___array_phc_rZpVo1fOZZutITBd4iAXRbGu4Zpng0y7lpOUgk9Fizk_config.js`
+- [consulta_0226] POST https://us.i.posthog.com/decide/?v=3&ip=1&_=1793143715242&ver=1.215.3&compression=base64 → 200 `application/json` (fetch) · POST `data=eyJ0b2tlbiI6InBoY19yWnBWbzFmT1padXRJVEJkNGlBWFJiR3U0WnBuZzB5N2xwT1VnazlGaXprIiwiZGlzdGluY3RfaWQiOiIwMWExN2ZiMS00OTE4LTc5ZDItOTc4Yi0yNzEzOTM3YTUxNjEiLCJncm91cHMiOnt9fQ%3D%3D` · guardado `consulta_0226___decide_`
+- [consulta_0226] POST https://o4508549255266304.ingest.us.sentry.io/api/4508570755465216/envelope/?sentry_version=7&sentry_key=2b0f8d068605d79a5cdb9e3f5ac0af06&sentry_client=sentry.javascript.sveltekit%2F8.47.0 → 200 `application/json` (fetch) · POST `{"sent_at":"2026-10-27T23:28:35.210Z","sdk":{"name":"sentry.javascript.sveltekit","version":"8.47.0"}}
+{"type":"session"}
+{"sid":"29cf720ebf854aee921c8a38c95598d6","init":true,"started":"2026-10-27T23:28:35.210Z","timestamp":"2026-10-27T23:28:35.210Z","status":"ok","errors":0,"attrs":{"release":"786` · guardado `consulta_0226___api_4508570755465216_envelope_`
+- [consulta_0226] POST https://o4508549255266304.ingest.us.sentry.io/api/4508570755465216/envelope/?sentry_version=7&sentry_key=2b0f8d068605d79a5cdb9e3f5ac0af06&sentry_client=sentry.javascript.sveltekit%2F8.47.0 → 200 `application/json` (fetch) · POST `{"event_id":"ed10f60dac3c4608adc2d699b57887f6","sent_at":"2026-10-27T23:28:36.288Z","sdk":{"name":"sentry.javascript.sveltekit","version":"8.47.0"},"trace":{"environment":"production","release":"78688783950b42fe95561d6a7a2b5979","public_key":"2b0f8d068605d79a5cdb9e3f5ac0af06","trace_id":"f2fb817c51b` · guardado `consulta_0226___api_4508570755465216_envelope_`
