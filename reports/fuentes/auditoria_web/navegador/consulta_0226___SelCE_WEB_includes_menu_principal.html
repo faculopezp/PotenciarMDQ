@@ -1,0 +1,27 @@
+<ul class="nav navbar-nav navbar-right">
+	<li><a data-seccion="1" href="#" onclick="menu('index')"         >Inicio</a></li>
+	<li><a data-seccion="2" href="#" onclick="menu('tmda')"          >TMDA</a></li>
+	<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Variaciones <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" onclick="menu('variaciones_temporales')"   >Temporales</a></li>
+            <li><a href="#" onclick="menu('variaciones_interanuales')"   >Interanuales</a></li>
+          </ul>
+        </li>
+	<li><a data-seccion="4" href="#" onclick="menu('segmentacion')"  >Segmentaci&oacute;n</a></li>
+	<li><a data-seccion="5" href="#" onclick="menu('clasificacion')" >Clasificaci&oacute;n</a></li>
+</ul>
+
+<script>
+	function menu(seleccionado) {
+      var _url;
+      
+      //name="tmda_anual" : de la pagina de cada tmda anual.-
+		if ( $('div[name="tmda_anual"]').length > 0)
+      	_url = '../../'+seleccionado+'.html';
+      else _url = seleccionado+'.html';
+      
+		location.href = _url;
+	}
+
+</script>

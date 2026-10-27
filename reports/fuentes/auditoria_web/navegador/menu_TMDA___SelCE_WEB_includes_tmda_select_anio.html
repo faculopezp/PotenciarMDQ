@@ -1,0 +1,67 @@
+<h5 class="m-t-2">Año</h5>
+<!--label for class="m-t-2">
+   <strong>Año</strong>
+</label-->
+<div class="form-group">
+<select id="tmda" class="form-control">
+	<option value="0">Elegir</>
+	<option data-seccion="2025" valoptionue="2025">2025</option>
+    <option data-seccion="2024" >2024</option>
+	<option data-seccion="2023" value="2023">2023</option>
+	<option data-seccion="2022" value="2022">2022</option>
+	<option data-seccion="2021" value="2021">2021</option>
+	<option data-seccion="2020" value="2020">2020</option>
+	<option data-seccion="2019" value="2019">2019</option>
+	<option data-seccion="2016" value="2018">2018</option>
+	<option data-seccion="2017" value="2017">2017</option>
+	<option data-seccion="2016" value="2016">2016</option>
+	<option data-seccion="2015" value="2015">2015</option>
+	<option data-seccion="2014" value="2014">2014</option>
+	<option data-seccion="2013" value="2013">2013</option>
+	<option data-seccion="2012" value="2012">2012</option>
+	<option data-seccion="2011" value="2011">2011</option>
+	<option data-seccion="2010" value="2010">2010</option>
+	<option data-seccion="2009" value="2009">2009</option>
+	<option data-seccion="2008" value="2008">2008</option>
+	<option data-seccion="2007" value="2007">2007</option>
+	<option data-seccion="2006" value="2006">2006</option>
+</select> 
+</div>
+
+<script>
+      $(function(){
+      	$('#tmda').change(function(){
+      		
+      		var seleccionado = $('#tmda option:selected').val();
+
+            if (seleccionado > 0 ){
+               /*var _url;
+               var pathname = window.location.pathname;
+               var actual = $('#tmda option[data-seccion]').val();
+      		
+               if (pathname.indexOf(actual) > 0 )
+      			   _url = '../'+seleccionado+'/index.html';
+               else _url = 'tmda/'+seleccionado+'/index.html';
+      		
+               location.href = _url;*/
+               
+               //alert(seleccionado);
+               //$('#tmda_contenido').fadeOut(1000);
+               
+               $('#tmda_contenido').load('tmda/'+seleccionado+'/index.html');
+               $('#tmda_contenido').fadeIn(1000);
+               /*
+               $('#breadcrumb_menu').
+                     
+                        <li class="tmda.html">TMDA</li>
+                        <li class="active">'+seleccionado+'</li>
+                        */
+               $('#busqueda').fadeIn(250);
+            } else {
+               $('#busqueda').fadeOut(250);
+               $('#tmda_contenido').fadeOut(250);
+            }
+            
+        });
+      })
+</script>

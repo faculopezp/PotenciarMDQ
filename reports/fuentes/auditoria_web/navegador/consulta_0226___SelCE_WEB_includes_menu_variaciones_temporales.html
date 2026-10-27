@@ -1,0 +1,63 @@
+<aside class="m-t-4">
+	<!-- h4 class="text-muted m-t-4">Variaciones Temporales</h4-->
+	<div class="panel-pane pane-node-book-nav">
+		<div class="pane-content">
+			<div id="" class="book-navigation">
+				<div class="nav nav-pills nav-stacked">
+					<nav class="page-sidebar">
+						<ul class="nav nav-pills nav-stacked">
+							<li class=""><a data-seccion="FactoresEstacionales" href="javascript:cambiarcont('FactoresEstacionales');">Factores de ajuste mensual</a><ul></ul></li>
+							<li class=""><a data-seccion="FactoresDiarios"  href="javascript:cambiarcont('FactoresDiarios');" class="">Factores de ajuste diarios</a>
+								<ul id="FactoresDiarios" style="display: none;">
+									<li class=""><a href="javascript:cambiarcont('FactoresDiariosAnuales');">Anuales</a></li>
+									<li class=""><a href="javascript:cambiarcont('FactoresDiariosMensuales');">Mensuales</a></li>
+								</ul>
+							</li>
+
+							<li class=""><a data-seccion="FactoresHorarios" href="javascript:cambiarcont('FactoresHorarios');">Factores de ajuste horarios</a>
+								<ul id="FactoresHorarios" style="display: none;">
+									<li class=""><a href="javascript:cambiarcont('FactoresHorariosAnuales');">Anuales</a></li>
+									<li class=""><a href="javascript:cambiarcont('FactoresHorariosMensuales');">Mensuales</a></li>
+									<li class=""><a href="javascript:cambiarcont('FactoresHorariosDiarios');">Diarios</a></li>
+								</ul>
+							</li>
+							<li class=""><a data-seccion="Comparativa" href="javascript:cambiarcont('Comparativa');">Factores de ajuste de periodos</a><ul></ul></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</aside>
+
+<script type="text/javascript">
+	function cambiarcont(pagina) { 
+          	//if(pagina != ''){
+          		//alert('lo encontro');
+          		//alert('http://127.0.0.1:8080/s_web/'+pagina);
+          		$('#variaciones_consultas').load('/SelCE_WEB/'+pagina);
+          		//$('#variaciones_consultas').load('http://transito.vialidad.gob.ar:8080/SelCE_WEB/'+pagina);
+          		//$('#variaciones_consultas').load('http://10.8.34.149:8080/s_web/'+pagina);
+          		//$('#variaciones_consultas').fadeIn(1000);
+          		$("#menuLateral ul li a").parent().removeClass("active");
+
+          		if(pagina.indexOf('FactoresDiarios') > -1)
+          		{
+          			pagina = 'FactoresDiarios';
+          		 	$('#FactoresDiarios').show();
+          		 	$('#FactoresHorarios').hide();
+          		}else {
+          			if (pagina.indexOf('FactoresHorarios') > -1)
+          			{
+          				pagina = 'FactoresHorarios';
+          				$('#FactoresDiarios').hide();
+          		 		$('#FactoresHorarios').show();
+          			}else {
+	          			$('#FactoresHorarios').hide();
+    	      			$('#FactoresDiarios').hide();
+        	  		}
+				}
+          		$("#menuLateral ul li a[data-seccion="+pagina+"]").parent().addClass("active");
+         	//}
+    }
+</script>
