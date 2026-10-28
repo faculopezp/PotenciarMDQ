@@ -86,5 +86,6 @@ def test_hora_aa2000_corrige_cruce_de_anio():
     ref = datetime(2025, 12, 31)
     assert generic.hora_aa2000("31/12 23:50", ref) == datetime(2025, 12, 31, 23, 50)
     assert generic.hora_aa2000("01/01 00:20", ref) == datetime(2026, 1, 1, 0, 20)
-    assert generic.hora_aa2000("31/12 23:50", datetime(2026, 1, 1)) == datetime(2025, 12, 31, 23, 50)
+    enero = datetime(2026, 1, 1)
+    assert generic.hora_aa2000("31/12 23:50", enero) == datetime(2025, 12, 31, 23, 50)
     assert generic.hora_aa2000("", ref) is None

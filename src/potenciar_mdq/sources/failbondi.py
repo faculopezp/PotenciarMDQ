@@ -10,6 +10,7 @@ endpoint.
 from __future__ import annotations
 
 import json
+import re
 import time
 from collections.abc import Iterator
 from datetime import UTC, datetime
@@ -20,26 +21,34 @@ import requests
 URL = "https://failbondi.fail/api/dump"
 
 
-def objetos(resp: requests.Response, max_seg: float = 1800) -> Iterator[dict]:
-    """Objetos de un arreglo JSON a medida que llegan (sin cargarlo entero en memoria)."""
+_SEP = re.compile(r"[\s,]*")
+
+
+def objetos(resp: requests.Response, max_seg: float = 900) -> Iterator[dict]:
+    """Objetos de un arreglo JSON a medida que llegan (sin cargarlo entero en memoria).
+
+    Avanza con un índice dentro del bloque y recorta el texto una sola vez por bloque: lineal en
+    el tamaño del dump."""
     dec = json.JSONDecoder()
     buf, inicio, t0 = "", True, time.time()
     for chunk in resp.iter_content(chunk_size=1 << 20, decode_unicode=True):
         buf += chunk
+        pos = 0
         if inicio:
-            buf = buf.lstrip()
-            if buf.startswith("["):
-                buf, inicio = buf[1:], False
+            pos = _SEP.match(buf, pos).end()
+            if pos < len(buf) and buf[pos] == "[":
+                pos, inicio = pos + 1, False
         while True:
-            buf = buf.lstrip(", \n\r\t")
-            if not buf or buf[0] == "]":
+            pos = _SEP.match(buf, pos).end()
+            if pos >= len(buf) or buf[pos] == "]":
                 break
             try:
-                obj, fin = dec.raw_decode(buf)
+                obj, pos_fin = dec.raw_decode(buf, pos)
             except json.JSONDecodeError:
                 break  # objeto incompleto: esperar más bytes
             yield obj
-            buf = buf[fin:]
+            pos = pos_fin
+        buf = buf[pos:]
         if time.time() - t0 > max_seg:
             raise TimeoutError(f"dump de failbondi incompleto tras {max_seg:.0f} s")
 
