@@ -34,9 +34,11 @@ jobs:
       - name: Probe de fuentes
         run: uv run pmdq probe
         continue-on-error: true
+        timeout-minutes: 20
 
       - name: Pipeline completo
         run: uv run pmdq all
+        timeout-minutes: 60
 
       - name: Muestras de fuentes nuevas
         run: uv run pmdq muestras-fuentes

@@ -2,8 +2,12 @@
 
 from __future__ import annotations
 
+import contextlib
 import logging
+import os
 import re
+import signal
+import time
 from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -15,6 +19,25 @@ from potenciar_mdq.sources.dkan import DkanClient
 from potenciar_mdq.sources.html_links import discover_files
 
 log = logging.getLogger(__name__)
+
+
+@contextlib.contextmanager
+def _tope(sid: str, segundos: int, etapa: str):
+    """Corta la fuente si tarda más de `segundos` (un host lento con reintentos puede trabar la
+    corrida) y deja la duración como anotación de GitHub Actions, legible por la API."""
+    def _corte(*_):
+        raise TimeoutError(f"más de {segundos} s")
+
+    previo = signal.signal(signal.SIGALRM, _corte)
+    signal.alarm(segundos)
+    t0 = time.time()
+    try:
+        yield
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, previo)
+        if os.environ.get("GITHUB_ACTIONS"):
+            print(f"::notice title={etapa} {sid}::{time.time() - t0:.0f} s", flush=True)
 
 
 def _session() -> PoliteSession:
@@ -111,6 +134,71 @@ def _scan(http: PoliteSession, url: str, follow_js: bool = True) -> list[str]:
     return ["- URLs encontradas:", *[f"  - `{u}`" for u in interesantes[:120]]]
 
 
+def _probe_fuente(http: PoliteSession, cfg: dict) -> list[str]:
+    """Líneas del probe.md para una fuente."""
+    lines: list[str] = []
+    if cfg["kind"] == "ckan_package":
+        client, dataset = _ckan_with_fallback(cfg, http)
+        res = client.resources(dataset)
+        lines.append(f"- OK `{client.base_url}` dataset `{dataset}`: {len(res)} recursos")
+        for r in res:
+            lines.append(f"  - `{r.format}` {r.name} — `{r.id}` — mod {r.last_modified}")
+            if r.format in ("csv", "xml", "txt") or r.url.lower().endswith(".csv"):
+                lines += [f"    > {x}" for x in _preview(http, r.url)]
+    elif cfg["kind"] == "ckan_search":
+        client = CkanClient(cfg["base_url"], http)
+        for q in cfg["queries"]:
+            pkgs = list(client.package_search(q=q, rows=20))[:10]
+            lines.append(f"- búsqueda `{q}`: {len(pkgs)} datasets")
+            for pkg in pkgs:
+                lines.append(f"  - `{pkg.get('name')}` — {pkg.get('title')}")
+                for r in pkg.get("resources", [])[:8]:
+                    fmt = (r.get("format") or "").lower()
+                    lines.append(f"    - `{fmt}` {r.get('name')} — {r.get('url')}")
+    elif cfg["kind"] == "dkan_package":
+        client = DkanClient(cfg["base_url"], http)
+        slugs = client.package_list()
+        hits = [s for s in slugs if any(t in s for t in cfg.get("search_terms", []))]
+        lines.append(f"- OK `{client.api}`: {len(slugs)} datasets; coinciden: {hits}")
+        for slug in cfg.get("datasets", []):
+            lines.append(f"### `{slug}`")
+            for r in client.resources(slug):
+                lines.append(f"  - `{r.format}` {r.name} — {r.url} — mod {r.last_modified}")
+                if r.format in ("csv", "txt") or r.url.lower().endswith(".csv"):
+                    lines += [f"    > {x}" for x in _preview(http, r.url, 4)]
+    elif cfg["kind"] == "html_links":
+        files, warns = discover_files(
+            http, cfg["url"], cfg["file_extensions"], cfg.get("follow_pattern"),
+            cfg.get("include_pattern"),
+        )
+        lines.append(f"- {len(files)} archivos encontrados")
+        lines += [f"  - [{f['text'] or 'sin texto'}]({f['url']})" for f in files[:200]]
+        lines += [f"- ⚠️ {w}" for w in warns]
+    elif cfg["kind"] == "url_pattern":
+        urls = expand_pattern(cfg)
+        ok = [u for u in urls if _exists(http, u)]
+        lines.append(f"- {len(ok)}/{len(urls)} URLs existen")
+        lines += [f"  - {u}" for u in ok]
+    elif cfg["kind"] == "static_files":
+        ok = [u for u in cfg["urls"] if _exists(http, u)]
+        lines.append(f"- {len(ok)}/{len(cfg['urls'])} URLs responden 200")
+    elif cfg["kind"] == "openmeteo":
+        r = http.get(openmeteo_url(cfg), stream=True)
+        lines.append(f"- HTTP {r.status_code} `{openmeteo_url(cfg)[:160]}`")
+        r.close()
+    elif cfg["kind"] == "static_file":
+        r = http.get(cfg["url"], stream=True)
+        lines.append(
+            f"- HTTP {r.status_code}, content-type `{r.headers.get('Content-Type')}`"
+        )
+        r.close()
+        if cfg.get("preview"):
+            lines += ["```", *_preview(http, cfg["url"], n_lines=6), "```"]
+        if cfg.get("scan"):
+            lines += _scan(http, cfg["url"], cfg.get("scan_follow_js", True))
+    return lines
+
+
 def probe() -> Path:
     """Valida cada fuente y escribe reports/probe.md (no descarga datos)."""
     http = _session()
@@ -118,65 +206,8 @@ def probe() -> Path:
     for sid, cfg in sources()["sources"].items():
         lines.append(f"## `{sid}` ({cfg['kind']})")
         try:
-            if cfg["kind"] == "ckan_package":
-                client, dataset = _ckan_with_fallback(cfg, http)
-                res = client.resources(dataset)
-                lines.append(f"- OK `{client.base_url}` dataset `{dataset}`: {len(res)} recursos")
-                for r in res:
-                    lines.append(f"  - `{r.format}` {r.name} — `{r.id}` — mod {r.last_modified}")
-                    if r.format in ("csv", "xml", "txt") or r.url.lower().endswith(".csv"):
-                        lines += [f"    > {x}" for x in _preview(http, r.url)]
-            elif cfg["kind"] == "ckan_search":
-                client = CkanClient(cfg["base_url"], http)
-                for q in cfg["queries"]:
-                    pkgs = list(client.package_search(q=q, rows=20))[:10]
-                    lines.append(f"- búsqueda `{q}`: {len(pkgs)} datasets")
-                    for pkg in pkgs:
-                        lines.append(f"  - `{pkg.get('name')}` — {pkg.get('title')}")
-                        for r in pkg.get("resources", [])[:8]:
-                            fmt = (r.get("format") or "").lower()
-                            lines.append(f"    - `{fmt}` {r.get('name')} — {r.get('url')}")
-            elif cfg["kind"] == "dkan_package":
-                client = DkanClient(cfg["base_url"], http)
-                slugs = client.package_list()
-                hits = [s for s in slugs if any(t in s for t in cfg.get("search_terms", []))]
-                lines.append(f"- OK `{client.api}`: {len(slugs)} datasets; coinciden: {hits}")
-                for slug in cfg.get("datasets", []):
-                    lines.append(f"### `{slug}`")
-                    for r in client.resources(slug):
-                        lines.append(f"  - `{r.format}` {r.name} — {r.url} — mod {r.last_modified}")
-                        if r.format in ("csv", "txt") or r.url.lower().endswith(".csv"):
-                            lines += [f"    > {x}" for x in _preview(http, r.url, 4)]
-            elif cfg["kind"] == "html_links":
-                files, warns = discover_files(
-                    http, cfg["url"], cfg["file_extensions"], cfg.get("follow_pattern"),
-                    cfg.get("include_pattern"),
-                )
-                lines.append(f"- {len(files)} archivos encontrados")
-                lines += [f"  - [{f['text'] or 'sin texto'}]({f['url']})" for f in files[:200]]
-                lines += [f"- ⚠️ {w}" for w in warns]
-            elif cfg["kind"] == "url_pattern":
-                urls = expand_pattern(cfg)
-                ok = [u for u in urls if _exists(http, u)]
-                lines.append(f"- {len(ok)}/{len(urls)} URLs existen")
-                lines += [f"  - {u}" for u in ok]
-            elif cfg["kind"] == "static_files":
-                ok = [u for u in cfg["urls"] if _exists(http, u)]
-                lines.append(f"- {len(ok)}/{len(cfg['urls'])} URLs responden 200")
-            elif cfg["kind"] == "openmeteo":
-                r = http.get(openmeteo_url(cfg), stream=True)
-                lines.append(f"- HTTP {r.status_code} `{openmeteo_url(cfg)[:160]}`")
-                r.close()
-            elif cfg["kind"] == "static_file":
-                r = http.get(cfg["url"], stream=True)
-                lines.append(
-                    f"- HTTP {r.status_code}, content-type `{r.headers.get('Content-Type')}`"
-                )
-                r.close()
-                if cfg.get("preview"):
-                    lines += ["```", *_preview(http, cfg["url"], n_lines=6), "```"]
-                if cfg.get("scan"):
-                    lines += _scan(http, cfg["url"], cfg.get("scan_follow_js", True))
+            with _tope(sid, 120, "probe"):
+                lines += _probe_fuente(http, cfg)
         except Exception as exc:  # noqa: BLE001 - el probe reporta, no corta
             lines.append(f"- ❌ {type(exc).__name__}: {exc}")
         lines.append("")
@@ -198,7 +229,8 @@ def ingest(only: list[str] | None = None, force: bool = False) -> list[Path]:
         if (only and sid not in only) or (not only and not cfg.get("enabled")):
             continue
         try:
-            new_files += _ingest_source(http, sid, cfg, force)
+            with _tope(sid, cfg.get("tope_s", 900), "ingest"):
+                new_files += _ingest_source(http, sid, cfg, force)
         except Exception as exc:  # noqa: BLE001 - se registra y se sigue con la próxima fuente
             log.error("Fuente %s falló: %s: %s", sid, type(exc).__name__, exc)
     movs = RAW / "anac_movimientos"

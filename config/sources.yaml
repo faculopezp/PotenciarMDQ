@@ -221,6 +221,7 @@ sources:
   failbondi:
     kind: failbondi_dump
     aeropuertos: [MDQ]
+    tope_s: 1200        # el lector corta a los 900 s; margen para la escritura
     enabled: true
     verified: true      # 2026-10-27: 496.951 vuelos; MDQ coincide con ANAC en pasajeros (±3 %)
 
