@@ -440,7 +440,7 @@ display(Plot.plot({
   height: ALTO.medio,
   marginLeft: 55,
   y: {grid: true, label: "Vuelos a horario (hasta 15 min)", tickFormat: (v) => `${Math.round(v * 100)} %`, domain: [0, 1]},
-  x: {label: null, type: "utc"},
+  x: {label: null, type: "utc", tickFormat: fechaEje},
   color: {domain: SENTIDOS.map((s) => s.nombre), range: SENTIDOS.map((s) => s.color), legend: true},
   marks: [
     Plot.ruleY([0]),
@@ -452,8 +452,8 @@ display(Plot.plot({
 ```
 
 ```js
-display(html`<table class="editorial"><thead><tr><th>Aerolínea</th><th>Sentido</th><th>Período</th><th>Programados</th><th>Cancelados</th><th>A horario</th><th>Demora mediana</th><th>9 de cada 10, hasta</th></tr></thead><tbody>
-${puntAero.map((d) => html`<tr><td>${d.aerolinea}</td><td>${d.movimiento === "salida" ? "Salidas" : "Llegadas"}</td><td>${MESES[new Date(d.desde).getUTCMonth()]} ${new Date(d.desde).getUTCFullYear()} – ${MESES[new Date(d.hasta).getUTCMonth()]} ${new Date(d.hasta).getUTCFullYear()}</td><td>${entero(d.programados)}</td><td>${entero(d.cancelados)} (${pct1(d.pct_cancelados)})</td><td>${pct(d.pct_a_horario)}</td><td>${d.demora_mediana_min} min</td><td>${d.demora_p90_min} min</td></tr>`)}
+display(html`<table class="editorial" style="width: 100%; max-width: none"><thead><tr><th>Aerolínea</th><th>Sentido</th><th>Período</th><th>Programados</th><th>Cancelados</th><th>A horario</th><th>Demora mediana</th><th>9 de cada 10, hasta</th></tr></thead><tbody>
+${puntAero.map((d) => html`<tr><td>${d.aerolinea}</td><td>${d.movimiento === "salida" ? "Salidas" : "Llegadas"}</td><td style="white-space: nowrap">${MESES[new Date(d.desde).getUTCMonth()]} ${new Date(d.desde).getUTCFullYear()} – ${MESES[new Date(d.hasta).getUTCMonth()]} ${new Date(d.hasta).getUTCFullYear()}</td><td>${entero(d.programados)}</td><td>${entero(d.cancelados)} (${pct1(d.pct_cancelados)})</td><td>${pct(d.pct_a_horario)}</td><td>${d.demora_mediana_min} min</td><td>${d.demora_p90_min} min</td></tr>`)}
 </tbody></table>`);
 ```
 
