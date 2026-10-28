@@ -38,6 +38,8 @@ const ranking = datos(FileAttachment("../data/ranking_nacional.json"));
 const red = datos(FileAttachment("../data/red_aeropuertos.json"));
 const atipicos = datos(FileAttachment("../data/mdq_dias_atipicos.json"));
 const pronostico = datos(FileAttachment("../data/mdq_pronostico.json"));
+const puntual = datos(FileAttachment("../data/mdq_puntualidad_mensual.json"));
+const puntAero = datos(FileAttachment("../data/mdq_puntualidad_aerolinea.json"));
 const paises = FileAttachment("../data/sudamerica.json").json();
 const eventos = FileAttachment("../data/eventos.json").json();
 ```
@@ -408,6 +410,54 @@ const aepTramos = tramos.filter((d) => d.anio === ref.anio && d.origen === "AER"
   ${rotFam.map(([f, v]) => html`<div><span class="rotulo">En tierra · ${f}</span><span class="valor">${Math.round(v.med)} min</span><p class="nota">mediana entre aterrizar y volver a despegar</p></div>`)}
   <div><span class="rotulo">Aeroparque → MDQ</span><span class="valor">${aepTramos.length ? Math.round(d3.median(aepTramos, (d) => d.duracion_mediana_min)) : "—"} min</span><p class="nota">de pista a pista (mediana)</p></div>
 </div>
+
+### Puntualidad y cancelaciones
+
+```js
+// Salidas y llegadas de línea según la web de Aeropuertos Argentina (vía failbondi.fail), desde
+// dic-2024. Solo meses completos de cada sentido; "a horario" = hasta 15 minutos de demora.
+const pCompletos = puntual.filter((d) => d.completo);
+const pSal = pCompletos.filter((d) => d.movimiento === "salida");
+const ult12 = pSal.slice(-12);
+const tot = (rows, campo) => d3.sum(rows, (d) => d[campo]);
+const pctHorario12 = tot(ult12, "a_horario") / tot(ult12, "con_horario_real");
+const pctCanc12 = tot(ult12, "cancelados") / tot(ult12, "programados");
+const peorMes = d3.least(pSal, (d) => d.pct_a_horario);
+const SENTIDOS = [{id: "salida", nombre: "Salidas", color: ACENTO}, {id: "llegada", nombre: "Llegadas", color: TINTA}];
+const mesTxt = (d) => `${MESES[d.mes - 1]} ${d.anio}`;
+```
+
+<div class="cifras">
+  <div><span class="rotulo">Salidas a horario</span><span class="valor">${pSal.length ? pct(pctHorario12) : "—"}</span><p class="nota">hasta 15 min de demora, últimos ${ult12.length} meses</p></div>
+  <div><span class="rotulo">Vuelos cancelados</span><span class="valor">${pSal.length ? pct1(pctCanc12) : "—"}</span><p class="nota">de las salidas programadas, últimos ${ult12.length} meses</p></div>
+  <div><span class="rotulo">El peor mes</span><span class="valor">${peorMes ? pct(peorMes.pct_a_horario) : "—"}</span><p class="nota">${peorMes ? `salidas a horario en ${mesTxt(peorMes)}` : ""}</p></div>
+</div>
+
+```js
+const serieP = pCompletos.map((d) => ({...d, sentido: SENTIDOS.find((s) => s.id === d.movimiento).nombre}));
+display(Plot.plot({
+  width,
+  height: ALTO.medio,
+  marginLeft: 55,
+  y: {grid: true, label: "Vuelos a horario (hasta 15 min)", tickFormat: (v) => `${Math.round(v * 100)} %`, domain: [0, 1]},
+  x: {label: null, type: "utc"},
+  color: {domain: SENTIDOS.map((s) => s.nombre), range: SENTIDOS.map((s) => s.color), legend: true},
+  marks: [
+    Plot.ruleY([0]),
+    Plot.lineY(serieP, {x: "periodo", y: "pct_a_horario", stroke: "sentido", strokeWidth: 2, z: "sentido"}),
+    Plot.dot(serieP, {x: "periodo", y: "pct_a_horario", fill: "sentido", r: 3, tip: true,
+      title: (d) => `${d.sentido} · ${mesTxt(d)}\n${pct(d.pct_a_horario)} a horario · demora mediana ${d.demora_mediana_min} min\n${entero(d.cancelados)} cancelados de ${entero(d.programados)} (${pct1(d.pct_cancelados)})`})
+  ]
+}));
+```
+
+```js
+display(html`<table class="editorial"><thead><tr><th>Aerolínea</th><th>Sentido</th><th>Período</th><th>Programados</th><th>Cancelados</th><th>A horario</th><th>Demora mediana</th><th>9 de cada 10, hasta</th></tr></thead><tbody>
+${puntAero.map((d) => html`<tr><td>${d.aerolinea}</td><td>${d.movimiento === "salida" ? "Salidas" : "Llegadas"}</td><td>${MESES[new Date(d.desde).getUTCMonth()]} ${new Date(d.desde).getUTCFullYear()} – ${MESES[new Date(d.hasta).getUTCMonth()]} ${new Date(d.hasta).getUTCFullYear()}</td><td>${entero(d.programados)}</td><td>${entero(d.cancelados)} (${pct1(d.pct_cancelados)})</td><td>${pct(d.pct_a_horario)}</td><td>${d.demora_mediana_min} min</td><td>${d.demora_p90_min} min</td></tr>`)}
+</tbody></table>`);
+```
+
+<p class="leyenda">Fuente: estado de cada vuelo en la web de Aeropuertos Argentina, recopilado cada 3 horas por <a href="https://failbondi.fail/acerca" target="_blank" rel="noopener">failbondi.fail</a> desde diciembre de 2024 (no es un dato oficial de la ANAC). Demora = hora real menos programada; las negativas son adelantos. Las llegadas de febrero a octubre de 2025 no se registraron completas y no se muestran. Validado contra la ANAC: los pasajeros de cada mes coinciden dentro de ~3 %.</p>
 
 <h2 id="07" data-idx="07 — Conectividad">A dónde se vuela</h2>
 

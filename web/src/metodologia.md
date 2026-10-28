@@ -25,6 +25,7 @@ title: Metodología y fuentes
 | Tipo de avión por matrícula | tar1090-db, base comunitaria de transpondedores (Mictronics / wiedehopf) | actual |
 | Cabinas por aerolínea y modelo | Comunicados y prensa especializada, con fuente por fila (`config/cabinas.yaml`) | — |
 | Aeronaves del Estado | Formato de identificación de cada fuerza e identificaciones públicas por serie (`config/estatales.yaml`) | — |
+| Horario programado y real, cancelaciones y pasajeros de cada vuelo de línea | Web de estado de vuelos de Aeropuertos Argentina, recopilada cada 3 horas por failbondi.fail (Nulo Science; dump abierto, sin garantía de estabilidad) | dic-2024 → hoy (llegadas completas desde nov-2025) |
 | Micros de media y larga distancia: pasajeros, asientos y viajes por ruta y año; cada servicio de turismo con fecha | CNRT vía Yvera, Ministerio de Turismo — "Conectividad terrestre interurbana" | 2019 → 2024 (Yvera no actualiza desde diciembre de 2024) |
 | Tren: pasajeros pagos por mes y servicio | CNRT — planilla de pasajeros de larga distancia, regionales y turísticos | 2008 → hoy, mensual |
 | Turistas por medio de transporte (auto, ómnibus, tren, avión) y por región de procedencia | EMTUR vía datos.mardelplata.gob.ar ("Arribo de turistas por medio de transporte", "Procedencia de turistas") | 2013–2025 y 2007–2024, mensual |
@@ -52,6 +53,7 @@ Los datos se descargan y procesan automáticamente una vez por mes. El código e
 - **Serie larga:** hasta 2018 se usan los datos municipales y desde 2019 los de la ANAC. En 2019, año que cubren ambas fuentes, difieren menos de 4 % por mes. Desde 2021 el Municipio publica pasajeros de un solo sentido, por eso no se usa.
 - **Datos provisorios:** la ANAC marca como provisorios los últimos meses; pueden cambiar.
 - **Hora local:** hora UTC − 3.
+- **Puntualidad:** demora = hora real menos programada (despegue en salidas, aterrizaje en llegadas); "a horario" = hasta 15 minutos. Cancelado = estado "Cancelado" o "No opera". El año de cada horario sale de la fecha del vuelo (el dump lo toma de la fecha de actualización y fecha mal los vuelos que cruzan el año). Solo se publican meses completos de cada sentido. Validación contra ANAC en `reports/qa/puntualidad.md`.
 - **Micros:** servicios de jurisdicción nacional (CNRT) con Mar del Plata en un extremo del par origen–destino. *Regular*: líneas con horario y boleto; *turismo*: servicios contratados (DUT). Los pasajeros salen de las bases con cada viaje; en los años que esas bases no cubren, del archivo de rutas con al menos un viaje semanal (un piso). En turismo, ambas coinciden ruta por ruta donde se pueden comparar. Los nombres de localidad se unifican (con y sin tildes, "CABA" = Ciudad Autónoma de Buenos Aires). En algunas rutas largas la fuente registra más pasajeros que asientos: no se publica la ocupación por ruta. Validación en `reports/qa/omnibus.md`.
 - **Tren:** pasajeros pagos de los servicios que llegan a Mar del Plata (Constitución–Mar del Plata, con o sin extensión a Miramar), en los dos sentidos y con estaciones intermedias. Para comparar con las llegadas se toma la mitad.
 - **Reparto por medio (EMTUR):** la suma de las cuatro vías es el total de turistas del mes. Avión coincide con los pasajeros que aterrizan según ANAC (diferencia menor al 2 % por año) y tren con la mitad de los pasajeros de la CNRT (hasta 11 %); el auto es la parte estimada. Comparación año por año en "Cómo llega la gente" y en `reports/qa/omnibus.md`.
@@ -100,7 +102,7 @@ Qué hay, qué falta y quién lo tiene. "Pedido de acceso" = solicitud de acceso
 
 | Vía | Lo que tenemos | Lo que falta | Quién lo tiene / debería publicarlo |
 |---|---|---|---|
-| **Avión** | Cada aterrizaje y despegue desde 2019 (ANAC); asientos por vuelo (Yvera); serie municipal 2001–2020 | Operador y avión de vuelos privados, escuelas y oficiales 2019–2025 (sin matrícula); horarios programados (puntualidad, cancelaciones); tarifas | ANAC (matrícula histórica, pedido de acceso); Aeropuertos Argentina (horarios programados); las aerolíneas (tarifas) |
+| **Avión** | Cada aterrizaje y despegue desde 2019 (ANAC); asientos por vuelo (Yvera); serie municipal 2001–2020; horario programado y real desde dic-2024 (Aeropuertos Argentina vía failbondi.fail) | Operador y avión de vuelos privados, escuelas y oficiales 2019–2025 (sin matrícula); puntualidad antes de dic-2024 y llegadas de feb–oct 2025; tarifas | ANAC (matrícula histórica, pedido de acceso); Aeropuertos Argentina (histórico de horarios, que hoy no publica como dato abierto); las aerolíneas (tarifas) |
 | **Ómnibus** | Cada viaje de larga distancia con pasajeros y asientos, regular y turismo, 2019–nov 2024 (CNRT vía Yvera) | Datos desde diciembre de 2024 (Yvera dejó de actualizar); servicios provinciales (no son de la CNRT); pasajeros reales por tramo (hay rutas con más pasajeros que asientos) | Ministerio de Turismo / CNRT (actualizar el conjunto); Provincia de Buenos Aires (servicios provinciales); Terminal de Ómnibus de Mar del Plata (arribos por andén) |
 | **Tren** | Pasajeros pagos por mes y servicio desde 2008 (CNRT) | Subidas y bajadas por estación y por sentido (hoy es el servicio entero, ida y vuelta) | Trenes Argentinos (SOFSE) / CNRT |
 | **Auto** | Estimación mensual del EMTUR desde 2013; cifras de AUBASA comunicadas a la prensa; tránsito medio diario anual de la Ruta 226 (Vialidad Nacional) | Conteos por cabina de peaje, día y sentido en las rutas 2 y 11; el método con que el EMTUR estima el auto | AUBASA y Ministerio de Infraestructura de la Provincia (conteos, pedido de acceso); EMTUR (método) |
@@ -130,7 +132,7 @@ ${cob.filter((d) => d.alcance === "todos").map((t) => {
 
 ## Lo que no se puede medir con estos datos
 
-- Puntualidad y cancelaciones (no hay horarios programados).
+- Puntualidad y cancelaciones antes de diciembre de 2024 (no hay horarios programados abiertos).
 - Operador y avión de privados, escuelas y vuelos oficiales 2019–2025: la ANAC publica la matrícula recién desde 2026 y sin matrícula no hay cruce posible.
 - Tarifas.
 - Origen de los pasajeros aéreos (el dataset de la ANAC no trae nacionalidad ni residencia; la procedencia del EMTUR es de todos los turistas, no por vía).
@@ -182,6 +184,8 @@ const archivos = [
   ["Turistas por procedencia (EMTUR)", FileAttachment("data/mdq_procedencia.json")],
   ["Turistas por medio de transporte (EVyTH)", FileAttachment("data/evyth_medio.json")],
   ["Turistas por región de origen (EVyTH)", FileAttachment("data/evyth_origen.json")],
+  ["Puntualidad por mes", FileAttachment("data/mdq_puntualidad_mensual.json")],
+  ["Puntualidad por aerolínea", FileAttachment("data/mdq_puntualidad_aerolinea.json")],
   ["Cruceros", FileAttachment("data/cruceros.json")]
 ];
 ```
