@@ -12,4 +12,5 @@
 | build_terrestre | ok (9 archivos) |
 | build_tren | ok (1 archivo) |
 | build_evyth | ok (2 archivos) |
+| build_failbondi | ok (1 archivo) |
 | build | ok (2 archivos) |

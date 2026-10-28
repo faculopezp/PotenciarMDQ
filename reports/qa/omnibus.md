@@ -62,10 +62,10 @@ El anual solo trae rutas con al menos un viaje semanal: tiene que dar igual o me
 
 | extremo_clave | escrituras | servicios |
 |---|---|---|
-| ciudad autonoma de buenos aires | Ciudad Autónoma De Buenos Aires · Ciudad Autonoma De Buenos Aires · Caba | 2 |
+| ciudad autonoma de buenos aires | Caba · Ciudad Autónoma De Buenos Aires · Ciudad Autonoma De Buenos Aires | 2 |
 | cordoba | Córdoba · Cordoba | 2 |
 | neuquen | Neuquén · Neuquen | 2 |
-| parana | Parana · Paraná | 2 |
+| parana | Paraná · Parana | 2 |
 | san miguel de tucuman | San Miguel De Tucuman · San Miguel De Tucumán | 2 |
 
 Localidades con más de una provincia en las bases (se toma la más frecuente):
@@ -80,7 +80,7 @@ Localidades con más de una provincia en las bases (se toma la más frecuente):
 | arroyito | Córdoba (22) · Santa Fe (1) |
 | avellaneda | Buenos Aires (77) · Santa Fe (4) · Entre Ríos (1) |
 | bandera | Santiago Del Estero (1) · Buenos Aires (2) |
-| bella vista | Buenos Aires (6) · Corrientes (3) |
+| bella vista | Corrientes (3) · Buenos Aires (6) |
 | capital | Buenos Aires (8) · San Juan (10) · Santiago Del Estero (5) · Tucumán (2) · Entre Ríos (1) |
 | catrilo | Buenos Aires (1) · La Pampa (37) |
 | chanar ladeado | Córdoba (1) · Santa Fe (2) |
@@ -92,12 +92,12 @@ Localidades con más de una provincia en las bases (se toma la más frecuente):
 | el bolson | Neuquén (1) · Río Negro (17) |
 | el calafate | Santa Cruz (18) · Río Negro (1) |
 | el trebol | Córdoba (1) · Santa Fe (10) |
-| federacion | Entre Ríos (215) · Buenos Aires (1) · Misiones (1) · Santiago Del Estero (1) |
+| federacion | Entre Ríos (215) · Misiones (1) · Santiago Del Estero (1) · Buenos Aires (1) |
 | flores | Buenos Aires (188) · Salta (1) |
 | general alvear | Buenos Aires (1) · Mendoza (2) |
 | general gelly | Santa Fe (199) · Santa Cruz (1) · Buenos Aires (2) |
 | general roca | Río Negro (35) · Neuquén (1) |
-| general san martin | La Pampa (15) · Buenos Aires (3) · Chaco (1) |
+| general san martin | Buenos Aires (3) · Chaco (1) · La Pampa (15) |
 | ituzaingo | Corrientes (19) · Buenos Aires (31) |
 | jacinto arauz | Buenos Aires (3) · La Pampa (22) |
 | juan jose castelli | Buenos Aires (4) · Chaco (6) |
@@ -109,15 +109,15 @@ Localidades con más de una provincia en las bases (se toma la más frecuente):
 | maipu | Buenos Aires (4) · Mendoza (21) |
 | malvinas argentinas | Buenos Aires (8) · Córdoba (1) |
 | marco juarez | Córdoba (1) · Santa Fe (1) |
-| mercedes | Corrientes (14) · Buenos Aires (67) |
+| mercedes | Buenos Aires (67) · Corrientes (14) |
 | merlo | Buenos Aires (76) · San Luis (390) |
 | miramar | Buenos Aires (11) · Córdoba (1) |
 | misiones | Corrientes (1) · Misiones (3) |
-| piedritas | La Pampa (1) · Buenos Aires (1) |
+| piedritas | Buenos Aires (1) · La Pampa (1) |
 | recreo | Catamarca (2) · Santa Fe (3) |
 | rio colorado | Buenos Aires (5) · Tucumán (4) · Río Negro (170) |
 | rio cuarto | Córdoba (90) · Tucumán (1) |
-| rio hondo | Santiago Del Estero (37) · Buenos Aires (1) |
+| rio hondo | Buenos Aires (1) · Santiago Del Estero (37) |
 | rio negro | Río Negro (2) · Neuquén (1) |
 | roca | La Pampa (1) · Río Negro (1) |
 | roldan | Córdoba (1) · Santa Fe (6) |
@@ -129,7 +129,7 @@ Localidades con más de una provincia en las bases (se toma la más frecuente):
 | san jose | Misiones (1) · Entre Ríos (7) |
 | san justo | Buenos Aires (83) · Santa Fe (12) |
 | san lorenzo | Corrientes (1) · Santa Fe (91) |
-| san martin | Buenos Aires (27) · Mendoza (16) · La Pampa (4) · Chaco (1) |
+| san martin | Buenos Aires (27) · Mendoza (16) · Chaco (1) · La Pampa (4) |
 | san miguel | Buenos Aires (9047) · Tucumán (23) |
 | san nicolas | Buenos Aires (56) · Santa Fe (2) |
 | san pedro | Jujuy (8) · Buenos Aires (54) · Salta (1) |
