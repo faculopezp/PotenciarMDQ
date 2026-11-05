@@ -30,26 +30,27 @@ Operados = no cancelados. ANAC cuenta despegues y aterrizajes de línea.
 | 2026 | 7 | 101 | 85 | 101 | 84 | 8494 | 8425 | 0.8 | 8428 | 8260 | 2.0 |
 | 2026 | 8 | 88 | 79 | 89 | 79 | 7599 | 7614 | -0.2 | 7637 | 7417 | 3.0 |
 | 2026 | 9 | 94 | 84 | 93 | 83 | 8778 | 8761 | 0.2 | 8623 | 8729 | -1.2 |
-| 2026 | 10 | 92 |  | 90 |  | 7798 |  |  | 8004 |  |  |
+| 2026 | 10 | 107 |  | 106 |  | 9351 |  |  | 9667 |  |  |
+| 2026 | 11 | 17 |  | 18 |  | 1481 |  |  | 1670 |  |  |
 
 ## 2. Estados informados
 
 | movimiento | estado | cancelado | vuelos | con_horario_real |
 |---|---|---|---|---|
-| llegada | Aterrizado | False | 1677 | 1677 |
-| llegada |  | False | 38 | 0 |
+| llegada | Aterrizado | False | 1707 | 1707 |
+| llegada |  | False | 41 | 0 |
 | llegada | Cancelado | True | 23 | 0 |
-| llegada | Consulte Cía. | False | 1 | 0 |
+| llegada | Consulte Cía. | False | 2 | 0 |
 | llegada | Reprogramado | False | 1 | 0 |
-| salida | Despegado | False | 2827 | 2827 |
+| salida | Despegado | False | 2856 | 2856 |
 | salida | Cancelado | True | 73 | 0 |
-| salida | En Horario | False | 24 | 0 |
+| salida | En Horario | False | 27 | 0 |
 | salida |  | False | 24 | 0 |
+| salida | Pre Embarque | False | 1 | 0 |
+| salida | Reprogramado | False | 1 | 0 |
 | salida | NO OPERA | True | 1 | 0 |
 | salida | Demorado | False | 1 | 0 |
 | salida | Consulte Cía. | False | 1 | 0 |
-| salida | Pre Embarque | False | 1 | 0 |
-| salida | Reprogramado | False | 1 | 0 |
 
 ## 3. Posibles duplicados (mismo sentido, programado y matrícula)
 

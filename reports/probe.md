@@ -1,4 +1,4 @@
-# Probe de fuentes — 2026-10-28 01:02 UTC
+# Probe de fuentes — 2026-11-05 18:45 UTC
 
 ## `anac_movimientos` (ckan_package)
 - OK `https://datos.transporte.gob.ar` dataset `aterrizajes-y-despegues-procesados-por-la-administracion-nacional-de-aviacion-civil-anac`: 8 recursos
@@ -36,7 +36,40 @@
     > 01/01/2019;0:01;Regular;Internacional;ATERRIZAJE;EZE;SBGL;TRANSPORTES AEREOS DEL MERCOSUR;0;165,00;165,00;DEFINITIVO
 
 ## `yvera_conectividad` (ckan_package)
-- ❌ RuntimeError: Ningún portal respondió para conectividad-aerea
+- OK `https://datos.gob.ar` dataset `turismo-conectividad-aerea`: 9 recursos
+  - `csv` Base agregada de frecuencias aéreas — `turismo_aab49234-28c9-48ab-a978-a83485139290` — mod 2026-07-16T16:34:51.400810
+    > <!DOCTYPE html>
+    > <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+    > <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+  - `csv` Vuelos, asientos y pasajeros por día — `turismo_03b4176f-a065-450a-b411-101d2a884720` — mod 2026-07-16T16:34:55.428293
+    > <!DOCTYPE html>
+    > <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+    > <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+  - `csv` Aerolíneas por trimestre — `turismo_81d7d664-d54b-4e34-aae6-c3cdd00e8728` — mod 2026-07-16T16:34:56.874589
+    > <!DOCTYPE html>
+    > <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+    > <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+  - `csv` Rutas aéreas por mes — `turismo_a37f611a-b7cf-450a-aaa9-7d02ae685ee9` — mod 2026-07-16T16:34:58.898102
+    > <!DOCTYPE html>
+    > <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+    > <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+  - `csv` Principales aerolíneas de cabotaje por mes — `turismo_26bf262e-3f1b-4043-a012-870988073c4e` — mod 2026-07-16T16:34:59.802541
+    > <!DOCTYPE html>
+    > <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+    > <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+  - `csv` Principales rutas por año — `turismo_bdb24072-a463-4305-9fde-f38f753ebf26` — mod 2026-07-16T16:35:01.079451
+    > <!DOCTYPE html>
+    > <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+    > <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+  - `pdf` Ficha Técnica: Conectividad Aérea — `turismo_b23e3a61-f80d-44cf-a71b-ef7c2b9324c2` — mod 2023-08-24T11:38:56.948368
+  - `csv` Aeropuertos — `turismo_d406a6fa-c209-4b15-b648-6bcceb1d040c` — mod 2026-07-16T16:35:02.382264
+    > <!DOCTYPE html>
+    > <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+    > <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+  - `csv` Novedades — `turismo_6d021c08-2d9e-45f2-8030-aeb178877541` — mod 2023-10-06T16:20:17.933441
+    > <!DOCTYPE html>
+    > <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+    > <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
 
 ## `anac_dnta` (html_links)
 - 30 archivos encontrados
@@ -161,7 +194,7 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 ```
 
 ## `clima_mdq` (openmeteo)
-- HTTP 200 `https://archive-api.open-meteo.com/v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-22&daily=weather_code%2Cprecipitation_`
+- HTTP 200 `https://archive-api.open-meteo.com/v1/archive?latitude=-37.9342&longitude=-57.5733&start_date=2019-01-01&end_date=2026-10-30&daily=weather_code%2Cprecipitation_`
 
 ## `anac_informes_mensuales` (url_pattern)
 - 0/60 URLs existen
@@ -179,16 +212,16 @@ ADT;;;Aeródromo;"BANDERA/AGROSERVICIOS DOÑA TERESA";"28°51'19""S  62°15'53""
 
 ## `cnrt_ferroviario` (html_links)
 - 1 archivos encontrados
-  - [Pasajeros Datos actualizados a 2026](https://www.argentina.gob.ar/sites/default/files/pax_ldregionales_tur_sep_2026.xlsx)
+  - [Pasajeros Datos actualizados a 2026](https://www.argentina.gob.ar/sites/default/files/pax_ldregionales_tur_09_2026.xlsx)
 
 ## `yvera_evyth` (ckan_package)
 - ❌ RuntimeError: Ningún portal respondió para encuesta-de-viajes-y-turismo-de-los-hogares-evyth-microdatos
 
 ## `yvera_evyth_diccionario` (static_file)
-- ❌ ConnectionError: más de 120 s
+- HTTP 403, content-type `text/html; charset=UTF-8`
 
 ## `yvera_busqueda` (ckan_search)
-- ❌ ConnectionError: más de 120 s
+- ❌ HTTPError: 403 Client Error: Forbidden for url: https://data-turismo.jefatura.gob.ar/api/3/action/package_search?q=evyth&rows=20&start=0
 
 ## `mdp_portal_catalogo` (dkan_package)
 - OK `https://datos.mardelplata.gob.ar/?q=api/3/action`: 446 datasets; coinciden: ['arribos-de-turistas', 'turismo-estable-estadía-promedio', 'transportes-de-acceso-la-ciudad', 'transportes-escolares-habilitados', 'encuesta-permanente-de-hogares-eph-evolución-de-indicadores-mercado-de-trabajo', 'transporte-urbano-por-ramal', 'transporte-urbano-por-empresa', 'turismo-en-fines-de-semana-largo', 'movimientos-del-aeropuerto-internacional-astor-piazzolla', 'pasajeros-del-aeropuerto-astor-piazzolla', 'arribo-de-turistas-por-medio-de-transporte', 'procedencia-de-turistas', 'flota-de-transporte-público-de-pasajeros', 'pasajeros-transporte-interurbano-en-autobus-estudio-origen-destino', 'vuelos-comerciales-pasajeros-por-tramo', 'vuelos-comerciales-vuelos-por-tramo', 'transporte-público-de-pasajeros', 'líneas-de-transporte-público-de-pasajeros', 'vuelos-del-aeropuerto-internacional-astor-piazzolla', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30062022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-31032022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30092021', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-30092022', 'presupuesto-de-recursos-y-gastos-2022-del-ente-municipal-de-turismo-emtur-al-31122022', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-emtur-al-31032023', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-emtur-al-30062023', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-y-cultura-emturyc-al-4', 'presupuesto-de-recursos-y-gastos-2023-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-11', 'presupuesto-de-recursos-y-gastos-2024-del-ente-municipal-de-turismo-y-cultura-emturyc-al-31', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-11', 'presupuesto-de-recursos-y-gastos-2026-del-ente-municipal-de-turismo-y-cultura-emturyc-al', 'presupuesto-de-recursos-y-gastos-2025-del-ente-municipal-de-turismo-y-cultura-emturyc-al-12', 'presupuesto-de-recursos-y-gastos-2026-del-ente-municipal-de-turismo-y-cultura-emturyc-al-5']
